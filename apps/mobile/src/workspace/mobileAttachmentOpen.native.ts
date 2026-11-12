@@ -25,7 +25,7 @@ async function openMobileAttachmentOrHref(href: string, vaultRootUri?: string | 
     return
   }
 
-  if (/^(?:https?|mailto|tel|file):/iu.test(href) || href.startsWith('tolaria://')) await Linking.openURL(href)
+  if (/^(?:https?|mailto|tel|file):/iu.test(href) || href.startsWith('metis://')) await Linking.openURL(href)
 }
 
 async function shareMobileAttachment(uri: string): Promise<void> {

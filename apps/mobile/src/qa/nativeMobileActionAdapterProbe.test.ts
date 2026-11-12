@@ -83,9 +83,9 @@ function requestFixture(): ReadOnlyWorkspaceRequest {
   return {
     scenarioId: 'default',
     source: 'fixture',
-    vaultAlias: 'tolaria-vault',
-    vaultLabel: 'Tolaria Vault',
-    vaultRootUri: 'file:///tolaria-vault',
+    vaultAlias: 'metis-vault',
+    vaultLabel: 'Metis Vault',
+    vaultRootUri: 'file:///metis-vault',
   }
 }
 

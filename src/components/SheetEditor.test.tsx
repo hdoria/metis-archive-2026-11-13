@@ -1219,7 +1219,7 @@ describe('SheetEditor', () => {
     })
 
     try {
-      fireEvent(window, new Event('laputa-zoom-change'))
+      fireEvent(window, new Event('metislegacy-zoom-change'))
 
       await waitFor(() => {
         expect(ironCalcMock.state.workbookRenders).toBeGreaterThan(rendersBeforeZoom)

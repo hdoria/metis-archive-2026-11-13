@@ -36,12 +36,12 @@ final class TabletPortraitNavigationTests: XCTestCase {
 
   private func launchPortrait() -> XCUIApplication {
     continueAfterFailure = false
-    let app = XCUIApplication(bundleIdentifier: "com.tolaria.mobile.dev")
+    let app = XCUIApplication(bundleIdentifier: "io.github.hdoria.metis.mobile.dev")
     app.terminate()
     XCUIDevice.shared.orientation = .portrait
     let search = "?source=fixture&editorMode=wysiwyg&qaRun=portrait-navigation"
-    app.launchArguments = ["--tolaria-mobile-search", search]
-    app.launchEnvironment["TOLARIA_MOBILE_SEARCH"] = search
+    app.launchArguments = ["--metis-mobile-search", search]
+    app.launchEnvironment["METIS_MOBILE_SEARCH"] = search
     app.launch()
     XCTAssertTrue(element(app, "note-list-panel").waitForExistence(timeout: 60))
     XCTAssertTrue(element(app, "note-row-workflow-orchestration").waitForExistence(timeout: 10))

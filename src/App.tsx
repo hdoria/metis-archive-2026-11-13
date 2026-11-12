@@ -98,7 +98,7 @@ import { resolveAiTargetReadiness, type AiTarget } from './lib/aiTargets'
 import { isAiAgentInstalled } from './lib/aiAgents'
 import { areGitFeaturesEnabled } from './lib/gitSettings'
 import { useAppCommandAiActions } from './hooks/useAppCommandAiActions'
-import { TOLARIA_DOCS_URL } from './constants/feedback'
+import { METIS_DOCS_URL } from './constants/feedback'
 import { openExternalUrl } from './utils/url'
 import { createVaultFolder } from './utils/vaultFolderCreation'
 import {
@@ -175,9 +175,9 @@ function App() {
 /** The remote server the web build talks to, when one is configured on window. */
 function remoteVaultConfig(): { baseUrl: string; token: string } | null {
   if (typeof window === 'undefined') return null
-  const { TOLARIA_REMOTE_URL: baseUrl, TOLARIA_REMOTE_TOKEN: token } = window as {
-    TOLARIA_REMOTE_URL?: string
-    TOLARIA_REMOTE_TOKEN?: string
+  const { METIS_REMOTE_URL: baseUrl, METIS_REMOTE_TOKEN: token } = window as {
+    METIS_REMOTE_URL?: string
+    METIS_REMOTE_TOKEN?: string
   }
   return baseUrl && token ? { baseUrl, token } : null
 }
@@ -228,7 +228,7 @@ function MainApp({ noteWindowParams }: { noteWindowParams: NoteWindowParams | nu
   const openFeedback = useCallback(() => setShowFeedback(true), [])
   const closeFeedback = useCallback(() => setShowFeedback(false), [])
   const openDocs = useCallback(() => {
-    void openExternalUrl(TOLARIA_DOCS_URL)
+    void openExternalUrl(METIS_DOCS_URL)
   }, [])
   const networkStatus = useNetworkStatus()
   const { settings, loaded: settingsLoaded, saveSettings } = useSettings()
@@ -1083,15 +1083,15 @@ function MainApp({ noteWindowParams }: { noteWindowParams: NoteWindowParams | nu
   }, [loadModifiedFiles, notes.activeTabPath, notes.tabs, recordAutoGitActivity, resolvedPath])
 
   useEffect(() => {
-    window.__laputaTest = {
-      ...window.__laputaTest,
+    window.__metislegacyTest = {
+      ...window.__metislegacyTest,
       activeTabPath: notes.activeTabPath,
       seedAutoGitSavedChange,
     }
 
     return () => {
-      if (window.__laputaTest?.seedAutoGitSavedChange === seedAutoGitSavedChange) {
-        delete window.__laputaTest.seedAutoGitSavedChange
+      if (window.__metislegacyTest?.seedAutoGitSavedChange === seedAutoGitSavedChange) {
+        delete window.__metislegacyTest.seedAutoGitSavedChange
       }
     }
   }, [notes.activeTabPath, seedAutoGitSavedChange])
@@ -1191,6 +1191,10 @@ function MainApp({ noteWindowParams }: { noteWindowParams: NoteWindowParams | nu
   )
 
   const handleCheckForUpdates = useCallback(async () => {
+    if (!platformCapabilities.updater) {
+      setToastMessage(translate(appLocale, 'update.unavailable'))
+      return
+    }
     if (updateStatus.state === 'downloading') return
     if (updateStatus.state === 'ready') {
       await restartApp()
@@ -1201,7 +1205,7 @@ function MainApp({ noteWindowParams }: { noteWindowParams: NoteWindowParams | nu
       const checkedChannel = normalizeReleaseChannel(settings.release_channel)
       setToastMessage(`No newer ${checkedChannel} update is available right now`)
     }
-  }, [settings.release_channel, updateActions, updateStatus.state])
+  }, [appLocale, platformCapabilities.updater, settings.release_channel, updateActions, updateStatus.state])
 
   const handleRepairVault = useCallback(async () => {
     if (!resolvedPath) return
@@ -1216,7 +1220,7 @@ function MainApp({ noteWindowParams }: { noteWindowParams: NoteWindowParams | nu
     }
   }, [refreshVaultAiGuidance, resolvedPath, vault])
 
-  const restoreVaultAiGuidance = useCallback(async (successToast: string | null = 'Tolaria AI guidance restored') => {
+  const restoreVaultAiGuidance = useCallback(async (successToast: string | null = 'Métis AI guidance restored') => {
     if (!resolvedPath) return
     try {
       const tauriInvoke = isTauri() ? invoke : mockInvoke
@@ -1225,7 +1229,7 @@ function MainApp({ noteWindowParams }: { noteWindowParams: NoteWindowParams | nu
       await refreshVaultAiGuidance()
       if (successToast) setToastMessage(successToast)
     } catch (err) {
-      setToastMessage(`Failed to restore Tolaria AI guidance: ${err}`)
+      setToastMessage(`Failed to restore Métis AI guidance: ${err}`)
     }
   }, [refreshVaultAiGuidance, resolvedPath, vault])
 

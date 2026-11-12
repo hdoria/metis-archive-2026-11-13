@@ -1,5 +1,5 @@
 /**
- * Hook for communicating with the Tolaria MCP WebSocket bridge.
+ * Hook for communicating with the Metis MCP WebSocket bridge.
  *
  * Provides typed tool invocations for vault operations:
  * - readNote, createNote, searchNotes, appendToNote
@@ -8,7 +8,7 @@
  */
 import { useCallback, useRef, useState } from 'react'
 
-const DEFAULT_WS_URL = 'ws://localhost:9710'
+const DEFAULT_WS_URL = 'ws://localhost:9730'
 
 interface PendingRequest {
   resolve: (value: unknown) => void

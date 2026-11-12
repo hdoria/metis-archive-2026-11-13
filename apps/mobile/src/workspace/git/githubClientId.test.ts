@@ -1,8 +1,8 @@
 import { expect, it } from 'vitest'
 import { resolveGitHubClientId } from './githubClientId'
 
-it.each([undefined, '', ' ', '\n\t'])('keeps GitHub sign-in configured without local build configuration (%j)', (override) => {
-  expect(resolveGitHubClientId(override)).toBe('Ov23liNOTXRjy9MZr0Fy')
+it.each([undefined, '', ' ', '\n\t'])('leaves GitHub sign-in unconfigured without an own public OAuth client (%j)', (override) => {
+  expect(resolveGitHubClientId(override)).toBe('')
 })
 
 it('keeps an explicit public OAuth client override', () => {

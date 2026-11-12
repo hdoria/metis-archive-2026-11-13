@@ -5,11 +5,11 @@ URL: /concepts/ai
 
 # AI
 
-Tolaria has two AI paths: coding agents that can use tools to inspect and edit a vault, and direct model targets that answer in chat mode from note context.
+Métis has two AI paths: coding agents that can use tools to inspect and edit a vault, and direct model targets that answer in chat mode from note context.
 
 ## Coding Agents
 
-The AI panel can stream supported local CLI agents through Tolaria's normalized event layer. Current targets include:
+The AI panel can stream supported local CLI agents through Métis's normalized event layer. Current targets include:
 
 - Claude Code
 - Codex
@@ -20,7 +20,7 @@ The AI panel can stream supported local CLI agents through Tolaria's normalized 
 - Kiro
 - Hermes Agent
 
-Tolaria detects agents installed on the machine. Each agent still owns its authentication, available tools, and runtime behavior.
+Métis detects agents installed on the machine. Each agent still owns its authentication, available tools, and runtime behavior.
 
 Coding agents can run in:
 
@@ -29,7 +29,7 @@ Coding agents can run in:
 
 ## Agent Models
 
-Agents that expose a reliable model catalog can show a model selector in the AI workspace. Tolaria currently discovers Codex models and exposes Claude Code's documented aliases. Other agents continue to use their own default model.
+Agents that expose a reliable model catalog can show a model selector in the AI workspace. Métis currently discovers Codex models and exposes Claude Code's documented aliases. Other agents continue to use their own default model.
 
 Model preferences are stored per agent on the current device. Switching agents restores that agent's previous choice, and selecting **Agent default** lets the CLI decide.
 
@@ -45,11 +45,11 @@ Supported provider shapes include:
 
 ## External MCP Setup
 
-Tolaria exposes an MCP server for external tools. The setup flow can write Tolaria's MCP entry into Claude Code, Antigravity CLI, Cursor, and a generic MCP config path, and it can also copy the exact JSON snippet for manual setup.
+Métis exposes an MCP server for external tools. The setup flow can write Métis's MCP entry into Claude Code, Antigravity CLI, Cursor, and a generic MCP config path, and it can also copy the exact JSON snippet for manual setup.
 
 MCP setup is explicit. Closing the dialog leaves third-party config files untouched.
 
-The MCP server can search and read vault content, create notes, update a complete note, or append content to an existing note. `update_note` supports an optional modification-time guard for safer read-modify-write workflows, and both write operations refresh Tolaria after the file changes.
+The MCP server can search and read vault content, create notes, update a complete note, or append content to an existing note. `update_note` supports an optional modification-time guard for safer read-modify-write workflows, and both write operations refresh Métis after the file changes.
 
 ## Why Git Matters For AI
 
@@ -64,7 +64,7 @@ URL: /concepts/editor
 
 # Editor
 
-Tolaria offers a rich editor for daily writing and a raw Markdown mode for exact file control. Both modes write back to the same Markdown file.
+Métis offers a rich editor for daily writing and a raw Markdown mode for exact file control. Both modes write back to the same Markdown file.
 
 ## Rich Editing
 
@@ -92,7 +92,7 @@ Raw mode shows the Markdown source directly. Use it when you need to edit YAML f
 
 Toggle raw mode with `Cmd+\` on macOS or `Ctrl+\` on Windows and Linux.
 
-Tolaria highlights invalid YAML frontmatter in raw mode so malformed metadata is easier to locate and repair.
+Métis highlights invalid YAML frontmatter in raw mode so malformed metadata is easier to locate and repair.
 
 ## Table Of Contents
 
@@ -111,7 +111,7 @@ URL: /concepts/files-and-media
 
 # Files And Media
 
-Tolaria starts with Markdown notes, but a vault can also contain images, PDFs, media files, whiteboards, and other local files.
+Métis starts with Markdown notes, but a vault can also contain images, PDFs, media files, whiteboards, and other local files.
 
 ## Mermaid Diagrams
 
@@ -124,17 +124,17 @@ flowchart LR
 ```
 ````
 
-Tolaria renders Mermaid diagrams in the editor while keeping the source in Markdown.
+Métis renders Mermaid diagrams in the editor while keeping the source in Markdown.
 
 ## Attachments
 
 Images pasted into the editor are saved into the vault as normal files. They remain portable and can be opened by other tools.
 
-When pasted web content contains eligible remote images, Tolaria imports those images into `attachments/` in the background and rewrites the pasted references to local paths. Text appears immediately. If an image cannot be imported safely, its original remote reference remains editable instead of blocking the paste.
+When pasted web content contains eligible remote images, Métis imports those images into `attachments/` in the background and rewrites the pasted references to local paths. Text appears immediately. If an image cannot be imported safely, its original remote reference remains editable instead of blocking the paste.
 
 ## Previews
 
-Tolaria can preview common image files, PDFs, and supported media files in the app. Files without an in-app preview can still be opened in the default system app.
+Métis can preview common image files, PDFs, and supported media files in the app. Files without an in-app preview can still be opened in the default system app.
 
 Settings control whether PDFs, images, and unsupported files appear in All Notes. Folder browsing still shows files in their folders.
 
@@ -150,7 +150,7 @@ Whiteboards use tldraw in the editor, but their durable representation stays in 
 
 ## Git Boundary
 
-If generated or local-only files are ignored by Git, Tolaria can hide them from notes, search, quick open, and folders. Use this when build artifacts or private local files should not behave like vault content.
+If generated or local-only files are ignored by Git, Métis can hide them from notes, search, quick open, and folders. Use this when build artifacts or private local files should not behave like vault content.
 
 ---
 
@@ -161,11 +161,11 @@ URL: /concepts/git
 
 # Git
 
-Git is Tolaria's recommended history and sync layer. Tolaria can work with plain Markdown folders, and Git unlocks local history, recovery, remote backup, and multi-device workflows when you want them.
+Git is Métis's recommended history and sync layer. Métis can work with plain Markdown folders, and Git unlocks local history, recovery, remote backup, and multi-device workflows when you want them.
 
-Tolaria acts as a lightweight Git client for your vault. You can review changes, commit, pull, push, and inspect history without leaving the app.
+Métis acts as a lightweight Git client for your vault. You can review changes, commit, pull, push, and inspect history without leaving the app.
 
-## What Tolaria Uses Git For
+## What Métis Uses Git For
 
 - Whole-vault commit history.
 - Current diff for the vault.
@@ -179,22 +179,22 @@ Tolaria acts as a lightweight Git client for your vault. You can review changes,
 
 Each note can show its own history and current diff, so you can understand how that file changed over time or what is unsaved relative to Git.
 
-Tolaria also shows a history of the whole vault. Use it when you want to review broader changes across multiple notes before committing or syncing.
+Métis also shows a history of the whole vault. Use it when you want to review broader changes across multiple notes before committing or syncing.
 
 ## Local Commits
 
-You can commit changes inside Tolaria without leaving the app. This gives you useful restore points even before a remote is configured.
+You can commit changes inside Métis without leaving the app. This gives you useful restore points even before a remote is configured.
 
 ## Remotes
 
-Connect a compatible Git remote when you want sync or backup. Tolaria relies on your system Git authentication, so GitHub CLI, SSH keys, credential helpers, and existing Git configuration can continue to work.
+Connect a compatible Git remote when you want sync or backup. Métis relies on your system Git authentication, so GitHub CLI, SSH keys, credential helpers, and existing Git configuration can continue to work.
 
 ## Vaults Inside A Parent Repository
 
-A vault can be a folder inside a larger Git repository. Tolaria discovers the nearest parent work tree but keeps the selected vault as the content boundary:
+A vault can be a folder inside a larger Git repository. Métis discovers the nearest parent work tree but keeps the selected vault as the content boundary:
 
 - status, diffs, history, and app-created commits include only vault files
-- files elsewhere in the repository do not appear as Tolaria notes
+- files elsewhere in the repository do not appear as Métis notes
 - pull, push, branch, merge, and rebase state still belong to the whole repository
 
 The resolved Git root is visible in Settings when it differs from the vault root.
@@ -228,7 +228,7 @@ When reviewing the Inbox:
 
 ## Healthy Inbox Habit
 
-Keep the Inbox small enough that it can be reviewed in one focused pass. Tolaria works best when capture is fast and organization is deliberate.
+Keep the Inbox small enough that it can be reviewed in one focused pass. Métis works best when capture is fast and organization is deliberate.
 
 ---
 
@@ -239,7 +239,7 @@ URL: /concepts/notes
 
 # Notes
 
-A note is a Markdown file with optional YAML frontmatter. Tolaria reads the first H1 as the primary title and keeps the file on disk as the durable representation.
+A note is a Markdown file with optional YAML frontmatter. Métis reads the first H1 as the primary title and keeps the file on disk as the durable representation.
 
 ## Anatomy
 
@@ -253,12 +253,12 @@ belongs_to:
 
 # Launch Documentation
 
-Draft the public Tolaria docs and keep them close to code changes.
+Draft the public Métis docs and keep them close to code changes.
 ```
 
 ## Titles
 
-The first H1 is the note title. Tolaria uses that title wherever the note is displayed: note lists, search results, wikilink suggestions, relationship pickers, tabs, and window titles.
+The first H1 is the note title. Métis uses that title wherever the note is displayed: note lists, search results, wikilink suggestions, relationship pickers, tabs, and window titles.
 
 The title is separate from the filename. The filename stays visible in the breadcrumb so you can see the file on disk, and you can rename it independently when needed.
 
@@ -266,7 +266,7 @@ Use the breadcrumb action to rename the file to match the title. New untitled no
 
 ## Body Links
 
-Use `[[wikilinks]]` to connect notes from the body. Tolaria shows autocomplete suggestions while you type, and links can resolve by filename or title.
+Use `[[wikilinks]]` to connect notes from the body. Métis shows autocomplete suggestions while you type, and links can resolve by filename or title.
 
 ## Frontmatter
 
@@ -283,11 +283,11 @@ URL: /concepts/properties
 
 # Properties
 
-Properties are frontmatter fields that Tolaria can display, filter, and edit.
+Properties are frontmatter fields that Métis can display, filter, and edit.
 
 ## Suggested Properties
 
-Suggested properties are the fields Tolaria knows how to create quickly from the Properties panel. When a suggested property is missing, the panel shows a shortcut to add it with the right editor.
+Suggested properties are the fields Métis knows how to create quickly from the Properties panel. When a suggested property is missing, the panel shows a shortcut to add it with the right editor.
 
 | Field | Purpose |
 | --- | --- |
@@ -308,7 +308,7 @@ Type documents use `_pinned_properties` to choose which fields appear in the edi
 
 The Properties panel is the safest place to edit structured properties. Toggle it with `Cmd+Shift+I` on macOS or `Ctrl+Shift+I` on Windows and Linux.
 
-Date fields use Tolaria's picker, relationship fields can use wikilinks, and raw Markdown mode is available when you need direct control over YAML.
+Date fields use Métis's picker, relationship fields can use wikilinks, and raw Markdown mode is available when you need direct control over YAML.
 
 ## Referencing Properties
 
@@ -354,7 +354,7 @@ blocked_by:
   - "[[sync-conflicts]]"
 ```
 
-Tolaria supports default relationship fields out of the box: `belongs_to`, `has`, and `related_to`. It also detects custom relationship fields dynamically when they contain wikilinks.
+Métis supports default relationship fields out of the box: `belongs_to`, `has`, and `related_to`. It also detects custom relationship fields dynamically when they contain wikilinks.
 
 Default relationships have automatically computed inverses. If a note says it `belongs_to` a project, the project can show that note under its inverse `has` relationship without you writing the reverse link by hand. `related_to` works as a lateral relationship in both directions.
 
@@ -366,7 +366,7 @@ Use body links when the relationship appears naturally in writing. Use frontmatt
 
 ## Backlinks
 
-Tolaria can show incoming links and inverse relationships, making it easier to navigate from a note to the rest of its context.
+Métis can show incoming links and inverse relationships, making it easier to navigate from a note to the rest of its context.
 
 ---
 
@@ -377,7 +377,7 @@ URL: /concepts/spreadsheets
 
 # Spreadsheets
 
-Tolaria sheets are spreadsheet notes. They keep the same file-first model as other notes, but a note with `_display: sheet` opens in a spreadsheet editor instead of the rich text editor. The note's `type` remains available for organization.
+Métis sheets are spreadsheet notes. They keep the same file-first model as other notes, but a note with `_display: sheet` opens in a spreadsheet editor instead of the rich text editor. The note's `type` remains available for organization.
 
 The durable file is still Markdown with YAML frontmatter. The body is CSV-like text containing cell inputs and formulas, and spreadsheet presentation state is stored as plain YAML under `_sheet`.
 
@@ -391,7 +391,7 @@ The durable file is still Markdown with YAML frontmatter. The body is CSV-like t
 
 Sheets are useful when information is better modeled as rows, columns, and formulas than as prose. Examples include budgets, revenue models, inventories, editorial calendars, lightweight trackers, and analytical scratchpads.
 
-Tolaria does not store sheets as opaque workbook binaries. A sheet should remain:
+Métis does not store sheets as opaque workbook binaries. A sheet should remain:
 
 - readable in a text editor
 - diffable in Git
@@ -401,27 +401,27 @@ Tolaria does not store sheets as opaque workbook binaries. A sheet should remain
 
 ## One Note, One Sheet
 
-A sheet note is a single sheet. Tolaria does not expose multiple tabs inside one note.
+A sheet note is a single sheet. Métis does not expose multiple tabs inside one note.
 
-When a model needs more than one table, create more than one sheet note and connect them with wikilinks or cross-sheet formulas. This keeps each file small, legible, and aligned with Tolaria's graph model.
+When a model needs more than one table, create more than one sheet note and connect them with wikilinks or cross-sheet formulas. This keeps each file small, legible, and aligned with Métis's graph model.
 
 For example:
 
 - `newsletter-revenue.md`
 - `sponsorship-pipeline.md`
-- `refactoring-business-plan.md`
+- `business-plan.md`
 
-Each can be a normal `_display: sheet` note, and formulas can reference cells in another sheet note with Tolaria's wikilink cell syntax.
+Each can be a normal `_display: sheet` note, and formulas can reference cells in another sheet note with Métis's wikilink cell syntax.
 
 ## Editing
 
-The interactive sheet editor is backed by IronCalc. Tolaria uses IronCalc for spreadsheet behavior and formula evaluation, then adapts the workbook back to Tolaria's plain-text note format.
+The interactive sheet editor is backed by IronCalc. Métis uses IronCalc for spreadsheet behavior and formula evaluation, then adapts the workbook back to Métis's plain-text note format.
 
 In the sheet editor:
 
 - cell inputs that start with `=` are formulas
 - non-formula cells can contain normal text, numbers, dates, and `[[wikilinks]]`
-- typing `[[` in a cell opens the same note autocomplete concept used elsewhere in Tolaria
+- typing `[[` in a cell opens the same note autocomplete concept used elsewhere in Métis
 - typing a formula function name opens inline formula autocomplete for the bundled IronCalc function catalog
 - right-clicking a selection exposes core formatting controls such as number formats, decimal precision, bold, italic, and clear formatting
 
@@ -432,11 +432,11 @@ Keyboard basics follow spreadsheet conventions:
 - `Enter` starts editing the active cell
 - `Escape` exits cell editing while keeping focus in the sheet
 - `Delete` or `Backspace` clears the selected range
-- copy and paste should preserve formulas, including Tolaria cross-sheet references
+- copy and paste should preserve formulas, including Métis cross-sheet references
 
 ## Wikilinks In Cells
 
-Wikilinks in non-formula cells are stored as normal Tolaria wikilinks:
+Wikilinks in non-formula cells are stored as normal Métis wikilinks:
 
 ```csv
 Project,Owner,Status
@@ -444,19 +444,19 @@ Project,Owner,Status
 [[sponsorship-pipeline]],[[person/matteo]],Review
 ```
 
-The cell still behaves like a spreadsheet cell, but the value remains a vault link that Tolaria can understand.
+The cell still behaves like a spreadsheet cell, but the value remains a vault link that Métis can understand.
 
 ## Note Reference Formulas
 
-Tolaria adds a sheet-note reference syntax on top of IronCalc formulas:
+Métis adds a sheet-note reference syntax on top of IronCalc formulas:
 
 ```txt
 =[[newsletter-revenue]].B5
 =SUM(B2:D2)+[[sponsorship-pipeline]].E12
-=[[refactoring-business-plan]].$C$18
+=[[business-plan]].$C$18
 ```
 
-The target before the dot is a normal Tolaria wikilink target. For another sheet note, the part after the dot is an A1-style cell address.
+The target before the dot is a normal Métis wikilink target. For another sheet note, the part after the dot is an A1-style cell address.
 
 Relative and absolute references work like spreadsheet references when copied:
 
@@ -465,7 +465,7 @@ Relative and absolute references work like spreadsheet references when copied:
 - `[[revenue]].B$5` fixes the row
 - `[[revenue]].$B5` fixes the column
 
-This is not the same as an IronCalc workbook tab reference. It is Tolaria-specific syntax for referencing another sheet note in the vault.
+This is not the same as an IronCalc workbook tab reference. It is Métis-specific syntax for referencing another sheet note in the vault.
 
 Current cross-sheet formulas resolve single cells. Ranges across sheet notes are not a stable file-format feature yet, so prefer composing them from explicit cell references or keeping range formulas inside the same sheet note.
 
@@ -476,7 +476,7 @@ Sheet formulas can also read scalar frontmatter properties from a note:
 =[[project-alpha]].status
 ```
 
-This keeps sheet models connected to ordinary Tolaria metadata without requiring a saved view or query. Unresolved, ambiguous, or non-scalar property references show spreadsheet errors.
+This keeps sheet models connected to ordinary Métis metadata without requiring a saved view or query. Unresolved, ambiguous, or non-scalar property references show spreadsheet errors.
 
 Formulas can also read a raw Markdown body line from another note:
 
@@ -514,13 +514,13 @@ Net,=B2+B3-B4,=C2+C3-C4,=D2+D3-D4,=SUM(B5:D5)
 Growth,,=(C5-B5)/B5,=(D5-C5)/C5,=(E5-B5)/B5
 ```
 
-Normal frontmatter stays normal Tolaria metadata. `_sheet` is system metadata for the spreadsheet editor and is hidden from normal property editing.
+Normal frontmatter stays normal Métis metadata. `_sheet` is system metadata for the spreadsheet editor and is hidden from normal property editing.
 
 For the full storage contract, see [Spreadsheet File Format](/reference/spreadsheet-format).
 
 ## Formulas
 
-Tolaria delegates formula calculation to IronCalc. IronCalc aims for Excel-compatible formulas, while its project documentation still describes it as work in progress. For Tolaria-specific formula behavior and the autocomplete function catalog, see [Spreadsheet Formulas](/reference/spreadsheet-functions).
+Métis delegates formula calculation to IronCalc. IronCalc aims for Excel-compatible formulas, while its project documentation still describes it as work in progress. For Métis-specific formula behavior and the autocomplete function catalog, see [Spreadsheet Formulas](/reference/spreadsheet-functions).
 
 ---
 
@@ -541,13 +541,13 @@ The `type:` field assigns a note to a type.
 type: Project
 ```
 
-Tolaria does not infer type from folder location. Moving a file into another folder does not change its type.
+Métis does not infer type from folder location. Moving a file into another folder does not change its type.
 
 ## Prefer Types Over Folders
 
-Types are the preferred way to group notes in Tolaria. Folders are supported for existing vaults and fallback organization, but Tolaria is built around types and relationships because they carry stronger meaning than file paths.
+Types are the preferred way to group notes in Métis. Folders are supported for existing vaults and fallback organization, but Métis is built around types and relationships because they carry stronger meaning than file paths.
 
-Use types for semantic groups such as Projects, People, Topics, Procedures, Events, and Essays. Use relationships to connect notes across those groups. This gives Tolaria better structure for navigation, filtering, properties, templates, and future automation than folder location alone.
+Use types for semantic groups such as Projects, People, Topics, Procedures, Events, and Essays. Use relationships to connect notes across those groups. This gives Métis better structure for navigation, filtering, properties, templates, and future automation than folder location alone.
 
 ## Type Documents
 
@@ -566,7 +566,7 @@ _order: 10
 # Project
 ```
 
-Type templates can live in the Type document's `template` frontmatter field. When a hand-edited Type body contains template-like structure after its own `# TypeName` heading, Tolaria also uses that body content as the new-note template. Plain descriptive body text stays documentation-only.
+Type templates can live in the Type document's `template` frontmatter field. When a hand-edited Type body contains template-like structure after its own `# TypeName` heading, Métis also uses that body content as the new-note template. Plain descriptive body text stays documentation-only.
 
 ## What Types Control
 
@@ -578,7 +578,7 @@ Type templates can live in the Type document's `template` frontmatter field. Whe
 
 ## New Note Defaults
 
-Type documents can define empty properties and relationships. When you create a new note of that type, Tolaria shows placeholders for those fields so you can fill them in from the Properties panel.
+Type documents can define empty properties and relationships. When you create a new note of that type, Métis shows placeholders for those fields so you can fill them in from the Properties panel.
 
 If a type document gives a property a value, that value becomes the default for new notes of that type. For example, a Project type can define `status: Active` so every new project starts active until you change it.
 
@@ -591,7 +591,7 @@ URL: /concepts/vaults
 
 # Vaults
 
-A vault is the folder Tolaria reads and writes. The filesystem is the source of truth; the app state and cache are derived from files.
+A vault is the folder Métis reads and writes. The filesystem is the source of truth; the app state and cache are derived from files.
 
 ## Core Rules
 
@@ -605,19 +605,19 @@ A vault is the folder Tolaria reads and writes. The filesystem is the source of 
 
 Local files keep your notes inspectable. You can open them in another editor, search with command-line tools, back them up with your own system, and version them with Git.
 
-Tolaria should never become the only way to read your data.
+Métis should never become the only way to read your data.
 
 ## Git Is A Capability
 
 A plain folder of Markdown files can open as a vault. Git-backed vaults unlock history, changes, commits, pull, push, conflict handling, and remote setup.
 
-If a folder is not a Git repository, Tolaria can initialize Git when you explicitly ask it to. It avoids initializing broad personal folders such as Desktop, Documents, or Downloads unless they are clearly dedicated vault folders.
+If a folder is not a Git repository, Métis can initialize Git when you explicitly ask it to. It avoids initializing broad personal folders such as Desktop, Documents, or Downloads unless they are clearly dedicated vault folders.
 
 ## Multiple Vaults At The Same Time
 
-Tolaria can load multiple registered vaults into one unified graph. Enable this from `Settings` -> `Vaults` -> `Use multiple vaults at the same time`.
+Métis can load multiple registered vaults into one unified graph. Enable this from `Settings` -> `Vaults` -> `Use multiple vaults at the same time`.
 
-After the option is enabled, open the bottom-left vault menu to include or exclude vaults from the graph. Included vaults appear together in note lists, search, quick open, backlinks, and wikilink navigation. Each note keeps a compact vault badge when Tolaria needs to disambiguate where it lives.
+After the option is enabled, open the bottom-left vault menu to include or exclude vaults from the graph. Included vaults appear together in note lists, search, quick open, backlinks, and wikilink navigation. Each note keeps a compact vault badge when Métis needs to disambiguate where it lives.
 
 The selected vault still matters. Git status, commits, sync, folder navigation, saved views, and vault repair actions stay scoped to the current repository. Use `Manage vaults` from the vault menu or the Vaults settings section to rename vaults, choose colors, and set the default destination for new notes.
 

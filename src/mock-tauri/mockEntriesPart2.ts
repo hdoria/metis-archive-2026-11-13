@@ -4,13 +4,13 @@ import { MOCK_NOW as now } from './mockNow'
 /** Part of the demo vault entries (see mock-entries.ts), split to keep each file small. */
 export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
   {
-    path: '/Users/luca/Laputa/2026-02-14-laputa-app-kickoff.md',
-    filename: '2026-02-14-laputa-app-kickoff.md',
-    title: 'Laputa App Design Session',
+    path: '/Users/luca/MetisLegacy/2026-02-14-metislegacy-app-kickoff.md',
+    filename: '2026-02-14-metislegacy-app-kickoff.md',
+    title: 'MetisLegacy App Design Session',
     isA: 'Event',
     aliases: [],
     belongsTo: [],
-    relatedTo: ['[[26q1-laputa-app]]', '[[matteo-cellini]]'],
+    relatedTo: ['[[26q1-metislegacy-app]]', '[[matteo-cellini]]'],
     status: null,
     archived: false,
     modifiedAt: now - 3600 * 2,
@@ -19,7 +19,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     snippet: 'Agreed on four-panel layout inspired by Bear Notes CodeMirror 6 for the editor — live preview is critical MVP by end of Q1.',
     wordCount: 310,
     relationships: {
-      'Related to': ['[[26q1-laputa-app]]', '[[matteo-cellini]]'],
+      'Related to': ['[[26q1-metislegacy-app]]', '[[matteo-cellini]]'],
       'Type': ['[[event]]'],
     },
     icon: null,
@@ -27,12 +27,12 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     order: null,
     sidebarLabel: null,
     template: null, sort: null, view: null, visible: null,
-    outgoingLinks: ['26q1-laputa-app', 'matteo-cellini'],
+    outgoingLinks: ['26q1-metislegacy-app', 'matteo-cellini'],
     properties: {},
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/Laputa/software-development.md',
+    path: '/Users/luca/MetisLegacy/software-development.md',
     filename: 'software-development.md',
     title: 'Software Development',
     isA: 'Topic',
@@ -60,7 +60,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/Laputa/trading.md',
+    path: '/Users/luca/MetisLegacy/trading.md',
     filename: 'trading.md',
     title: 'Trading',
     isA: 'Topic',
@@ -88,7 +88,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/Laputa/on-writing-well.md',
+    path: '/Users/luca/MetisLegacy/on-writing-well.md',
     filename: 'on-writing-well.md',
     title: 'On Writing Well',
     isA: 'Essay',
@@ -116,7 +116,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/Laputa/engineering-leadership-101.md',
+    path: '/Users/luca/MetisLegacy/engineering-leadership-101.md',
     filename: 'engineering-leadership-101.md',
     title: 'Engineering Leadership 101',
     isA: 'Essay',
@@ -145,7 +145,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/Laputa/ai-agents-primer.md',
+    path: '/Users/luca/MetisLegacy/ai-agents-primer.md',
     filename: 'ai-agents-primer.md',
     title: 'AI Agents Primer',
     isA: 'Essay',
@@ -174,7 +174,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
   },
   // --- Type documents ---
   {
-    path: '/Users/luca/Laputa/project.md',
+    path: '/Users/luca/MetisLegacy/project.md',
     filename: 'project.md',
     title: 'Project',
     isA: 'Type',
@@ -199,7 +199,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/Laputa/responsibility.md',
+    path: '/Users/luca/MetisLegacy/responsibility.md',
     filename: 'responsibility.md',
     title: 'Responsibility',
     isA: 'Type',
@@ -224,7 +224,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/Laputa/procedure.md',
+    path: '/Users/luca/MetisLegacy/procedure.md',
     filename: 'procedure.md',
     title: 'Procedure',
     isA: 'Type',
@@ -249,7 +249,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/Laputa/experiment.md',
+    path: '/Users/luca/MetisLegacy/experiment.md',
     filename: 'experiment.md',
     title: 'Experiment',
     isA: 'Type',
@@ -274,7 +274,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/Laputa/person.md',
+    path: '/Users/luca/MetisLegacy/person.md',
     filename: 'person.md',
     title: 'Person',
     isA: 'Type',
@@ -299,7 +299,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/Laputa/event.md',
+    path: '/Users/luca/MetisLegacy/event.md',
     filename: 'event.md',
     title: 'Event',
     isA: 'Type',
@@ -324,7 +324,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/Laputa/topic.md',
+    path: '/Users/luca/MetisLegacy/topic.md',
     filename: 'topic.md',
     title: 'Topic',
     isA: 'Type',
@@ -349,7 +349,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/Laputa/essay.md',
+    path: '/Users/luca/MetisLegacy/essay.md',
     filename: 'essay.md',
     title: 'Essay',
     isA: 'Type',

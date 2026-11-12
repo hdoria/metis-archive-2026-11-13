@@ -11,7 +11,7 @@ const analyzer = fileURLToPath(
 );
 
 test("new-note frame check requires the body-ready event before editor entry", (t) => {
-	const directory = mkdtempSync(join(tmpdir(), "tolaria-motion-log-"));
+	const directory = mkdtempSync(join(tmpdir(), "metis-motion-log-"));
 	t.after(() => rmSync(directory, { recursive: true, force: true }));
 	const path = join(directory, "simulator.log");
 	const ready = event("new-note-editor-body-ready", 20);
@@ -60,7 +60,7 @@ test("new-note frame check requires the body-ready event before editor entry", (
 });
 
 test("note-open check fails when body renders lack visible content fingerprints", (t) => {
-	const directory = mkdtempSync(join(tmpdir(), "tolaria-motion-log-"));
+	const directory = mkdtempSync(join(tmpdir(), "metis-motion-log-"));
 	t.after(() => rmSync(directory, { recursive: true, force: true }));
 	const path = join(directory, "simulator.log");
 	writeFileSync(path, noteOpenLog([{ noteId: "note-1", render: 1 }]));
@@ -68,7 +68,7 @@ test("note-open check fails when body renders lack visible content fingerprints"
 });
 
 test("note-open check fails when body content changes more than once", (t) => {
-	const directory = mkdtempSync(join(tmpdir(), "tolaria-motion-log-"));
+	const directory = mkdtempSync(join(tmpdir(), "metis-motion-log-"));
 	t.after(() => rmSync(directory, { recursive: true, force: true }));
 	const path = join(directory, "simulator.log");
 	writeNoteOpenLog(path, [contentRender("a"), contentRender("b", 2)]);
@@ -109,7 +109,7 @@ test("note-entry check requires exactly one content-bearing render", (t) => {
 });
 
 test("full run fails when chrome is not laid out within the first frame", (t) => {
-	const directory = mkdtempSync(join(tmpdir(), "tolaria-motion-log-"));
+	const directory = mkdtempSync(join(tmpdir(), "metis-motion-log-"));
 	t.after(() => rmSync(directory, { recursive: true, force: true }));
 	const path = join(directory, "simulator.log");
 	writeFileSync(
@@ -135,7 +135,7 @@ test("full run fails when chrome is not laid out within the first frame", (t) =>
 			...Array.from(
 				{ length: 2 },
 				(_, index) =>
-					`TOLARIA_MOTION_FRAME ${JSON.stringify({ id: "organize-swipe.workflow-orchestration", timestampMs: 100 + index * 16, value: index * 10 })}`,
+					`METIS_MOTION_FRAME ${JSON.stringify({ id: "organize-swipe.workflow-orchestration", timestampMs: 100 + index * 16, value: index * 10 })}`,
 			),
 		].join("\n"),
 	);
@@ -143,7 +143,7 @@ test("full run fails when chrome is not laid out within the first frame", (t) =>
 });
 
 test("full run recognizes organize swipe frame ids with a file extension", (t) => {
-	const directory = mkdtempSync(join(tmpdir(), "tolaria-motion-log-"));
+	const directory = mkdtempSync(join(tmpdir(), "metis-motion-log-"));
 	t.after(() => rmSync(directory, { recursive: true, force: true }));
 	const path = join(directory, "simulator.log");
 	writeFileSync(
@@ -170,12 +170,12 @@ test("full run recognizes organize swipe frame ids with a file extension", (t) =
 			...Array.from(
 				{ length: 2 },
 				(_, index) =>
-					`TOLARIA_MOTION_FRAME ${JSON.stringify({ id: "phone.rail.offset", timestampMs: 100 + index * 16, value: index * 10 })}`,
+					`METIS_MOTION_FRAME ${JSON.stringify({ id: "phone.rail.offset", timestampMs: 100 + index * 16, value: index * 10 })}`,
 			),
 			...Array.from(
 				{ length: 2 },
 				(_, index) =>
-					`TOLARIA_MOTION_FRAME ${JSON.stringify({ id: "organize-swipe.workflow-orchestration.md", timestampMs: 200 + index * 16, value: index * 10 })}`,
+					`METIS_MOTION_FRAME ${JSON.stringify({ id: "organize-swipe.workflow-orchestration.md", timestampMs: 200 + index * 16, value: index * 10 })}`,
 			),
 		].join("\n"),
 	);
@@ -183,7 +183,7 @@ test("full run recognizes organize swipe frame ids with a file extension", (t) =
 });
 
 test("large-vault launch check requires first-frame controls and the expected build", (t) => {
-	const directory = mkdtempSync(join(tmpdir(), "tolaria-motion-log-"));
+	const directory = mkdtempSync(join(tmpdir(), "metis-motion-log-"));
 	t.after(() => rmSync(directory, { recursive: true, force: true }));
 	const path = join(directory, "simulator.log");
 	writeFileSync(
@@ -209,13 +209,13 @@ test("large-vault launch check requires first-frame controls and the expected bu
 });
 
 test("launch check reads motion events from Expo JSON log envelopes", (t) => {
-	const directory = mkdtempSync(join(tmpdir(), "tolaria-motion-log-"));
+	const directory = mkdtempSync(join(tmpdir(), "metis-motion-log-"));
 	t.after(() => rmSync(directory, { recursive: true, force: true }));
 	const path = join(directory, "simulator.log");
 	const envelope = (name, at, extra = {}) =>
 		JSON.stringify({
 			data: [
-				`TOLARIA_MOTION_EVENT ${JSON.stringify({ buildId: "fixture-build", event: name, at, ...extra })}`,
+				`METIS_MOTION_EVENT ${JSON.stringify({ buildId: "fixture-build", event: name, at, ...extra })}`,
 			],
 		});
 	writeFileSync(
@@ -234,7 +234,7 @@ test("launch check reads motion events from Expo JSON log envelopes", (t) => {
 });
 
 test("delayed cached startup keeps one list mounted with chrome before preparation", (t) => {
-	const directory = mkdtempSync(join(tmpdir(), "tolaria-motion-log-"));
+	const directory = mkdtempSync(join(tmpdir(), "metis-motion-log-"));
 	t.after(() => rmSync(directory, { recursive: true, force: true }));
 	const path = join(directory, "simulator.log");
 	writeFileSync(path, delayedStartupLog(1));
@@ -252,7 +252,7 @@ test("delayed cached startup keeps one list mounted with chrome before preparati
 });
 
 test("startup create check verifies the first-frame action is accepted during delayed preparation", (t) => {
-	const directory = mkdtempSync(join(tmpdir(), "tolaria-motion-log-"));
+	const directory = mkdtempSync(join(tmpdir(), "metis-motion-log-"));
 	t.after(() => rmSync(directory, { recursive: true, force: true }));
 	const path = join(directory, "simulator.log");
 	writeFileSync(
@@ -290,7 +290,7 @@ test("startup create check verifies the first-frame action is accepted during de
 });
 
 test("startup create check fails when the first-frame tap never reaches the editor", (t) => {
-	const directory = mkdtempSync(join(tmpdir(), "tolaria-motion-log-"));
+	const directory = mkdtempSync(join(tmpdir(), "metis-motion-log-"));
 	t.after(() => rmSync(directory, { recursive: true, force: true }));
 	const path = join(directory, "simulator.log");
 	writeFileSync(
@@ -360,7 +360,7 @@ function delayedStartupLog(mountCount) {
 }
 
 function createNoteOpenLog(t, renders) {
-	const directory = mkdtempSync(join(tmpdir(), "tolaria-motion-log-"));
+	const directory = mkdtempSync(join(tmpdir(), "metis-motion-log-"));
 	t.after(() => rmSync(directory, { recursive: true, force: true }));
 	const path = join(directory, "simulator.log");
 	writeNoteOpenLog(path, renders);
@@ -376,11 +376,11 @@ function contentRender(contentFingerprint, render = 1) {
 }
 
 function event(name, at, extra = {}) {
-	return `TOLARIA_MOTION_EVENT ${JSON.stringify({ buildId: "fixture-build", event: name, at, ...extra })}`;
+	return `METIS_MOTION_EVENT ${JSON.stringify({ buildId: "fixture-build", event: name, at, ...extra })}`;
 }
 
 function frame(timestampMs, value) {
-	return `TOLARIA_MOTION_FRAME ${JSON.stringify({ id: "phone.rail.offset", timestampMs, value })}`;
+	return `METIS_MOTION_FRAME ${JSON.stringify({ id: "phone.rail.offset", timestampMs, value })}`;
 }
 
 function runAnalyzer(
@@ -394,10 +394,10 @@ function runAnalyzer(
 		env: {
 			...process.env,
 			...(expectedBuildId
-				? { EXPO_PUBLIC_TOLARIA_MOTION_BUILD_ID: expectedBuildId }
+				? { EXPO_PUBLIC_METIS_MOTION_BUILD_ID: expectedBuildId }
 				: {}),
 			...(expectedDelay
-				? { TOLARIA_MOTION_EXPECT_PREPARATION_DELAY_MS: String(expectedDelay) }
+				? { METIS_MOTION_EXPECT_PREPARATION_DELAY_MS: String(expectedDelay) }
 				: {}),
 		},
 	});

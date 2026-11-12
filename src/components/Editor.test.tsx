@@ -141,7 +141,7 @@ describe('Editor', () => {
 
     expect(screen.getByTestId('pdf-file-preview')).toHaveAttribute(
       'data-pdf-source',
-      expect.stringMatching(/^asset:\/\/localhost\/%2Fvault%2Fassets%2Freport\.pdf\?tolaria_pdf_preview=/u),
+      expect.stringMatching(/^asset:\/\/localhost\/%2Fvault%2Fassets%2Freport\.pdf\?metis_pdf_preview=/u),
     )
     expect(screen.queryByTestId('blocknote-view')).not.toBeInTheDocument()
   })
@@ -1072,9 +1072,9 @@ describe('@ wikilink autocomplete', () => {
   }
   const nonPersonEntry: VaultEntry = {
     ...mockEntry,
-    title: 'Build Laputa App',
-    filename: 'laputa-app.md',
-    path: '/vault/project/laputa-app.md',
+    title: 'Build MetisLegacy App',
+    filename: 'metislegacy-app.md',
+    path: '/vault/project/metislegacy-app.md',
     isA: 'Project',
     aliases: [],
   }
@@ -1108,14 +1108,14 @@ describe('@ wikilink autocomplete', () => {
 
   it('keeps @ limited to generic note suggestions while [[ adds unresolved creation', async () => {
     renderForAtAutocomplete()
-    const atItems = await getAtItems!('Lap')
-    const bracketItems = await getBracketItems!('Lap')
+    const atItems = await getAtItems!('Met')
+    const bracketItems = await getBracketItems!('Met')
 
     expect(getAtItems).toBeTruthy()
     expect(atItems.map(item => item.title)).toEqual(bracketItems.slice(0, -1).map(item => item.title))
-    expect(bracketItems.at(-1)?.title).toBe('Create a new note called “Lap”')
+    expect(bracketItems.at(-1)?.title).toBe('Create a new note called “Met”')
     expect(atItems).toHaveLength(1)
-    expect(atItems[0].title).toBe('Build Laputa App')
+    expect(atItems[0].title).toBe('Build MetisLegacy App')
     expect(await getAtItems!('Mat')).toEqual([
       expect.objectContaining({ title: 'Matteo Cellini' }),
     ])
@@ -1125,19 +1125,19 @@ describe('@ wikilink autocomplete', () => {
     renderForAtAutocomplete()
 
     expect(await getAtItems!('M')).toHaveLength(0)
-    const items = await getAtItems!('@Lap')
+    const items = await getAtItems!('@Met')
     expect(items.length).toBeGreaterThan(0)
-    expect(items[0].title).toBe('Build Laputa App')
+    expect(items[0].title).toBe('Build MetisLegacy App')
   })
 
   it('inserts a normal wikilink when an @ item is clicked', async () => {
     renderForAtAutocomplete()
     mockEditor.insertInlineContent.mockClear()
-    const items = await getAtItems!('Laputa')
+    const items = await getAtItems!('MetisLegacy')
     expect(items.length).toBeGreaterThan(0)
     items[0].onItemClick()
     expect(mockEditor.insertInlineContent).toHaveBeenCalledWith([
-      { type: 'wikilink', props: { target: 'vault/project/laputa-app' } },
+      { type: 'wikilink', props: { target: 'vault/project/metislegacy-app' } },
       ' ',
     ], { updateSelection: true })
     expect(items[0].noteType).toBe('Project')
@@ -1155,9 +1155,9 @@ describe('@ wikilink autocomplete', () => {
     }
     const target = {
       ...mockEntry,
-      path: '/team/projects/laputa-app.md',
-      filename: 'laputa-app.md',
-      title: 'Build Laputa App',
+      path: '/team/projects/metislegacy-app.md',
+      filename: 'metislegacy-app.md',
+      title: 'Build MetisLegacy App',
       isA: 'Project',
       aliases: [],
       workspace: teamWorkspace,
@@ -1175,12 +1175,12 @@ describe('@ wikilink autocomplete', () => {
 
     getAtItems = capturedSuggestionState.getItemsByTrigger['@'] ?? null
     mockEditor.insertInlineContent.mockClear()
-    const items = await getAtItems!('Laputa')
+    const items = await getAtItems!('MetisLegacy')
     expect(items[0].workspace).toBe(teamWorkspace)
     items[0].onItemClick()
 
     expect(mockEditor.insertInlineContent).toHaveBeenCalledWith([
-      { type: 'wikilink', props: { target: 'team/projects/laputa-app' } },
+      { type: 'wikilink', props: { target: 'team/projects/metislegacy-app' } },
       ' ',
     ], { updateSelection: true })
     mockFilterSuggestionItems.mockImplementation((items: unknown[]) => items)

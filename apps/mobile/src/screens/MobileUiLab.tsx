@@ -298,7 +298,7 @@ function initialEditorState(searchParams: URLSearchParams) {
 function layoutProbeEnabled(searchParams: URLSearchParams) {
 	return (
 		searchParams.get("layoutProbe") === "1" ||
-		envFlagEnabled("EXPO_PUBLIC_TOLARIA_LAYOUT_PROBE")
+		envFlagEnabled("EXPO_PUBLIC_METIS_LAYOUT_PROBE")
 	);
 }
 
@@ -306,7 +306,7 @@ function tabletTransitionProbeEnabled(
 	searchParams: URLSearchParams,
 ): TabletTransitionProbeMode {
 	return tabletTransitionProbeMode({
-		envProbe: envValue("EXPO_PUBLIC_TOLARIA_TABLET_TRANSITION_PROBE"),
+		envProbe: envValue("EXPO_PUBLIC_METIS_TABLET_TRANSITION_PROBE"),
 		queryProbe: searchParams.get("tabletTransitionProbe"),
 	});
 }

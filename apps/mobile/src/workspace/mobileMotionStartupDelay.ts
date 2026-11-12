@@ -16,7 +16,7 @@ export async function waitForMotionStartupDelay(signal: AbortSignal) {
 }
 
 function configuredDelay() {
-	const value = Number(process.env.EXPO_PUBLIC_TOLARIA_MOTION_STARTUP_DELAY_MS);
+	const value = Number(process.env.EXPO_PUBLIC_METIS_MOTION_STARTUP_DELAY_MS);
 	return Number.isFinite(value)
 		? Math.min(Math.max(Math.floor(value), 0), maximumDelayMs)
 		: 0;

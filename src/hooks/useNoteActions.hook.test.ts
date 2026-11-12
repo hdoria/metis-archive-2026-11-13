@@ -20,7 +20,7 @@ vi.mock('../mock-tauri', () => ({
 }))
 
 const makeEntry = (overrides: Partial<VaultEntry> = {}): VaultEntry => ({
-  path: '/Users/luca/Laputa/test.md',
+  path: '/Users/luca/MetisLegacy/test.md',
   filename: 'test.md',
   title: 'Test Note',
   isA: 'Note',
@@ -188,7 +188,7 @@ describe('useNoteActions hook', () => {
 
   it('keeps the active tab open when gitignored visibility reports a /tmp alias', async () => {
     const activeEntry = makeEntry({
-      path: '/private/tmp/tolaria-vault/active.md',
+      path: '/private/tmp/metis-vault/active.md',
       filename: 'active.md',
       title: 'Active',
     })
@@ -202,12 +202,12 @@ describe('useNoteActions hook', () => {
       window.dispatchEvent(new CustomEvent(GITIGNORED_VISIBILITY_APPLIED_EVENT, {
         detail: {
           hide: true,
-          visiblePaths: ['/tmp/tolaria-vault/active.md'],
+          visiblePaths: ['/tmp/metis-vault/active.md'],
         },
       }))
     })
 
-    expect(result.current.activeTabPath).toBe('/private/tmp/tolaria-vault/active.md')
+    expect(result.current.activeTabPath).toBe('/private/tmp/metis-vault/active.md')
     expect(result.current.tabs).toHaveLength(1)
   })
 

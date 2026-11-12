@@ -480,11 +480,11 @@ mod tests {
         );
         assert_eq!(
             local_config_value(vault, "user.name").as_deref(),
-            Some("Tolaria")
+            Some("Metis")
         );
         assert_eq!(
             local_config_value(vault, "user.email").as_deref(),
-            Some("vault@tolaria.default")
+            Some("vault@metis.default")
         );
     }
 

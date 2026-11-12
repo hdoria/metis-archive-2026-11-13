@@ -1,3 +1,6 @@
+import matter from 'gray-matter'
+import starterManifest from '../../apps/mobile/assets/starter-vault/manifest.json'
+import { parseFrontmatter } from './frontmatter'
 import { afterEach, describe, it, expect, vi } from 'vitest'
 import { evaluateView } from './viewFilters'
 import type { FilterNode, VaultEntry, ViewDefinition } from '../types'
@@ -79,11 +82,11 @@ describe('evaluateView', () => {
 
   it('filters by relationship contains wikilink', () => {
     const entries = [
-      makeEntry({ title: 'Match', relationships: { 'Related to': ['[[laputa-app|Laputa App]]', '[[other]]'] } }),
+      makeEntry({ title: 'Match', relationships: { 'Related to': ['[[metislegacy-app|MetisLegacy App]]', '[[other]]'] } }),
       makeEntry({ title: 'No match', relationships: { 'Related to': ['[[something]]'] } }),
       makeEntry({ title: 'No rels', relationships: {} }),
     ]
-    expectFilterTitles({ field: 'Related to', op: 'contains', value: '[[laputa-app]]' }, entries, ['Match'], 'Related')
+    expectFilterTitles({ field: 'Related to', op: 'contains', value: '[[metislegacy-app]]' }, entries, ['Match'], 'Related')
   })
 
   it('evaluates nested AND/OR groups', () => {
@@ -343,4 +346,30 @@ describe('evaluateView', () => {
     ]
     expectFilterTitles({ field: 'title', op: 'contains', value: '(', regex: true }, entries, [], 'Broken regex')
   })
+})
+
+
+it('shows the twelve bundled guide notes in the starter view using technical wikilink slugs', () => {
+  const viewFile = starterManifest.files.find((file) => file.path === 'views/active-projects.yml')
+  expect(viewFile).toBeDefined()
+  const definition = matter(`---\n${viewFile?.text}\n---`).data as ViewDefinition
+  const entries = starterManifest.files.filter((file) => file.path.endsWith('.md')).map((file) => {
+    const metadata = parseFrontmatter(file.text)
+    const links = metadata.related_to
+    const relatedTo = typeof links === 'string' ? [links] : Array.isArray(links) ? links.map(String) : []
+    return makeEntry({
+      path: file.path,
+      filename: file.path,
+      isA: typeof metadata.type === 'string' ? metadata.type : null,
+      relatedTo,
+      relationships: { related_to: relatedTo },
+    })
+  })
+  const guides = evaluateView(definition, entries.filter((entry) => entry.isA === 'Note'))
+  expect(guides.map((entry) => entry.path).sort()).toEqual([
+    'command-palette.md', 'editor-playground.md', 'launch-plan-spreadsheet.md',
+    'make-it-yours.md', 'metis-ai.md', 'metis-bottom-bar.md', 'metis-editor.md',
+    'metis-note-list.md', 'metis-principles.md', 'metis-sidebar.md',
+    'multiple-vaults.md', 'the-properties-panel.md',
+  ])
 })

@@ -1,12 +1,12 @@
 {
-  "name": "@tolaria/landing",
+  "name": "@metis/landing",
   "private": true,
   "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:tolaria-md": "tsc -b && vite build --mode tolaria-md",
+    "build:metis-md": "tsc -b && vite build --mode metis-md",
     "typecheck": "tsc -b"
   },
   "dependencies": {

@@ -10,7 +10,7 @@ type TreeEntry = { path: string; oid: string; size: number }
 type PreparedFile = { file: BundleFile; image?: Buffer }
 type BundleOptions = { repository: string; revision: string; outputDirectory: string }
 
-const repositoryUrl = 'https://github.com/refactoringhq/tolaria-getting-started'
+const repositoryUrl = 'https://github.com/hdoria/metis'
 const maxFileBytes = 8 * 1024 * 1024
 const maxBundleBytes = 32 * 1024 * 1024
 const textExtensions = new Set(['.md', '.yml', '.yaml', '.json', '.html', '.txt'])

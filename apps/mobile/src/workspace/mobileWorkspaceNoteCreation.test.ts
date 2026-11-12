@@ -170,7 +170,7 @@ describe("mobile note creation parity", () => {
 		]);
 	});
 
-	it("keeps fixture-created scratch notes on the default Tolaria vault label", () => {
+	it("keeps fixture-created scratch notes on the default Metis vault label", () => {
 		const result = applyMobileWorkspaceEditWithWrites(
 			workspaceScenarioForId("default"),
 			{
@@ -182,14 +182,14 @@ describe("mobile note creation parity", () => {
 
 		expect(note).toMatchObject({
 			path: "mobile-qa-draft.md",
-			workspace: "Tolaria Vault",
+			workspace: "Metis Vault",
 			workspaceAlias: null,
 		});
 		expect(
 			buildMobileDeepLinkForNote({ note, source: result.snapshot.source }),
 		).toEqual({
 			ok: true,
-			url: "tolaria://tolaria-vault/mobile-qa-draft.md",
+			url: "metis://metis-vault/mobile-qa-draft.md",
 		});
 	});
 
@@ -201,7 +201,7 @@ describe("mobile note creation parity", () => {
 					folderPath: "Writing/Launch",
 					organized: false,
 					properties: { priority: "High" },
-					relationships: { belongs_to: ["[[Tolaria MVP]]"] },
+					relationships: { belongs_to: ["[[Metis MVP]]"] },
 					status: "Active",
 					tags: ["Design", "Mobile"],
 					type: "Procedure",
@@ -226,14 +226,14 @@ describe("mobile note creation parity", () => {
 				(relationship) => relationship.key === "belongs_to",
 			)?.values,
 		).toContainEqual(
-			expect.objectContaining({ title: "Tolaria MVP", type: "Note" }),
+			expect.objectContaining({ title: "Metis MVP", type: "Note" }),
 		);
 		expect(note.rawContent).toContain("type: Procedure");
 		expect(note.rawContent).toContain("status: Active");
 		expect(note.rawContent).toContain("title: Launch Checklist");
 		expect(note.rawContent).toContain("tags:\n  - Design\n  - Mobile");
 		expect(note.rawContent).toContain("priority: High");
-		expect(note.rawContent).toContain('belongs_to: "[[Tolaria MVP]]"');
+		expect(note.rawContent).toContain('belongs_to: "[[Metis MVP]]"');
 		expect(result.writes).toEqual([
 			{
 				content: note.rawContent,
@@ -248,7 +248,7 @@ describe("mobile note creation parity", () => {
 			workspaceScenarioForId("default"),
 			{
 				defaults: {
-					relationships: { "Belongs to": ["[[Tolaria MVP]]"] },
+					relationships: { "Belongs to": ["[[Metis MVP]]"] },
 					type: "Project",
 				},
 				title: "Relationship Key Contract",
@@ -261,8 +261,8 @@ describe("mobile note creation parity", () => {
 			note.relationships.find(
 				(relationship) => relationship.key === "Belongs to",
 			)?.values,
-		).toContainEqual(expect.objectContaining({ title: "Tolaria MVP" }));
-		expect(note.rawContent).toContain('Belongs to: "[[Tolaria MVP]]"');
+		).toContainEqual(expect.objectContaining({ title: "Metis MVP" }));
+		expect(note.rawContent).toContain('Belongs to: "[[Metis MVP]]"');
 		expect(note.rawContent).not.toContain("belongs_to:");
 		expect(result.writes).toEqual([
 			{

@@ -5,8 +5,8 @@ final class TabletRotationTests: XCTestCase {
     continueAfterFailure = false
     XCUIDevice.shared.orientation = .landscapeLeft
     defer { XCUIDevice.shared.orientation = .landscapeLeft }
-    let app = XCUIApplication(bundleIdentifier: "com.tolaria.mobile.dev")
-    app.launchArguments = ["--tolaria-mobile-search", "?source=fixture&editorMode=wysiwyg&qaRun=rotation"]
+    let app = XCUIApplication(bundleIdentifier: "io.github.hdoria.metis.mobile.dev")
+    app.launchArguments = ["--metis-mobile-search", "?source=fixture&editorMode=wysiwyg&qaRun=rotation"]
     app.launch()
     let note = app.descendants(matching: .any).matching(identifier: "note-row-open-source-project").firstMatch
     XCTAssertTrue(note.waitForExistence(timeout: 60))

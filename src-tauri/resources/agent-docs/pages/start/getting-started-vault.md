@@ -1,45 +1,14 @@
-# Getting Started Vault
+# Getting Started vault
 
 Source: start/getting-started-vault.md
 URL: /start/getting-started-vault
 
-# Getting Started Vault
+# Getting Started vault
 
-The Getting Started vault is a small public sample vault hosted at [refactoringhq/tolaria-getting-started](https://github.com/refactoringhq/tolaria-getting-started).
+Métis includes a starter vault in the app. Creating it works offline and does not clone a remote repository.
 
-It exists to show Tolaria's conventions without requiring you to restructure your own notes first.
+The starter contains Markdown notes, type definitions, example properties, an editor playground, a sample spreadsheet and guides to the sidebar, Git and AI tools. Open **Get familiar with Métis** for a tour.
 
-## What It Demonstrates
+Métis creates a local Git repository for the starter without a remote. You can edit the notes, commit locally or delete the sample when you are finished. To sync a vault later, choose your own Git remote.
 
-- Markdown notes with YAML frontmatter.
-- Types such as Note, Project, Person, and Topic.
-- Wikilinks in note bodies.
-- Relationship fields in frontmatter.
-- Rich-editor blocks, callouts, collapsible sections, and durable formatting.
-- A spreadsheet with formulas and a cross-note frontmatter reference.
-- An HTML dashboard powered by vault expressions.
-- A standalone HTML report that can be previewed or edited in raw mode.
-- A local Git repository that can be connected to a remote later.
-- Vault guidance files plus example workflows for AI agents and direct models.
-
-In the cloned vault, open **Editor Playground** for block editing, **Project Dashboard** for vault expressions, and **Sample Report** for standalone HTML preview.
-
-## Local-Only By Default
-
-When Tolaria clones the sample, it removes the remote from the local copy. This makes the sample vault disposable. You can edit it freely, commit locally, and delete it later.
-
-To connect a vault to your own remote, use the bottom status bar remote chip or run `Add Remote` from the command palette.
-
-Tolaria also repairs starter-vault guidance files when needed. `AGENTS.md` is the canonical guidance file, `CLAUDE.md` is kept as a compatibility shim, and `GEMINI.md` is only created when you explicitly restore Antigravity/Gemini guidance.
-
-Start with the `Start here!` view and follow **Get familiar with Tolaria**. The checklist links to working examples, so you can try each feature without changing your own notes.
-
-## Use It Alongside Your Own Vaults
-
-You can keep the Getting Started vault open while working in your own notes. Enable `Settings` -> `Vaults` -> `Use multiple vaults at the same time`, then use the bottom-left vault menu to include both the sample vault and your real vault in the unified graph.
-
-This lets search, quick open, note lists, backlinks, and wikilink navigation span both vaults. Git actions still stay scoped to each vault's own repository, and new notes go to the default vault you choose in `Manage vaults`.
-
-## When To Move On
-
-After you understand the sample, open your own vault. Tolaria does not require a special folder structure: a folder of Markdown files is enough to start. You can remove the sample from Tolaria's vault list later without deleting its files from disk.
+You can also open an existing folder of Markdown files. Métis does not require a special folder structure. Removing a vault from the app's list does not delete the files on disk.

@@ -124,7 +124,7 @@ function makeWorkspace(path: string, label: string, alias = label.toLowerCase())
 }
 
 const referencedByTargetEntry: VaultEntry = {
-  path: '/Users/luca/Laputa/responsibility/grow-newsletter.md',
+  path: '/Users/luca/MetisLegacy/responsibility/grow-newsletter.md',
   filename: 'grow-newsletter.md',
   title: 'Grow Newsletter',
   isA: 'Responsibility',
@@ -149,7 +149,7 @@ const referencedByTargetEntry: VaultEntry = {
 }
 
 const referencedByEssayEntry: VaultEntry = {
-  path: '/Users/luca/Laputa/essay/on-writing.md',
+  path: '/Users/luca/MetisLegacy/essay/on-writing.md',
   filename: 'on-writing.md',
   title: 'On Writing Well',
   isA: 'Essay',
@@ -174,7 +174,7 @@ const referencedByEssayEntry: VaultEntry = {
 }
 
 const referencedByProcedureEntry: VaultEntry = {
-  path: '/Users/luca/Laputa/procedure/write-essays.md',
+  path: '/Users/luca/MetisLegacy/procedure/write-essays.md',
   filename: 'write-essays.md',
   title: 'Write Weekly Essays',
   isA: 'Procedure',
@@ -199,7 +199,7 @@ const referencedByProcedureEntry: VaultEntry = {
 }
 
 const referencedByExperimentEntry: VaultEntry = {
-  path: '/Users/luca/Laputa/experiment/seo.md',
+  path: '/Users/luca/MetisLegacy/experiment/seo.md',
   filename: 'seo.md',
   title: 'SEO Experiment',
   isA: 'Experiment',
@@ -323,26 +323,26 @@ Status: Evergreened
   })
 
   it('infers the current workspace for untagged default-vault notes before moving them', () => {
-    const laputaWorkspace = makeWorkspace('/Users/luca/Laputa', 'Laputa')
+    const metislegacyWorkspace = makeWorkspace('/Users/luca/MetisLegacy', 'MetisLegacy')
     const refactoringWorkspace = makeWorkspace('/Users/luca/Refactoring', 'Refactoring')
     const entry = {
       ...mockEntry,
-      path: '/Users/luca/Laputa/project/test.md',
+      path: '/Users/luca/MetisLegacy/project/test.md',
       workspace: undefined,
     }
     const onChangeWorkspace = vi.fn()
 
     renderSelectedInspector({
       entry,
-      workspaces: [laputaWorkspace, refactoringWorkspace],
+      workspaces: [metislegacyWorkspace, refactoringWorkspace],
       onChangeWorkspace,
     })
 
-    fireEvent.click(screen.getByRole('combobox', { name: 'Laputa' }))
+    fireEvent.click(screen.getByRole('combobox', { name: 'MetisLegacy' }))
     fireEvent.click(screen.getByRole('option', { name: 'Refactoring' }))
 
     expect(onChangeWorkspace).toHaveBeenCalledWith(
-      expect.objectContaining({ path: entry.path, workspace: laputaWorkspace }),
+      expect.objectContaining({ path: entry.path, workspace: metislegacyWorkspace }),
       refactoringWorkspace,
     )
   })
@@ -585,7 +585,7 @@ This is a test note with some words to count.
     it('skips Type relationships in referenced-by computation', () => {
       const typeEntry: VaultEntry = {
         ...referencedByTargetEntry,
-        path: '/Users/luca/Laputa/responsibility.md',
+        path: '/Users/luca/MetisLegacy/responsibility.md',
         filename: 'responsibility.md',
         title: 'Responsibility',
         isA: 'Type',
@@ -631,7 +631,7 @@ This is a test note with some words to count.
 
     it('excludes entries from backlinks when already shown in referenced-by', async () => {
       const noteA: VaultEntry = {
-        path: '/Users/luca/Laputa/essay/on-writing.md',
+        path: '/Users/luca/MetisLegacy/essay/on-writing.md',
         filename: 'on-writing.md',
         title: 'On Writing Well',
         isA: 'Essay',

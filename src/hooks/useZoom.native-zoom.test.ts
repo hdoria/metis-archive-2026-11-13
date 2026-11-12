@@ -48,7 +48,7 @@ describe("native desktop zoom", () => {
 		expect(document.documentElement.style.getPropertyValue("zoom")).toBe("");
 		expect(
 			document.documentElement.style.getPropertyValue(
-				"--tolaria-overlay-zoom-factor",
+				"--metis-overlay-zoom-factor",
 			),
 		).toBe("1");
 	});
@@ -77,7 +77,7 @@ describe("native desktop zoom", () => {
 			expect(document.documentElement.style.getPropertyValue("zoom")).toBe("");
 			expect(
 				document.documentElement.style.getPropertyValue(
-					"--tolaria-overlay-zoom-factor",
+					"--metis-overlay-zoom-factor",
 				),
 			).toBe("1");
 		},

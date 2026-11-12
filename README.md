@@ -1,165 +1,38 @@
-![Latest stable](https://img.shields.io/github/v/release/refactoringhq/tolaria?display_name=tag) [![Codecov](https://codecov.io/gh/refactoringhq/tolaria/graph/badge.svg?branch=main)](https://codecov.io/gh/refactoringhq/tolaria) [![CodeScene Hotspot Code Health](https://codescene.io/projects/76865/status-badges/hotspot-code-health)](https://codescene.io/projects/76865) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/fa3cdc28aefa460591c74aa262530708)](https://app.codacy.com/gh/refactoringhq/tolaria/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+<p align="center"><img src="public/metis-icon.png" width="120" alt="Métis icon"></p>
 
-# 💧 Tolaria
+# Métis
 
-Tolaria is an app for managing **markdown knowledge bases**, available on desktop (macOS, Windows, Linux) and mobile (iPhone, iPad). People use it for a variety of use cases:
+A free app for your second brain. Write notes in Markdown, connect ideas, and keep their history with Git. Your files stay yours.
 
-* Operate second brains and personal knowledge
-* Organize company docs as context for AI
-* Store OpenClaw/assistants memory and procedures
+Métis takes its name from the Greek titaness of wisdom and good counsel. She advised Zeus from inside his head: a second brain inside the first. Our symbol carries that idea, with one profile nested inside another.
 
-Personally, I use it to **run my life** (hey 👋 [Luca here](http://x.com/lucaronin)). I have a massive workspace of 10,000+ notes, which are the result of my [Refactoring](https://refactoring.fm/) work + a ton of personal journaling and *second braining*.
+## What is here
 
-<img width="1000" height="656" alt="1776506856823-CleanShot_2026-04-18_at_12 06 57_2x" src="https://github.com/user-attachments/assets/8aeafb0a-b236-43c2-a083-ec111f903c38" />
+The repository includes a React/Tauri desktop app, a web app and server, an Expo mobile app, and an MCP server for working with your vault through AI tools.
 
-## Sponsors
+The app is free and open source under AGPL-3.0-or-later. Optional AI providers and hosting services can have their own costs. The whiteboard editor is retained with tldraw’s own license enforcement. Public distribution is pending a free tldraw license. Set `VITE_TLDRAW_LICENSE_KEY` when that license is granted; saved drawings remain in your notes.
 
-Tolaria is supported by a small panel of tools that help keep the project healthy, tested, and ready for AI-assisted development. I use these tools every day.
+## Run the desktop app
 
-<table>
-  <tr>
-    <td align="center" width="25%">
-      <a href="https://codacy.com/tolaria?utm_source=tolaria&utm_medium=github&utm_campaign=refactoring">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/refactoringhq/tolaria/main/site/public/landing/sponsors/codacy-light.svg">
-          <img src="https://raw.githubusercontent.com/refactoringhq/tolaria/main/site/public/landing/sponsors/codacy-dark.svg" alt="Codacy" height="32">
-        </picture>
-      </a>
-    </td>
-    <td align="center" width="25%">
-      <a href="https://codescene.com/?utm_source=tolaria&utm_medium=github&utm_campaign=refactoring">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/refactoringhq/tolaria/main/site/public/landing/sponsors/codescene-light.svg">
-          <img src="https://raw.githubusercontent.com/refactoringhq/tolaria/main/site/public/landing/sponsors/codescene-dark.svg" alt="CodeScene" height="32">
-        </picture>
-      </a>
-    </td>
-    <td align="center" width="25%">
-      <a href="https://circleci.com/?utm_source=tolaria&utm_medium=github&utm_campaign=refactoring">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/refactoringhq/tolaria/main/site/public/landing/sponsors/circleci-light.svg">
-          <img src="https://raw.githubusercontent.com/refactoringhq/tolaria/main/site/public/landing/sponsors/circleci-dark.svg" alt="CircleCI" height="32">
-        </picture>
-      </a>
-    </td>
-    <td align="center" width="25%">
-      <a href="https://getunblocked.com/?utm_source=tolaria&utm_medium=github&utm_campaign=refactoring">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/refactoringhq/tolaria/main/site/public/landing/sponsors/unblocked-light.svg">
-          <img src="https://raw.githubusercontent.com/refactoringhq/tolaria/main/site/public/landing/sponsors/unblocked-dark.svg" alt="Unblocked" height="32">
-        </picture>
-      </a>
-    </td>
-  </tr>
-</table>
+Install Node.js, pnpm and the [Tauri prerequisites](https://v2.tauri.app/start/prerequisites/) for your operating system.
 
-## Walkthroughs
-
-You can find some Loom walkthroughs below — they are short and to the point:
-- [How I Organize My Own Tolaria Workspace](https://www.loom.com/share/bb3aaffa238b4be0bd62e4464bca2528)
-- [My Inbox Workflow](https://www.loom.com/share/dffda263317b4fa8b47b59cdf9330571)
-- [How I Save Web Resources to Tolaria](https://www.loom.com/share/8a3c1776f801402ebbf4d7b0f31e9882)
-
-## Principles
-
-- 📑 **Files-first** — Your notes are plain markdown files. They're portable, work with any editor, and require no export step. Your data belongs to you, not to any app.
-- 🔌 **Git-first** — Every vault is a git repository. You get full version history, the ability to use any git remote, and zero dependency on Tolaria servers.
-- 🛜 **Offline-first, zero lock-in** — No accounts, no subscriptions, no cloud dependencies. Your vault works completely offline and always will. If you stop using Tolaria, you lose nothing.
-- 🔬 **Open source** — Tolaria is free and open source. I built this for [myself](https://x.com/lucaronin) and for sharing it with others.
-- 📋 **Standards-based** — Notes are markdown files with YAML frontmatter. No proprietary formats, no locked-in data. Everything works with standard tools if you decide to move away from Tolaria.
-- 🔍 **Types as lenses, not schemas** — Types in Tolaria are navigation aids, not enforcement mechanisms. There's no required fields, no validation, just helpful categories for finding notes.
-- 🪄**AI-first but not AI-only** — A vault of files works very well with AI agents, but you are free to use whatever you want. We support Claude Code, Codex CLI, and Gemini CLI setup paths, but you can edit the vault with any AI you want. We provide an AGENTS file for your agents to figure out.
-- ⌨️ **Keyboard-first** — Tolaria is designed for power-users who want to use keyboard as much as possible. A lot of how we designed the Editor and the Command Palette is based on this.
-- 💪 **Built from real use** — Tolaria was created for manage my personal vault of 10,000+ notes, and I use it every day. Every feature exists because it solved a real problem.
-
-## Installation
-
-### Homebrew
-
-Install via Homebrew on macOS:
-
-```batch
-brew install --cask tolaria
-```
-
-### Download from releases
-
-Download the [latest release here](https://refactoringhq.github.io/tolaria/download/) for macOS, Windows, or Linux. Windows installers are Authenticode-signed; company-managed devices may still require IT approval of the Tolaria publisher before first install.
-
-## Mobile (iPhone and iPad)
-
-Tolaria for iOS is currently in **beta** via TestFlight. The mobile app brings Tolaria's core features to iPhone and iPad:
-
-- **WYSIWYG Markdown editor** — Fast, native rich-text editing powered by TenTap/Tiptap
-- **Real git integration** — Auto-commit on save, with merge support for multi-device workflows
-- **Sync with desktop** — Your vaults sync seamlessly through iCloud or Files, and share the same git repository as the desktop app
-
-The mobile app is still early and under active development. To join the beta, open the [public TestFlight invite](https://testflight.apple.com/join/7aPD4GAB) on your iPhone or iPad, and join the [Tolaria Discord community](https://discord.gg/tRBC2u428B) to stay updated on mobile development.
-
-## Getting started
-
-When you open Tolaria for the first time you get the chance of cloning the [getting started vault](https://github.com/refactoringhq/tolaria-getting-started) — which gives you a walkthrough of the whole app.
-
-The public user docs live in [`site/`](site/) and are published to GitHub Pages. Start with [Install Tolaria](site/start/install.md), then [First Launch](site/start/first-launch.md).
-
-## Open source and local setup
-
-Tolaria is open source and built with Tauri, React, and TypeScript. If you want to run or contribute to the app locally, here is [how to get started](https://github.com/refactoringhq/tolaria/blob/main/docs/GETTING-STARTED.md). You can also find the gist below 👇
-
-### Prerequisites
-
-- Node.js 20+
-- pnpm 8+
-- Rust stable
-- macOS or Linux for development
-
-#### Linux system dependencies
-
-Tauri 2 on Linux requires WebKit2GTK 4.1 and GTK 3:
-
-- Arch / Manjaro:
-  ```bash
-  sudo pacman -S --needed webkit2gtk-4.1 base-devel curl wget file openssl \
-    appmenu-gtk-module libappindicator-gtk3 librsvg
-  ```
-- Debian / Ubuntu (22.04+):
-  ```bash
-  sudo apt install libwebkit2gtk-4.1-dev build-essential curl wget file \
-    libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev \
-    libsoup-3.0-dev patchelf
-  ```
-- Fedora 38+:
-  ```bash
-  sudo dnf install webkit2gtk4.1-devel openssl-devel curl wget file \
-    libappindicator-gtk3-devel librsvg2-devel
-  ```
-
-The bundled MCP server still spawns the system `node` binary at runtime on Linux, so install Node from your distro package manager if you want the external AI tooling flow.
-
-### Quick start
-
-```bash
-pnpm install
-pnpm dev
-```
-
-Open `http://localhost:5173` for the browser-based mock mode, or run the native desktop app with:
-
-```bash
+```sh
+git clone https://github.com/hdoria/metis.git
+cd metis
+pnpm install --frozen-lockfile
 pnpm tauri dev
 ```
 
-## Tech Docs
+For a browser development preview, run `pnpm dev`. Run `pnpm build` to build the desktop frontend, `pnpm build:web` for the web app, and `pnpm docs:build` for the documentation.
 
-- 📐 [ARCHITECTURE.md](docs/ARCHITECTURE.md) — System design, tech stack, data flow
-- 🧩 [ABSTRACTIONS.md](docs/ABSTRACTIONS.md) — Core abstractions and models
-- 🚀 [GETTING-STARTED.md](docs/GETTING-STARTED.md) — How to navigate the codebase
-- 📚 [ADRs](docs/adr) — Architecture Decision Records
+## Releases
 
-## Security
+Packaged Métis releases will be listed on [GitHub Releases](https://github.com/hdoria/metis/releases). Automatic updates and mobile OTA delivery are disabled until this project has its own signing and publishing configuration. No Homebrew package or public TestFlight invitation is advertised for this fork.
 
-If you believe you have found a security issue, please report it privately as described in [SECURITY.md](./SECURITY.md).
+## Documentation and contributions
 
-## License
+Start with the [documentation](site/docs.md), [installation instructions](site/start/install.md), and [contribution guide](CONTRIBUTING.md). Report reproducible problems in [Issues](https://github.com/hdoria/metis/issues).
 
-Tolaria is licensed under AGPL-3.0-or-later. The Tolaria name and logo remain covered by the project’s trademark policy.
+## License and attribution
+
+See [LICENSE](LICENSE), [NOTICE](NOTICE), and [third-party notices](THIRD_PARTY_NOTICES.md). The source history and original authors' rights are preserved. Métis is an independent project maintained by Hugo Doria.

@@ -1,26 +1,26 @@
 import { describe, expect, it } from 'vitest'
 import { buildLocalVaultWorkspaceSnapshot } from './localVaultSnapshot'
-import { vaultFile, realVaultRelationshipFiles, tolariaMobileContent } from './localVaultSnapshotTestFixtures'
+import { vaultFile, realVaultRelationshipFiles, metisMobileContent } from './localVaultSnapshotTestFixtures'
 
 describe('buildLocalVaultWorkspaceSnapshot', () => {
   it('maps real vault frontmatter into mobile notes, relationships, and type colors', () => {
     const snapshot = buildLocalVaultWorkspaceSnapshot({
       files: realVaultRelationshipFiles(),
-      vaultLabel: 'Laputa',
-      vaultPath: '/Users/luca/Laputa',
+      vaultLabel: 'MetisLegacy',
+      vaultPath: '/Users/luca/MetisLegacy',
     })
 
-    expect(snapshot.source).toMatchObject({ kind: 'localVault', label: 'Laputa', totalNotes: 3 })
+    expect(snapshot.source).toMatchObject({ kind: 'localVault', label: 'MetisLegacy', totalNotes: 3 })
     expect(snapshot.notes).toHaveLength(1)
     expect(snapshot.notes[0]).toMatchObject({
       aliases: ['Mobile App'],
       outgoingLinks: ['workflow-orchestration'],
-      rawContent: tolariaMobileContent,
-      title: 'Tolaria Mobile',
+      rawContent: metisMobileContent,
+      title: 'Metis Mobile',
       type: 'Project',
       noteWidth: 'wide',
       typeTone: 'red',
-      workspace: 'Laputa',
+      workspace: 'MetisLegacy',
     })
     expect(snapshot.notes[0]?.relationships[0]).toMatchObject({
       key: 'related_to',
@@ -54,8 +54,8 @@ type: Project
 # Target
 `),
       ],
-      vaultLabel: 'Laputa',
-      vaultPath: '/Users/luca/Laputa',
+      vaultLabel: 'MetisLegacy',
+      vaultPath: '/Users/luca/MetisLegacy',
     })
 
     expect(snapshot.notes[0]?.properties).toEqual([{
@@ -94,8 +94,8 @@ type: Journal
 # Café Notes
 `),
       ],
-      vaultLabel: 'Laputa',
-      vaultPath: '/Users/luca/Laputa',
+      vaultLabel: 'MetisLegacy',
+      vaultPath: '/Users/luca/MetisLegacy',
     })
 
     expect(snapshot.notes[0]?.relationships[0]?.values[0]).toMatchObject({
@@ -121,8 +121,8 @@ Belongs to:
 ---
 # Source
 `)],
-      vaultLabel: 'Laputa',
-      vaultPath: '/Users/luca/Laputa',
+      vaultLabel: 'MetisLegacy',
+      vaultPath: '/Users/luca/MetisLegacy',
     })
 
     expect(snapshot.notes[0]?.relationships[0]?.values[0]).toMatchObject({

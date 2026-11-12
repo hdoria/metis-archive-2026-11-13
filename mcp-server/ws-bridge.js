@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 /**
- * WebSocket bridge for Tolaria MCP tools.
+ * WebSocket bridge for Metis MCP tools.
  *
- * Exposes vault operations over WebSocket so the Tolaria app frontend
+ * Exposes vault operations over WebSocket so the Metis app frontend
  * can invoke MCP tools in real-time without going through stdio.
  *
- * Port 9710: Tool bridge — Claude/AI clients call vault tools here.
- * Port 9711: UI bridge — Frontend listens for UI action broadcasts.
+ * Port 9730: Tool bridge — Claude/AI clients call vault tools here.
+ * Port 9731: UI bridge — Frontend listens for UI action broadcasts.
  *
  * Usage:
- *   VAULT_PATH=/path/to/vault WS_PORT=9710 WS_UI_PORT=9711 node ws-bridge.js
+ *   VAULT_PATH=/path/to/vault WS_PORT=9730 WS_UI_PORT=9731 node ws-bridge.js
  *
  * Protocol (tool bridge):
  *   Client sends:  { "id": "req-1", "tool": "search_notes", "args": { "query": "test" } }
@@ -24,8 +24,8 @@ import { WebSocketServer } from 'ws'
 import { createMcpToolService } from './tool-service.js'
 import { attachVault, cloneVault } from './vault-lifecycle.js'
 
-const WS_PORT = parseInt(process.env.WS_PORT || '9710', 10)
-const WS_UI_PORT = parseInt(process.env.WS_UI_PORT || '9711', 10)
+const WS_PORT = parseInt(process.env.WS_PORT || '9730', 10)
+const WS_UI_PORT = parseInt(process.env.WS_UI_PORT || '9731', 10)
 const LOOPBACK_HOST = 'localhost'
 const TRUSTED_UI_ORIGINS = new Set([
   'tauri://localhost',
@@ -197,7 +197,7 @@ function verifyBridgeRequest(bridgeType) {
 /**
  * Attempt to start the UI bridge WebSocket server.
  * Returns a Promise that resolves to the WebSocketServer or null if the port
- * is unavailable (e.g. another Tolaria instance owns it).
+ * is unavailable (e.g. another Metis instance owns it).
  */
 export function startUiBridge(port = WS_UI_PORT) {
   return new Promise((resolve) => {

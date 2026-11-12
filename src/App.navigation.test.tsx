@@ -135,7 +135,7 @@ describe("App.navigation", () => {
 			inbox: { noteListProperties: null, explicitOrganization: false },
 		});
 		localStorage.setItem(
-			`laputa:vault-config:${workVaultPath}`,
+			`metislegacy:vault-config:${workVaultPath}`,
 			disabledWorkflowConfig,
 		);
 
@@ -186,7 +186,7 @@ describe("App.navigation", () => {
 		});
 
 		await waitFor(() => {
-			expect(window.__laputaTest?.activeTabPath).toBe("/vault/beta.md");
+			expect(window.__metislegacyTest?.activeTabPath).toBe("/vault/beta.md");
 		});
 	}, 10_000);
 
@@ -237,7 +237,7 @@ describe("App.navigation", () => {
 			await Promise.resolve();
 		});
 		await waitFor(() => {
-			expect(window.__laputaTest?.activeTabPath).toBe("/vault/gamma.md");
+			expect(window.__metislegacyTest?.activeTabPath).toBe("/vault/gamma.md");
 		});
 
 		await act(async () => {
@@ -247,7 +247,7 @@ describe("App.navigation", () => {
 			await Promise.resolve();
 		});
 
-		expect(window.__laputaTest?.activeTabPath).toBe("/vault/gamma.md");
+		expect(window.__metislegacyTest?.activeTabPath).toBe("/vault/gamma.md");
 	}, 10_000);
 
 	it("renders status bar", async () => {

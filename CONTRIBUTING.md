@@ -1,49 +1,9 @@
-# Contributing to Tolaria
+# Contributing to Métis
 
-Thanks for being here! Tolaria is still early, and every bug report, idea, and contribution genuinely helps shape the app.
+Report bugs and propose changes in [GitHub Issues](https://github.com/hdoria/metis/issues). Search existing issues first. For a bug, include the platform, build, steps to reproduce, expected result and actual result. Remove note contents, credentials and other private information from diagnostics.
 
-## 🗳️ Where to share what
+Keep pull requests focused on one change. Explain the problem, the behavior after the change, and how you tested it. Follow the repository's [AGENTS.md](AGENTS.md), reuse existing components, and keep visible text in the locale catalogs.
 
-To keep things clean:
+Run `pnpm lint`, `pnpm build` and the relevant tests before submitting. Native changes also need Rust verification. Test with a disposable vault, never a real user's files.
 
-- 🐛 Bugs → GitHub Issues
-- 💡 Feature requests / ideas → Canny • <https://tolaria.canny.io/>
-
-If you have a feature idea, please check Canny first and upvote it if it already exists.
-
-## 📥 Pull requests are welcome
-
-PRs are very welcome.
-
-A few things to keep in mind before opening one:
-
-- Bug fixes are always great
-- Small improvements are great too
-- For bigger features, please check Canny first before building
-  - Try to avoid things that are already marked **in progress**
-  - Requests marked **planned** are usually great contribution targets
-- Keep PRs small, focused, and easy to review
-- Include a short explanation of the problem and your solution
-- Follow the dev process described in Tolaria’s `AGENTS.md` (tests, code health, etc.)
-- Avoid bundling unrelated refactors into the same PR
-
-If you want to contribute a feature, the best place to start is here: <https://tolaria.canny.io/>
-
-## 📋 What makes a good bug report
-
-If you open a bug report on GitHub, it really helps to include:
-
-- your Tolaria version
-- your OS version
-- steps to reproduce
-- what you expected to happen
-- what actually happened
-- screenshots or screen recordings if useful
-
-The clearer the report, the easier it is for us to reproduce and fix it.
-
-## 🙏 Thank you
-
-Tolaria is getting better because people care enough to try it, report what’s broken, suggest what’s missing, and contribute improvements.
-
-That means a lot. Thanks for helping build it.
+The project is distributed under AGPL-3.0-or-later. Preserve attribution notices and check the licenses of any new dependencies. Do not add external telemetry, signing or deployment credentials to the repository.

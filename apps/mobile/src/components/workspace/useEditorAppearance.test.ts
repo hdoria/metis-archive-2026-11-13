@@ -8,7 +8,7 @@ describe('rich editor appearance', () => {
     const css = mobileTentapEditorCss(false, null, mobilePalettes.dark)
     expect(css).toContain('background: #1F1E1B')
     expect(css).toContain('color: #E6E1D8')
-    expect(css).toContain('caret-color: #78A4FF')
+    expect(css).toContain('caret-color: #79B9A5')
     expect(css).toContain('1px solid #34322D')
     expect(css).not.toContain('#FFFFFF')
   })
@@ -16,7 +16,7 @@ describe('rich editor appearance', () => {
   it('changes only CSS, preserving the document and selection', () => {
     const editor = { injectCSS: vi.fn(), setContent: vi.fn(), setSelection: vi.fn() }
     expect(injectMobileEditorAppearance(editor, 'body { color: white; }')).toBe(true)
-    expect(editor.injectCSS).toHaveBeenCalledWith('body { color: white; }', 'tolaria-editor')
+    expect(editor.injectCSS).toHaveBeenCalledWith('body { color: white; }', 'metis-editor')
     expect(editor.setContent).not.toHaveBeenCalled()
     expect(editor.setSelection).not.toHaveBeenCalled()
     expect(injectMobileEditorAppearance(null, '')).toBe(false)

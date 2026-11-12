@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test'
 import { executeCommand, openCommandPalette } from './helpers'
 
-const LARGE_NOTE_PATH = '/Users/luca/Laputa/perf-large-note.md'
+const LARGE_NOTE_PATH = '/Users/luca/MetisLegacy/perf-large-note.md'
 const LARGE_NOTE_TITLE = 'Perf Large Note'
 
 function largeMarkdown(): string {
@@ -11,7 +11,7 @@ function largeMarkdown(): string {
       `## Section ${ordinal}`,
       '',
       `Paragraph ${ordinal} keeps the large editor path realistic with **bold text**, *italic text*, `,
-      `a wikilink to [[Build Laputa App]], and a [reference link](https://example.com/${ordinal}). `,
+      `a wikilink to [[Build MetisLegacy App]], and a [reference link](https://example.com/${ordinal}). `,
       'The text is intentionally long enough to push the source past the worker-backed parser threshold.',
     ].join('')
   })
@@ -44,7 +44,7 @@ const largeEntry = {
   snippet: 'Synthetic large note for editor performance instrumentation.',
   wordCount: 4600,
   relationships: {},
-  outgoingLinks: ['build-laputa-app'],
+  outgoingLinks: ['build-metislegacy-app'],
   icon: null,
   color: null,
   order: null,

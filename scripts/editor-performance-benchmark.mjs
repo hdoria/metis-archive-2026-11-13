@@ -213,7 +213,7 @@ function largeMarkdown(sectionCount, title) {
       `## Section ${ordinal}`,
       '',
       `Paragraph ${ordinal} keeps the large editor path realistic with **bold text**, *italic text*, `,
-      `a wikilink to [[Build Laputa App]], and a [reference link](https://example.com/${ordinal}). `,
+      `a wikilink to [[Build MetisLegacy App]], and a [reference link](https://example.com/${ordinal}). `,
       'The text is intentionally long enough to push the source past the worker-backed parser threshold.',
     ].join('')
   })
@@ -249,7 +249,7 @@ function syntheticEntry({ index = 0, markdown = '', title }) {
     modifiedAt: 1_710_000_000 + index,
     order: null,
     organized: false,
-    outgoingLinks: ['build-laputa-app'],
+    outgoingLinks: ['build-metislegacy-app'],
     path: `/performance-fixture/${slug}.md`,
     properties: {},
     relationships: {},
@@ -328,8 +328,8 @@ function stopDevServer() {
 
 async function installSyntheticVault(page, entries, contentByPath) {
   await page.addInitScript(({ syntheticContent, syntheticEntries }) => {
-    globalThis.__TOLARIA_PERFORMANCE_HARNESS__ = true
-    localStorage.setItem('tolaria:claude-code-onboarding-dismissed', '1')
+    globalThis.__METIS_PERFORMANCE_HARNESS__ = true
+    localStorage.setItem('metis:claude-code-onboarding-dismissed', '1')
     const jsonResponse = value => new Response(JSON.stringify(value), {
       headers: { 'Content-Type': 'application/json' },
       status: 200,
@@ -441,7 +441,7 @@ async function openFixturePage({ baseUrl, browser, contentByPath, entries }) {
 }
 
 async function startupMarkMs(page, phase) {
-  const markName = `tolaria:${phase}`
+  const markName = `metis:${phase}`
   await page.waitForFunction(
     name => performance.getEntriesByName(name, 'mark').length > 0,
     markName,

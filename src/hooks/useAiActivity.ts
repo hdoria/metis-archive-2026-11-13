@@ -16,7 +16,7 @@ export interface AiActivityCallbacks {
   onVaultRegistryChanged?: (path?: string) => void
 }
 
-const WS_UI_URL = 'ws://localhost:9711'
+const WS_UI_URL = 'ws://localhost:9731'
 const HIGHLIGHT_DURATION_MS = 800
 const RECONNECT_DELAY_MS = 3000
 
@@ -113,7 +113,7 @@ function dispatchVaultRegistryChanged(
   const registrationType = message.registrationType === 'clone' ? 'clone' : 'attach'
   trackEvent('mcp_vault_registered', { registration_type: registrationType })
   callbacksRef.current?.onVaultRegistryChanged?.(path)
-  window.dispatchEvent(new CustomEvent('tolaria:vault-registry-changed', { detail: { path } }))
+  window.dispatchEvent(new CustomEvent('metis:vault-registry-changed', { detail: { path } }))
 }
 
 function dispatchUiActionMessage(
@@ -181,7 +181,7 @@ function useUiActionSocket(handleMessage: (event: MessageEvent) => void, clearHi
 }
 
 /**
- * Listens on the UI WebSocket bridge (port 9711) for UI action events
+ * Listens on the UI WebSocket bridge (port 9731) for UI action events
  * from the MCP server. Handles highlight, open_note, open_tab, set_filter,
  * and vault_changed actions.
  */

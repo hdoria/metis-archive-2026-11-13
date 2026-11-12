@@ -33,7 +33,7 @@ describe("Sidebar", () => {
 	it("does not show inline entity names — sections are flat rows", () => {
 		renderSidebar({});
 		// Individual entries should NOT appear inline in the sidebar
-		expect(screen.queryByText("Build Laputa App")).not.toBeInTheDocument();
+		expect(screen.queryByText("Build MetisLegacy App")).not.toBeInTheDocument();
 		expect(screen.queryByText("Grow Newsletter")).not.toBeInTheDocument();
 	});
 

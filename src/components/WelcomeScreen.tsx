@@ -3,8 +3,8 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import { OnboardingShell } from './OnboardingShell'
 import { Button } from '@/components/ui/button'
-import tolariaIcon from '@/assets/tolaria-icon.svg'
-import { TOLARIA_FIRST_LAUNCH_DOCS_URL } from '@/constants/feedback'
+import metisIcon from '@/assets/metis-icon.svg'
+import { METIS_FIRST_LAUNCH_DOCS_URL } from '@/constants/feedback'
 import { translate, type AppLocale } from '@/lib/i18n'
 import { openExternalUrl } from '@/utils/url'
 
@@ -283,35 +283,25 @@ function OptionButton(options: OptionButtonProps) {
 
 function getWelcomeScreenPresentation(
   mode: WelcomeScreenProps['mode'],
-  defaultVaultPath: string,
-  isOffline: boolean,
   locale: AppLocale,
 ): WelcomeScreenPresentation {
   if (mode === 'welcome') {
     return {
       heroBackground: 'transparent',
-      heroIcon: <img src={tolariaIcon} alt="Tolaria icon" style={BRAND_ICON_STYLE} />,
+      heroIcon: <img src={metisIcon} alt="Métis icon" style={BRAND_ICON_STYLE} />,
       openFolderLabel: translate(locale, 'onboarding.welcome.openExisting'),
       subtitle: translate(locale, 'onboarding.welcome.subtitle'),
-      templateDescription: isOffline
-        ? translate(locale, 'onboarding.welcome.templateOffline', {
-            path: defaultVaultPath,
-          })
-        : translate(locale, 'onboarding.welcome.templateDescription'),
+      templateDescription: translate(locale, 'onboarding.welcome.templateDescription'),
       title: translate(locale, 'onboarding.welcome.title'),
     }
   }
 
   return {
     heroBackground: 'transparent',
-    heroIcon: <img src={tolariaIcon} alt="Tolaria icon" style={BRAND_ICON_STYLE} />,
+    heroIcon: <img src={metisIcon} alt="Métis icon" style={BRAND_ICON_STYLE} />,
     openFolderLabel: translate(locale, 'onboarding.welcome.openExisting'),
     subtitle: translate(locale, 'onboarding.welcome.missingSubtitle'),
-    templateDescription: isOffline
-      ? translate(locale, 'onboarding.welcome.templateOffline', {
-          path: defaultVaultPath,
-        })
-      : translate(locale, 'onboarding.welcome.templateDescription'),
+    templateDescription: translate(locale, 'onboarding.welcome.templateDescription'),
     title: translate(locale, 'onboarding.welcome.title'),
   }
 }
@@ -319,11 +309,10 @@ function getWelcomeScreenPresentation(
 function useWelcomeActionButtons({
   mode,
   busy,
-  isOffline,
   onCreateEmptyVault,
   onOpenFolder,
   onCreateVault,
-}: Pick<WelcomeScreenProps, 'mode' | 'isOffline' | 'onCreateEmptyVault' | 'onOpenFolder' | 'onCreateVault'> & {
+}: Pick<WelcomeScreenProps, 'mode' | 'onCreateEmptyVault' | 'onOpenFolder' | 'onCreateVault'> & {
   busy: boolean
 }) {
   const templateActionRef = useRef<HTMLButtonElement>(null)
@@ -332,11 +321,11 @@ function useWelcomeActionButtons({
   const actionButtonRefs = useMemo(() => [templateActionRef, createEmptyActionRef, openFolderActionRef], [])
   const actions = useMemo<WelcomeAction[]>(
     () => [
-      { disabled: isOffline, run: onCreateVault },
+      { disabled: false, run: onCreateVault },
       { disabled: false, run: onCreateEmptyVault },
       { disabled: false, run: onOpenFolder },
     ],
-    [isOffline, onCreateEmptyVault, onCreateVault, onOpenFolder],
+    [onCreateEmptyVault, onCreateVault, onOpenFolder],
   )
 
   useEffect(() => {
@@ -402,7 +391,7 @@ function WelcomeHeader({ presentation }: { presentation: WelcomeScreenPresentati
 function WelcomeActions(
   options: Pick<
     WelcomeScreenProps,
-    'creatingAction' | 'isOffline' | 'onCreateEmptyVault' | 'onCreateVault' | 'onOpenFolder'
+    'creatingAction' | 'onCreateEmptyVault' | 'onCreateVault' | 'onOpenFolder'
   > & {
     busy: boolean
     createEmptyActionRef: WelcomeActionButtonRef
@@ -416,8 +405,7 @@ function WelcomeActions(
     busy,
     createEmptyActionRef,
     creatingAction,
-    isOffline,
-    locale,
+      locale,
     onCreateEmptyVault,
     onCreateVault,
     onOpenFolder,
@@ -442,7 +430,7 @@ function WelcomeActions(
         loadingLabel={translate(locale, 'onboarding.welcome.templateLoading')}
         loadingDescription={translate(locale, 'onboarding.welcome.templateLoadingDescription')}
         onClick={onCreateVault}
-        disabled={busy || isOffline}
+        disabled={busy}
         loading={creatingAction === 'template'}
         testId="welcome-create-vault"
         autoFocus
@@ -530,7 +518,7 @@ function WelcomeDocsLink({ locale }: { locale: AppLocale }) {
         variant="link"
         size="sm"
         className="h-auto gap-1 px-0 py-0 text-xs"
-        onClick={() => void openExternalUrl(TOLARIA_FIRST_LAUNCH_DOCS_URL)}
+        onClick={() => void openExternalUrl(METIS_FIRST_LAUNCH_DOCS_URL)}
         data-testid="welcome-docs-link"
       >
         {translate(locale, 'onboarding.welcome.docsLink')}
@@ -544,23 +532,20 @@ export function WelcomeScreen(options: WelcomeScreenProps) {
   const {
     mode,
     locale = 'en',
-    defaultVaultPath,
     onCreateVault,
     onRetryCreateVault,
     onCreateEmptyVault,
     onOpenFolder,
-    isOffline,
-    creatingAction,
+      creatingAction,
     error,
     canRetryTemplate,
   } = options
   const busy = creatingAction !== null
-  const presentation = getWelcomeScreenPresentation(mode, defaultVaultPath, isOffline, locale)
+  const presentation = getWelcomeScreenPresentation(mode, locale)
   const { templateActionRef, createEmptyActionRef, openFolderActionRef } = useWelcomeActionButtons({
     mode,
     busy,
-    isOffline,
-    onCreateEmptyVault,
+      onCreateEmptyVault,
     onOpenFolder,
     onCreateVault,
   })
@@ -573,7 +558,6 @@ export function WelcomeScreen(options: WelcomeScreenProps) {
           busy={busy}
           createEmptyActionRef={createEmptyActionRef}
           creatingAction={creatingAction}
-          isOffline={isOffline}
           locale={locale}
           onCreateEmptyVault={onCreateEmptyVault}
           onCreateVault={onCreateVault}

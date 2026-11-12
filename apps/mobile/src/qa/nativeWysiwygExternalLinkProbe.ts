@@ -17,8 +17,8 @@ export type NativeWysiwygExternalLinkAssertionFailure = {
   message: string
 }
 
-const nativeWysiwygExternalLinkProbeLabel = 'Tolaria'
-const nativeWysiwygExternalLinkProbeUrl = 'https://tolaria.app/docs'
+const nativeWysiwygExternalLinkProbeLabel = 'Métis'
+const nativeWysiwygExternalLinkProbeUrl = 'https://example.com/docs'
 const nativeWysiwygExternalLinkExpectedMarkdown = `[${nativeWysiwygExternalLinkProbeLabel}](${nativeWysiwygExternalLinkProbeUrl})`
 const proofFieldTypes = {
   contentLength: 'number',
@@ -29,7 +29,7 @@ const proofFieldTypes = {
   unlinkSaved: 'boolean',
 } as const
 
-export const nativeWysiwygExternalLinkLogPrefix = 'TOLARIA_MOBILE_WYSIWYG_EXTERNAL_LINK_PROBE'
+export const nativeWysiwygExternalLinkLogPrefix = 'METIS_MOBILE_WYSIWYG_EXTERNAL_LINK_PROBE'
 
 export function nativeWysiwygExternalLinkProbeContent(): object {
   return {

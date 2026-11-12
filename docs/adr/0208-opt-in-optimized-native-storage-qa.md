@@ -14,7 +14,7 @@ development builds, preventing the same fixtures from measuring optimized code.
 
 ## Decision
 
-Allow those storage probes in an explicitly compiled `TOLARIA_QA` binary as well
+Allow those storage probes in an explicitly compiled `METIS_QA` binary as well
 as Debug. The native workspace module exposes a read-only capability only under
 those compilation conditions. The JavaScript entry point accepts either a
 development runtime or that exact native boolean. URL parameters, strings, and
@@ -32,5 +32,5 @@ flag into the project, release pipeline, or ordinary app settings.
 - Ordinary Release excludes the native probe API/capability. Verify that boundary
   separately, not only that a QA-enabled build works.
 - QA-enabled binaries are local test artifacts, not distribution candidates.
-  Native fault injection never gains access to the original Laputa vault.
+  Native fault injection never gains access to the original MetisLegacy vault.
 - No dependency or alternate storage implementation is introduced.

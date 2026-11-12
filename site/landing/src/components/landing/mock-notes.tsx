@@ -4,8 +4,8 @@ import {
 } from "@phosphor-icons/react"
 
 // Shared data for the device mock-ups (MacBook, iPhone, Peel to Markdown): note types with their colour and icon,
-// modelled on a real Tolaria vault's sidebar, and the rich "From notes to essays" note (table, Mermaid, code) with
-// the raw Markdown it is stored as. Colours are the Refactoring brand palette (CSS vars from brand/shadcn.css).
+// modelled on a real Métis vault's sidebar, and the rich "From notes to essays" note (table, Mermaid, code) with
+// the raw Markdown it is stored as. Colours are the Métis brand palette (CSS vars from brand/shadcn.css).
 // Written out in full (not built from a template) so Tailwind's scanner keeps every one of these theme variables.
 const HUES = {
   red: ["var(--color-red-500)", "var(--color-red-50)", "var(--color-red-700)"],
@@ -37,7 +37,7 @@ export const TYPES = {
   skill: T("Skills", "Skill", ToolboxIcon, "orange", 9),
 } as const
 export type TypeKey = keyof typeof TYPES
-export const VAULT = "Refactoring"
+export const VAULT = "My knowledge"
 
 // ---------- the rich note ----------
 export const ESSAY = {

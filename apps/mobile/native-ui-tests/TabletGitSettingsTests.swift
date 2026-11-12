@@ -46,8 +46,8 @@ final class TabletGitSettingsTests: XCTestCase {
   }
 
   private func launchVault() -> XCUIApplication {
-    let app = XCUIApplication(bundleIdentifier: "com.tolaria.mobile.dev")
-    app.launchArguments = ["--tolaria-mobile-search", "?source=native&editorMode=wysiwyg&qaRun=git-settings"]
+    let app = XCUIApplication(bundleIdentifier: "io.github.hdoria.metis.mobile.dev")
+    app.launchArguments = ["--metis-mobile-search", "?source=native&editorMode=wysiwyg&qaRun=git-settings"]
     app.launch()
     return app
   }

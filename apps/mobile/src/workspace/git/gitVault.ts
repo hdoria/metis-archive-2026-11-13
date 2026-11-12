@@ -58,7 +58,7 @@ async function requireClean(context: GitVaultContext) {
 async function checkpoint(
 	context: GitVaultContext,
 	author: GitAuthor,
-	message = "Update vault from Tolaria mobile",
+	message = "Update vault from Metis mobile",
 ) {
 	if (!message.trim()) throw new Error("emptyCommitMessage");
 	const { changed, workspaceChanged } = await refreshedChanges(context);

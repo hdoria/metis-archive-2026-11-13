@@ -56,9 +56,9 @@ const recoveredEntry = {
 
 async function installStartupRecoveryMock(page: Page): Promise<void> {
   await page.addInitScript(({ defaultPath, vaultPath, noteEntry }) => {
-    localStorage.setItem('tolaria_welcome_dismissed', '1')
-    localStorage.setItem('tolaria:ai-agents-onboarding-dismissed', '1')
-    localStorage.setItem('tolaria:claude-code-onboarding-dismissed', '1')
+    localStorage.setItem('metis_welcome_dismissed', '1')
+    localStorage.setItem('metis:ai-agents-onboarding-dismissed', '1')
+    localStorage.setItem('metis:claude-code-onboarding-dismissed', '1')
 
     const startupWindow = window as StartupWindow
     const noteContent = {

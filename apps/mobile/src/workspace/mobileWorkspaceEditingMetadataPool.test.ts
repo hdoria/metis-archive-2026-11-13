@@ -29,12 +29,12 @@ describe('mobile workspace metadata note pools', () => {
 
     expect(result.writes).toContainEqual({
       kind: 'moveNote',
-      path: 'Tolaria/Mobile UI/Workflow Orchestration Essay.md',
-      toPath: 'Tolaria/Mobile UI/manual-name.md',
+      path: 'Metis/Mobile UI/Workflow Orchestration Essay.md',
+      toPath: 'Metis/Mobile UI/manual-name.md',
     })
     expectSaveNoteContent(result.writes, 'Refs.md', [
-      '[[Tolaria/Mobile UI/manual-name|Workflow]]',
-      '[[Tolaria/Mobile UI/manual-name|essay]]',
+      '[[Metis/Mobile UI/manual-name|Workflow]]',
+      '[[Metis/Mobile UI/manual-name|essay]]',
     ])
   })
 })
@@ -54,11 +54,11 @@ function movedReferenceContent() {
     'related_to:',
     '  - [[Workflow Orchestration Essay]]',
     'belongs_to:',
-    '  - [[Tolaria/Mobile UI/Workflow Orchestration Essay|Workflow]]',
+    '  - [[Metis/Mobile UI/Workflow Orchestration Essay|Workflow]]',
     '---',
     '# Ref',
     '',
-    'See [[Tolaria/Mobile UI/Workflow Orchestration Essay|essay]] before launch.',
+    'See [[Metis/Mobile UI/Workflow Orchestration Essay|essay]] before launch.',
     '',
   ].join('\n')
 }

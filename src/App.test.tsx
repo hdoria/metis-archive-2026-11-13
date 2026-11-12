@@ -167,7 +167,7 @@ describe("App", () => {
 				vaultPath: "/vault",
 			});
 			await waitFor(() =>
-				expect(window.__laputaTest?.activeTabPath).toBe(
+				expect(window.__metislegacyTest?.activeTabPath).toBe(
 					"/vault/project/test.md",
 				),
 			);
@@ -233,7 +233,7 @@ describe("App", () => {
 					vaultPath: "/vault",
 				});
 			});
-			expect(window.__laputaTest?.activeTabPath).not.toBe(
+			expect(window.__metislegacyTest?.activeTabPath).not.toBe(
 				"/vault/untitled-note-1700000000.md",
 			);
 
@@ -243,7 +243,7 @@ describe("App", () => {
 			});
 
 			await waitFor(() => {
-				expect(window.__laputaTest?.activeTabPath).toBe(
+				expect(window.__metislegacyTest?.activeTabPath).toBe(
 					"/vault/untitled-note-1700000000.md",
 				);
 			});

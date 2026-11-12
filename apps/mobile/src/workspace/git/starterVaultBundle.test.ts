@@ -15,7 +15,7 @@ afterEach(() => {
 })
 
 function fixture() {
-  const root = mkdtempSync(join(tmpdir(), 'tolaria-starter-bundle-'))
+  const root = mkdtempSync(join(tmpdir(), 'metis-starter-bundle-'))
   roots.push(root)
   const repository = join(root, 'source')
   const outputDirectory = join(root, 'bundle')
@@ -142,11 +142,12 @@ it('preserves the prior bundle if a new snapshot fails validation', () => {
 })
 
 it('keeps every checked-in template file consistent with its recorded checksum', () => {
-  const paths = bundledManifest.files.map(file => file.path)
+  const files: { path: string; sha256: string; text?: string; asset?: string }[] = bundledManifest.files
+  const paths = files.map(file => file.path)
   expect(new Set(paths).size).toBe(paths.length)
   expect(paths).toContain('note.md')
   expect(paths).toContain('views/active-projects.yml')
-  for (const file of bundledManifest.files) {
+  for (const file of files) {
     const bytes = file.asset
       ? readFileSync(new URL(`../../../assets/starter-vault/${file.asset}`, import.meta.url))
       : Buffer.from(file.text ?? '')

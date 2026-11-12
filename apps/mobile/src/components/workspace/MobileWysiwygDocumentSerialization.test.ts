@@ -110,12 +110,12 @@ describe("native WYSIWYG document serialization", () => {
 					{
 						content: [
 							{
-								attrs: { tolariaAlignment: "left" },
+								attrs: { metisAlignment: "left" },
 								content: [{ text: "Surface", type: "text" }],
 								type: "tableHeader",
 							},
 							{
-								attrs: { tolariaAlignment: "right" },
+								attrs: { metisAlignment: "right" },
 								content: [{ text: "Target", type: "text" }],
 								type: "tableHeader",
 							},
@@ -125,12 +125,12 @@ describe("native WYSIWYG document serialization", () => {
 					{
 						content: [
 							{
-								attrs: { tolariaAlignment: "left" },
+								attrs: { metisAlignment: "left" },
 								content: [{ text: "Editor", type: "text" }],
 								type: "tableCell",
 							},
 							{
-								attrs: { tolariaAlignment: "right" },
+								attrs: { metisAlignment: "right" },
 								content: [{ text: "WYSIWYG", type: "text" }],
 								type: "tableCell",
 							},

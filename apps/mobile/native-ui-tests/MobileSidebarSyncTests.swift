@@ -42,12 +42,12 @@ final class MobileSidebarSyncTests: XCTestCase {
 
   private func launchOwnedVault() throws -> XCUIApplication {
     continueAfterFailure = false
-    let label = try XCTUnwrap(ProcessInfo.processInfo.environment["TOLARIA_SYNC_QA_LABEL"])
+    let label = try XCTUnwrap(ProcessInfo.processInfo.environment["METIS_SYNC_QA_LABEL"])
     XCUIDevice.shared.orientation = UIDevice.current.userInterfaceIdiom == .pad ? .landscapeLeft : .portrait
-    let app = XCUIApplication(bundleIdentifier: "com.tolaria.mobile.dev")
+    let app = XCUIApplication(bundleIdentifier: "io.github.hdoria.metis.mobile.dev")
     let search = "?source=native-vault&phoneState=sidebar&qaRun=sidebar-sync-\(UUID().uuidString)"
-    app.launchArguments = ["--tolaria-mobile-search", search]
-    app.launchEnvironment["TOLARIA_MOBILE_SEARCH"] = search
+    app.launchArguments = ["--metis-mobile-search", search]
+    app.launchEnvironment["METIS_MOBILE_SEARCH"] = search
     addTeardownBlock { app.terminate() }
     app.launch()
     XCTAssertTrue(element(app, "sidebar-sync-action").waitForExistence(timeout: 30))

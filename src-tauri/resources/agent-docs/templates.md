@@ -1,77 +1,31 @@
-# Portent
+# Vault templates
 
-Source: templates/portent.md
-URL: /templates/portent
+Source: templates/vault-templates.md
+URL: /templates/vault-templates
 
-# Portent
+# Vault templates
 
-[Portent](https://portent.md) is an open specification and template for work and personal knowledge bases.
+A template is a folder of Markdown files that gives a new vault a starting structure. Métis includes a local starter vault, and you can build your own template from notes you already use.
 
-It gives a Tolaria vault a small set of defaults for organizing information: clear types, generic graph-like relationships, and a simple lifecycle for captured knowledge. The goal is to make a knowledge base useful to humans and AI agents without forcing every person or team to design a private ontology first.
+## Start with useful types
 
-## Core Questions
+Choose types that help you find your work, such as Note, Project, Person or Topic. Define each type in a Markdown file. A type is a navigation aid; it does not force every note to use a fixed schema.
 
-Portent favors convention over configuration. Instead of asking "where should this go?", it asks:
+## Connect related notes
 
-- What is this?
-- What is it useful for?
-- Is it captured, organized, or archived?
+Keep relationships in YAML frontmatter using wikilinks. For example:
 
-Those questions map naturally to Tolaria's type documents, relationship fields, Inbox, organized state, archive behavior, and custom views.
+```yaml
+type: Note
+related_to:
+  - "[[Project plan]]"
+_organized: true
+```
 
-## Types
+Use `related_to` for a general connection and `belongs_to` when a note belongs to a project or another context. Keep field names consistent within your vault.
 
-Portent defines eight default types.
+## Keep the template small
 
-PORT types are actionable:
+Include a short introduction, a few representative notes and only the views you need. Remove personal information, credentials and Git remotes before sharing a template.
 
-- Project
-- Operation
-- Responsibility
-- Task
-
-ENTP types are non-actionable knowledge records:
-
-- Event
-- Note
-- Topic
-- Person
-
-These defaults are meant to cover the common shape of personal and work knowledge with almost no setup. You can add custom types later, but Portent works best when the default vocabulary comes first.
-
-## Relationships
-
-Portent models knowledge as a graph. The two default relationships are:
-
-- `belongs_to`: primary ownership, composition, or context.
-- `related_to`: a looser semantic connection.
-
-In Tolaria, these relationships can live in YAML frontmatter and point to other notes with wikilinks. That keeps the graph portable, searchable, and readable outside the app.
-
-## Lifecycle
-
-Portent separates capture from organization:
-
-1. Capture information quickly so it is not lost.
-2. Organize it by assigning a type and useful relationships.
-3. Archive it when it has served its purpose.
-
-Tolaria supports that lifecycle directly: the Inbox holds captured notes, organizing a note marks it ready for normal views, and archiving hides old or obsolete notes from active surfaces while keeping them available.
-
-## Why Use It
-
-A blank vault is flexible, but it also asks you to make structural decisions before you have momentum. Portent gives you enough structure to start capturing, organizing, and retrieving notes immediately.
-
-Because Portent is file-friendly and portable, the same model can work across local Markdown vaults, note apps, docs tools, and agent-readable knowledge bases. Tolaria is the first intended implementation, but the spec is not tied to Tolaria internals.
-
-## Start From The Template
-
-The fastest starting point is the Portent template vault:
-
-- [refactoringhq/portent-vault-template](https://github.com/refactoringhq/portent-vault-template)
-
-Use it as-is, rename pieces to match your language, or treat it as a reference model for your own Tolaria setup.
-
-## Learn More
-
-Visit [portent.md](https://portent.md) for the full spec, examples, and implementation notes.
+The [Getting Started vault](/start/getting-started-vault) is available offline from the welcome screen. You can edit it, connect it to your own remote or use it as a reference for a different structure.

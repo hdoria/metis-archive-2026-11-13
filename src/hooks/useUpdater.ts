@@ -16,7 +16,9 @@ import { isTauri } from "../mock-tauri";
 import { formatCalendarVersionForDisplay } from "../utils/calendarVersion";
 import { openExternalUrl } from "../utils/url";
 
-const RELEASE_NOTES_URL = "https://tolaria.md/releases/";
+const RELEASE_NOTES_URL = "https://github.com/hdoria/metis/releases";
+// Enable only alongside a Métis-owned signing key and release service.
+export const SIGNED_UPDATES_ENABLED = false;
 const UPDATER_CHECK_TIMEOUT_MS = 10_000;
 
 function withTimeout<T>(operation: Promise<T>, timeoutMs: number): Promise<T> {
@@ -153,7 +155,7 @@ function useAutomaticUpdateCheck(
 	checkForUpdates: () => Promise<UpdateCheckResult>,
 ): void {
 	useEffect(() => {
-		if (!automaticChecksEnabled || !isTauri()) return;
+		if (!SIGNED_UPDATES_ENABLED || !automaticChecksEnabled || !isTauri()) return;
 		const timer = setTimeout(() => checkForUpdates(), 3000);
 		return () => clearTimeout(timer);
 	}, [automaticChecksEnabled, checkForUpdates]);

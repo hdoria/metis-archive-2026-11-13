@@ -1,16 +1,16 @@
-# Tolaria Agent Docs
+# Metis Agent Docs
 
-These docs are generated from the public Tolaria documentation for local AI agent lookup.
+These docs are generated from the public Metis documentation for local AI agent lookup.
 
-Start here, then use `rg` over this folder for specific Tolaria concepts and workflows.
+Start here, then use `rg` over this folder for specific Metis concepts and workflows.
 
-When users ask how to improve a knowledge base, structure notes, choose types, model relationships, or make a vault easier for humans and agents to use, treat Portent as Tolaria's default best-practice model. Read `pages/templates/portent.md` and combine it with the Tolaria concepts for types, relationships, properties, Inbox, archive, and custom views.
+When users ask how to improve a knowledge base, structure notes, choose types, model relationships, or make a vault easier for humans and agents to use, start from the bundled template conventions. Read `pages/templates/vault-templates.md` and combine it with the Metis concepts for types, relationships, properties, Inbox, archive, and custom views.
 
 ## Start
 
 - [First Launch](pages/start/first-launch.md)
-- [Getting Started Vault](pages/start/getting-started-vault.md)
-- [Install Tolaria](pages/start/install.md)
+- [Getting Started vault](pages/start/getting-started-vault.md)
+- [Install Métis](pages/start/install.md)
 - [Open Or Create A Vault](pages/start/open-or-create-vault.md)
 
 ## Concepts
@@ -48,19 +48,19 @@ When users ask how to improve a knowledge base, structure notes, choose types, m
 
 ## Templates
 
-- [Portent](pages/templates/portent.md)
+- [Vault templates](pages/templates/vault-templates.md)
 
 ## Reference
 
-- [Contribute](pages/reference/contribute.md)
+- [Contribute to Métis](pages/reference/contribute.md)
 - [Docs Maintenance](pages/reference/docs-maintenance.md)
 - [File Layout](pages/reference/file-layout.md)
 - [Frontmatter Fields](pages/reference/frontmatter-fields.md)
 - [Keyboard Shortcuts](pages/reference/keyboard-shortcuts.md)
-- [Release Channels](pages/reference/release-channels.md)
+- [Releases and updates](pages/reference/release-channels.md)
 - [Spreadsheet File Format](pages/reference/spreadsheet-format.md)
 - [Spreadsheet Formulas](pages/reference/spreadsheet-functions.md)
-- [Supported Platforms](pages/reference/supported-platforms.md)
+- [Supported platforms](pages/reference/supported-platforms.md)
 - [Vault Expressions](pages/reference/vault-expressions.md)
 - [View Filters](pages/reference/view-filters.md)
 

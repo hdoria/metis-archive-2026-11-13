@@ -32,7 +32,7 @@ type CachedEditorShell = {
 const preparedShells = new Map<string, CachedEditorShell>();
 let cacheInitialization: Promise<void> | null = null;
 let shellUseSequence = 0;
-const previewCache = `${cacheDirectory}tolaria-editor-previews/`;
+const previewCache = `${cacheDirectory}metis-editor-previews/`;
 const maxCachedEditorShells = 4;
 
 async function initializePreviewCache() {
@@ -224,7 +224,7 @@ function mobileEditorHtmlWithAppearance({
 	if (!appearance.css) return html;
 	return html.replace(
 		"</head>",
-		`<style data-tag="tolaria-editor-appearance">${appearance.css.replace(/<\/style/giu, "<\\/style")}</style></head>`,
+		`<style data-tag="metis-editor-appearance">${appearance.css.replace(/<\/style/giu, "<\\/style")}</style></head>`,
 	);
 }
 

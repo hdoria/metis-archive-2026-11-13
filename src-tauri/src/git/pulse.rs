@@ -363,7 +363,7 @@ mod tests {
     #[derive(Clone, Copy)]
     enum GitHubRemote {
         OwnerRepo,
-        LaputaVault,
+        MetisLegacyVault,
     }
 
     enum NoteRepoChange {
@@ -380,14 +380,14 @@ mod tests {
         fn url(&self) -> &'static str {
             match self {
                 GitHubRemote::OwnerRepo => "https://github.com/owner/repo.git",
-                GitHubRemote::LaputaVault => "https://github.com/lucaong/laputa-vault.git",
+                GitHubRemote::MetisLegacyVault => "https://github.com/lucaong/metislegacy-vault.git",
             }
         }
 
         fn commit_prefix(&self) -> &'static str {
             match self {
                 GitHubRemote::OwnerRepo => "https://github.com/owner/repo/commit/",
-                GitHubRemote::LaputaVault => "https://github.com/lucaong/laputa-vault/commit/",
+                GitHubRemote::MetisLegacyVault => "https://github.com/lucaong/metislegacy-vault/commit/",
             }
         }
     }
@@ -626,7 +626,7 @@ mod tests {
 
     #[test]
     fn test_get_last_commit_info_with_github_remote() {
-        let remote = GitHubRemote::LaputaVault;
+        let remote = GitHubRemote::MetisLegacyVault;
         let url = commit_url_for(CommitUrlSource::LastCommitInfo, remote);
 
         assert!(url.starts_with(remote.commit_prefix()));

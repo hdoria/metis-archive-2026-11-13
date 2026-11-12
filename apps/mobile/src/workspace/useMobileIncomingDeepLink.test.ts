@@ -47,8 +47,8 @@ describe('useMobileIncomingDeepLink', () => {
     const snapshot = workspaceScenarioForId('default')
     const note = snapshot.notes[0]
     const path = note.path ?? note.id
-    const vaultLabel = snapshot.source?.label ?? 'Laputa Vault'
-    linking.initialUrl = `tolaria://${slug(vaultLabel)}/${encodePath(path)}`
+    const vaultLabel = snapshot.source?.label ?? 'MetisLegacy Vault'
+    linking.initialUrl = `metis://${slug(vaultLabel)}/${encodePath(path)}`
     const choice = { id: vaultLabel, label: vaultLabel, selected: true, select: vi.fn() }
     const state = await renderHook([choice], snapshot)
     expect(state().navigation?.noteId).toBe(note.id)
@@ -59,12 +59,12 @@ describe('useMobileIncomingDeepLink', () => {
     const snapshot = workspaceScenarioForId('default')
     const note = snapshot.notes[0]
     const path = note.path ?? note.id
-    const vaultLabel = snapshot.source?.label ?? 'Laputa Vault'
+    const vaultLabel = snapshot.source?.label ?? 'MetisLegacy Vault'
     const choice = { id: vaultLabel, label: vaultLabel, selected: true, select: vi.fn() }
     const state = await renderHook([choice], snapshot)
-    await act(async () => linking.listener?.({ url: 'tolaria://mobile-ui-lab?layoutProbe=1' }))
+    await act(async () => linking.listener?.({ url: 'metis://mobile-ui-lab?layoutProbe=1' }))
     expect(state().navigation).toBeNull()
-    await act(async () => linking.listener?.({ url: `tolaria://${slug(vaultLabel)}/${encodePath(path)}` }))
+    await act(async () => linking.listener?.({ url: `metis://${slug(vaultLabel)}/${encodePath(path)}` }))
     expect(state().navigation?.noteId).toBe(note.id)
   })
 
@@ -73,7 +73,7 @@ describe('useMobileIncomingDeepLink', () => {
     const state = await renderHook([
       { id: 'work', label: 'Work', selected: true, select: vi.fn() },
     ], snapshot)
-    await act(async () => linking.listener?.({ url: 'tolaria://missing-vault/Note.md' }))
+    await act(async () => linking.listener?.({ url: 'metis://missing-vault/Note.md' }))
     expect(state().notice).toBeTruthy()
     expect(state().navigation).toBeNull()
   })
@@ -95,7 +95,7 @@ describe('useMobileIncomingDeepLink', () => {
   it('keeps the newest warm link when a delayed cold-start URL resolves later', async () => {
     const snapshot = workspaceScenarioForId('default')
     const [older, newer] = snapshot.notes
-    const vaultLabel = snapshot.source?.label ?? 'Laputa Vault'
+    const vaultLabel = snapshot.source?.label ?? 'MetisLegacy Vault'
     let resolveInitial!: (url: string) => void
     linking.initialUrlPromise = new Promise((resolve) => { resolveInitial = resolve })
     const state = await renderHook([
@@ -115,7 +115,7 @@ describe('useMobileIncomingDeepLink', () => {
     const choices = [{ id: 'work', label: 'Work', selected: false, select }]
     const state = await renderHook(choices, snapshot)
 
-    await act(async () => linking.listener?.({ url: 'tolaria://work/Note.md' }))
+    await act(async () => linking.listener?.({ url: 'metis://work/Note.md' }))
     await act(async () => state.rerender([...choices]))
     await act(async () => rejectSelection(new Error('vault unavailable')))
 
@@ -125,7 +125,7 @@ describe('useMobileIncomingDeepLink', () => {
   it('emits a fresh navigation request when the same note link is repeated', async () => {
     const snapshot = workspaceScenarioForId('default')
     const note = snapshot.notes[0]
-    const vaultLabel = snapshot.source?.label ?? 'Laputa Vault'
+    const vaultLabel = snapshot.source?.label ?? 'MetisLegacy Vault'
     const url = noteUrl(vaultLabel, note.path ?? note.id)
     const state = await renderHook([
       { id: vaultLabel, label: vaultLabel, selected: true, select: vi.fn() },
@@ -181,7 +181,7 @@ async function renderHook(choices: MobileDeepLinkVaultChoice[], snapshot: Return
 }
 
 function noteUrl(vaultLabel: string, path: string) {
-  return `tolaria://${slug(vaultLabel)}/${encodePath(path)}`
+  return `metis://${slug(vaultLabel)}/${encodePath(path)}`
 }
 
 function slug(value: string) {

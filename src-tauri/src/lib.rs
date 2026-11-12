@@ -142,8 +142,10 @@ fn setup_desktop_plugins(app: &mut tauri::App) -> Result<(), Box<dyn std::error:
 
 #[cfg(desktop)]
 fn install_desktop_runtime_plugins(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
-    app.handle()
-        .plugin(tauri_plugin_updater::Builder::new().build())?;
+    if app_updater::SIGNED_UPDATES_ENABLED {
+        app.handle()
+            .plugin(tauri_plugin_updater::Builder::new().build())?;
+    }
     app.handle().plugin(tauri_plugin_process::init())?;
     app.handle().plugin(tauri_plugin_opener::init())?;
     Ok(())
@@ -414,7 +416,7 @@ pub fn run() {
     linux_appimage::apply_startup_env_overrides();
 
     let builder = tauri::Builder::default()
-        .register_uri_scheme_protocol("tolaria-html-block", html_block_protocol::handle_request)
+        .register_uri_scheme_protocol("metis-html-block", html_block_protocol::handle_request)
         .manage(commands::StartupTimingState::default());
 
     #[cfg(desktop)]

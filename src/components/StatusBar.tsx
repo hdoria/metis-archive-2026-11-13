@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { DiscordLogo } from '@phosphor-icons/react'
+import { GithubLogo } from '@phosphor-icons/react'
 import { ActionTooltip } from '@/components/ui/action-tooltip'
 import { Button } from '@/components/ui/button'
 import type { McpStatus } from '../hooks/useMcpStatus'
@@ -13,7 +13,7 @@ import { isRemoteBrowserShell } from './status-bar/syncPillState'
 import { WebSyncPill } from './status-bar/WebSyncPill'
 import { SharingStatusButton } from './sharing/SharingStatusButton'
 import type { VaultOption } from './status-bar/types'
-import { CONTRIBUTION_ANALYTICS_EVENT, TOLARIA_DISCORD_INVITE_URL } from '../constants/feedback'
+import { CONTRIBUTION_ANALYTICS_EVENT, METIS_GITHUB_URL } from '../constants/feedback'
 import { trackEvent } from '../lib/telemetry'
 import { openExternalUrl } from '../utils/url'
 
@@ -174,13 +174,13 @@ function StatusBarSecondaryFromFooter(options: StatusBarFooterProps) {
           size="icon-xs"
           className="text-muted-foreground hover:bg-[var(--hover)] hover:text-foreground"
           onClick={() => {
-            trackEvent(CONTRIBUTION_ANALYTICS_EVENT, { action: 'discord', surface: 'status_bar' })
-            void openExternalUrl(TOLARIA_DISCORD_INVITE_URL)
+            trackEvent(CONTRIBUTION_ANALYTICS_EVENT, { action: 'github', surface: 'status_bar' })
+            void openExternalUrl(METIS_GITHUB_URL)
           }}
           aria-label={translate(locale, 'feedback.community.title')}
-          data-testid="status-discord"
+          data-testid="status-github"
         >
-          <DiscordLogo size={14} weight="regular" />
+          <GithubLogo size={14} weight="regular" />
         </Button>
       </ActionTooltip>
     </div>

@@ -6,7 +6,7 @@ describe('routeMobileWysiwygLink', () => {
     const onNavigateWikilink = vi.fn()
     const onOpenLink = vi.fn()
 
-    expect(routeMobileWysiwygLink('tolaria://wikilink/folder%2FNote%20Name', {
+    expect(routeMobileWysiwygLink('metis://wikilink/folder%2FNote%20Name', {
       onNavigateWikilink,
       onOpenLink,
     })).toBe('wikilink')
@@ -26,13 +26,13 @@ describe('routeMobileWysiwygLink', () => {
     },
   )
 
-  it('routes a Tolaria note deep link to the incoming-link handler', () => {
+  it('routes a Metis note deep link to the incoming-link handler', () => {
     const onOpenLink = vi.fn()
-    expect(routeMobileWysiwygLink('tolaria://laputa-vault/Folder/Note.md', { onOpenLink })).toBe('deepLink')
-    expect(onOpenLink).toHaveBeenCalledWith('tolaria://laputa-vault/Folder/Note.md')
+    expect(routeMobileWysiwygLink('metis://metislegacy-vault/Folder/Note.md', { onOpenLink })).toBe('deepLink')
+    expect(onOpenLink).toHaveBeenCalledWith('metis://metislegacy-vault/Folder/Note.md')
   })
 
-  it.each(['javascript:alert(1)', 'data:text/html,hello', 'file:///note.png', 'tolaria://wikilink/%E0%A4%A', '']) (
+  it.each(['javascript:alert(1)', 'data:text/html,hello', 'file:///note.png', 'metis://wikilink/%E0%A4%A', '']) (
     'rejects unsupported or malformed href %s',
     (href) => {
       const onOpenLink = vi.fn()

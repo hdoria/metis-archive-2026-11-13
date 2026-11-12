@@ -79,14 +79,14 @@ fn vault_path_hash(vault: &Path) -> String {
     format!("{:016x}", hasher.finish())
 }
 
-/// Return the cache directory. Override with `LAPUTA_CACHE_DIR` env var (for tests).
+/// Return the cache directory. Override with `METIS_CACHE_DIR` env var (for tests).
 fn cache_dir() -> PathBuf {
-    if let Ok(dir) = std::env::var("LAPUTA_CACHE_DIR") {
+    if let Ok(dir) = std::env::var("METIS_CACHE_DIR") {
         return PathBuf::from(dir);
     }
     dirs::home_dir()
         .unwrap_or_else(|| PathBuf::from("~"))
-        .join(".laputa")
+        .join(".metis")
         .join("cache")
 }
 
@@ -95,7 +95,7 @@ fn cache_path(vault: &Path) -> PathBuf {
 }
 
 fn legacy_cache_path(vault: &Path) -> PathBuf {
-    vault.join(".laputa-cache.json")
+    vault.join(".metislegacy-cache.json")
 }
 
 fn resolve_git_workspace(vault: &Path) -> Option<GitWorkspace> {
@@ -329,7 +329,7 @@ fn migrate_legacy_cache(vault: &Path) {
             "--cached",
             "--quiet",
             "--ignore-unmatch",
-            ".laputa-cache.json",
+            ".metislegacy-cache.json",
         ])
         .current_dir(vault)
         .output();

@@ -25,7 +25,7 @@ export async function initializeLocalVaultCatalog(
 				{
 					id: "local-legacy",
 					label: legacy.vaultLabel,
-					directory: "Tolaria Vault",
+					directory: "Metis Vault",
 				},
 			]
 		: await initialStarterVaults();

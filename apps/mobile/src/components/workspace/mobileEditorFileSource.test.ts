@@ -81,7 +81,7 @@ it("stages only referenced images beside the editor shell, without writing into 
 	});
 	expect(disk.copy).toHaveBeenCalledTimes(3);
 	expect(disk.write).toHaveBeenCalledExactlyOnceWith(
-		"file:///application/Cache/tolaria-editor-previews/editor-preview-session.html",
+		"file:///application/Cache/metis-editor-previews/editor-preview-session.html",
 		'<html><head></head><body><div id="root"></div></body></html>',
 	);
 	await preview.prepare("![one](attachments/a.png)");
@@ -187,11 +187,11 @@ it("embeds the final appearance stylesheet into the local shell before the WebVi
 	await preview.prepare("");
 
 	expect(disk.write).toHaveBeenCalledWith(
-		"file:///application/Cache/tolaria-editor-previews/editor-preview-session.html",
-		'<html><head><style data-tag="tolaria-editor-appearance">#root { visibility: visible; }</style></head><body><div id="root"></div></body></html>',
+		"file:///application/Cache/metis-editor-previews/editor-preview-session.html",
+		'<html><head><style data-tag="metis-editor-appearance">#root { visibility: visible; }</style></head><body><div id="root"></div></body></html>',
 	);
 	expect(disk.copy).toHaveBeenCalledWith({
-		from: "file:///application/Cache/tolaria-editor-previews/editor-preview-session.html",
+		from: "file:///application/Cache/metis-editor-previews/editor-preview-session.html",
 		to: preview.source.uri,
 	});
 });
@@ -205,7 +205,7 @@ it("cleans previews abandoned by a previous process only once, before staging an
 	await first.prepare("");
 	await second.prepare("");
 	expect(disk.remove).toHaveBeenCalledExactlyOnceWith(
-		"file:///application/Cache/tolaria-editor-previews/",
+		"file:///application/Cache/metis-editor-previews/",
 		{ idempotent: true },
 	);
 	expect(disk.remove.mock.invocationCallOrder[0]).toBeLessThan(

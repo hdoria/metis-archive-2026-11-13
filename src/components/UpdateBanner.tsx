@@ -4,21 +4,14 @@ import {
 	ArrowsClockwise as RefreshCw,
 	X,
 } from "@phosphor-icons/react";
-import { type CSSProperties, useEffect, useState } from "react";
-import {
-	CONTRIBUTION_ANALYTICS_EVENT,
-	TOLARIA_DISCORD_INVITE_URL,
-	TOLARIA_IOS_DOWNLOAD_URL,
-} from "../constants/feedback";
+import { type CSSProperties, useEffect } from "react";
 import type { UpdateActions, UpdateStatus } from "../hooks/useUpdater";
 import { restartApp } from "../hooks/useUpdater";
 import { type AppLocale, translate } from "../lib/i18n";
-import { trackEvent } from "../lib/telemetry";
 import { openExternalUrl } from "../utils/url";
 import { Button } from "./ui/button";
 
-const COMMUNITY_BANNER_DISMISSED_KEY = "tolaria.community-banner.dismissed";
-const RELEASE_NOTES_URL = "https://tolaria.md/releases/";
+const RELEASE_NOTES_URL = "https://github.com/hdoria/metis/releases";
 
 interface UpdateBannerProps {
 	status: UpdateStatus;
@@ -32,16 +25,6 @@ function isUpdateBannerVisible(
 	status: UpdateStatus,
 ): status is VisibleUpdateStatus {
 	return status.state !== "idle";
-}
-
-function readCommunityBannerDismissed(): boolean {
-	try {
-		return (
-			window.localStorage.getItem(COMMUNITY_BANNER_DISMISSED_KEY) === "true"
-		);
-	} catch {
-		return false;
-	}
 }
 
 const bannerStyle = {
@@ -104,7 +87,7 @@ function renderAvailableContent(
 		<>
 			<Download size={14} style={iconStyle} />
 			<span>
-				<strong>Tolaria {status.displayVersion}</strong>{" "}
+				<strong>Métis {status.displayVersion}</strong>{" "}
 				{translate(locale, "update.available")}
 			</span>
 			<Button
@@ -195,7 +178,7 @@ function renderReadyContent(
 		<>
 			<RefreshCw size={14} style={readyIconStyle} />
 			<span>
-				<strong>Tolaria {status.displayVersion}</strong>{" "}
+				<strong>Métis {status.displayVersion}</strong>{" "}
 				{translate(locale, "update.readyRestart")}
 			</span>
 			<Button
@@ -274,114 +257,13 @@ function renderBannerContent(
 	}
 }
 
-export function UpdateBanner({
-	status,
-	actions,
-	locale = "en",
-}: UpdateBannerProps) {
-	const [communityDismissed, setCommunityDismissed] = useState(
-		readCommunityBannerDismissed,
-	);
-	const updateVisible = isUpdateBannerVisible(status);
-	useEffect(() => {
-		const appShell = document.querySelector<HTMLElement>(".app-shell");
-		const bottomOffset = communityDismissed
-			? updateVisible
-				? "80px"
-				: "2.75rem"
-			: updateVisible
-				? "124px"
-				: "80px";
-		appShell?.style.setProperty(
-			"--ai-workspace-floating-button-bottom",
-			bottomOffset,
-		);
-	}, [communityDismissed, updateVisible]);
-
-	return (
-		<div
-			data-testid="bottom-banner-stack"
-			style={{ display: "flex", flexDirection: "column", flexShrink: 0 }}
-		>
-			{updateVisible && (
-				<div data-testid="update-banner" style={bannerStyle}>
-					{renderBannerContent(status, actions, locale)}
-				</div>
-			)}
-			{!communityDismissed && (
-				<div
-					data-testid="community-banner"
-					style={{
-						...bannerStyle,
-						background: "var(--accent-green)",
-						color: "#fff",
-						flexWrap: "wrap",
-					}}
-				>
-					<span>{translate(locale, "communityBanner.invite")}</span>
-					<Button
-						type="button"
-						variant="link"
-						size="xs"
-						data-testid="community-banner-ios"
-						onClick={() => {
-							trackEvent(CONTRIBUTION_ANALYTICS_EVENT, {
-								action: "ios_download",
-								surface: "bottom_banner",
-							});
-							void openExternalUrl(TOLARIA_IOS_DOWNLOAD_URL);
-						}}
-						style={{
-							...primaryActionStyle,
-							marginLeft: "auto",
-							background: "#fff",
-							color: "#176B3A",
-						}}
-					>
-						{translate(locale, "communityBanner.ios")}
-					</Button>
-					<Button
-						type="button"
-						variant="link"
-						size="xs"
-						onClick={() => {
-							trackEvent(CONTRIBUTION_ANALYTICS_EVENT, {
-								action: "discord",
-								surface: "bottom_banner",
-							});
-							void openExternalUrl(TOLARIA_DISCORD_INVITE_URL);
-						}}
-						style={{
-							...primaryActionStyle,
-							background: "#fff",
-							color: "#176B3A",
-						}}
-					>
-						{translate(locale, "communityBanner.joinCommunity")}
-					</Button>
-					<Button
-						type="button"
-						variant="ghost"
-						size="icon-xs"
-						data-testid="community-banner-dismiss"
-						onClick={() => {
-							try {
-								window.localStorage.setItem(
-									COMMUNITY_BANNER_DISMISSED_KEY,
-									"true",
-								);
-							} catch {
-								// Keep the banner dismissed for this session if storage is unavailable.
-							}
-							setCommunityDismissed(true);
-						}}
-						style={dismissButtonStyle}
-						aria-label={translate(locale, "communityBanner.dismiss")}
-					>
-						<X size={14} />
-					</Button>
-				</div>
-			)}
-		</div>
-	);
+export function UpdateBanner({ status, actions, locale = "en" }: UpdateBannerProps) {
+  const updateVisible = isUpdateBannerVisible(status);
+  useEffect(() => {
+    const appShell = document.querySelector<HTMLElement>(".app-shell");
+    appShell?.style.setProperty("--ai-workspace-floating-button-bottom", updateVisible ? "80px" : "2.75rem");
+  }, [updateVisible]);
+  return <div data-testid="bottom-banner-stack" style={{ display: "flex", flexDirection: "column", flexShrink: 0 }}>
+    {updateVisible && <div data-testid="update-banner" style={bannerStyle}>{renderBannerContent(status, actions, locale)}</div>}
+  </div>;
 }

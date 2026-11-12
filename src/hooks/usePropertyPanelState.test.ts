@@ -227,10 +227,10 @@ describe('usePropertyPanelState', () => {
     ])
 
     act(() => {
-      result.current.handleSaveList('Projects', ['Tolaria'])
+      result.current.handleSaveList('Projects', ['Metis'])
     })
 
-    expect(onUpdateProperty).toHaveBeenCalledWith('Projects', ['Tolaria'])
+    expect(onUpdateProperty).toHaveBeenCalledWith('Projects', ['Metis'])
   })
 
   it('saves scalar and list properties through the correct handlers', () => {

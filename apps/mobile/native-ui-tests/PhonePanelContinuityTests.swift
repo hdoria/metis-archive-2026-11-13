@@ -24,7 +24,7 @@ final class PhonePanelContinuityTests: XCTestCase {
   }
 
   func testLongNoteListKeepsItsScrollPositionAcrossSidebarAndEditor() throws {
-    try XCTSkipUnless(ProcessInfo.processInfo.environment["TOLARIA_RAIL_OWNED_VAULT"] == "1", "Requires the owned long-list fixture")
+    try XCTSkipUnless(ProcessInfo.processInfo.environment["METIS_RAIL_OWNED_VAULT"] == "1", "Requires the owned long-list fixture")
     let app = launch("native-vault")
     let list = element(app, "note-list-panel")
     XCTAssertTrue(list.waitForExistence(timeout: 30))
@@ -51,10 +51,10 @@ final class PhonePanelContinuityTests: XCTestCase {
   private func launch(_ source: String) -> XCUIApplication {
     continueAfterFailure = false
     XCUIDevice.shared.orientation = .portrait
-    let app = XCUIApplication(bundleIdentifier: "com.tolaria.mobile.dev")
+    let app = XCUIApplication(bundleIdentifier: "io.github.hdoria.metis.mobile.dev")
     let search = "?source=\(source)&phoneState=list&editorMode=wysiwyg&qaRun=phone-rail-continuity"
-    app.launchArguments = ["--tolaria-mobile-search", search]
-    app.launchEnvironment["TOLARIA_MOBILE_SEARCH"] = search
+    app.launchArguments = ["--metis-mobile-search", search]
+    app.launchEnvironment["METIS_MOBILE_SEARCH"] = search
     app.launch()
     addTeardownBlock { app.terminate() }
     return app

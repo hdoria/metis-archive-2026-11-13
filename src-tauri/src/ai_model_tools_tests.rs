@@ -300,6 +300,6 @@ fn execute_openai_tool_calls_rejects_inactive_explicit_vault() {
 
     let error = execute_openai_tool_calls(&request, &response, |_| {}).unwrap_err();
 
-    assert!(error.starts_with("Vault is not active in Tolaria:"));
+    assert!(error.starts_with("Vault is not active in Metis:"));
     assert!(!inactive.path().join("inactive.md").exists());
 }

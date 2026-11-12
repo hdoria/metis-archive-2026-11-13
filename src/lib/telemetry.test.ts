@@ -31,7 +31,7 @@ afterEach(() => {
 
 describe('telemetry scrubPaths', () => {
   it('redacts macOS absolute paths', () => {
-    expect(scrubPaths('Error in /Users/luca/Laputa/note.md')).toBe(
+    expect(scrubPaths('Error in /Users/luca/MetisLegacy/note.md')).toBe(
       'Error in [redacted-path]'
     )
   })
@@ -97,8 +97,8 @@ describe('initSentry', () => {
       release: sentryRelease,
     }))
     expect(sentryMocks.setUser).toHaveBeenCalledWith({ id: 'anonymous-user' })
-    expect(sentryMocks.setTag).toHaveBeenCalledWith('tolaria.build_version', buildVersion)
-    expect(sentryMocks.setTag).toHaveBeenCalledWith('tolaria.release_kind', releaseKind)
+    expect(sentryMocks.setTag).toHaveBeenCalledWith('metis.build_version', buildVersion)
+    expect(sentryMocks.setTag).toHaveBeenCalledWith('metis.release_kind', releaseKind)
   })
 
   it('keeps the desktop options free of the web additions', () => {
@@ -423,7 +423,7 @@ describe('initSentry', () => {
       exception: {
         values: [{
           type: 'UnhandledRejection',
-          value: 'File does not exist: /Users/luca/Laputa/missing.md',
+          value: 'File does not exist: /Users/luca/MetisLegacy/missing.md',
         }],
       },
     }
@@ -438,13 +438,13 @@ describe('initSentry', () => {
       exception: {
         values: [{
           type: 'Error',
-          value: 'File does not exist: /Users/luca/Laputa/missing.md',
+          value: 'File does not exist: /Users/luca/MetisLegacy/missing.md',
         }],
       },
     }
 
     expect(beforeSend(event, {
-      originalException: new Error('File does not exist: /Users/luca/Laputa/missing.md'),
+      originalException: new Error('File does not exist: /Users/luca/MetisLegacy/missing.md'),
     })).toBe(event)
     expect(event.exception.values[0].value).toBe('File does not exist: [redacted-path]')
   })

@@ -32,7 +32,7 @@ describe('fixtureReadOnlyWorkspaceRepository', () => {
       noteListSubtitle: '12 / 6,011',
       source: {
         kind: 'localVault' as const,
-        label: 'Laputa',
+        label: 'MetisLegacy',
         totalNotes: 6011,
         visibleNotes: 12,
       },
@@ -49,7 +49,7 @@ describe('fixtureReadOnlyWorkspaceRepository', () => {
     expect(readOnlyWorkspaceRepository.readSnapshot({ source: 'fixture' })).toBe(workspaceScenarios.default)
     expect(readOnlyWorkspaceRepository.readSnapshot({ source: 'host' })).toMatchObject({
       noteListSubtitle: '12 / 6,011',
-      source: { kind: 'localVault', label: 'Laputa' },
+      source: { kind: 'localVault', label: 'MetisLegacy' },
     })
 
     Reflect.deleteProperty(globalThis, 'localStorage')
@@ -61,7 +61,7 @@ describe('fixtureReadOnlyWorkspaceRepository', () => {
       noteListSubtitle: 'global snapshot',
       source: {
         kind: 'localVault' as const,
-        label: 'Laputa',
+        label: 'MetisLegacy',
         totalNotes: 8846,
         visibleNotes: 80,
       },
@@ -70,19 +70,19 @@ describe('fixtureReadOnlyWorkspaceRepository', () => {
     Reflect.set(globalThis, HOST_WORKSPACE_SNAPSHOT_GLOBAL_KEY, hostSnapshot)
     expect(readOnlyWorkspaceRepository.readSnapshot({ source: 'host' })).toMatchObject({
       noteListSubtitle: 'global snapshot',
-      source: { kind: 'localVault', label: 'Laputa' },
+      source: { kind: 'localVault', label: 'MetisLegacy' },
     })
     Reflect.deleteProperty(globalThis, HOST_WORKSPACE_SNAPSHOT_GLOBAL_KEY)
   })
 
   it('reads host note content from the injected content map', async () => {
     Reflect.set(globalThis, HOST_WORKSPACE_NOTE_CONTENTS_GLOBAL_KEY, {
-      'Tolaria/Mobile UI/Hidden Note.md': '# Hidden Note\n\nHydrated body.\n',
+      'Metis/Mobile UI/Hidden Note.md': '# Hidden Note\n\nHydrated body.\n',
     })
 
     await expect(readOnlyWorkspaceRepository.readNoteContent({
       ...workspaceScenarios.default.notes[0],
-      path: 'Tolaria/Mobile UI/Hidden Note.md',
+      path: 'Metis/Mobile UI/Hidden Note.md',
       rawContent: undefined,
     }, { source: 'host' })).resolves.toBe('# Hidden Note\n\nHydrated body.\n')
 

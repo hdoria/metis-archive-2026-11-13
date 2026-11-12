@@ -75,7 +75,7 @@ it("reads note bytes without synchronously replaying native recovery", async () 
 			text = file.text;
 
 			constructor(_root: string, ...path: string[]) {
-				this.exists = path.at(-1) !== "tolaria-checkout.json";
+				this.exists = path.at(-1) !== "metis-checkout.json";
 			}
 		},
 	} as never;

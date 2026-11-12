@@ -26,7 +26,7 @@ export function generateBulkEntries(count: number): VaultEntry[] {
     const title = `${adj} ${noun} ${i + 1}`
     const slug = title.toLowerCase().replace(/\s+/g, '-')
     entries.push({
-      path: `/Users/luca/Laputa/${slug}.md`,
+      path: `/Users/luca/MetisLegacy/${slug}.md`,
       filename: `${slug}.md`,
       title,
       isA: type,

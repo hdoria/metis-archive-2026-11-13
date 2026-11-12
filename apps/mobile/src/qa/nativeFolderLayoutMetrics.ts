@@ -12,9 +12,9 @@ import {
 
 type FolderTreeMetrics = {
   root: NativeLayoutMetric | undefined
-  tolaria: NativeLayoutMetric | undefined
-  tolariaMobile: NativeLayoutMetric | undefined
-  tolariaReleases: NativeLayoutMetric | undefined
+  metis: NativeLayoutMetric | undefined
+  metisMobile: NativeLayoutMetric | undefined
+  metisReleases: NativeLayoutMetric | undefined
   writing: NativeLayoutMetric | undefined
   writingDrafts: NativeLayoutMetric | undefined
   writingEssays: NativeLayoutMetric | undefined
@@ -24,9 +24,9 @@ const folderMetricSpecs = [
   { expectedLeftInset: nativeSidebarMetricContract.folderRowContentInset, id: 'sidebar.folder.writing' },
   { expectedLeftInset: nativeSidebarMetricContract.folderRowContentInset + nativeSidebarMetricContract.folderRowIndent, id: 'sidebar.folder.writing-essays' },
   { expectedLeftInset: nativeSidebarMetricContract.folderRowContentInset + nativeSidebarMetricContract.folderRowIndent, id: 'sidebar.folder.writing-drafts' },
-  { expectedLeftInset: nativeSidebarMetricContract.folderRowContentInset, id: 'sidebar.folder.tolaria' },
-  { expectedLeftInset: nativeSidebarMetricContract.folderRowContentInset + nativeSidebarMetricContract.folderRowIndent, id: 'sidebar.folder.tolaria-mobile-ui' },
-  { expectedLeftInset: nativeSidebarMetricContract.folderRowContentInset + nativeSidebarMetricContract.folderRowIndent, id: 'sidebar.folder.tolaria-releases' },
+  { expectedLeftInset: nativeSidebarMetricContract.folderRowContentInset, id: 'sidebar.folder.metis' },
+  { expectedLeftInset: nativeSidebarMetricContract.folderRowContentInset + nativeSidebarMetricContract.folderRowIndent, id: 'sidebar.folder.metis-mobile-ui' },
+  { expectedLeftInset: nativeSidebarMetricContract.folderRowContentInset + nativeSidebarMetricContract.folderRowIndent, id: 'sidebar.folder.metis-releases' },
 ] as const
 
 const sidebarFolderPrefix = 'sidebar.folder.'
@@ -77,9 +77,9 @@ export function assertFolderTreeLayout(metrics: NativeLayoutMetricMap): NativeLa
 
 function hasFixtureFolderStackingMetrics(tree: FolderTreeMetrics): boolean {
   return Boolean(
-    tree.tolaria
-      && tree.tolariaMobile
-      && tree.tolariaReleases
+    tree.metis
+      && tree.metisMobile
+      && tree.metisReleases
       && tree.writing
       && tree.writingDrafts
       && tree.writingEssays,
@@ -89,8 +89,8 @@ function hasFixtureFolderStackingMetrics(tree: FolderTreeMetrics): boolean {
 function assertFixtureFolderStacking(tree: FolderTreeMetrics): NativeLayoutAssertionFailure[] {
   return [
     ...assertStackedMetricPair({
-      current: tree.tolaria,
-      currentId: 'sidebar.folder.tolaria',
+      current: tree.metis,
+      currentId: 'sidebar.folder.metis',
       previous: tree.writing,
       previousId: 'sidebar.folder.writing',
     }),
@@ -101,10 +101,10 @@ function assertFixtureFolderStacking(tree: FolderTreeMetrics): NativeLayoutAsser
       previousId: 'sidebar.folder.writing-essays',
     }),
     ...assertStackedMetricPair({
-      current: tree.tolariaReleases,
-      currentId: 'sidebar.folder.tolaria-releases',
-      previous: tree.tolariaMobile,
-      previousId: 'sidebar.folder.tolaria-mobile-ui',
+      current: tree.metisReleases,
+      currentId: 'sidebar.folder.metis-releases',
+      previous: tree.metisMobile,
+      previousId: 'sidebar.folder.metis-mobile-ui',
     }),
   ]
 }
@@ -121,9 +121,9 @@ function sidebarFolderContainerMetrics(metrics: NativeLayoutMetricMap): Array<{ 
 function folderTreeMetrics(metrics: NativeLayoutMetricMap): FolderTreeMetrics {
   return {
     root: metrics['sidebar.folderTree.root'],
-    tolaria: metrics['sidebar.folder.tolaria.container'],
-    tolariaMobile: metrics['sidebar.folder.tolaria-mobile-ui.container'],
-    tolariaReleases: metrics['sidebar.folder.tolaria-releases.container'],
+    metis: metrics['sidebar.folder.metis.container'],
+    metisMobile: metrics['sidebar.folder.metis-mobile-ui.container'],
+    metisReleases: metrics['sidebar.folder.metis-releases.container'],
     writing: metrics['sidebar.folder.writing.container'],
     writingDrafts: metrics['sidebar.folder.writing-drafts.container'],
     writingEssays: metrics['sidebar.folder.writing-essays.container'],
@@ -134,7 +134,7 @@ function assertFolderTreeRootLayout(
   tree: FolderTreeMetrics,
   lastFolder: { id: string; metric: NativeLayoutMetric } | undefined,
 ): NativeLayoutAssertionFailure[] {
-  const bottomReference = lastFolder?.metric ?? tree.tolaria
+  const bottomReference = lastFolder?.metric ?? tree.metis
 
   return [
     ...expectMetric({

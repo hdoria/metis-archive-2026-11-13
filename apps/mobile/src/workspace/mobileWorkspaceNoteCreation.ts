@@ -112,7 +112,7 @@ function createNoteFallback({
 		title: pathTitle,
 		type,
 		typeTone: "gray",
-		workspace: snapshot.source?.label ?? "Tolaria Vault",
+		workspace: snapshot.source?.label ?? "Metis Vault",
 		workspaceAlias: workspaceAliasForNewNote(snapshot),
 	};
 }

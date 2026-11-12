@@ -11,7 +11,7 @@ const claudeCodeOnboardingStorageState = {
     {
       origin: baseURL,
       localStorage: [
-        { name: 'tolaria:claude-code-onboarding-dismissed', value: '1' },
+        { name: 'metis:claude-code-onboarding-dismissed', value: '1' },
       ],
     },
   ],

@@ -19,7 +19,7 @@ test.describe('MCP config copy', () => {
     const copiedConfig = await page.evaluate(() => navigator.clipboard.readText())
     const parsedConfig = JSON.parse(copiedConfig) as {
       mcpServers: {
-        tolaria: {
+        metis: {
           args: string[]
           command: string
           env: Record<string, string>
@@ -27,12 +27,12 @@ test.describe('MCP config copy', () => {
         }
       }
     }
-    const tolariaServer = parsedConfig.mcpServers.tolaria
+    const metisServer = parsedConfig.mcpServers.metis
 
-    expect(tolariaServer.type).toBe('stdio')
-    expect(tolariaServer.command).toBe('node')
-    expect(tolariaServer.args[0]).toContain('mcp-server/index.js')
-    expect(tolariaServer.env.VAULT_PATH).toBeUndefined()
-    expect(tolariaServer.env.WS_UI_PORT).toBe('9711')
+    expect(metisServer.type).toBe('stdio')
+    expect(metisServer.command).toBe('node')
+    expect(metisServer.args[0]).toContain('mcp-server/index.js')
+    expect(metisServer.env.VAULT_PATH).toBeUndefined()
+    expect(metisServer.env.WS_UI_PORT).toBe('9731')
   })
 })

@@ -17,7 +17,7 @@ vi.mock("../mock-tauri", () => ({
 }));
 
 const makeEntry = (overrides: Partial<VaultEntry> = {}): VaultEntry => ({
-	path: "/Users/luca/Laputa/test.md",
+	path: "/Users/luca/MetisLegacy/test.md",
 	filename: "test.md",
 	title: "Test Note",
 	isA: "Note",

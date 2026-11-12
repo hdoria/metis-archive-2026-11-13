@@ -116,7 +116,7 @@ async function expectPaintedTldrawIcon(icon: Locator): Promise<void> {
 async function applyZoom(page: Page, percent: number): Promise<void> {
   await page.evaluate((pct) => {
     document.documentElement.style.setProperty('zoom', `${pct}%`)
-    window.dispatchEvent(new Event('laputa-zoom-change'))
+    window.dispatchEvent(new Event('metislegacy-zoom-change'))
   }, percent)
   await page.waitForTimeout(250)
 }
@@ -135,10 +135,10 @@ test('tldraw whiteboard fences render as embedded canvases and remain Markdown-d
 
   expect(rawAfterRichMode).toContain('```tldraw id="planning-map" height="520"')
   expect(rawAfterRichMode).toContain('{}')
-  expect(rawAfterRichMode).not.toContain('@@TOLARIA_TLDRAW')
+  expect(rawAfterRichMode).not.toContain('@@METIS_TLDRAW')
 })
 
-test('embedded tldraw whiteboards follow Tolaria theme changes', async ({ page }) => {
+test('embedded tldraw whiteboards follow Metis theme changes', async ({ page }) => {
   await openNote(page, 'Whiteboard Embed')
 
   const tldrawContainer = page.locator('.tldraw-whiteboard .tl-container').first()

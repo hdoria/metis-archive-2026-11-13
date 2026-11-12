@@ -57,6 +57,7 @@ vi.mock('./components/Editor', () => ({
 }))
 
 vi.mock('./hooks/useUpdater', () => ({
+  SIGNED_UPDATES_ENABLED: false,
   restartApp: vi.fn(),
   useUpdater: () => ({
     status: { state: 'idle' },
@@ -214,7 +215,7 @@ describe('App note windows', () => {
     editorSnapshots.length = 0
     resetCommandResults()
     localStorage.clear()
-    localStorage.setItem('tolaria:claude-code-onboarding-dismissed', '1')
+    localStorage.setItem('metis:claude-code-onboarding-dismissed', '1')
     window.history.replaceState(
       {},
       '',

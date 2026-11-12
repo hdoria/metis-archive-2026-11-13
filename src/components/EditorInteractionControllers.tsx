@@ -11,12 +11,12 @@ import {
 } from '@blocknote/react'
 import type { AppLocale } from '../lib/i18n'
 import { errorMessageIncludes } from '../utils/vaultErrors'
-import { TolariaFilePanelController } from './TolariaFilePanel'
-import { TolariaLinkToolbar } from './TolariaLinkToolbar'
-import { TolariaSlashMenu } from './TolariaSlashMenu'
+import { MetisFilePanelController } from './MetisFilePanel'
+import { MetisLinkToolbar } from './MetisLinkToolbar'
+import { MetisSlashMenu } from './MetisSlashMenu'
 import { WikilinkSuggestionMenu, type WikilinkSuggestionItem } from './WikilinkSuggestionMenu'
-import { TolariaCollapsedHeadingsController, TolariaSideMenu } from './tolariaBlockNoteSideMenu'
-import { TolariaFormattingToolbar, TolariaFormattingToolbarController } from './tolariaEditorFormatting'
+import { MetisCollapsedHeadingsController, MetisSideMenu } from './metisBlockNoteSideMenu'
+import { MetisFormattingToolbar, MetisFormattingToolbarController } from './metisEditorFormatting'
 import type { SuggestionAction } from './singleEditorSuggestionItems'
 import type { useSuggestionMenuItems } from './singleEditorSuggestionItems'
 
@@ -53,7 +53,7 @@ function guardLinkToolbarElementLookup(extension: LinkToolbarElementLookup) {
   guardedLinkToolbarExtensions.add(extension)
 }
 
-function TolariaLinkToolbarController({
+function MetisLinkToolbarController({
   editor,
   ...props
 }: React.ComponentProps<typeof LinkToolbarController> & Pick<EditorInteractionControllersProps, 'editor'>) {
@@ -69,16 +69,16 @@ function EditorToolbarControllers({
   onToolbarMouseDown,
   vaultPath,
 }: Pick<EditorInteractionControllersProps, 'editor' | 'locale' | 'onToolbarMouseDown' | 'vaultPath'>) {
-  const sideMenu = useCallback((props: SideMenuProps) => <TolariaSideMenu {...props} locale={locale} />, [locale])
+  const sideMenu = useCallback((props: SideMenuProps) => <MetisSideMenu {...props} locale={locale} />, [locale])
   const formattingToolbar = useCallback(
     (props: FormattingToolbarProps) => (
-      <TolariaFormattingToolbar {...props} locale={locale} vaultPath={vaultPath} />
+      <MetisFormattingToolbar {...props} locale={locale} vaultPath={vaultPath} />
     ),
     [locale, vaultPath],
   )
   const linkToolbar = useCallback(
-    (props: React.ComponentProps<typeof TolariaLinkToolbar>) => (
-      <TolariaLinkToolbar {...props} vaultPath={vaultPath} />
+    (props: React.ComponentProps<typeof MetisLinkToolbar>) => (
+      <MetisLinkToolbar {...props} vaultPath={vaultPath} />
     ),
     [vaultPath],
   )
@@ -86,18 +86,18 @@ function EditorToolbarControllers({
 
   return (
     <>
-      <TolariaCollapsedHeadingsController />
+      <MetisCollapsedHeadingsController />
       <SideMenuController sideMenu={sideMenu} />
-      <TolariaFormattingToolbarController
+      <MetisFormattingToolbarController
         formattingToolbar={formattingToolbar}
         floatingUIOptions={floatingUIOptions}
       />
-      <TolariaLinkToolbarController
+      <MetisLinkToolbarController
         editor={editor}
         linkToolbar={linkToolbar}
         floatingUIOptions={floatingUIOptions}
       />
-      <TolariaFilePanelController />
+      <MetisFilePanelController />
     </>
   )
 }
@@ -122,7 +122,7 @@ function EditorSuggestionControllers({
       <SuggestionMenuController
         triggerCharacter="/"
         getItems={getSlashMenuItems}
-        suggestionMenuComponent={TolariaSlashMenu}
+        suggestionMenuComponent={MetisSlashMenu}
       />
       <GridSuggestionMenuController triggerCharacter=":" columns={10} minQueryLength={1} getItems={getEmojiItems} />
       <SuggestionMenuController

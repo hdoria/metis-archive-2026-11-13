@@ -50,11 +50,11 @@ const GO_LANGUAGE_REGISTRATION = {
   },
 }
 
-type TolariaCodeHighlighter = Awaited<ReturnType<NonNullable<typeof codeBlockOptions.createHighlighter>>>
-type TolariaLoadLanguage = TolariaCodeHighlighter['loadLanguage']
-type TolariaLanguageInput = Parameters<TolariaLoadLanguage>[number]
-type TolariaLanguageLoader = () => Promise<TolariaLanguageInput[]>
-type TolariaNamedLanguageRegistration = Record<string, unknown> & {
+type MetisCodeHighlighter = Awaited<ReturnType<NonNullable<typeof codeBlockOptions.createHighlighter>>>
+type MetisLoadLanguage = MetisCodeHighlighter['loadLanguage']
+type MetisLanguageInput = Parameters<MetisLoadLanguage>[number]
+type MetisLanguageLoader = () => Promise<MetisLanguageInput[]>
+type MetisNamedLanguageRegistration = Record<string, unknown> & {
   name: string
   displayName?: string
   aliases?: string[]
@@ -80,18 +80,18 @@ function prioritizeTheme(themes: string[], theme: string) {
   return [theme, ...themes.filter((candidate) => candidate !== theme)]
 }
 
-function languageInputs(languages: readonly TolariaLanguageInput[]): TolariaLanguageInput[] {
+function languageInputs(languages: readonly MetisLanguageInput[]): MetisLanguageInput[] {
   return [...languages]
 }
 
-function languageModuleInputs(languageModule: unknown): TolariaLanguageInput[] {
+function languageModuleInputs(languageModule: unknown): MetisLanguageInput[] {
   if (typeof languageModule !== 'object' || languageModule === null) return []
 
   const defaultExport = (languageModule as { default?: unknown }).default
-  return Array.isArray(defaultExport) ? languageInputs(defaultExport as TolariaLanguageInput[]) : []
+  return Array.isArray(defaultExport) ? languageInputs(defaultExport as MetisLanguageInput[]) : []
 }
 
-async function optionalLanguageInputs(importLanguage: () => Promise<unknown>): Promise<TolariaLanguageInput[]> {
+async function optionalLanguageInputs(importLanguage: () => Promise<unknown>): Promise<MetisLanguageInput[]> {
   try {
     return languageModuleInputs(await importLanguage())
   } catch {
@@ -99,27 +99,27 @@ async function optionalLanguageInputs(importLanguage: () => Promise<unknown>): P
   }
 }
 
-function namedLanguageRegistration(value: TolariaLanguageInput): TolariaNamedLanguageRegistration | null {
+function namedLanguageRegistration(value: MetisLanguageInput): MetisNamedLanguageRegistration | null {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) return null
   const record = value as Record<string, unknown>
   return typeof record.name === 'string'
-    ? record as TolariaNamedLanguageRegistration
+    ? record as MetisNamedLanguageRegistration
     : null
 }
 
 function renameLanguageRegistration(
-  languages: readonly TolariaLanguageInput[],
+  languages: readonly MetisLanguageInput[],
   sourceName: string,
   nextLanguage: { name: string; displayName: string; aliases: string[] },
-): TolariaLanguageInput[] {
+): MetisLanguageInput[] {
   return languages.map((language) => {
     const registration = namedLanguageRegistration(language)
     if (!registration || registration.name !== sourceName) return language
-    return { ...registration, ...nextLanguage } as TolariaLanguageInput
+    return { ...registration, ...nextLanguage } as MetisLanguageInput
   })
 }
 
-async function loadVbScriptLanguage(): Promise<TolariaLanguageInput[]> {
+async function loadVbScriptLanguage(): Promise<MetisLanguageInput[]> {
   const language = await optionalLanguageInputs(() => import('@shikijs/langs/vb'))
   return renameLanguageRegistration(language, 'vb', {
     name: 'vbscript',
@@ -128,7 +128,7 @@ async function loadVbScriptLanguage(): Promise<TolariaLanguageInput[]> {
   })
 }
 
-async function loadBashLanguage(): Promise<TolariaLanguageInput[]> {
+async function loadBashLanguage(): Promise<MetisLanguageInput[]> {
   const languages = await optionalLanguageInputs(() => import('@shikijs/langs/bash'))
   return languages.map((language) => {
     const registration = namedLanguageRegistration(language)
@@ -147,11 +147,11 @@ async function loadBashLanguage(): Promise<TolariaLanguageInput[]> {
           patterns: [{ include: '#comment' }, ...argumentContext.patterns],
         },
       },
-    } as unknown as TolariaLanguageInput
+    } as unknown as MetisLanguageInput
   })
 }
 
-const EXTRA_LANGUAGE_LOADERS = new Map<string, TolariaLanguageLoader>([
+const EXTRA_LANGUAGE_LOADERS = new Map<string, MetisLanguageLoader>([
   ['bash', loadBashLanguage],
   ['powershell', async () => optionalLanguageInputs(() => import('@shikijs/langs/powershell'))],
   ['vbscript', loadVbScriptLanguage],
@@ -177,25 +177,25 @@ const EXTRA_LANGUAGE_LOADERS = new Map<string, TolariaLanguageLoader>([
 
 type LanguageId = { id: string }
 
-function expandGoLanguage({ id }: LanguageId): TolariaLanguageInput[] | null {
+function expandGoLanguage({ id }: LanguageId): MetisLanguageInput[] | null {
   return canonicalKnownCodeBlockLanguage(id) === 'go'
-    ? [GO_LANGUAGE_REGISTRATION as TolariaLanguageInput]
+    ? [GO_LANGUAGE_REGISTRATION as MetisLanguageInput]
     : null
 }
 
-async function expandExternalLanguage({ id }: LanguageId): Promise<TolariaLanguageInput[] | null> {
+async function expandExternalLanguage({ id }: LanguageId): Promise<MetisLanguageInput[] | null> {
   const canonicalLanguage = canonicalKnownCodeBlockLanguage(id) ?? id.trim().toLowerCase()
   const loadLanguage = EXTRA_LANGUAGE_LOADERS.get(canonicalLanguage)
   return loadLanguage ? loadLanguage() : null
 }
 
-async function expandLanguage(language: TolariaLanguageInput): Promise<TolariaLanguageInput[]> {
+async function expandLanguage(language: MetisLanguageInput): Promise<MetisLanguageInput[]> {
   if (typeof language !== 'string') return [language]
   const languageId = { id: language }
   return expandGoLanguage(languageId) ?? await expandExternalLanguage(languageId) ?? [language]
 }
 
-async function createTolariaCodeHighlighter(): Promise<TolariaCodeHighlighter> {
+async function createMetisCodeHighlighter(): Promise<MetisCodeHighlighter> {
   const highlighter = await codeBlockOptions.createHighlighter()
   return {
     ...highlighter,
@@ -207,10 +207,10 @@ async function createTolariaCodeHighlighter(): Promise<TolariaCodeHighlighter> {
   }
 }
 
-export function createTolariaCodeBlockOptions(): Partial<CodeBlockOptions> {
+export function createMetisCodeBlockOptions(): Partial<CodeBlockOptions> {
   const options: Partial<CodeBlockOptions> = {
     ...codeBlockOptions,
-    createHighlighter: createTolariaCodeHighlighter,
+    createHighlighter: createMetisCodeHighlighter,
     defaultLanguage: 'text',
     supportedLanguages: {
       ...DEFAULT_SUPPORTED_LANGUAGES,

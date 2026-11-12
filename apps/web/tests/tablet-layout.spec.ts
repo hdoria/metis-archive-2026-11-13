@@ -8,7 +8,7 @@ import { expect, type Locator, type Page, type TestInfo, test } from "@playwrigh
 
 const TABLET_PROJECTS = ["ipad", "ipad-landscape"];
 const DESKTOP_PROJECTS = ["chromium", "webkit"];
-const NOTE_TITLE = "Build Laputa App";
+const NOTE_TITLE = "Build MetisLegacy App";
 const REPEATS = 20;
 
 test.describe.configure({ retries: 0 });

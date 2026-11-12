@@ -10,7 +10,7 @@ export async function openCommandPalette(page: Page): Promise<void> {
 
 	// This bridge is installed by the app's effects, after keyboard routing mounts.
 	await page.waitForFunction(
-		() => typeof window.__laputaTest?.dispatchBrowserMenuCommand === "function",
+		() => typeof window.__metislegacyTest?.dispatchBrowserMenuCommand === "function",
 	);
 	// Focus a stable app control; the body center can belong to an embedded document.
 	const navigation = page

@@ -1,4 +1,4 @@
-pub(crate) fn tolaria_node_mcp_server(
+pub(crate) fn metis_node_mcp_server(
     mcp_server_path: &str,
     vault_path: &str,
     vault_paths: &[String],
@@ -10,7 +10,7 @@ pub(crate) fn tolaria_node_mcp_server(
     });
 
     if include_ui_bridge_env {
-        env["WS_UI_PORT"] = serde_json::json!("9711");
+        env["WS_UI_PORT"] = serde_json::json!("9731");
     }
 
     serde_json::json!({

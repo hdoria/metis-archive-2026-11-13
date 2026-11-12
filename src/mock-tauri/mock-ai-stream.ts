@@ -1,4 +1,4 @@
-import type { MockAiStreamChunk, MockAiStreamHook } from '../types/laputaTestBridge'
+import type { MockAiStreamChunk, MockAiStreamHook } from '../types/metislegacyTestBridge'
 
 export function createMockAiStreamHook(): MockAiStreamHook {
   let chunks: MockAiStreamChunk[] = []

@@ -133,7 +133,7 @@ export function serializeMobileSavedViewDefinition(definition: MobileViewDefinit
 }
 
 function isViewFile(path: ViewPath) {
-  return /^(?:views|\.laputa\/views)\/[^/]+\.ya?ml$/u.test(path)
+  return /^(?:views|\.metislegacy\/views)\/[^/]+\.ya?ml$/u.test(path)
 }
 
 function mobileNoteToViewEntry(note: MobileNote): MobileViewEntry {

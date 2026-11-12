@@ -113,14 +113,14 @@ function useTestMenuCommandBridge(handlersRef: { current: MenuEventHandlers }) {
       dispatchMenuEvent(id, handlersRef.current)
     }
 
-    window.__laputaTest = {
-      ...window.__laputaTest,
+    window.__metislegacyTest = {
+      ...window.__metislegacyTest,
       dispatchBrowserMenuCommand: bridge,
     }
 
     return () => {
-      if (window.__laputaTest?.dispatchBrowserMenuCommand === bridge) {
-        delete window.__laputaTest.dispatchBrowserMenuCommand
+      if (window.__metislegacyTest?.dispatchBrowserMenuCommand === bridge) {
+        delete window.__metislegacyTest.dispatchBrowserMenuCommand
       }
     }
   }, [handlersRef])

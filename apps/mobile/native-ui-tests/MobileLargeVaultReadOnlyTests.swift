@@ -3,14 +3,14 @@ import XCTest
 
 final class MobileLargeVaultReadOnlyTests: XCTestCase {
   func testLargeLocalVaultOpensTypesAndNotesWithoutEditing() throws {
-    try XCTSkipUnless(ProcessInfo.processInfo.environment["TOLARIA_LARGE_VAULT_QA"] == "1",
+    try XCTSkipUnless(ProcessInfo.processInfo.environment["METIS_LARGE_VAULT_QA"] == "1",
       "Requires a disposable copy and host-side catalog restoration")
     continueAfterFailure = false
     XCUIDevice.shared.orientation = UIDevice.current.userInterfaceIdiom == .pad ? .landscapeLeft : .portrait
-    let app = XCUIApplication(bundleIdentifier: "md.tolaria.mobile.ota-validation")
+    let app = XCUIApplication(bundleIdentifier: "io.github.hdoria.metis.mobile.ota-validation")
     let search = "?source=native-vault&phoneState=sidebar&editorMode=source&qaRun=large-vault-readonly"
-    app.launchArguments = ["--tolaria-mobile-search", search]
-    app.launchEnvironment["TOLARIA_MOBILE_SEARCH"] = search
+    app.launchArguments = ["--metis-mobile-search", search]
+    app.launchEnvironment["METIS_MOBILE_SEARCH"] = search
     addTeardownBlock { app.terminate() }
     let started = Date()
     app.launch()
@@ -51,7 +51,7 @@ final class MobileLargeVaultReadOnlyTests: XCTestCase {
 
   private func waitForOwnedVault(_ app: XCUIApplication) {
     let ready = XCTNSPredicateExpectation(predicate: NSPredicate { _, _ in
-      self.element(app, "sidebar-toolbar-title").label == "Owned Laputa QA"
+      self.element(app, "sidebar-toolbar-title").label == "Owned MetisLegacy QA"
         && self.noteCount(app) >= 1000
     }, object: nil)
     XCTAssertEqual(XCTWaiter.wait(for: [ready], timeout: 40), .completed)

@@ -37,8 +37,8 @@ function gate() {
 
 async function openApp(page: Page): Promise<void> {
 	await page.addInitScript((token) => {
-		window.TOLARIA_REMOTE_URL = window.location.origin;
-		window.TOLARIA_REMOTE_TOKEN = token;
+		window.METIS_REMOTE_URL = window.location.origin;
+		window.METIS_REMOTE_TOKEN = token;
 	}, COLLAB_TOKEN);
 	await page.goto("/", { waitUntil: "load" });
 	await expect(noteListItem(page)).toBeVisible({ timeout: 10_000 });
@@ -142,7 +142,7 @@ test("is synced, and only the pill spins while the vault reloads in the backgrou
 		await route.continue();
 	});
 	await page.evaluate(() =>
-		window.__laputaTest?.dispatchBrowserMenuCommand?.("vault-reload"),
+		window.__metislegacyTest?.dispatchBrowserMenuCommand?.("vault-reload"),
 	);
 
 	await expectPill(page, "syncing", testInfo);

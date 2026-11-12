@@ -18,8 +18,8 @@ export function useEditorContentPathSignal(): EditorContentPathSignal {
       }
     }
 
-    window.addEventListener('laputa:editor-tab-swapped', handleTabSwapped)
-    return () => { window.removeEventListener('laputa:editor-tab-swapped', handleTabSwapped); }
+    window.addEventListener('metislegacy:editor-tab-swapped', handleTabSwapped)
+    return () => { window.removeEventListener('metislegacy:editor-tab-swapped', handleTabSwapped); }
   }, [])
 
   return contentSignal

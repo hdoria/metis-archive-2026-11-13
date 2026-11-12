@@ -299,8 +299,8 @@ function applySentryTags({ platform, sentryBuildVersion, sentryRelease }: Fronte
     ? 'stable'
     : sentryBuildVersion.includes('-') ? 'prerelease' : 'internal'
 
-  Sentry.setTag('tolaria.build_version', sentryBuildVersion)
-  Sentry.setTag('tolaria.release_kind', releaseKind)
+  Sentry.setTag('metis.build_version', sentryBuildVersion)
+  Sentry.setTag('metis.release_kind', releaseKind)
 }
 
 export function teardownSentry(): void {

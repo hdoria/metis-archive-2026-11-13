@@ -28,11 +28,11 @@ describe('mobile folder editing', () => {
   ])('does not rename folders over existing vault file path %s', (existingPath) => {
     const snapshot = {
       ...snapshotWithFileEntry(existingPath),
-      folderPaths: ['Tolaria', 'Tolaria/Mobile UI'],
+      folderPaths: ['Metis', 'Metis/Mobile UI'],
     }
 
     const result = applyMobileWorkspaceEditWithWrites(snapshot, {
-      folderPath: 'Tolaria',
+      folderPath: 'Metis',
       name: 'Research',
       type: 'renameFolder',
     })

@@ -97,7 +97,7 @@ function get(url: URL, { lookup, signal }: FetchContext): Promise<IncomingMessag
     lookup,
     signal,
     agent: false,
-    headers: { accept: 'image/*', 'user-agent': 'Tolaria' },
+    headers: { accept: 'image/*', 'user-agent': 'Metis' },
   }
   return new Promise((resolve, reject) => {
     const outgoing = send(url, options, resolve)

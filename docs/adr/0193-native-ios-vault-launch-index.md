@@ -7,13 +7,13 @@ Accepted.
 ## Context
 
 Restoring a large app-managed iOS vault through `expo-file-system` required one
-JavaScript-to-native call per directory and file. Laputa has thousands of notes,
+JavaScript-to-native call per directory and file. MetisLegacy has thousands of notes,
 so startup spent tens of seconds crossing the React Native bridge before the
 pure snapshot builder could render the workspace.
 
 ## Decision
 
-The local `TolariaWorkspaceAccess` Expo module enumerates the managed vault on a
+The local `MetisWorkspaceAccess` Expo module enumerates the managed vault on a
 native asynchronous function and returns one JSON launch index containing folder
 paths and file metadata/content. The filesystem repository accepts that index as
 an optional input to its existing pure snapshot builder.

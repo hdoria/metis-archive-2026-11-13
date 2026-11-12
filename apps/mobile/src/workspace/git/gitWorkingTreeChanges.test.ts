@@ -23,7 +23,7 @@ afterEach(async () => {
 });
 
 async function repository() {
-	const dir = await mkdtemp(join(tmpdir(), "tolaria-dirty-guard-"));
+	const dir = await mkdtemp(join(tmpdir(), "metis-dirty-guard-"));
 	roots.push(dir);
 	const context = { fs, dir };
 	await git.init({ ...context, defaultBranch: "main" });
@@ -90,7 +90,7 @@ it("bounds in-flight working-tree stat calls while checkpointing changed notes",
 it.each(["NFC", "NFD"] as const)(
 	"keeps a tracked %s filename when enumeration uses decomposed Unicode",
 	async (normalization) => {
-		const dir = await mkdtemp(join(tmpdir(), "tolaria-unicode-path-"));
+		const dir = await mkdtemp(join(tmpdir(), "metis-unicode-path-"));
 		roots.push(dir);
 		const trackedName = "Matthäus 17.md".normalize(normalization);
 		await writeFile(join(dir, trackedName), "# Before\n");
@@ -148,7 +148,7 @@ it.each(["NFC", "NFD"] as const)(
 );
 
 it("stages a new Unicode filename using its canonical spelling", async () => {
-	const dir = await mkdtemp(join(tmpdir(), "tolaria-new-unicode-path-"));
+	const dir = await mkdtemp(join(tmpdir(), "metis-new-unicode-path-"));
 	roots.push(dir);
 	const context = { fs, dir };
 	await git.init({ ...context, defaultBranch: "main" });

@@ -2,13 +2,13 @@ import type { Dispatch, MutableRefObject, ClipboardEvent as ReactClipboardEvent,
 import { useCallback, useEffect, useRef } from 'react'
 import { cancelIdle, type IdleHandle, scheduleIdle } from '../../utils/sheetBrowserScheduling'
 import {
-  buildTolariaSheetClipboardPayload,
-  parseTolariaSheetClipboardPayload,
+  buildMetisSheetClipboardPayload,
+  parseMetisSheetClipboardPayload,
   rangesIntersect,
   shiftedClipboardCellInput,
-  TOLARIA_SHEET_CLIPBOARD_MIME,
-  type TolariaSheetClipboardPayload,
-  writeTolariaSheetClipboard,
+  METIS_SHEET_CLIPBOARD_MIME,
+  type MetisSheetClipboardPayload,
+  writeMetisSheetClipboard,
 } from '../../utils/sheetClipboard'
 import type { SheetContextMenuState } from '../../utils/sheetContextMenuState'
 import { dirtyRowsForArea, dirtyRowsForSelectedRange, selectedRangeArea } from '../../utils/sheetSelection'
@@ -47,7 +47,7 @@ interface UseSheetClipboardActionsOptions {
   writeCellInputAt: (current: SheetWorkbookState, row: number, column: number, input: string) => SheetCellInputResult
 }
 
-function clipboardOperations(payload: TolariaSheetClipboardPayload, targetArea: ReturnType<typeof selectedRangeArea>) {
+function clipboardOperations(payload: MetisSheetClipboardPayload, targetArea: ReturnType<typeof selectedRangeArea>) {
   return payload.cells.flatMap((row, rowOffset) =>
     row.map((input, columnOffset) => ({
       column: targetArea.column + columnOffset,
@@ -63,7 +63,7 @@ function clipboardOperations(payload: TolariaSheetClipboardPayload, targetArea: 
   )
 }
 
-function sourceArea(payload: TolariaSheetClipboardPayload) {
+function sourceArea(payload: MetisSheetClipboardPayload) {
   return {
     sheet: SHEET_INDEX,
     row: payload.source.row,
@@ -73,7 +73,7 @@ function sourceArea(payload: TolariaSheetClipboardPayload) {
   }
 }
 
-function destinationArea(payload: TolariaSheetClipboardPayload, targetArea: ReturnType<typeof selectedRangeArea>) {
+function destinationArea(payload: MetisSheetClipboardPayload, targetArea: ReturnType<typeof selectedRangeArea>) {
   return {
     sheet: SHEET_INDEX,
     row: targetArea.row,
@@ -85,7 +85,7 @@ function destinationArea(payload: TolariaSheetClipboardPayload, targetArea: Retu
 
 function clearCutSourceIfNeeded(
   current: SheetWorkbookState,
-  payload: TolariaSheetClipboardPayload,
+  payload: MetisSheetClipboardPayload,
   targetArea: ReturnType<typeof selectedRangeArea>,
   dirtyRows: Set<number>,
 ) {
@@ -142,7 +142,7 @@ function usePendingExternalFormulaRetry({
   )
 }
 
-function useTolariaClipboardPaste(
+function useMetisClipboardPaste(
   options: UseSheetClipboardActionsOptions & {
     cancelPendingPaste: () => void
     pasteIdleRef: MutableRefObject<IdleHandle | null>
@@ -166,7 +166,7 @@ function useTolariaClipboardPaste(
     writeCellInputAt,
   } = options
   return useCallback(
-    (payload: TolariaSheetClipboardPayload) => {
+    (payload: MetisSheetClipboardPayload) => {
       const current = workbookRef.current
       if (!current) return false
 
@@ -261,14 +261,14 @@ function scheduleSelectedRowsSerialization(
   })
 }
 
-function useTolariaCopyCaptureHandler(workbookRef: MutableRefObject<SheetWorkbookState | null>) {
+function useMetisCopyCaptureHandler(workbookRef: MutableRefObject<SheetWorkbookState | null>) {
   return useCallback(
-    (event: ReactClipboardEvent<HTMLDivElement>, action: TolariaSheetClipboardPayload['action']) => {
+    (event: ReactClipboardEvent<HTMLDivElement>, action: MetisSheetClipboardPayload['action']) => {
       if (isEditableTarget(event.target) || isSheetCommandTarget(event.target)) return false
       const current = workbookRef.current
       if (!current) return false
 
-      const payload = buildTolariaSheetClipboardPayload(
+      const payload = buildMetisSheetClipboardPayload(
         current.model,
         current.path,
         action,
@@ -276,7 +276,7 @@ function useTolariaCopyCaptureHandler(workbookRef: MutableRefObject<SheetWorkboo
       )
       if (!payload) return false
 
-      writeTolariaSheetClipboard(event.clipboardData, payload)
+      writeMetisSheetClipboard(event.clipboardData, payload)
       event.preventDefault()
       event.stopPropagation()
       return true
@@ -289,27 +289,27 @@ function useSheetCopyCutCaptureHandlers({
   scheduleSerialize,
   workbookRef,
 }: Pick<UseSheetClipboardActionsOptions, 'scheduleSerialize' | 'workbookRef'>) {
-  const handleTolariaSheetCopyCapture = useTolariaCopyCaptureHandler(workbookRef)
+  const handleMetisSheetCopyCapture = useMetisCopyCaptureHandler(workbookRef)
 
   const handleCopyCapture = useCallback(
     (event: ReactClipboardEvent<HTMLDivElement>) => {
-      handleTolariaSheetCopyCapture(event, 'copy')
+      handleMetisSheetCopyCapture(event, 'copy')
     },
-    [handleTolariaSheetCopyCapture],
+    [handleMetisSheetCopyCapture],
   )
 
   const handleCutCapture = useCallback(
     (event: ReactClipboardEvent<HTMLDivElement>) => {
-      if (!handleTolariaSheetCopyCapture(event, 'cut')) scheduleSerialize()
+      if (!handleMetisSheetCopyCapture(event, 'cut')) scheduleSerialize()
     },
-    [handleTolariaSheetCopyCapture, scheduleSerialize],
+    [handleMetisSheetCopyCapture, scheduleSerialize],
   )
 
   return { handleCopyCapture, handleCutCapture }
 }
 
 function useSheetPasteCaptureHandler({
-  applyTolariaClipboardPaste,
+  applyMetisClipboardPaste,
   scheduleSerialize,
   setFormulaAutocomplete,
   setSheetContextMenu,
@@ -319,7 +319,7 @@ function useSheetPasteCaptureHandler({
   UseSheetClipboardActionsOptions,
   'scheduleSerialize' | 'setFormulaAutocomplete' | 'setSheetContextMenu' | 'setWikilinkAutocomplete' | 'workbookRef'
 > & {
-  applyTolariaClipboardPaste: (payload: TolariaSheetClipboardPayload) => boolean
+  applyMetisClipboardPaste: (payload: MetisSheetClipboardPayload) => boolean
 }) {
   return useCallback(
     (event: ReactClipboardEvent<HTMLDivElement>) => {
@@ -328,8 +328,8 @@ function useSheetPasteCaptureHandler({
         return
       }
 
-      const payload = parseTolariaSheetClipboardPayload(event.clipboardData.getData(TOLARIA_SHEET_CLIPBOARD_MIME))
-      if (!payload || !applyTolariaClipboardPaste(payload)) {
+      const payload = parseMetisSheetClipboardPayload(event.clipboardData.getData(METIS_SHEET_CLIPBOARD_MIME))
+      if (!payload || !applyMetisClipboardPaste(payload)) {
         scheduleSelectedRowsSerialization(workbookRef, scheduleSerialize)
         return
       }
@@ -341,7 +341,7 @@ function useSheetPasteCaptureHandler({
       setSheetContextMenu(null)
     },
     [
-      applyTolariaClipboardPaste,
+      applyMetisClipboardPaste,
       scheduleSerialize,
       setFormulaAutocomplete,
       setSheetContextMenu,
@@ -356,7 +356,7 @@ function useClipboardEventHandlers(
     UseSheetClipboardActionsOptions,
     'scheduleSerialize' | 'setFormulaAutocomplete' | 'setSheetContextMenu' | 'setWikilinkAutocomplete' | 'workbookRef'
   > & {
-    applyTolariaClipboardPaste: (payload: TolariaSheetClipboardPayload) => boolean
+    applyMetisClipboardPaste: (payload: MetisSheetClipboardPayload) => boolean
   },
 ) {
   const { handleCopyCapture, handleCutCapture } = useSheetCopyCutCaptureHandlers(options)
@@ -392,7 +392,7 @@ export function useSheetClipboardActions(options: UseSheetClipboardActionsOption
     writeCellInputAt,
   })
 
-  const applyTolariaClipboardPaste = useTolariaClipboardPaste({
+  const applyMetisClipboardPaste = useMetisClipboardPaste({
     cancelPendingPaste,
     pasteIdleRef,
     pasteJobRef,
@@ -408,7 +408,7 @@ export function useSheetClipboardActions(options: UseSheetClipboardActionsOption
   })
 
   const { handleCopyCapture, handleCutCapture, handlePasteCapture } = useClipboardEventHandlers({
-    applyTolariaClipboardPaste,
+    applyMetisClipboardPaste,
     scheduleSerialize,
     setFormulaAutocomplete,
     setSheetContextMenu,

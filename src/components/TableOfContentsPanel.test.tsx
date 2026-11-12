@@ -39,12 +39,12 @@ describe('TableOfContentsPanel', () => {
 
   it('does not duplicate the note title when the first markdown H1 matches it', () => {
     const toc = buildTableOfContentsFromMarkdown(
-      'Introducing Tolaria',
-      '# Introducing Tolaria\n\n## Tolaria + Refactoring\n\n## Principles',
+      'Introducing Métis',
+      '# Introducing Métis\n\n## Métis + Refactoring\n\n## Principles',
     )
 
-    expect(toc.title).toBe('Introducing Tolaria')
-    expect(toc.children.map((item) => item.title)).toEqual(['Tolaria + Refactoring', 'Principles'])
+    expect(toc.title).toBe('Introducing Métis')
+    expect(toc.children.map((item) => item.title)).toEqual(['Métis + Refactoring', 'Principles'])
   })
 
   it('ignores heading-like frontmatter until an exact closing delimiter', () => {
@@ -105,21 +105,21 @@ describe('TableOfContentsPanel', () => {
       <TableOfContentsPanel
         editor={{
           document: [
-            { id: 'title-block', type: 'heading', props: { level: 1 }, content: [{ type: 'text', text: 'Introducing Tolaria' }] },
-            { id: 'section-block', type: 'heading', props: { level: 2 }, content: [{ type: 'text', text: 'Tolaria + Refactoring' }] },
+            { id: 'title-block', type: 'heading', props: { level: 1 }, content: [{ type: 'text', text: 'Introducing Métis' }] },
+            { id: 'section-block', type: 'heading', props: { level: 2 }, content: [{ type: 'text', text: 'Métis + Refactoring' }] },
           ],
           setTextCursorPosition,
         }}
-        entry={{ ...entry, title: 'Introducing Tolaria' } as VaultEntry}
-        sourceContent={'# Introducing Tolaria\n\n## Tolaria + Refactoring'}
+        entry={{ ...entry, title: 'Introducing Métis' } as VaultEntry}
+        sourceContent={'# Introducing Métis\n\n## Métis + Refactoring'}
         onClose={vi.fn()}
       />,
     )
 
-    fireEvent.click(await screen.findByRole('button', { name: /Introducing Tolaria/ }))
+    fireEvent.click(await screen.findByRole('button', { name: /Introducing Métis/ }))
     expect(setTextCursorPosition).toHaveBeenCalledWith('title-block', 'start')
 
-    fireEvent.click(await screen.findByRole('button', { name: /Tolaria \+ Refactoring/ }))
+    fireEvent.click(await screen.findByRole('button', { name: /Métis \+ Refactoring/ }))
     expect(setTextCursorPosition).toHaveBeenCalledWith('section-block', 'start')
   })
 

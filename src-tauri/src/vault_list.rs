@@ -146,7 +146,7 @@ mod tests {
             vaults: vec![
                 VaultEntry {
                     label: "My Vault".to_string(),
-                    path: "/Users/luca/Laputa".to_string(),
+                    path: "/Users/luca/MetisLegacy".to_string(),
                     ..Default::default()
                 },
                 VaultEntry {
@@ -155,16 +155,16 @@ mod tests {
                     ..Default::default()
                 },
             ],
-            active_vault: Some("/Users/luca/Laputa".to_string()),
+            active_vault: Some("/Users/luca/MetisLegacy".to_string()),
             default_workspace_path: None,
             hidden_defaults: vec![],
         };
         let loaded = save_and_reload(&list);
         assert_eq!(loaded.vaults.len(), 2);
         assert_eq!(loaded.vaults[0].label, "My Vault");
-        assert_eq!(loaded.vaults[0].path, "/Users/luca/Laputa");
+        assert_eq!(loaded.vaults[0].path, "/Users/luca/MetisLegacy");
         assert_eq!(loaded.vaults[1].label, "Work");
-        assert_eq!(loaded.active_vault.as_deref(), Some("/Users/luca/Laputa"));
+        assert_eq!(loaded.active_vault.as_deref(), Some("/Users/luca/MetisLegacy"));
     }
 
     #[test]
@@ -211,18 +211,18 @@ mod tests {
         assert!(result.is_ok());
         let path = result.unwrap();
         let path = path.to_str().unwrap();
-        assert!(path.contains("com.tolaria.app") || path.contains("com.laputa.app"));
+        assert!(path.contains("io.github.hdoria.metis") || path.contains("io.github.hdoria.metis.legacy"));
     }
 
     #[test]
-    fn preferred_vault_list_path_uses_tolaria_namespace() {
+    fn preferred_vault_list_path_uses_metis_namespace() {
         let result = preferred_app_config_path("vaults.json");
         assert!(result.is_ok());
         assert!(result
             .unwrap()
             .to_str()
             .unwrap()
-            .contains("com.tolaria.app"));
+            .contains("io.github.hdoria.metis"));
     }
 
     #[test]
@@ -281,7 +281,7 @@ mod tests {
     fn loaded_vault_list_expands_tilde_paths() {
         let home = dirs::home_dir().unwrap();
         let expected_vault = home.join("Workspace/refactoring-vault");
-        let expected_hidden = home.join("Workspace/tolaria/demo-vault-v2");
+        let expected_hidden = home.join("Workspace/metis/demo-vault-v2");
         let list = VaultList {
             vaults: vec![VaultEntry {
                 label: "Refactoring".to_string(),
@@ -290,7 +290,7 @@ mod tests {
             }],
             active_vault: Some("~/Workspace/refactoring-vault".to_string()),
             default_workspace_path: Some("~/Workspace/refactoring-vault".to_string()),
-            hidden_defaults: vec!["~/Workspace/tolaria/demo-vault-v2".to_string()],
+            hidden_defaults: vec!["~/Workspace/metis/demo-vault-v2".to_string()],
         };
 
         let loaded = expand_vault_list_paths(list);

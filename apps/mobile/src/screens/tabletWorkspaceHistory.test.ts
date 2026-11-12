@@ -295,23 +295,23 @@ describe("tablet workspace editing history", () => {
 		const redoneSnapshot = applyHistoryEdits(undoneSnapshot, entry.redoEdits);
 
 		expect(
-			noteByIdOptional(undoneSnapshot, "Tolaria/Mobile UI/new-dependency.md"),
+			noteByIdOptional(undoneSnapshot, "Metis/Mobile UI/new-dependency.md"),
 		).toBeNull();
 		expect(noteById(undoneSnapshot, "workflow-orchestration").rawContent).toBe(
 			"# Workflow Orchestration Essay\n\nSource body.\n",
 		);
 		expect(
-			noteById(redoneSnapshot, "Tolaria/Mobile UI/new-dependency.md")
+			noteById(redoneSnapshot, "Metis/Mobile UI/new-dependency.md")
 				.rawContent,
 		).toBe("---\ntitle: New Dependency\ntype: Note\n---\n");
 		expect(
 			noteById(redoneSnapshot, "workflow-orchestration").rawContent,
-		).toContain('related_to:\n  - "[[Tolaria/Mobile UI/new-dependency]]"');
+		).toContain('related_to:\n  - "[[Metis/Mobile UI/new-dependency]]"');
 	});
 
 	it("persists relationship target undo and redo write plans", () => {
-		const sourcePath = "Tolaria/Mobile UI/Workflow Orchestration Essay.md";
-		const targetPath = "Tolaria/Mobile UI/new-dependency.md";
+		const sourcePath = "Metis/Mobile UI/Workflow Orchestration Essay.md";
+		const targetPath = "Metis/Mobile UI/new-dependency.md";
 		const { redoWrites, undoWrites } = historyRoundTripWithWrites(
 			relationshipTargetHistorySnapshot(),
 			{
@@ -333,7 +333,7 @@ describe("tablet workspace editing history", () => {
 		expect(redoWrites).toEqual([
 			{
 				content: expect.stringContaining(
-					'related_to:\n  - "[[Tolaria/Mobile UI/new-dependency]]"',
+					'related_to:\n  - "[[Metis/Mobile UI/new-dependency]]"',
 				),
 				kind: "saveNote",
 				path: sourcePath,

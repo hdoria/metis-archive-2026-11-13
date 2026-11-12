@@ -7,7 +7,7 @@ import {
   resetSheetEditorTestState,
 } from './SheetEditor.testUtils'
 import { SheetEditor } from './SheetEditor'
-import { TOLARIA_SHEET_CLIPBOARD_MIME } from '../utils/sheetClipboard'
+import { METIS_SHEET_CLIPBOARD_MIME } from '../utils/sheetClipboard'
 
 const ironCalcMock = getIronCalcMock()
 const sheetContent = '---\ntype: Sheet\n---\nMetric,January'
@@ -160,7 +160,7 @@ describe('SheetEditor stale workbook model recovery', () => {
     await screen.findByTestId('ironcalc-workbook')
     const editor = screen.getByTestId('sheet-editor')
     const clipboardData = createClipboardData()
-    clipboardData.setData(TOLARIA_SHEET_CLIPBOARD_MIME, JSON.stringify({
+    clipboardData.setData(METIS_SHEET_CLIPBOARD_MIME, JSON.stringify({
       action: 'copy',
       cells: [['queued paste']],
       source: {
@@ -170,7 +170,7 @@ describe('SheetEditor stale workbook model recovery', () => {
         row: 1,
         width: 1,
       },
-      type: 'tolaria-sheet-clipboard',
+      type: 'metis-sheet-clipboard',
       version: 1,
     }))
 

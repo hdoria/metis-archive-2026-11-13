@@ -178,22 +178,22 @@ describe('useVaultLoader workspaces', () => {
   it('keeps the active vault folder root visible when it is absent from mounted folder vaults', async () => {
     const entryVaults = [
       { label: 'Brian', path: '/brian', alias: 'brian', available: true, mounted: false },
-      { label: 'Laputa', path: '/laputa', alias: 'laputa', available: true, mounted: true },
+      { label: 'MetisLegacy', path: '/metislegacy', alias: 'metislegacy', available: true, mounted: true },
     ]
     const folderVaults = [entryVaults[1]]
     mockWorkspaceBackend({
       foldersByPath: {
         '/brian': [backendFolder('brian-projects')],
-        '/laputa': [backendFolder('laputa-projects')],
+        '/metislegacy': [backendFolder('metislegacy-projects')],
       },
     })
 
-    const { result } = renderHook(() => useVaultLoader('/brian', entryVaults, '/laputa', folderVaults))
+    const { result } = renderHook(() => useVaultLoader('/brian', entryVaults, '/metislegacy', folderVaults))
 
     await waitForEntries(result, 2)
     await waitFor(() => {
       expect(result.current.folders).toEqual([
-        mountedFolderRoot('Laputa', '/laputa', 'laputa-projects'),
+        mountedFolderRoot('MetisLegacy', '/metislegacy', 'metislegacy-projects'),
         mountedFolderRoot('brian', '/brian', 'brian-projects'),
       ])
     })
@@ -266,17 +266,17 @@ describe('useVaultLoader workspaces', () => {
 
   it('reloads scoped folder roots when another mounted workspace is added', async () => {
     const brian = { label: 'Brian', path: '/brian', alias: 'brian', available: true, mounted: true }
-    const laputa = { label: 'Laputa', path: '/laputa', alias: 'laputa', available: true, mounted: true }
+    const metislegacy = { label: 'MetisLegacy', path: '/metislegacy', alias: 'metislegacy', available: true, mounted: true }
     const third = { label: 'Third', path: '/third', alias: 'third', available: true, mounted: true }
     mockWorkspaceBackend({
       foldersByPath: {
         '/brian': [backendFolder('brian-root')],
-        '/laputa': [backendFolder('laputa-root')],
+        '/metislegacy': [backendFolder('metislegacy-root')],
         '/third': [backendFolder('third-root')],
       },
     })
     const { result, rerender } = renderHook(
-      ({ folderVaults }) => useVaultLoader('/brian', [brian, laputa, third], '/brian', folderVaults),
+      ({ folderVaults }) => useVaultLoader('/brian', [brian, metislegacy, third], '/brian', folderVaults),
       { initialProps: { folderVaults: [brian] } },
     )
 
@@ -285,28 +285,28 @@ describe('useVaultLoader workspaces', () => {
       expect(result.current.folders.map((folder) => folder.name)).toEqual(['brian-root'])
     })
 
-    rerender({ folderVaults: [brian, laputa] })
+    rerender({ folderVaults: [brian, metislegacy] })
 
     await waitFor(() => {
-      expect(result.current.folders.map((folder) => folder.rootPath)).toEqual(['/brian', '/laputa'])
+      expect(result.current.folders.map((folder) => folder.rootPath)).toEqual(['/brian', '/metislegacy'])
     })
 
-    rerender({ folderVaults: [brian, laputa, third] })
+    rerender({ folderVaults: [brian, metislegacy, third] })
 
     await waitFor(() => {
-      expect(result.current.folders.map((folder) => folder.rootPath)).toEqual(['/brian', '/laputa', '/third'])
+      expect(result.current.folders.map((folder) => folder.rootPath)).toEqual(['/brian', '/metislegacy', '/third'])
     })
   })
 
   it('loads secondary workspaces progressively without an I/O stampede', async () => {
-    const laputaLoad = createDeferred<VaultEntry[]>()
+    const metislegacyLoad = createDeferred<VaultEntry[]>()
     const brian = { label: 'Brian', path: '/brian', alias: 'brian', available: true, mounted: true }
-    const laputa = { label: 'Laputa', path: '/laputa', alias: 'laputa', available: true, mounted: true }
+    const metislegacy = { label: 'MetisLegacy', path: '/metislegacy', alias: 'metislegacy', available: true, mounted: true }
     const team = { label: 'Team', path: '/team', alias: 'team', available: true, mounted: true }
-    const vaults = [brian, laputa, team]
+    const vaults = [brian, metislegacy, team]
 
     mockWorkspaceBackend({
-      entriesByPath: { '/laputa': laputaLoad.promise },
+      entriesByPath: { '/metislegacy': metislegacyLoad.promise },
     })
 
     const { result } = renderHook(() => useVaultLoader('/brian', vaults, '/brian', vaults))
@@ -317,11 +317,11 @@ describe('useVaultLoader workspaces', () => {
     ))).toBe(false)
 
     await act(async () => {
-      laputaLoad.resolve([{ ...mockEntries[0], path: '/laputa/note/hello.md' }])
+      metislegacyLoad.resolve([{ ...mockEntries[0], path: '/metislegacy/note/hello.md' }])
     })
 
     await waitFor(() => {
-      expect(result.current.entries.map((entry) => entry.workspace?.path).sort()).toEqual(['/brian', '/laputa', '/team'])
+      expect(result.current.entries.map((entry) => entry.workspace?.path).sort()).toEqual(['/brian', '/metislegacy', '/team'])
     })
   })
 
@@ -381,19 +381,19 @@ describe('useVaultLoader workspaces', () => {
   it('uses cached vault listing for background workspace loads in Tauri mode', async () => {
     await enableTauriMode()
     const brian = { label: 'Brian', path: '/brian', alias: 'brian', available: true, mounted: true }
-    const laputa = { label: 'Laputa', path: '/laputa', alias: 'laputa', available: true, mounted: true }
-    const vaults = [brian, laputa]
+    const metislegacy = { label: 'MetisLegacy', path: '/metislegacy', alias: 'metislegacy', available: true, mounted: true }
+    const vaults = [brian, metislegacy]
     mockWorkspaceBackend()
 
     const { result } = renderHook(() => useVaultLoader('/brian', vaults, '/brian', vaults))
 
     await waitForEntries(result, 2)
 
-    const laputaLoadCommands = backendInvokeFn.mock.calls
-      .filter(([, args]) => args?.path === '/laputa')
+    const metislegacyLoadCommands = backendInvokeFn.mock.calls
+      .filter(([, args]) => args?.path === '/metislegacy')
       .map(([command]) => command)
-    expect(laputaLoadCommands).toContain('list_vault')
-    expect(laputaLoadCommands).not.toContain('reload_vault')
+    expect(metislegacyLoadCommands).toContain('list_vault')
+    expect(metislegacyLoadCommands).not.toContain('reload_vault')
   })
 
   it('clears stale views immediately when switching to another preloaded workspace', async () => {
@@ -403,8 +403,8 @@ describe('useVaultLoader workspaces', () => {
       },
     })
     const brian = { label: 'Brian', path: '/brian', alias: 'brian', available: true, mounted: true }
-    const laputa = { label: 'Laputa', path: '/laputa', alias: 'laputa', available: true, mounted: true }
-    const vaults = [brian, laputa]
+    const metislegacy = { label: 'MetisLegacy', path: '/metislegacy', alias: 'metislegacy', available: true, mounted: true }
+    const vaults = [brian, metislegacy]
     const { result, rerender } = renderHook(
       ({ path }) => useVaultLoader(path, vaults, path),
       { initialProps: { path: '/brian' } },
@@ -414,7 +414,7 @@ describe('useVaultLoader workspaces', () => {
       expect(result.current.views.map((view) => view.filename)).toEqual(['brian.yml'])
     })
 
-    rerender({ path: '/laputa' })
+    rerender({ path: '/metislegacy' })
 
     expect(result.current.views).toEqual([])
     await waitFor(() => {

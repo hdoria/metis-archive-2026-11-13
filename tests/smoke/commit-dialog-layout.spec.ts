@@ -10,8 +10,8 @@ function installLongAuthorScript() {
   const withLongAuthor = (handlers?: Record<string, Handler> | null) => {
     if (handlers) {
       handlers.git_author_identity = () => ({
-        name: 'Tolaria',
-        email: 'very.long.commit.author.address+tolaria-vault@example-organization.com',
+        name: 'Metis',
+        email: 'very.long.commit.author.address+metis-vault@example-organization.com',
         source: 'global',
         warning: null,
       })
@@ -39,7 +39,7 @@ test('commit dialog keeps every control inside its bounds', async ({ page }) => 
   await openCommandPalette(page)
   await executeCommand(page, 'Commit & Push')
   await expect(page.getByRole('heading', { name: 'Commit & Push' })).toBeVisible()
-  await expect(page.getByTestId('commit-author-identity')).toContainText('Tolaria')
+  await expect(page.getByTestId('commit-author-identity')).toContainText('Metis')
 
   const overflowing = await page.locator('[data-slot="dialog-content"]').evaluate((dialog) => {
     const bounds = dialog.getBoundingClientRect()

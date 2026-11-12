@@ -13,12 +13,12 @@ it('persists a validated local vault alias', () => {
   expect(parseManagedGitVaultCatalog(JSON.stringify(catalog)).localVaults?.[0].alias).toBe('local-notes')
 })
 
-it.each(['../private', '/private', 'Local Vaults/../../private', 'file:///private', '.tolaria-mobile-config'])('rejects local directories outside imported copies: %s', (directory) => {
+it.each(['../private', '/private', 'Local Vaults/../../private', 'file:///private', '.metis-mobile-config'])('rejects local directories outside imported copies: %s', (directory) => {
   expect(() => parseManagedGitVaultCatalog(JSON.stringify({ vaults: [], localVaults: [{ ...local, directory }] }))).toThrow('vaultCatalogInvalid')
 })
 
 it('migrates the original imported folder without relocating or deleting it', () => {
-  const catalog = { vaults: [], activeId: null, localVaults: [{ ...local, directory: 'Tolaria Vault' }], activeLocalId: local.id }
+  const catalog = { vaults: [], activeId: null, localVaults: [{ ...local, directory: 'Metis Vault' }], activeLocalId: local.id }
   expect(parseManagedGitVaultCatalog(JSON.stringify(catalog))).toEqual(catalog)
 })
 

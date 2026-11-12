@@ -42,9 +42,9 @@ filters:
     ]).map((candidate) => candidate.id)).toEqual(['active-project', 'draft-project'])
   })
 
-  it('loads legacy desktop saved views from the pre-migration .laputa directory', () => {
+  it('loads legacy desktop saved views from the pre-migration .metislegacy directory', () => {
     const view = parseMobileSavedViewFile({
-      relativePath: '.laputa/views/legacy-focus.yml',
+      relativePath: '.metislegacy/views/legacy-focus.yml',
       content: `name: Legacy Focus
 filters:
   all:

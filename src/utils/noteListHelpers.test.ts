@@ -183,13 +183,13 @@ describe('filterEntries', () => {
 
   it('shows only direct root-level files when selecting the vault root folder', () => {
     const entries = [
-      makeEntry({ path: '/Users/luca/Laputa/root-note.md', title: 'Root Note', fileKind: 'markdown' }),
-      makeEntry({ path: '/Users/luca/Laputa/config.json', title: 'config.json', fileKind: 'text' }),
-      makeEntry({ path: '/Users/luca/Laputa/projects/nested.md', title: 'Nested Note', fileKind: 'markdown' }),
-      makeEntry({ path: '/Users/luca/Laputa/assets/logo.png', title: 'Logo', fileKind: 'binary' }),
+      makeEntry({ path: '/Users/luca/MetisLegacy/root-note.md', title: 'Root Note', fileKind: 'markdown' }),
+      makeEntry({ path: '/Users/luca/MetisLegacy/config.json', title: 'config.json', fileKind: 'text' }),
+      makeEntry({ path: '/Users/luca/MetisLegacy/projects/nested.md', title: 'Nested Note', fileKind: 'markdown' }),
+      makeEntry({ path: '/Users/luca/MetisLegacy/assets/logo.png', title: 'Logo', fileKind: 'binary' }),
     ]
 
-    const result = filterEntries(entries, { kind: 'folder', path: '', rootPath: '/Users/luca/Laputa' })
+    const result = filterEntries(entries, { kind: 'folder', path: '', rootPath: '/Users/luca/MetisLegacy' })
 
     expect(result.map((entry) => entry.title)).toEqual(['Root Note', 'config.json'])
   })
@@ -320,14 +320,14 @@ describe('buildRelationshipGroups', () => {
   it('keeps stale entity views usable when a rapidly switched entry lacks filename metadata', () => {
     const staleEntity = {
       ...makeEntry({
-        path: 'C:\\Users\\luca\\Laputa\\project\\alpha.md',
+        path: 'C:\\Users\\luca\\MetisLegacy\\project\\alpha.md',
         title: 'Alpha project',
         isA: 'Project',
       }),
       filename: undefined,
     } as unknown as ReturnType<typeof makeEntry>
     const backlink = makeEntry({
-      path: '/Users/luca/Laputa/note/backlink.md',
+      path: '/Users/luca/MetisLegacy/note/backlink.md',
       filename: 'backlink.md',
       title: 'Backlink',
       outgoingLinks: ['project/alpha'],

@@ -20,8 +20,8 @@ export type NativeMobileKeyCommandsModule = {
   setModalOpen?: (open: boolean) => Promise<void>
 }
 
-export const mobileLaunchSearchEnvironmentName = 'TOLARIA_MOBILE_SEARCH'
-export const mobileLaunchSearchArgumentName = '--tolaria-mobile-search'
+export const mobileLaunchSearchEnvironmentName = 'METIS_MOBILE_SEARCH'
+export const mobileLaunchSearchArgumentName = '--metis-mobile-search'
 
 export function mobileLaunchSearchFromNativeInputs({
   args,

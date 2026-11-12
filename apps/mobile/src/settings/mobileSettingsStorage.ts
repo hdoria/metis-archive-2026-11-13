@@ -1,6 +1,6 @@
 import { parseMobileSettings, type MobileSettings } from './mobileSettings'
 
-const settingsKey = 'tolaria-mobile-settings'
+const settingsKey = 'metis-mobile-settings'
 
 export async function readMobileSettings() {
   return parseMobileSettings(globalThis.localStorage?.getItem(settingsKey) ?? null)

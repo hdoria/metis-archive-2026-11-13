@@ -73,7 +73,7 @@ describe('streamAiAgent', () => {
     await promise
 
     expect(callbacks.onText).toHaveBeenCalledWith(
-      '[mock-codex turns=2] You asked: "latest" — This note is related to [[Build Laputa App]] and [[Matteo Cellini]].',
+      '[mock-codex turns=2] You asked: "latest" — This note is related to [[Build MetisLegacy App]] and [[Matteo Cellini]].',
     )
     expect(callbacks.onDone).toHaveBeenCalledTimes(1)
     expect(listenMock).not.toHaveBeenCalled()

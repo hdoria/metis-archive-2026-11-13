@@ -1,7 +1,7 @@
 export const mobileMotionFrameProbeEnabled =
 	typeof __DEV__ !== "undefined" &&
 	__DEV__ &&
-	process.env.EXPO_PUBLIC_TOLARIA_MOTION_FRAME_PROBE === "1";
+	process.env.EXPO_PUBLIC_METIS_MOTION_FRAME_PROBE === "1";
 
 export function logMobileMotionEvent(
 	event: string,
@@ -9,7 +9,7 @@ export function logMobileMotionEvent(
 ) {
 	if (!mobileMotionFrameProbeEnabled) return;
 	console.info(
-		`TOLARIA_MOTION_EVENT ${JSON.stringify({ buildId: motionBuildId(), event, at: monotonicNow(), ...details })}`,
+		`METIS_MOTION_EVENT ${JSON.stringify({ buildId: motionBuildId(), event, at: monotonicNow(), ...details })}`,
 	);
 }
 
@@ -52,6 +52,6 @@ function monotonicNow() {
 
 function motionBuildId() {
 	return (
-		process.env.EXPO_PUBLIC_TOLARIA_MOTION_BUILD_ID ?? "unlabeled-dev-build"
+		process.env.EXPO_PUBLIC_METIS_MOTION_BUILD_ID ?? "unlabeled-dev-build"
 	);
 }

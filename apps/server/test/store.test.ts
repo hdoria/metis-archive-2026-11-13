@@ -101,7 +101,7 @@ describe('LocalDiskStore', () => {
   let store: LocalDiskStore
 
   beforeEach(async () => {
-    root = await mkdtemp(join(tmpdir(), 'tolaria-store-test-'))
+    root = await mkdtemp(join(tmpdir(), 'metis-store-test-'))
     store = new LocalDiskStore(root)
   })
 
@@ -228,7 +228,7 @@ describe('R2BlobStore request signing', () => {
   // credentials, date and signed headers (host, x-amz-content-sha256, x-amz-date).
   const signer = new R2BlobStore(
     {
-      bucket: 'tolaria-proto',
+      bucket: 'metis-proto',
       endpoint: 'https://acct.r2.cloudflarestorage.com',
       region: 'auto',
       accessKeyId: 'AKIDEXAMPLE',
@@ -236,13 +236,13 @@ describe('R2BlobStore request signing', () => {
     },
     { now: () => new Date('2026-10-23T12:34:56.789Z') },
   )
-  const base = 'https://acct.r2.cloudflarestorage.com/tolaria-proto'
+  const base = 'https://acct.r2.cloudflarestorage.com/metis-proto'
 
   it.each([
-    ['GET', `${base}/vaults/prototype/vault-index.json`, undefined, '770c3ace401f3b74cd6ba1cc857c003beaf32f1fed8e9ed531ca2bee07ee6293'],
-    ['PUT', `${base}/vaults/prototype/vault-index.json`, '{"version":1}', '7df3fa7292f8e61dc05a591fa7b76d5ff74354bb042e8503e81ec1f4f08c8a32'],
-    ['GET', `${base}/?list-type=2&prefix=vaults%2Fprototype%2F`, undefined, '8afad17ddd4095c5d9d93f08aadc4236c5ac08f77700c01f0b7dd56871ec29fc'],
-    ['DELETE', `${base}/a%20b/it%27s.json`, undefined, 'b562274d2e736bb9b1c01b9c2e7bec057afa5bdbe33188dffa849d0a4c327ba3'],
+    ['GET', `${base}/vaults/prototype/vault-index.json`, undefined, '196597828e0d6550532044ff1e9606ba60252f9dba79058bf0ed8ced87a8cb6f'],
+    ['PUT', `${base}/vaults/prototype/vault-index.json`, '{"version":1}', '1a3ba91654db4588cd5e077c44228efa6e8d3518c38864e83a4403d95f6cd20d'],
+    ['GET', `${base}/?list-type=2&prefix=vaults%2Fprototype%2F`, undefined, '19ed6a36bcbed01d58c2e6a64fe179c496d1231ebb5491195747427d7b78296c'],
+    ['DELETE', `${base}/a%20b/it%27s.json`, undefined, '353bc70843de812544dafee5421fd8616cba02ce4f07211f55b2cf1f4498b225'],
   ])('signs %s %s as SigV4 does', (method, url, body, signature) => {
     const headers = signer.signRequest(method as StoreMethod, new URL(url), body === undefined ? undefined : text(body))
     expect(headers['X-Amz-Date']).toBe('20261023T123456Z')

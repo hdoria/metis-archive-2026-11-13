@@ -106,7 +106,7 @@ mod tests {
         let claude = std::fs::read_to_string(vault_path.join("CLAUDE.md")).unwrap();
 
         assert!(agents.contains("Use the first H1 as the note title."));
-        assert!(agents.contains("Tolaria reads notes recursively from all folders"));
+        assert!(agents.contains("Metis reads notes recursively from all folders"));
         assert!(agents.contains("views/*.yml"));
         assert!(claude.starts_with("---\ntype: Note\n_organized: true\n---"));
         assert!(claude.contains("@AGENTS.md"));
@@ -243,13 +243,13 @@ mod tests {
 
         let name = create_vault_folder(
             dir.path().into(),
-            "Laputa".into(),
+            "MetisLegacy".into(),
             Some(std::path::PathBuf::from("Projects")),
         )
         .expect("expected nested folder to be created");
 
-        assert_eq!(name, "Laputa");
-        assert!(dir.path().join("Projects").join("Laputa").is_dir());
+        assert_eq!(name, "MetisLegacy");
+        assert!(dir.path().join("Projects").join("MetisLegacy").is_dir());
     }
 
     #[test]
@@ -258,7 +258,7 @@ mod tests {
 
         let err = create_vault_folder(
             dir.path().into(),
-            "Laputa".into(),
+            "MetisLegacy".into(),
             Some(std::path::PathBuf::from("../escape")),
         )
         .expect_err("expected escaping parent path to be rejected");
@@ -299,7 +299,7 @@ mod tests {
 
         let cache_dir = tempfile::TempDir::new().unwrap();
         std::env::set_var(
-            "LAPUTA_CACHE_DIR",
+            "METIS_CACHE_DIR",
             cache_dir.path().to_string_lossy().as_ref(),
         );
 

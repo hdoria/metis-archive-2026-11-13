@@ -48,18 +48,18 @@ function applyZoomToDocument(level: number): void {
 	if (isDesktopTauri()) {
 		document.documentElement.style.removeProperty("zoom");
 		document.documentElement.style.setProperty(
-			"--tolaria-overlay-zoom-factor",
+			"--metis-overlay-zoom-factor",
 			"1",
 		);
 		document.documentElement.style.setProperty(
-			"--tolaria-overlay-zoom-inverse",
+			"--metis-overlay-zoom-inverse",
 			"1",
 		);
 		pendingNativeZoom = pendingNativeZoom
 			.catch(() => undefined)
 			.then(() => getCurrentWebview().setZoom(level / DEFAULT_ZOOM))
 			.then(() => {
-				window.dispatchEvent(new Event("laputa-zoom-change"));
+				window.dispatchEvent(new Event("metislegacy-zoom-change"));
 			})
 			.catch((error: unknown) => {
 				console.error("Unable to apply native webview zoom", error);
@@ -69,14 +69,14 @@ function applyZoomToDocument(level: number): void {
 
 	document.documentElement.style.setProperty("zoom", `${level}%`);
 	document.documentElement.style.setProperty(
-		"--tolaria-overlay-zoom-factor",
+		"--metis-overlay-zoom-factor",
 		String(level / DEFAULT_ZOOM),
 	);
 	document.documentElement.style.setProperty(
-		"--tolaria-overlay-zoom-inverse",
+		"--metis-overlay-zoom-inverse",
 		String(DEFAULT_ZOOM / level),
 	);
-	window.dispatchEvent(new Event("laputa-zoom-change"));
+	window.dispatchEvent(new Event("metislegacy-zoom-change"));
 }
 
 function persistZoom(level: number): void {

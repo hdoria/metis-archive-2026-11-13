@@ -6,17 +6,10 @@ import {
 } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
-	CIRCLECI_HOME_URL,
-	CODACY_HOME_URL,
-	CODESCENE_HOME_URL,
-	REFACTORING_HOME_URL,
-	TOLARIA_DEVELOPMENT_ARTICLE_URL,
-	TOLARIA_DISCORD_INVITE_URL,
-	TOLARIA_GITHUB_CONTRIBUTING_URL,
-	TOLARIA_GITHUB_ISSUES_URL,
-	TOLARIA_GITHUB_PULL_REQUESTS_URL,
-	TOLARIA_PRODUCT_BOARD_URL,
-	UNBLOCKED_HOME_URL,
+	METIS_GITHUB_CONTRIBUTING_URL,
+	METIS_GITHUB_ISSUES_URL,
+	METIS_GITHUB_PULL_REQUESTS_URL,
+	METIS_PRODUCT_BOARD_URL,
 } from "../constants/feedback";
 import {
 	APP_COMMAND_EVENT_NAME,
@@ -49,61 +42,10 @@ function render(ui: Parameters<typeof rtlRender>[0]) {
 }
 
 const CONTRIBUTION_BUTTON_ACTIONS = [
-	{
-		buttonLabel: "Check out Refactoring",
-		action: "newsletter_refactoring",
-		url: REFACTORING_HOME_URL,
-	},
-	{
-		buttonLabel: "Open Codacy",
-		action: "sponsor_codacy",
-		url: CODACY_HOME_URL,
-	},
-	{
-		buttonLabel: "Open CodeScene",
-		action: "sponsor_codescene",
-		url: CODESCENE_HOME_URL,
-	},
-	{
-		buttonLabel: "Open CircleCI",
-		action: "sponsor_circleci",
-		url: CIRCLECI_HOME_URL,
-	},
-	{
-		buttonLabel: "Open Unblocked",
-		action: "sponsor_unblocked",
-		url: UNBLOCKED_HOME_URL,
-	},
-	{
-		buttonLabel: "how I develop Tolaria",
-		action: "sponsors_development_article",
-		url: TOLARIA_DEVELOPMENT_ARTICLE_URL,
-	},
-	{
-		buttonLabel: "Open Product Board",
-		action: "feature_requests",
-		url: TOLARIA_PRODUCT_BOARD_URL,
-	},
-	{
-		buttonLabel: "Join Discord",
-		action: "discord",
-		url: TOLARIA_DISCORD_INVITE_URL,
-	},
-	{
-		buttonLabel: "Open PRs",
-		action: "pull_requests",
-		url: TOLARIA_GITHUB_PULL_REQUESTS_URL,
-	},
-	{
-		buttonLabel: "Open Guide",
-		action: "contributing_guide",
-		url: TOLARIA_GITHUB_CONTRIBUTING_URL,
-	},
-	{
-		buttonLabel: "Open Issues",
-		action: "issues",
-		url: TOLARIA_GITHUB_ISSUES_URL,
-	},
+ { buttonLabel: "Open Product Board", action: "feature_requests", url: METIS_PRODUCT_BOARD_URL },
+ { buttonLabel: "Open PRs", action: "pull_requests", url: METIS_GITHUB_PULL_REQUESTS_URL },
+ { buttonLabel: "Open Guide", action: "contributing_guide", url: METIS_GITHUB_CONTRIBUTING_URL },
+ { buttonLabel: "Open Issues", action: "issues", url: METIS_GITHUB_ISSUES_URL },
 ] as const;
 
 function clickContributionActions() {
@@ -142,79 +84,15 @@ describe("FeedbackDialog", () => {
 		});
 	});
 
-	it("renders the contribution paths when open", async () => {
-		render(
-			<FeedbackDialog
-				open={true}
-				onClose={vi.fn()}
-				buildNumber="b281"
-				releaseChannel="alpha"
-			/>,
-		);
-		expect(screen.getByTestId("feedback-dialog")).toBeInTheDocument();
-		expect(screen.getByText("Contribute to Tolaria")).toBeInTheDocument();
-		expect(
-			screen.getByText(
-				"Pick the path that fits what you want to do! Any type of help is appreciated",
-			),
-		).toBeInTheDocument();
-		expect(screen.getByText("Join Refactoring")).toBeInTheDocument();
-		expect(screen.getByText("Sponsors")).toBeInTheDocument();
-		expect(screen.getByText("Feature requests")).toBeInTheDocument();
-		expect(screen.getByText("Join the Tolaria Discord")).toBeInTheDocument();
-		expect(screen.getByText("Contribute code")).toBeInTheDocument();
-		expect(screen.getByText("Report a bug")).toBeInTheDocument();
-		expect(
-			screen.getByText(/Refactoring is my newsletter and community/i),
-		).toBeInTheDocument();
-		expect(
-			screen.getByText(/Tolaria is supported by a panel of tools/i),
-		).toBeInTheDocument();
-		expect(
-			screen.getByRole("button", { name: "how I develop Tolaria" }),
-		).toBeInTheDocument();
-		expect(
-			screen.getByRole("button", { name: "Open Codacy" }),
-		).toBeInTheDocument();
-		expect(
-			screen.getByRole("button", { name: "Open CodeScene" }),
-		).toBeInTheDocument();
-		expect(
-			screen.getByRole("button", { name: "Open CircleCI" }),
-		).toBeInTheDocument();
-		expect(
-			screen.getByRole("button", { name: "Open Unblocked" }),
-		).toBeInTheDocument();
-		fireEvent.focus(screen.getByRole("button", { name: "Open Codacy" }));
-		expect(
-			await screen.findAllByText(
-				"I use Codacy to ensure code security and quality",
-			),
-		).not.toHaveLength(0);
-		expect(
-			screen.getByText(
-				"Search on the board first, upvote existing ideas, and create new posts when genuinely new!",
-			),
-		).toBeInTheDocument();
-		expect(
-			screen.getByText(
-				"Chat with the team and other users, get help, and try alpha and mobile builds.",
-			),
-		).toBeInTheDocument();
-		expect(
-			screen.getByText(
-				"Small, focused PRs are welcome. Check the board first so you build the right things!",
-			),
-		).toBeInTheDocument();
-		expect(
-			screen.getByText(
-				"Explain how to reproduce, what you expected, vs what happened. Attach the diagnostics please!",
-			),
-		).toBeInTheDocument();
-		expect(
-			screen.queryByText(/Sanitized and optional/i),
-		).not.toBeInTheDocument();
-	});
+	it("renders only the fork's contribution paths", () => {
+    render(<FeedbackDialog open onClose={vi.fn()} buildNumber="b281" releaseChannel="alpha" />);
+    expect(screen.getByText("Contribute to Métis")).toBeInTheDocument();
+    expect(screen.getByText("Feature requests")).toBeInTheDocument();
+    expect(screen.getByText("Contribute code")).toBeInTheDocument();
+    expect(screen.getByText("Report a bug")).toBeInTheDocument();
+    expect(screen.queryByText("Sponsors")).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /newsletter/i })).not.toBeInTheDocument();
+  });
 
 	it("localizes the contribution dialog", () => {
 		render(
@@ -227,7 +105,7 @@ describe("FeedbackDialog", () => {
 			/>,
 		);
 
-		expect(screen.getByText("参与 Tolaria 贡献")).toBeInTheDocument();
+		expect(screen.getByText("参与 Métis 贡献")).toBeInTheDocument();
 		expect(screen.getByText("功能请求")).toBeInTheDocument();
 		expect(
 			screen.getByRole("button", { name: "打开产品看板" }),
@@ -235,7 +113,7 @@ describe("FeedbackDialog", () => {
 		expect(
 			screen.getByRole("button", { name: "复制诊断" }),
 		).toBeInTheDocument();
-		expect(screen.queryByText("Contribute to Tolaria")).not.toBeInTheDocument();
+		expect(screen.queryByText("Contribute to Métis")).not.toBeInTheDocument();
 		expect(screen.queryByText("Feature requests")).not.toBeInTheDocument();
 	});
 
@@ -248,7 +126,7 @@ describe("FeedbackDialog", () => {
 				releaseChannel={null}
 			/>,
 		);
-		const cta = screen.getByRole("button", { name: "Check out Refactoring" });
+		const cta = screen.getByRole("button", { name: "Open Product Board" });
 		await waitFor(() => expect(cta).toHaveFocus());
 	});
 
@@ -299,7 +177,7 @@ describe("FeedbackDialog", () => {
 		});
 		await waitFor(() => expect(writeText).toHaveBeenCalledTimes(1));
 		expect(writeText.mock.calls[0]?.[0]).toContain(
-			"Tolaria sanitized diagnostics",
+			"Métis sanitized diagnostics",
 		);
 		expect(writeText.mock.calls[0]?.[0]).toContain("Build: b281");
 		expect(writeText.mock.calls[0]?.[0]).toContain("Release channel: alpha");
@@ -322,7 +200,7 @@ describe("FeedbackDialog", () => {
 		expect(
 			await screen.findByText(/couldn’t open Product Board automatically/i),
 		).toBeInTheDocument();
-		expect(screen.getByText(TOLARIA_PRODUCT_BOARD_URL)).toBeInTheDocument();
+		expect(screen.getByText(METIS_PRODUCT_BOARD_URL)).toBeInTheDocument();
 	});
 
 	it("closes with Escape and the top-right Close control", () => {

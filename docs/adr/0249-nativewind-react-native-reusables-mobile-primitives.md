@@ -6,17 +6,17 @@ Accepted
 
 ## Context
 
-The mobile UI foundation needs to stay close to Tolaria's desktop shadcn/ui design language while still using native React Native surfaces. The first fixture-driven mock used handwritten `StyleSheet` primitives, which was useful for establishing state coverage but risked drifting from the desktop component vocabulary and required too many one-off styling decisions.
+The mobile UI foundation needs to stay close to Metis's desktop shadcn/ui design language while still using native React Native surfaces. The first fixture-driven mock used handwritten `StyleSheet` primitives, which was useful for establishing state coverage but risked drifting from the desktop component vocabulary and required too many one-off styling decisions.
 
-Tolaria already treats desktop shadcn/ui components as local application-owned primitives under `src/components/ui`. The mobile app needs the same ownership model: reusable primitives can be imported from an external registry, but Tolaria should own the local files and compose product-specific surfaces from them.
+Metis already treats desktop shadcn/ui components as local application-owned primitives under `src/components/ui`. The mobile app needs the same ownership model: reusable primitives can be imported from an external registry, but Metis should own the local files and compose product-specific surfaces from them.
 
 ## Decision
 
 Adopt Nativewind and React Native Reusables for mobile UI primitives.
 
-The mobile app will keep RNR-derived primitive components under `apps/mobile/src/components/ui`. Screens and Tolaria-specific helpers should depend on local Tolaria components, not on generated registry code scattered through feature files. Product-specific surfaces such as note rows, folder trees, editor chrome, properties panels, and Bear-inspired phone navigation remain Tolaria compositions that use the shared primitives underneath.
+The mobile app will keep RNR-derived primitive components under `apps/mobile/src/components/ui`. Screens and Metis-specific helpers should depend on local Metis components, not on generated registry code scattered through feature files. Product-specific surfaces such as note rows, folder trees, editor chrome, properties panels, and Bear-inspired phone navigation remain Metis compositions that use the shared primitives underneath.
 
-Use Nativewind for the shadcn-style class and variant model. Keep Tolaria semantic colors in the mobile Tailwind config so RNR defaults map to Tolaria's visual language instead of unthemed Tailwind defaults.
+Use Nativewind for the shadcn-style class and variant model. Keep Metis semantic colors in the mobile Tailwind config so RNR defaults map to Metis's visual language instead of unthemed Tailwind defaults.
 
 ## Consequences
 

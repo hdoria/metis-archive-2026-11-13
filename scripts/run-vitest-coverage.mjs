@@ -94,7 +94,7 @@ function coverageParallelismArgs(retryMode) {
 
 async function runCoverageAttempt(retryMode) {
 	const runCoverageDir = await mkdtemp(
-		resolve(os.tmpdir(), "tolaria-vitest-coverage-"),
+		resolve(os.tmpdir(), "metis-vitest-coverage-"),
 	);
 	if (!skipClearCache) {
 		const cacheExitCode = await clearVitestCache();

@@ -9,13 +9,13 @@ TOL-315 commit `fe9b657c` (Nov 4) introduced dynamic Pressable style functions i
 ## Fix Applied
 Reverted to static style references in both components.
 
-**Branch:** `cursor/tol-329-mobile-spacing-fix-96d7`  
+**Branch:** `cursor/tol-329-mobile-spacing-fix-96d7`
 **Tested SHA:** `31e35010`
 
 ## Linux Verification — All Gates Passed ✓
 
 ```bash
-cd /agent/repos/tolaria
+cd /agent/repos/metis
 git checkout cursor/tol-329-mobile-spacing-fix-96d7  # SHA: 31e35010
 pnpm install --frozen-lockfile
 
@@ -37,11 +37,11 @@ Duration  53.97s (transform 6.29s, setup 0ms, import 76.02s, tests 26.75s, envir
 ## Native QA Status — Pre-Merge Blocked by Architecture
 
 ### Mac Worker Setup (Confirmed)
-- Worktree: `/Volumes/Jupiter/Workspace/tolaria-worktrees/tol329-native-qa @ 777277f4`
+- Worktree: `/Volumes/Jupiter/Workspace/metis-worktrees/tol329-native-qa @ 777277f4`
 - Metro: PID 48774, port 8083, localhost listening
-- Binary: `com.tolaria.mobile.dev 0.2.0(1)`
-- URL schemes: `tolaria://`, `com.tolaria.mobile.dev://` registered
-- Correct dev-client URL: `tolaria://expo-development-client/?url=http%3A%2F%2Flocalhost%3A8083%2F...`
+- Binary: `com.metis.mobile.dev 0.2.0(1)`
+- URL schemes: `metis://`, `com.metis.mobile.dev://` registered
+- Correct dev-client URL: `metis://expo-development-client/?url=http%3A%2F%2Flocalhost%3A8083%2F...`
 
 ### Attempted Result
 Launched dev-client URL with `source=fixture&layoutProbe=1&phoneState=list` params → `MobileWorkspaceLoadFailure` error UI displayed.
@@ -72,7 +72,7 @@ const recovery = workspaceRecovery(manager)  // line 19: derives recovery state
 5. `MobileUiLab` reads `source=fixture` to use synthetic data, but it's inside provider wrapper
 6. Provider blocks mounting based on native vault manager state regardless of `source=fixture` param
 
-**Why XCUITest works:** `apps/mobile/native-ui-tests/*.swift` (100+ files) use `--tolaria-mobile-search` launch argument in controlled fresh-install test lifecycle with clean simulator state and no persisted vault catalog errors.
+**Why XCUITest works:** `apps/mobile/native-ui-tests/*.swift` (100+ files) use `--metis-mobile-search` launch argument in controlled fresh-install test lifecycle with clean simulator state and no persisted vault catalog errors.
 
 ## Options for Pre-Merge Native Verification
 
@@ -91,16 +91,16 @@ const recovery = workspaceRecovery(manager)  // line 19: derives recovery state
 
 ## Current Status
 
-**Runtime fix:** Complete (2 components, static style revert)  
-**Linux gates:** ✓ All passed (exit code 0: typecheck, lint, 451 test files/2741 tests)  
-**Native QA:** Blocked pre-merge by `MobileVaultProvider` architecture  
-**Tested SHA:** `31e35010`  
-**PR:** https://github.com/refactoringhq/tolaria/pull/1320  
+**Runtime fix:** Complete (2 components, static style revert)
+**Linux gates:** ✓ All passed (exit code 0: typecheck, lint, 451 test files/2741 tests)
+**Native QA:** Blocked pre-merge by `MobileVaultProvider` architecture
+**Tested SHA:** `31e35010`
+**PR:** https://github.com/hdoria/metis/pull/1320
 **Linear:** TOL-329 In Progress
 
 **No spacing verification from structural tests.** Native spacing can only be verified through:
 1. Option 1 test harness (if approved) on Mac worker's isolated setup
-2. Option 2 post-merge on installed Alpha channel app  
+2. Option 2 post-merge on installed Alpha channel app
 3. Option 3 post-merge production verification
 
 **Awaiting parent decision on verification approach.**

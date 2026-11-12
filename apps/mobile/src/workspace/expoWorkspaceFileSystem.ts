@@ -294,7 +294,7 @@ function vaultConfigFile(module: ExpoFileSystemModule, rootUri: RootUri): File {
 	assertGitCheckoutComplete(module, rootUri);
 	const directory = new module.Directory(
 		module.Paths.document,
-		".tolaria-mobile-config",
+		".metis-mobile-config",
 	);
 	recoverNativeWorkspaceText(directory.uri);
 	return new module.File(

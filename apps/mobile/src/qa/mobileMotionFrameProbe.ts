@@ -73,6 +73,6 @@ export function logMobileMotionFrame(
 	value: number,
 ) {
 	console.info(
-		`TOLARIA_MOTION_FRAME ${JSON.stringify({ buildId: process.env.EXPO_PUBLIC_TOLARIA_MOTION_BUILD_ID ?? "unlabeled-dev-build", deltaMs, id, timestampMs, value })}`,
+		`METIS_MOTION_FRAME ${JSON.stringify({ buildId: process.env.EXPO_PUBLIC_METIS_MOTION_BUILD_ID ?? "unlabeled-dev-build", deltaMs, id, timestampMs, value })}`,
 	);
 }

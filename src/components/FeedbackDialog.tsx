@@ -1,17 +1,13 @@
-import { ArrowUpRight, Check, Copy, Handshake, Megaphone } from '@phosphor-icons/react'
+import { ArrowUpRight, Check, Copy, Megaphone } from '@phosphor-icons/react'
 import { type ReactNode, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import {
   BUG_REPORT_PATH,
   CONTRIBUTION_ANALYTICS_EVENT,
   CONTRIBUTION_ANALYTICS_SURFACE,
   CONTRIBUTION_PATHS,
-  NEWSLETTER_PATH,
-  SPONSOR_DEVELOPMENT_ARTICLE_LINK,
-  SPONSOR_LOGOS,
   type ContributionAnalyticsAction,
   type ContributionIcon,
   type ContributionTone,
@@ -179,78 +175,6 @@ function ContributionCard(options: ContributionCardProps) {
   )
 }
 
-function SponsorLogoCard({
-  className,
-  onOpenLink,
-  t,
-}: {
-  className?: string
-  onOpenLink: (label: string, url: string) => void
-  t: Translate
-}) {
-  return (
-    <Card className={cn('gap-4 border-border/70 py-4 shadow-none', className)}>
-      <CardHeader className="gap-3 px-4">
-        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-            <span className={cn('rounded-md p-2', CONTRIBUTION_TONE_CLASSES.blue)}>
-              <Handshake size={16} />
-            </span>
-            <CardTitle className="text-sm font-semibold">{t('feedback.sponsors.title')}</CardTitle>
-          </div>
-          <div className="grid w-full grid-cols-2 gap-2 sm:grid-cols-4 lg:w-auto lg:flex lg:justify-end">
-            {SPONSOR_LOGOS.map((sponsor) => (
-              <Tooltip key={sponsor.name}>
-                <TooltipTrigger asChild>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    className="h-11 bg-transparent px-1.5 shadow-none hover:bg-transparent hover:opacity-80 lg:w-32"
-                    aria-label={t('feedback.sponsors.logoLinkLabel', {
-                      sponsor: sponsor.name,
-                    })}
-                    onClick={() =>
-                      openTrackedContributionLink(sponsor.analyticsAction, sponsor.name, sponsor.url, onOpenLink)
-                    }
-                  >
-                    <img className="max-h-6 max-w-[7.25rem] object-contain dark:hidden" src={sponsor.darkLogo} alt="" />
-                    <img
-                      className="hidden max-h-6 max-w-[7.25rem] object-contain dark:block"
-                      src={sponsor.lightLogo}
-                      alt=""
-                      aria-hidden="true"
-                    />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>{t(sponsor.tooltipKey)}</TooltipContent>
-              </Tooltip>
-            ))}
-          </div>
-        </div>
-        <CardDescription className="text-sm leading-6 text-muted-foreground">
-          {t('feedback.sponsors.description')} {t('feedback.sponsors.developmentSentencePrefix')}{' '}
-          <Button
-            type="button"
-            variant="link"
-            className="h-auto p-0 align-baseline text-sm leading-6 text-[var(--accent-blue)]"
-            onClick={() =>
-              openTrackedContributionLink(
-              SPONSOR_DEVELOPMENT_ARTICLE_LINK.analyticsAction,
-              t(SPONSOR_DEVELOPMENT_ARTICLE_LINK.labelKey),
-              SPONSOR_DEVELOPMENT_ARTICLE_LINK.url,
-              onOpenLink,
-              )
-            }
-          >
-            {t(SPONSOR_DEVELOPMENT_ARTICLE_LINK.textKey)}
-          </Button>
-          {t('feedback.sponsors.developmentSentenceSuffix')}
-        </CardDescription>
-      </CardHeader>
-    </Card>
-  )
-}
-
 type Translate = ReturnType<typeof createTranslator>
 
 function LinkFallbackBanner({ linkFallback, t }: { linkFallback: LinkFallback | null; t: Translate }) {
@@ -408,31 +332,13 @@ function ContributionGrid({
 }) {
   return (
     <div className="grid gap-4 sm:grid-cols-2">
-      <ContributionCard
-        className="sm:col-span-2"
-        title={t(NEWSLETTER_PATH.titleKey)}
-        description={t(NEWSLETTER_PATH.descriptionKey)}
-        ctaLabel={t(NEWSLETTER_PATH.ctaLabelKey)}
-        icon={NEWSLETTER_PATH.icon}
-        tone={NEWSLETTER_PATH.tone}
-        autoFocus={true}
-        inlineAction={true}
-        onAction={() =>
-          openTrackedContributionLink(
-          NEWSLETTER_PATH.analyticsAction,
-          t(NEWSLETTER_PATH.labelKey),
-          NEWSLETTER_PATH.url,
-          onOpenLink,
-          )
-        }
-      />
-      <SponsorLogoCard className="sm:col-span-2" onOpenLink={onOpenLink} t={t} />
-      {CONTRIBUTION_PATHS.map((path) => {
+      {CONTRIBUTION_PATHS.map((path, index) => {
         const secondaryLink = path.secondaryLink
 
         return (
           <ContributionCard
             key={path.titleKey}
+            autoFocus={index === 0}
             title={t(path.titleKey)}
             description={t(path.descriptionKey)}
             ctaLabel={t(path.ctaLabelKey)}

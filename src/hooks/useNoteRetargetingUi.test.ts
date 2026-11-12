@@ -4,7 +4,7 @@ import type { FolderNode, SidebarSelection, VaultEntry } from '../types'
 import { makeEntry } from '../test-utils/noteListTestUtils'
 import { useNoteRetargetingUi } from './useNoteRetargetingUi'
 
-const vaultPath = '/Users/luca/Laputa'
+const vaultPath = '/Users/luca/MetisLegacy'
 const activeEntry = makeEntry({
   path: `${vaultPath}/projects/alpha.md`,
   filename: 'alpha.md',
@@ -46,13 +46,13 @@ describe('useNoteRetargetingUi', () => {
       expect.objectContaining({
         current: false,
         id: '',
-        label: 'Laputa',
+        label: 'MetisLegacy',
       }),
     ])
   })
 
   it('marks the current Windows-style folder with the same normalization used by drops', () => {
-    const windowsVaultPath = 'C:\\Users\\luca\\Laputa'
+    const windowsVaultPath = 'C:\\Users\\luca\\MetisLegacy'
     const windowsEntry = makeEntry({
       path: `${windowsVaultPath}\\projects\\alpha.md`,
       filename: 'alpha.md',
@@ -75,7 +75,7 @@ describe('useNoteRetargetingUi', () => {
       expect.objectContaining({
         current: false,
         id: '',
-        label: 'Laputa',
+        label: 'MetisLegacy',
       }),
       expect.objectContaining({
         current: true,

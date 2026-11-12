@@ -57,17 +57,17 @@ function renderBanner(
 }
 
 describe("UpdateBanner", () => {
-	it("shows the community banner when idle", () => {
+	it("shows no banner when idle", () => {
 		const status: UpdateStatus = { state: "idle" };
 		renderBanner(status);
-		expect(screen.getByTestId("community-banner")).toBeInTheDocument();
+		expect(screen.queryByTestId("community-banner")).not.toBeInTheDocument();
 	});
 
-	it("keeps updater errors in the bottom stack with the community banner", () => {
+	it("keeps updater errors in the bottom stack without promotion", () => {
 		renderBanner({ state: "error", kind: "check" });
 		const stack = screen.getByTestId("bottom-banner-stack");
 		expect(stack).toContainElement(screen.getByTestId("update-banner"));
-		expect(stack).toContainElement(screen.getByTestId("community-banner"));
+		expect(screen.queryByTestId("community-banner")).not.toBeInTheDocument();
 		expect(stack).toHaveTextContent("Could not check for updates");
 	});
 
@@ -104,7 +104,7 @@ describe("UpdateBanner", () => {
 		const stack = screen.getByTestId("bottom-banner-stack");
 		const banners = Array.from(stack.children);
 		expect(banners.map((banner) => banner.getAttribute("data-testid"))).toEqual(
-			["update-banner", "community-banner"],
+			["update-banner"],
 		);
 		expect(stack).toHaveTextContent("Checking for updates");
 	});
@@ -119,7 +119,7 @@ describe("UpdateBanner", () => {
 		);
 
 		expect(screen.getByTestId("update-banner")).toBeTruthy();
-		expect(screen.getByText(/Tolaria Alpha 2026\.4\.16\.3/)).toBeTruthy();
+		expect(screen.getByText(/Métis Alpha 2026\.4\.16\.3/)).toBeTruthy();
 		expect(screen.getByText(/is available/)).toBeTruthy();
 		expect(screen.getByTestId("update-now-btn")).toBeTruthy();
 		expect(screen.getByTestId("update-release-notes")).toBeTruthy();
@@ -136,7 +136,7 @@ describe("UpdateBanner", () => {
 			"zh-CN",
 		);
 
-		expect(screen.getByText(/Tolaria Alpha 2026\.4\.16\.3/)).toBeTruthy();
+		expect(screen.getByText(/Métis Alpha 2026\.4\.16\.3/)).toBeTruthy();
 		expect(screen.getByText(/可用/)).toBeTruthy();
 		expect(screen.getByTestId("update-release-notes")).toHaveTextContent(
 			"发行说明",
@@ -173,7 +173,7 @@ describe("UpdateBanner", () => {
 		renderBanner(makeStatus("downloading"));
 
 		expect(
-			screen.getByText(/Downloading Tolaria Alpha 2026\.4\.16\.3/),
+			screen.getByText(/Downloading Métis Alpha 2026\.4\.16\.3/),
 		).toBeTruthy();
 		expect(screen.getByText("65%")).toBeTruthy();
 
@@ -198,7 +198,7 @@ describe("UpdateBanner", () => {
 	it("shows restart button when update is ready", () => {
 		renderBanner(makeStatus("ready"));
 
-		expect(screen.getByText(/Tolaria 2026\.4\.16/)).toBeTruthy();
+		expect(screen.getByText(/Métis 2026\.4\.16/)).toBeTruthy();
 		expect(screen.getByText(/restart to apply/)).toBeTruthy();
 		expect(screen.getByTestId("update-restart-btn")).toBeTruthy();
 	});

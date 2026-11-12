@@ -266,10 +266,10 @@ function optionalPixelMatches({ current, expected }: OptionalPixelComparison): b
 }
 
 function isAlreadyPatched(element: HTMLElement, snapshot: SelectionPatchSnapshot, options: OutlinePatchOptions): boolean {
-  const previousPatchedWidth = previousPatchedPixel({ element, key: 'tolariaSelectionBaseWidth', offset: options.expansion })
-  const previousPatchedHeight = previousPatchedPixel({ element, key: 'tolariaSelectionBaseHeight', offset: options.expansion })
-  const previousPatchedLeft = previousPatchedPixel({ element, key: 'tolariaSelectionBaseLeft', offset: options.offset })
-  const previousPatchedTop = previousPatchedPixel({ element, key: 'tolariaSelectionBaseTop', offset: options.offset })
+  const previousPatchedWidth = previousPatchedPixel({ element, key: 'metisSelectionBaseWidth', offset: options.expansion })
+  const previousPatchedHeight = previousPatchedPixel({ element, key: 'metisSelectionBaseHeight', offset: options.expansion })
+  const previousPatchedLeft = previousPatchedPixel({ element, key: 'metisSelectionBaseLeft', offset: options.offset })
+  const previousPatchedTop = previousPatchedPixel({ element, key: 'metisSelectionBaseTop', offset: options.offset })
   const requiredMatches = [
     requiredPixelMatches({ current: snapshot.width, expected: previousPatchedWidth }),
     requiredPixelMatches({ current: snapshot.height, expected: previousPatchedHeight }),
@@ -287,18 +287,18 @@ function patchCellOutlineGeometry(element: HTMLElement, options: OutlinePatchOpt
   const snapshot = selectionPatchSnapshot(element)
   if (!snapshot || isAlreadyPatched(element, snapshot, options)) return
 
-  element.dataset.tolariaSelectionBaseWidth = `${snapshot.width}px`
-  element.dataset.tolariaSelectionBaseHeight = `${snapshot.height}px`
+  element.dataset.metisSelectionBaseWidth = `${snapshot.width}px`
+  element.dataset.metisSelectionBaseHeight = `${snapshot.height}px`
   element.style.boxSizing = 'border-box'
   element.style.width = `${snapshot.width + options.expansion}px`
   element.style.height = `${snapshot.height + options.expansion}px`
 
   if (snapshot.left !== null) {
-    element.dataset.tolariaSelectionBaseLeft = `${snapshot.left}px`
+    element.dataset.metisSelectionBaseLeft = `${snapshot.left}px`
     element.style.left = `${snapshot.left + options.offset}px`
   }
   if (snapshot.top !== null) {
-    element.dataset.tolariaSelectionBaseTop = `${snapshot.top}px`
+    element.dataset.metisSelectionBaseTop = `${snapshot.top}px`
     element.style.top = `${snapshot.top + options.offset}px`
   }
 }
@@ -373,7 +373,7 @@ function hideIronCalcFillHandle(element: HTMLElement): void {
 }
 
 function markSelectionChrome(element: HTMLElement): void {
-  if (element.dataset.tolariaSelectionChrome !== 'true') element.dataset.tolariaSelectionChrome = 'true'
+  if (element.dataset.metisSelectionChrome !== 'true') element.dataset.metisSelectionChrome = 'true'
 }
 
 function replaceSelectionColor(element: HTMLElement, style: CSSStyleDeclaration): void {

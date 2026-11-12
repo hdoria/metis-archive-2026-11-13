@@ -61,7 +61,7 @@ function clickLink(href: string) {
 describe("mobile WYSIWYG link taps", () => {
 	it.each([
 		["external URL", "https://example.com"],
-		["wikilink", "tolaria://wikilink/Note"],
+		["wikilink", "metis://wikilink/Note"],
 	])("routes an unfocused %s tap", (_label, href) => {
 		const events = tapHandlers();
 		const { postMessage, preventDefault, target } = clickLink(href);
@@ -78,7 +78,7 @@ describe("mobile WYSIWYG link taps", () => {
 	it("leaves a focused tap to ProseMirror for cursor placement", () => {
 		const events = tapHandlers();
 		const { postMessage, preventDefault, target } = clickLink(
-			"tolaria://wikilink/Note",
+			"metis://wikilink/Note",
 		);
 		const view = { hasFocus: () => true };
 

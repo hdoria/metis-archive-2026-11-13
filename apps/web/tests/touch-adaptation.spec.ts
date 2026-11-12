@@ -9,7 +9,7 @@ import { expect, type Locator, type Page, type TestInfo, test } from "@playwrigh
 const PHONE_PROJECTS = ["iphone-15"];
 const TABLET_PROJECTS = ["ipad", "ipad-landscape"];
 const DESKTOP_PROJECTS = ["chromium", "webkit"];
-const NOTE_TITLE = "Build Laputa App";
+const NOTE_TITLE = "Build MetisLegacy App";
 const TYPE_NAME = "Projects";
 const MIN_TARGET_PX = 44;
 /** Longer than the 500 ms the app waits for: what a person holding a finger down sends. */

@@ -6,7 +6,7 @@ describe('NativeWind semantic palette', () => {
     expect(nativewindPalettes.light['--background']).toBe('0 0% 100%')
     expect(nativewindPalettes.dark['--background']).toBe(hexHslComponents('#1F1E1B'))
     expect(nativewindPalettes.dark['--foreground']).toBe(hexHslComponents('#E6E1D8'))
-    expect(nativewindPalettes.dark['--primary']).toBe(hexHslComponents('#78A4FF'))
+    expect(nativewindPalettes.dark['--primary']).toBe(hexHslComponents('#79B9A5'))
     expect(nativewindPalettes.dark['--radius']).toBe('0.5rem')
   })
 

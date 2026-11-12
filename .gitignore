@@ -68,7 +68,7 @@ CODE-HEALTH-REPORT.md
 .claude-pid
 
 # Generated vault index files (qmd/search artifacts)
-.laputa-index.json
+.metislegacy-index.json
 
 # Tauri signing keys (never commit private keys)
 *.key
@@ -117,3 +117,6 @@ videos/.remotion/
 
 # Hidden source maps of the web build, uploaded to Sentry by the deploy (TOL-232)
 apps/web/sourcemaps/
+
+# Native platform projects are generated with each maintainer's own signing setup.
+src-tauri/gen/

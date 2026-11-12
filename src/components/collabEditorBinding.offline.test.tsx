@@ -11,8 +11,8 @@ import {
 } from "./collabEditorBinding";
 
 type RemoteWindow = Window & {
-	TOLARIA_REMOTE_URL?: string;
-	TOLARIA_REMOTE_TOKEN?: string;
+	METIS_REMOTE_URL?: string;
+	METIS_REMOTE_TOKEN?: string;
 };
 
 const web = resolvePlatformCapabilities("remote");
@@ -59,14 +59,14 @@ function renderBinding(backend: VaultBackend<RemoteBindings>, activeTabPath = "a
 
 function useRemoteServer(): void {
 	const remote = window as RemoteWindow;
-	remote.TOLARIA_REMOTE_URL = "https://server.test";
-	remote.TOLARIA_REMOTE_TOKEN = "token";
+	remote.METIS_REMOTE_URL = "https://server.test";
+	remote.METIS_REMOTE_TOKEN = "token";
 }
 
 afterEach(() => {
 	const remote = window as RemoteWindow;
-	delete remote.TOLARIA_REMOTE_URL;
-	delete remote.TOLARIA_REMOTE_TOKEN;
+	delete remote.METIS_REMOTE_URL;
+	delete remote.METIS_REMOTE_TOKEN;
 	vi.restoreAllMocks();
 });
 

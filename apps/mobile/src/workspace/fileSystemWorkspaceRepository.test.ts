@@ -41,37 +41,37 @@ describe('createFileSystemWorkspaceRepository', () => {
 type: Essay
 status: Active
 belongs_to:
-  - "[[Projects/Tolaria MVP]]"
+  - "[[Projects/Metis MVP]]"
 tags:
   - Design
 ---
 # Workflow
 
-Body with [[Projects/Tolaria MVP]].
+Body with [[Projects/Metis MVP]].
 `,
-      'Projects/Tolaria MVP.md': `---
+      'Projects/Metis MVP.md': `---
 type: Project
 ---
-# Tolaria MVP
+# Metis MVP
 `,
     })
     const repository = createFileSystemWorkspaceRepository(fileSystem)
 
     const snapshot = repository.readSnapshot({
       source: 'native',
-      vaultAlias: 'laputa',
-      vaultLabel: 'Laputa',
+      vaultAlias: 'metislegacy',
+      vaultLabel: 'MetisLegacy',
       vaultRootUri: 'file:///vault',
     })
     const workflow = snapshot.allNotes?.find((note) => note.path === 'Writing/Workflow.md')
 
     expect(snapshot.folderPaths).toEqual(expect.arrayContaining(['Projects', 'Writing']))
-    expect(snapshot.source).toMatchObject({ alias: 'laputa', kind: 'localVault', label: 'Laputa', totalNotes: 3 })
+    expect(snapshot.source).toMatchObject({ alias: 'metislegacy', kind: 'localVault', label: 'MetisLegacy', totalNotes: 3 })
     expect(workflow).toMatchObject({
       path: 'Writing/Workflow.md',
       relationships: [expect.objectContaining({ key: 'belongs_to' })],
       title: 'Workflow',
-      workspaceAlias: 'laputa',
+      workspaceAlias: 'metislegacy',
     })
     expect(snapshot.notes.find((note) => note.path === 'Writing/Workflow.md')?.rawContent).toContain('# Workflow')
     expect(snapshot.sidebarSections.find((section) => section.id === 'views')?.items?.[0]).toMatchObject({
@@ -91,7 +91,7 @@ type: Project
       'Writing/Workflow.md': '# Workflow\n\n',
     })
     const repository = createFileSystemWorkspaceRepository(fileSystem)
-    const request = { source: 'native' as const, vaultLabel: 'Laputa', vaultRootUri: 'file:///vault' }
+    const request = { source: 'native' as const, vaultLabel: 'MetisLegacy', vaultRootUri: 'file:///vault' }
 
     await repository.persistWrites([{
       config: {
@@ -141,7 +141,7 @@ type: Project
     })
     const repository = createFileSystemWorkspaceRepository(fileSystem)
 
-    const snapshot = repository.readSnapshot({ source: 'native', vaultLabel: 'Laputa', vaultRootUri: 'file:///vault' })
+    const snapshot = repository.readSnapshot({ source: 'native', vaultLabel: 'MetisLegacy', vaultRootUri: 'file:///vault' })
 
     expect(snapshot.sidebarSections.find((section) => section.id === 'primary')?.items).toEqual([
       expect.objectContaining({ count: '1', id: 'inbox' }),
@@ -160,11 +160,11 @@ type: Project
     const fileSystem = fakeWorkspaceFileSystem({
       'Assets/logo.png': '',
       'Docs/brief.pdf': '',
-      'Docs/config.yml': 'name: Tolaria\n',
+      'Docs/config.yml': 'name: Metis\n',
       'Writing/Workflow.md': '# Workflow\n\n',
     })
     const repository = createFileSystemWorkspaceRepository(fileSystem)
-    const request = { source: 'native' as const, vaultLabel: 'Laputa', vaultRootUri: 'file:///vault' }
+    const request = { source: 'native' as const, vaultLabel: 'MetisLegacy', vaultRootUri: 'file:///vault' }
 
     await repository.persistWrites([{
       config: {
@@ -205,7 +205,7 @@ type: Project
       title: 'Workflow',
       type: 'Note',
       typeTone: 'gray',
-      workspace: 'Laputa',
+      workspace: 'MetisLegacy',
     }, { source: 'native', vaultRootUri: 'file:///vault' })).resolves.toBe('# Workflow\n\nOriginal body.\n')
 
     await repository.persistWrites([{
@@ -242,7 +242,7 @@ type: Project
     await expect(repository.readNoteContent({
       created: '-', date: '-', favorite: false, id: 'Writing/Workflow.md', links: 0,
       modified: '-', path: 'Writing/Workflow.md', relationships: [], snippet: '', status: '', tags: [],
-      title: 'Workflow', type: 'Note', typeTone: 'gray', workspace: 'Laputa',
+      title: 'Workflow', type: 'Note', typeTone: 'gray', workspace: 'MetisLegacy',
     }, { source: 'native', vaultRootUri: 'file:///vault' })).resolves.toBe('# Loaded asynchronously\n')
   })
 

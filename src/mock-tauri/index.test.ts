@@ -41,11 +41,11 @@ describe('isTauri', () => {
 })
 
 describe('mockInvoke latency', () => {
-  const remoteGlobals = window as Window & { TOLARIA_REMOTE_URL?: string; TOLARIA_REMOTE_TOKEN?: string }
+  const remoteGlobals = window as Window & { METIS_REMOTE_URL?: string; METIS_REMOTE_TOKEN?: string }
 
   afterEach(() => {
-    delete remoteGlobals.TOLARIA_REMOTE_URL
-    delete remoteGlobals.TOLARIA_REMOTE_TOKEN
+    delete remoteGlobals.METIS_REMOTE_URL
+    delete remoteGlobals.METIS_REMOTE_TOKEN
     vi.useRealTimers()
   })
 
@@ -61,9 +61,9 @@ describe('mockInvoke latency', () => {
     expect(await settlesWithoutTimers()).toBe(false)
   })
 
-  it('answers at once on a Tolaria remote, so startup is not held back (TOL-206)', async () => {
-    remoteGlobals.TOLARIA_REMOTE_URL = 'https://tolaria.example'
-    remoteGlobals.TOLARIA_REMOTE_TOKEN = 'token-not-a-secret'
+  it('answers at once on a Metis remote, so startup is not held back (TOL-206)', async () => {
+    remoteGlobals.METIS_REMOTE_URL = 'https://metis.example'
+    remoteGlobals.METIS_REMOTE_TOKEN = 'token-not-a-secret'
 
     expect(await settlesWithoutTimers()).toBe(true)
   })

@@ -2,7 +2,7 @@
 
 ## Phone motion-frame harness (TOL-339)
 
-The debug-only motion probe emits `TOLARIA_MOTION_FRAME` samples from Reanimated's
+The debug-only motion probe emits `METIS_MOTION_FRAME` samples from Reanimated's
 UI frame callback while the phone panel rail or an organize-swipe row is moving.
 Records include the monotonic frame timestamp, frame delta, sampled translation,
 probe id, and build id; React editor renders log a content fingerprint only, never
@@ -12,17 +12,17 @@ Start Metro with the probe enabled and the tested SHA/build label, install or op
 the development app against that Metro, then run the native interaction test:
 
 ```sh
-EXPO_PUBLIC_TOLARIA_MOTION_FRAME_PROBE=1 \
-EXPO_PUBLIC_TOLARIA_MOTION_BUILD_ID=<tested-sha-or-build-id> \
-npx -y pnpm@10.33.0 --dir apps/mobile start --port 8081 2>&1 | tee /tmp/tolaria-motion-metro.log
+EXPO_PUBLIC_METIS_MOTION_FRAME_PROBE=1 \
+EXPO_PUBLIC_METIS_MOTION_BUILD_ID=<tested-sha-or-build-id> \
+npx -y pnpm@10.33.0 --dir apps/mobile start --port 8081 2>&1 | tee /tmp/metis-motion-metro.log
 
-TOLARIA_MOTION_LOG_PATH=/tmp/tolaria-motion-metro.log \
-EXPO_PUBLIC_TOLARIA_MOTION_FRAME_PROBE=1 \
-EXPO_PUBLIC_TOLARIA_MOTION_BUILD_ID=<tested-sha-or-build-id> \
-node apps/mobile/scripts/test-ios-motion-frames.mjs <booted-iphone-udid> /tmp/tolaria-motion-qa
+METIS_MOTION_LOG_PATH=/tmp/metis-motion-metro.log \
+EXPO_PUBLIC_METIS_MOTION_FRAME_PROBE=1 \
+EXPO_PUBLIC_METIS_MOTION_BUILD_ID=<tested-sha-or-build-id> \
+node apps/mobile/scripts/test-ios-motion-frames.mjs <booted-iphone-udid> /tmp/metis-motion-qa
 ```
 
-Pipe that Metro process output to a file and set `TOLARIA_MOTION_LOG_PATH` to
+Pipe that Metro process output to a file and set `METIS_MOTION_LOG_PATH` to
 that file when invoking the runner; React Native debug-console records are
 emitted by Metro rather than the simulator unified log. The runner saves the
 captured records and XCUITest result bundle, then
@@ -33,7 +33,7 @@ after that launch, so earlier runs cannot contaminate measurements. The note-ope
 check requires exactly one content-bearing editor-body render; repeated renders
 with an unchanged fingerprint still fail the check.
 
-Use `TOLARIA_MOTION_CHECK=note-open` to run only the note-open interaction. The
+Use `METIS_MOTION_CHECK=note-open` to run only the note-open interaction. The
 runner preserves the Metro log, analysis JSON, and XCUITest result bundle even
 when a native assertion fails, so the measured evidence remains available.
 
@@ -42,12 +42,12 @@ vault under the app container's `Documents/Local Vaults/<lowercase-id>` path,
 then run:
 
 ```sh
-TOLARIA_MOTION_CHECK=launch \
-TOLARIA_MOTION_SEARCH='?source=native&layoutProbe=1&phoneState=list&qaRun=tol339-large-vault' \
-TOLARIA_MOTION_LOG_PATH=/tmp/tolaria-motion-metro.log \
-EXPO_PUBLIC_TOLARIA_MOTION_FRAME_PROBE=1 \
-EXPO_PUBLIC_TOLARIA_MOTION_BUILD_ID=<tested-sha-or-build-id> \
-node apps/mobile/scripts/test-ios-motion-frames.mjs <booted-iphone-udid> /tmp/tolaria-motion-large-vault
+METIS_MOTION_CHECK=launch \
+METIS_MOTION_SEARCH='?source=native&layoutProbe=1&phoneState=list&qaRun=tol339-large-vault' \
+METIS_MOTION_LOG_PATH=/tmp/metis-motion-metro.log \
+EXPO_PUBLIC_METIS_MOTION_FRAME_PROBE=1 \
+EXPO_PUBLIC_METIS_MOTION_BUILD_ID=<tested-sha-or-build-id> \
+node apps/mobile/scripts/test-ios-motion-frames.mjs <booted-iphone-udid> /tmp/metis-motion-large-vault
 ```
 
 The launch mode asserts that a generated note is present and both hamburger and
@@ -78,11 +78,11 @@ fixtures, not saved user vaults. A skipped audit on an older runtime is not a pa
 and automated audits do not replace physical VoiceOver or keyboard acceptance.
 
 Prerequisites: Xcode, a booted landscape iPad simulator, the current-source
-`com.tolaria.mobile.dev` development app installed, Metro on port 8081, and Ruby's
+`io.github.hdoria.metis.mobile.dev` development app installed, Metro on port 8081, and Ruby's
 `xcodeproj` gem (already installed alongside CocoaPods on the development host).
 
 ```sh
-node apps/mobile/scripts/test-ios-panel-gestures.mjs SIMULATOR_UDID /tmp/tolaria-panel-qa
+node apps/mobile/scripts/test-ios-panel-gestures.mjs SIMULATOR_UDID /tmp/metis-panel-qa
 ```
 
 The test opens an explicit isolated fixture. It verifies eight transitions:
@@ -95,7 +95,7 @@ screenshot. The result bundle retains a screenshot and Xcode's failure diagnosti
 
 The runner is reinstalled for every run: unsigned Xcode test bundles were observed
 to reuse stale installed test code. This only removes our disposable test runner,
-never the Tolaria app, vaults, or account data. Keep the app source stable while
+never the Metis app, vaults, or account data. Keep the app source stable while
 the test runs; Metro Fast Refresh can otherwise invalidate the interaction.
 
 This is an interaction-correctness check, **not** a frame-rate, interruption,
@@ -118,7 +118,7 @@ source/bundle in the batch evidence. Do not count a browser capture as this test
 `MobileInspectorContextTests` repeats inspector navigation and a single note-row
 tap across three cold launches in each editor mode. It does not retry a missed
 tap or swipe. For
-diagnosis, set `TEST_RUNNER_TOLARIA_QA_GESTURE_TRACE_URL` to an existing loopback
+diagnosis, set `TEST_RUNNER_METIS_QA_GESTURE_TRACE_URL` to an existing loopback
 collector before `xcodebuild test`; the test opts into the layout probe and emits
 numeric phone gesture recognition/settlement snapshots. No note content is sent.
 Run acceptance again without that environment variable: diagnostic success alone
@@ -193,42 +193,42 @@ can produce Keychain error -34018 even when all filesystem probes pass. Use
 `CODE_SIGNING_ALLOWED=YES CODE_SIGN_IDENTITY=- ONLY_ACTIVE_ARCH=YES` with the
 simulator destination. Let Xcode generate simulator identity entitlements; do not
 copy those identities into production app configuration. The optional
-`TOLARIA_QA` compilation flag is for local optimized probes only (ADR 0208).
+`METIS_QA` compilation flag is for local optimized probes only (ADR 0208).
 
 Tests that depend on prepared on-disk data or an authenticated remote skip by
 default, before launching the app. Enable only the relevant variable in the
 test runner environment (the Xcode scheme's Test action) and select that test:
 
-- `TOLARIA_QA_SOURCE_FIND=1`: `TabletSourceFindTests`, with an isolated active
+- `METIS_QA_SOURCE_FIND=1`: `TabletSourceFindTests`, with an isolated active
   vault containing a long source note and `QA_UNIQUE_END_TOKEN` at its end.
   It replaces that marker, so never run it against the user's vault.
-- `TOLARIA_QA_VAULT_CATALOG=1`: `TabletVaultCatalogTests`, with disposable
+- `METIS_QA_VAULT_CATALOG=1`: `TabletVaultCatalogTests`, with disposable
   `local-qa-alpha` and `local-qa-beta` entries and their matching note titles.
-- `TOLARIA_QA_AUTHENTICATED_CLONE=1`: `TabletAuthenticatedRepositoryTests`, with
-  an existing authorized GitHub session and explicit permission to clone Laputa.
+- `METIS_QA_AUTHENTICATED_CLONE=1`: `TabletAuthenticatedRepositoryTests`, with
+  an existing authorized GitHub session and explicit permission to clone MetisLegacy.
   It does not enable AutoGit or push, but can download a large repository.
-- `TOLARIA_QA_PUBLIC_CLONE=1`: `MobileCloneProgressTests`, only on a disposable
+- `METIS_QA_PUBLIC_CLONE=1`: `MobileCloneProgressTests`, only on a disposable
   simulator. Downloads part of the public isomorphic-git repository, displays
   actual counts, and cancels. Verify the saved catalog and existing vault files
   are unchanged and the incomplete clone directory has been removed.
-- `TOLARIA_QA_RECOVERY=conflict`: `MobileVaultRecoveryTests` background case,
+- `METIS_QA_RECOVERY=conflict`: `MobileVaultRecoveryTests` background case,
   with a disposable linked folder whose cached and provider versions both differ
   from their recorded baseline. The test waits for real automatic reconciliation,
   requires a non-modal notice, and follows its explicit Manage vaults action.
   It closes the manager and types into a new disposable note to prove the editor
   lock was released. Verify both original versions remain unchanged afterward.
-- `TOLARIA_QA_RECOVERY=catalog`: `MobileVaultRecoveryTests` catalog case, only
+- `METIS_QA_RECOVERY=catalog`: `MobileVaultRecoveryTests` catalog case, only
   after backing up the disposable simulator's primary/backup catalog. Corrupt
   both copies deliberately; require the recovery screen, Retry, no automatically
   opened modal, and no note-creation UI. Restore the byte-identical metadata after
   checking that retry did not overwrite the unreadable catalog.
-- `TOLARIA_QA_PENDING_CATALOG=valid` or `corrupt`: `MobilePendingCatalogTests`,
+- `METIS_QA_PENDING_CATALOG=valid` or `corrupt`: `MobilePendingCatalogTests`,
   with only a pending catalog in a disposable simulator. The valid fixture names
   a local vault containing `# Pending Catalog QA`; the test opens its source and
   relaunches to verify restoration. The corrupt fixture must show recovery and
   Retry, not an empty workspace. Check the pending file and note bytes are
   unchanged, then restore the original metadata. Run both cases on iPhone/iPad.
-- `TOLARIA_QA_LINKED_FOCUS=1`: `MobileEditorFocusTests` linked-folder case, with
+- `METIS_QA_LINKED_FOCUS=1`: `MobileEditorFocusTests` linked-folder case, with
   an isolated active folder imported through Files. The source and app-owned
   working copy must both be disposable. The test creates a note, types across
   an eight-second pause, and backgrounds the app to flush. Verify the resulting
@@ -242,7 +242,7 @@ is not a passing integration check.
 
 ## Default Note Type
 
-`MobileDefaultNoteTypeTests` requires `TOLARIA_QA_DEFAULT_NOTE_TYPE=1` and an
+`MobileDefaultNoteTypeTests` requires `METIS_QA_DEFAULT_NOTE_TYPE=1` and an
 empty, disposable local vault selected in a backed-up catalog. Set the generated
 scheme Test action's `shouldUseLaunchSchemeArgsEnv` to `NO` when supplying its own
 environment variables. The test creates a note through the native UI and checks
@@ -259,7 +259,7 @@ It never opens or modifies an existing vault.
 
 ## Bundled First Launch
 
-`MobileStarterVaultTests` requires `TOLARIA_QA_FRESH_STARTER=1` in the generated
+`MobileStarterVaultTests` requires `METIS_QA_FRESH_STARTER=1` in the generated
 scheme Test action and a fresh, disposable simulator installation. It opens the
 bundled guide, creates an additive test note, and checks that note after relaunch.
 Run on iPhone and iPad using the standalone Release QA app, without Metro. Verify

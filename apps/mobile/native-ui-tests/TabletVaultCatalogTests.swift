@@ -4,11 +4,11 @@ import XCTest
 // the previous catalog afterwards; this test never edits an existing user note.
 final class TabletVaultCatalogTests: XCTestCase {
   func testSwitchRestoreAndForgetWithoutDeletingVaults() throws {
-    try XCTSkipUnless(ProcessInfo.processInfo.environment["TOLARIA_QA_VAULT_CATALOG"] == "1", "Requires disposable host-prepared catalog entries")
+    try XCTSkipUnless(ProcessInfo.processInfo.environment["METIS_QA_VAULT_CATALOG"] == "1", "Requires disposable host-prepared catalog entries")
     continueAfterFailure = false
     XCUIDevice.shared.orientation = .landscapeLeft
-    let app = XCUIApplication(bundleIdentifier: "com.tolaria.mobile.dev")
-    app.launchArguments = ["--tolaria-mobile-search", "?source=native&qaRun=vault-catalog"]
+    let app = XCUIApplication(bundleIdentifier: "io.github.hdoria.metis.mobile.dev")
+    app.launchArguments = ["--metis-mobile-search", "?source=native&qaRun=vault-catalog"]
     app.launch()
     openManager(app)
     select(app, id: "local-qa-alpha", title: "Catalog QA Alpha")

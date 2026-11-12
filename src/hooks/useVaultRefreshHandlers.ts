@@ -29,7 +29,7 @@ interface VaultRefreshHandlersOptions {
 }
 
 function refocusActiveEditor(path: string) {
-  window.dispatchEvent(new CustomEvent('laputa:focus-editor', { detail: { path } }))
+  window.dispatchEvent(new CustomEvent('metislegacy:focus-editor', { detail: { path } }))
 }
 
 function useActiveTabContentCheck(tabs: Tab[], resolvedPath: string) {

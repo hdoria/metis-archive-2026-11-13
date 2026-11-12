@@ -76,6 +76,6 @@ flowchart LR
 
 ---
 
-![An image](attachments/laputa-reference.png)
+![An image](attachments/metislegacy-reference.png)
 
 Last line.

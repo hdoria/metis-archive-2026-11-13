@@ -9,7 +9,7 @@ import {
 import {
   collapsedSectionEndBlock,
   keepBlockVisibleOutsideCollapsedSection,
-} from './tolariaCollapsedSections'
+} from './metisCollapsedSections'
 
 const EMPTY_LIST_TYPES = new Set([
   'bulletListItem',

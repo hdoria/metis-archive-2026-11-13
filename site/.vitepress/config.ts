@@ -1,13 +1,13 @@
 import process from "node:process";
 import { defineConfig } from "vitepress";
-import { tolariaThemeConfig } from "./theme/tolaria/config";
+import { metisThemeConfig } from "./theme/metis/config";
 
 const base = process.env.VITEPRESS_BASE ?? "/";
 
 export default defineConfig({
-  title: "Tolaria",
+  title: "Métis",
   description:
-    "Tolaria is a local-first Markdown knowledge base with native relationships, Git history, and AI workflows.",
+    "Métis is a local-first Markdown knowledge base with native relationships, Git history, and AI workflows.",
   base,
   vite: {
     build: {
@@ -21,7 +21,7 @@ export default defineConfig({
   cleanUrls: true,
   head: [
     ["link", { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" }],
-    ["meta", { property: "og:title", content: "Tolaria" }],
+    ["meta", { property: "og:title", content: "Métis" }],
     [
       "meta",
       {
@@ -30,18 +30,10 @@ export default defineConfig({
           "A second brain for the AI era. Free forever, local-first, Markdown-based, Git-ready, and AI-friendly.",
       },
     ],
-    ["script", { async: "true", src: "https://www.googletagmanager.com/gtag/js?id=G-0NJ6E1GH9D" }],
-    [
-      "script",
-      {},
-      `window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-0NJ6E1GH9D');`,
-    ],
+
   ],
   themeConfig: {
-    ...tolariaThemeConfig,
+    ...metisThemeConfig,
     search: {
       provider: "local",
     },
@@ -49,7 +41,7 @@ gtag('config', 'G-0NJ6E1GH9D');`,
       {
         text: "Start Here",
         items: [
-          { text: "Install Tolaria", link: "/start/install" },
+          { text: "Install Métis", link: "/start/install" },
           { text: "First Launch", link: "/start/first-launch" },
           { text: "Getting Started Vault", link: "/start/getting-started-vault" },
           { text: "Open Or Create A Vault", link: "/start/open-or-create-vault" },
@@ -95,7 +87,7 @@ gtag('config', 'G-0NJ6E1GH9D');`,
       {
         text: "Templates",
         items: [
-          { text: "Portent", link: "/templates/portent" },
+          { text: "Vault templates", link: "/templates/vault-templates" },
         ],
       },
       {
@@ -128,7 +120,7 @@ gtag('config', 'G-0NJ6E1GH9D');`,
     footer: {
       message: "Free and open source. Local-first, Git-first, and Markdown-based.",
       copyright:
-        "Tolaria is AGPL-3.0-or-later. The Tolaria name and logo remain covered by the project trademark policy.",
+        "Métis is AGPL-3.0-or-later. See the repository NOTICE for source attributions.",
     },
   },
 });

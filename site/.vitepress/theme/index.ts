@@ -1,2 +1,2 @@
-import theme from "./tolaria";
+import theme from "./metis";
 export default theme;

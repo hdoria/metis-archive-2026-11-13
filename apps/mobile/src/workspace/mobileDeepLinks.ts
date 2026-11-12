@@ -1,6 +1,6 @@
 import type { MobileNote, MobileWorkspaceSnapshot, MobileWorkspaceSource } from './mobileWorkspaceModel'
 
-export const TOLARIA_MOBILE_DEEP_LINK_SCHEME = 'tolaria'
+export const METIS_MOBILE_DEEP_LINK_SCHEME = 'metis'
 
 export type MobileDeepLinkSlug = string & { readonly mobileDeepLinkSlug: true }
 export type MobileDeepLinkPath = string & { readonly mobileDeepLinkPath: true }
@@ -37,7 +37,7 @@ export function parseMobileIncomingDeepLink(rawUrl: string): MobileIncomingDeepL
     return { error: 'malformed_url', kind: 'invalid' }
   }
 
-  if (url.protocol !== `${TOLARIA_MOBILE_DEEP_LINK_SCHEME}:`) return { kind: 'ignored' }
+  if (url.protocol !== `${METIS_MOBILE_DEEP_LINK_SCHEME}:`) return { kind: 'ignored' }
   if (['qa', 'mobile-ui-lab'].includes(url.hostname) || url.searchParams.has('gitProbe')) {
     return { kind: 'ignored' }
   }
@@ -59,7 +59,7 @@ function parseNoteDeepLink(
 }
 
 function encodedNotePath(rawUrl: string): string | null {
-  return rawUrl.match(/^tolaria:\/\/[^/?#]+(\/[^?#]*)/iu)?.[1]?.replace(/^\/+/, '') ?? null
+  return rawUrl.match(/^metis:\/\/[^/?#]+(\/[^?#]*)/iu)?.[1]?.replace(/^\/+/, '') ?? null
 }
 
 function decodeNotePath(encodedPath: string): string | null {
@@ -124,7 +124,7 @@ export function buildMobileDeepLinkForNote({
 
   return {
     ok: true,
-    url: `${TOLARIA_MOBILE_DEEP_LINK_SCHEME}://${slug}/${encodeRelativePath(relativePath)}`,
+    url: `${METIS_MOBILE_DEEP_LINK_SCHEME}://${slug}/${encodeRelativePath(relativePath)}`,
   }
 }
 

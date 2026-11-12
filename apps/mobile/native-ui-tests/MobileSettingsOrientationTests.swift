@@ -3,9 +3,9 @@ import XCTest
 final class MobileSettingsOrientationTests: XCTestCase {
   func testSettingsPreservesLandscapeAndRemainsDismissible() {
     continueAfterFailure = false
-    let app = XCUIApplication(bundleIdentifier: "com.tolaria.mobile.dev")
+    let app = XCUIApplication(bundleIdentifier: "io.github.hdoria.metis.mobile.dev")
     app.terminate()
-    app.launchArguments = ["--tolaria-mobile-search", "?source=fixture&qaRun=settings-orientation"]
+    app.launchArguments = ["--metis-mobile-search", "?source=fixture&qaRun=settings-orientation"]
     XCUIDevice.shared.orientation = .landscapeLeft
     defer {
       app.terminate()

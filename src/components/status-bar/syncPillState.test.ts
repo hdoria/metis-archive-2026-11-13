@@ -74,10 +74,10 @@ describe("syncPillDescription", () => {
 describe("isRemoteBrowserShell", () => {
 	afterEach(() => vi.unstubAllGlobals());
 
-	it("is the browser build configured for a Tolaria server", () => {
+	it("is the browser build configured for a Métis server", () => {
 		expect(isRemoteBrowserShell()).toBe(false);
-		vi.stubGlobal("TOLARIA_REMOTE_URL", "https://example.com");
-		vi.stubGlobal("TOLARIA_REMOTE_TOKEN", "token");
+		vi.stubGlobal("METIS_REMOTE_URL", "https://example.com");
+		vi.stubGlobal("METIS_REMOTE_TOKEN", "token");
 		expect(isRemoteBrowserShell()).toBe(true);
 	});
 });

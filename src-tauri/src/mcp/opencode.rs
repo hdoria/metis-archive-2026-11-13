@@ -16,7 +16,8 @@ pub(super) fn build_entry(node_command: &str, index_js: &str) -> Value {
         "command": [node_command, index_js],
         "enabled": true,
         "environment": {
-            "WS_UI_PORT": "9711"
+            "WS_UI_PORT": "9731",
+            "METIS_APP_CONFIG_NAMESPACE": crate::app_config::active_namespace()
         }
     })
 }
@@ -91,7 +92,7 @@ pub(super) fn read_registered_entry(config_path: &Path) -> Option<Value> {
 pub(super) fn entry_is_installed(entry: &Value) -> bool {
     entry["type"].as_str() == Some("local")
         && entry["enabled"].as_bool() == Some(true)
-        && entry["environment"]["WS_UI_PORT"].as_str() == Some("9711")
+        && entry["environment"]["WS_UI_PORT"].as_str() == Some("9731")
         && command_index_js_exists(entry)
 }
 
@@ -165,7 +166,8 @@ mod tests {
                 "command": ["node", "/app/mcp-server/index.js"],
                 "enabled": true,
                 "environment": {
-                    "WS_UI_PORT": "9711"
+                    "WS_UI_PORT": "9731",
+                    "METIS_APP_CONFIG_NAMESPACE": "io.github.hdoria.metis"
                 }
             })
         );
@@ -173,7 +175,7 @@ mod tests {
     }
 
     #[test]
-    fn build_config_snippet_wraps_tolaria_entry_in_opencode_schema() {
+    fn build_config_snippet_wraps_metis_entry_in_opencode_schema() {
         let snippet =
             build_config_snippet(&build_entry("node", "/app/mcp-server/index.js")).unwrap();
         let config: Value = serde_json::from_str(&snippet).unwrap();
@@ -183,12 +185,13 @@ mod tests {
             serde_json::json!({
                 "$schema": "https://opencode.ai/config.json",
                 "mcp": {
-                    "tolaria": {
+                    "metis": {
                         "type": "local",
                         "command": ["node", "/app/mcp-server/index.js"],
                         "enabled": true,
                         "environment": {
-                            "WS_UI_PORT": "9711"
+                            "WS_UI_PORT": "9731",
+                    "METIS_APP_CONFIG_NAMESPACE": "io.github.hdoria.metis"
                         }
                     }
                 }
@@ -228,7 +231,7 @@ mod tests {
             &config_path,
             serde_json::json!({
                 "mcp": {
-                    "laputa": { "type": "local", "command": ["node", "/old.js"] }
+                    "metislegacy": { "type": "local", "command": ["node", "/old.js"] }
                 }
             }),
         );
@@ -249,8 +252,8 @@ mod tests {
             &config_path,
             serde_json::json!({
                 "mcp": {
-                    "tolaria": { "type": "local" },
-                    "laputa": { "type": "local" },
+                    "metis": { "type": "local" },
+                    "metislegacy": { "type": "local" },
                     "other": { "type": "local" }
                 }
             }),

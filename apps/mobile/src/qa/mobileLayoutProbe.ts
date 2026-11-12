@@ -18,7 +18,7 @@ export type MobileLayoutProbe = (
 ) => { onLayout: (event: LayoutChangeEvent) => void } | Record<string, never>;
 
 type LayoutProbeGlobal = typeof globalThis & {
-	__TOLARIA_MOBILE_LAYOUT_METRICS__?: MobileLayoutMetrics;
+	__METIS_MOBILE_LAYOUT_METRICS__?: MobileLayoutMetrics;
 };
 
 const emptyProbeProps = {};
@@ -95,13 +95,13 @@ function metricFromLayout(
 
 function publishMetric(metric: MobileLayoutMetric) {
 	const target = globalThis as LayoutProbeGlobal;
-	target.__TOLARIA_MOBILE_LAYOUT_METRICS__ = {
-		...target.__TOLARIA_MOBILE_LAYOUT_METRICS__,
+	target.__METIS_MOBILE_LAYOUT_METRICS__ = {
+		...target.__METIS_MOBILE_LAYOUT_METRICS__,
 		[metric.id]: metric,
 	};
 
 	if (Platform.OS !== "web") {
-		console.info(`TOLARIA_MOBILE_LAYOUT_METRIC ${JSON.stringify(metric)}`);
+		console.info(`METIS_MOBILE_LAYOUT_METRIC ${JSON.stringify(metric)}`);
 		postNativeQaEvent(metric);
 	}
 }

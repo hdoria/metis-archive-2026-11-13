@@ -38,10 +38,10 @@ describe('useAiActivity', () => {
     expect(result.current.highlightPath).toBeNull()
   })
 
-  it('connects to ws://localhost:9711', () => {
+  it('connects to ws://localhost:9731', () => {
     renderHook(() => useAiActivity())
     expect(MockWebSocket.latest).not.toBeNull()
-    expect(MockWebSocket.latest?.url).toBe('ws://localhost:9711')
+    expect(MockWebSocket.latest?.url).toBe('ws://localhost:9731')
   })
 
   it('sets highlight on ui_action highlight message', () => {

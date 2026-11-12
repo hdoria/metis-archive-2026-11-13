@@ -8,61 +8,10 @@ interface ContributionAction {
 }
 
 const CONTRIBUTION_ACTIONS: ContributionAction[] = [
-	{
-		activation: "Enter",
-		label: "Check out Refactoring",
-		url: "https://refactoring.fm/?utm_source=tolaria&utm_medium=app&utm_campaign=refactoring",
-	},
-	{
-		activation: "Enter",
-		label: "Open Codacy",
-		url: "https://codacy.com/tolaria?utm_source=tolaria&utm_medium=app&utm_campaign=refactoring",
-	},
-	{
-		activation: "Space",
-		label: "Open CodeScene",
-		url: "https://codescene.com/?utm_source=tolaria&utm_medium=app&utm_campaign=refactoring",
-	},
-	{
-		activation: "Enter",
-		label: "Open CircleCI",
-		url: "https://circleci.com/?utm_source=tolaria&utm_medium=app&utm_campaign=refactoring",
-	},
-	{
-		activation: "Space",
-		label: "Open Unblocked",
-		url: "https://getunblocked.com/?utm_source=tolaria&utm_medium=app&utm_campaign=refactoring",
-	},
-	{
-		activation: "Enter",
-		label: "how I develop Tolaria",
-		url: "https://refactoring.fm/p/introducing-the-tolaria-alliance",
-	},
-	{
-		activation: "Enter",
-		label: "Open Product Board",
-		url: "https://tolaria.canny.io/",
-	},
-	{
-		activation: "Space",
-		label: "Join Discord",
-		url: "https://discord.gg/tRBC2u428B",
-	},
-	{
-		activation: "Enter",
-		label: "Open PRs",
-		url: "https://github.com/refactoringhq/tolaria/pulls",
-	},
-	{
-		activation: "Space",
-		label: "Open Guide",
-		url: "https://github.com/refactoringhq/tolaria/blob/main/CONTRIBUTING.md",
-	},
-	{
-		activation: "Enter",
-		label: "Open Issues",
-		url: "https://github.com/refactoringhq/tolaria/issues",
-	},
+  { activation: "Enter", label: "Open Product Board", url: "https://github.com/hdoria/metis/issues" },
+  { activation: "Enter", label: "Open PRs", url: "https://github.com/hdoria/metis/pulls" },
+  { activation: "Space", label: "Open Guide", url: "https://github.com/hdoria/metis/blob/main/CONTRIBUTING.md" },
+  { activation: "Enter", label: "Open Issues", url: "https://github.com/hdoria/metis/issues" },
 ];
 
 async function expectOpenedUrl(page: Page, url: string): Promise<void> {
@@ -70,8 +19,8 @@ async function expectOpenedUrl(page: Page, url: string): Promise<void> {
 		.poll(async () =>
 			page.evaluate(
 				() =>
-					(window as typeof window & { __tolariaOpenedUrls: string[] })
-						.__tolariaOpenedUrls,
+					(window as typeof window & { __metisOpenedUrls: string[] })
+						.__metisOpenedUrls,
 			),
 		)
 		.toContain(url);
@@ -81,7 +30,7 @@ test.describe("Contribute modal", () => {
 	test.beforeEach(async ({ page }) => {
 		await page.addInitScript(() => {
 			const openedUrls: string[] = [];
-			Object.defineProperty(window, "__tolariaOpenedUrls", {
+			Object.defineProperty(window, "__metisOpenedUrls", {
 				configurable: true,
 				value: openedUrls,
 			});
@@ -91,7 +40,7 @@ test.describe("Contribute modal", () => {
 			}) as typeof window.open;
 
 			const copiedBundles: string[] = [];
-			Object.defineProperty(window, "__tolariaCopiedBundles", {
+			Object.defineProperty(window, "__metisCopiedBundles", {
 				configurable: true,
 				value: copiedBundles,
 			});
@@ -119,10 +68,10 @@ test.describe("Contribute modal", () => {
 
 		await expect(page.getByTestId("feedback-dialog")).toBeVisible();
 		await expect(
-			page.getByRole("heading", { name: "Contribute to Tolaria" }),
+			page.getByRole("heading", { name: "Contribute to Métis" }),
 		).toBeVisible();
 		await expect(
-			page.getByRole("button", { name: "Check out Refactoring" }),
+			page.getByRole("button", { name: "Open Product Board" }),
 		).toBeFocused();
 
 		for (const [index, action] of CONTRIBUTION_ACTIONS.entries()) {
@@ -143,8 +92,8 @@ test.describe("Contribute modal", () => {
 			.poll(async () =>
 				page.evaluate(
 					() =>
-						(window as typeof window & { __tolariaCopiedBundles: string[] })
-							.__tolariaCopiedBundles.length,
+						(window as typeof window & { __metisCopiedBundles: string[] })
+							.__metisCopiedBundles.length,
 				),
 			)
 			.toBe(1);

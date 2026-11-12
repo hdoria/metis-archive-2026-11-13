@@ -21,9 +21,9 @@ afterEach(async () => {
 	root = undefined;
 	delete (
 		globalThis as typeof globalThis & {
-			__TOLARIA_MOBILE_LAYOUT_METRICS__?: Record<string, MobileLayoutMetric>;
+			__METIS_MOBILE_LAYOUT_METRICS__?: Record<string, MobileLayoutMetric>;
 		}
-	).__TOLARIA_MOBILE_LAYOUT_METRICS__;
+	).__METIS_MOBILE_LAYOUT_METRICS__;
 });
 
 it("publishes layout metrics without rerendering the motion-probed screen", async () => {
@@ -55,9 +55,9 @@ it("publishes layout metrics without rerendering the motion-probed screen", asyn
 	expect(
 		(
 			globalThis as typeof globalThis & {
-				__TOLARIA_MOBILE_LAYOUT_METRICS__?: Record<string, MobileLayoutMetric>;
+				__METIS_MOBILE_LAYOUT_METRICS__?: Record<string, MobileLayoutMetric>;
 			}
-		).__TOLARIA_MOBILE_LAYOUT_METRICS__?.["editor.body"],
+		).__METIS_MOBILE_LAYOUT_METRICS__?.["editor.body"],
 	).toMatchObject({
 		id: "editor.body",
 		x: 0,

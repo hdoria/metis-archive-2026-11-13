@@ -19,14 +19,14 @@
 }
 
 [data-radix-popper-content-wrapper] {
-  zoom: var(--tolaria-overlay-zoom-inverse, 1);
+  zoom: var(--metis-overlay-zoom-inverse, 1);
 }
 
 [data-radix-popper-content-wrapper] > [data-slot="dropdown-menu-content"],
 [data-radix-popper-content-wrapper] > [data-slot="popover-content"],
 [data-radix-popper-content-wrapper] > [data-slot="select-content"],
 [data-radix-popper-content-wrapper] > [data-slot="tooltip-content"] {
-  zoom: var(--tolaria-overlay-zoom-factor, 1);
+  zoom: var(--metis-overlay-zoom-factor, 1);
 }
 
 :root,
@@ -35,7 +35,7 @@
 
   /* --- Semantic surfaces (light mode) --- */
   --surface-app: #FFFFFF;
-  --surface-sidebar: #F7F6F3;
+  --surface-sidebar: #F6F5ED;
   --surface-panel: #FFFFFF;
   --surface-card: #FFFFFF;
   --surface-popover: #FFFFFF;
@@ -60,24 +60,24 @@
   --border-strong: #D9D9D6;
   --border-input: #E9E9E7;
   --border-dialog: #E9E9E7;
-  --border-focus: #155DFF;
+  --border-focus: #17463F;
 
   /* --- Interaction states (light mode) --- */
   --state-hover: #EBEBEA;
   --state-hover-subtle: #F0F0EF;
-  --state-selected: #E8F4FE;
-  --state-selected-strong: #D8ECFE;
+  --state-selected: #E6EEE7;
+  --state-selected-strong: #D3E4D9;
   --editor-selection: var(--state-selected);
-  --state-active: #E8F4FE;
-  --state-focus-ring: #155DFF;
-  --state-drag-target: #155DFF18;
+  --state-active: #E6EEE7;
+  --state-focus-ring: #17463F;
+  --state-drag-target: #17463F18;
   --state-disabled: #F0F0EF;
 
   /* --- Accent roles (light mode) --- */
-  --accent-blue: #155DFF;
-  --accent-blue-bg: #155DFF18;
-  --accent-blue-hover: #0D4AD6;
-  --accent-blue-light: #155DFF14;
+  --accent-blue: #17463F;
+  --accent-blue-bg: #17463F18;
+  --accent-blue-hover: #103A33;
+  --accent-blue-light: #17463F14;
   --accent-green: #38A169;
   --accent-green-light: rgba(56, 161, 105, 0.1);
   --accent-orange: #D9730D;
@@ -223,7 +223,7 @@
   --border-strong: #46433B;
   --border-input: #3A3832;
   --border-dialog: #3A3832;
-  --border-focus: #78A4FF;
+  --border-focus: #79B9A5;
 
   /* --- Interaction states (dark mode) --- */
   --state-hover: #2D2B27;
@@ -232,12 +232,12 @@
   --state-selected-strong: #25415F;
   --editor-selection: #3A63A0;
   --state-active: #203A55;
-  --state-focus-ring: #78A4FF;
+  --state-focus-ring: #79B9A5;
   --state-drag-target: rgba(120, 164, 255, 0.2);
   --state-disabled: #292824;
 
   /* --- Accent roles (dark mode) --- */
-  --accent-blue: #78A4FF;
+  --accent-blue: #79B9A5;
   --accent-blue-bg: rgba(120, 164, 255, 0.2);
   --accent-blue-hover: #9BBEFF;
   --accent-blue-light: rgba(120, 164, 255, 0.16);

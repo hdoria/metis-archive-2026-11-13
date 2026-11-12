@@ -3,7 +3,7 @@ import { parseOptionalManagedVaultAlias } from './managedVaultAlias'
 export type ManagedLocalVault = { id: string; label: string; directory: string; alias?: string }
 
 export function isManagedLocalDirectory(value: string) {
-  return value === 'Tolaria Vault' || /^Local Vaults\/[a-z0-9-]{1,80}$/u.test(value)
+  return value === 'Metis Vault' || /^Local Vaults\/[a-z0-9-]{1,80}$/u.test(value)
 }
 
 export function parseManagedLocalVaults(value: unknown): ManagedLocalVault[] {

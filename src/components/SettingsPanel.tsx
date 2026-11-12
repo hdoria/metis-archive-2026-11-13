@@ -803,6 +803,7 @@ function SyncAndUpdatesSection({ t, pullInterval, setPullInterval, releaseChanne
           />
         </SettingsRow>
 
+        {platformCapabilities?.updater === false && <p className="text-sm text-muted-foreground">{t('update.unavailable')}</p>}
         {platformCapabilities?.updater !== false && (
           <>
             <SettingsRow label={t('settings.releaseChannel')} description={t('settings.releaseChannelDescription')}>

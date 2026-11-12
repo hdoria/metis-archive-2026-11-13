@@ -3,12 +3,12 @@ import XCTest
 // Opt-in integration acceptance for the owner's authorized simulator session.
 // Clones only; never commits, changes AutoGit, or pushes to the real repository.
 final class TabletAuthenticatedRepositoryTests: XCTestCase {
-  func testAuthenticatedPickerAndLaputaClone() throws {
-    try XCTSkipUnless(ProcessInfo.processInfo.environment["TOLARIA_QA_AUTHENTICATED_CLONE"] == "1", "Requires explicit read-only clone authorization and an existing GitHub session")
+  func testAuthenticatedPickerAndMetisLegacyClone() throws {
+    try XCTSkipUnless(ProcessInfo.processInfo.environment["METIS_QA_AUTHENTICATED_CLONE"] == "1", "Requires explicit read-only clone authorization and an existing GitHub session")
     continueAfterFailure = false
     XCUIDevice.shared.orientation = .landscapeLeft
-    let app = XCUIApplication(bundleIdentifier: "com.tolaria.mobile.dev")
-    app.launchArguments = ["--tolaria-mobile-search", "?source=fixture&qaRun=authenticated-repository"]
+    let app = XCUIApplication(bundleIdentifier: "io.github.hdoria.metis.mobile.dev")
+    app.launchArguments = ["--metis-mobile-search", "?source=fixture&qaRun=authenticated-repository"]
     app.launch()
     let vaults = element(app, "open-mobile-settings")
     XCTAssertTrue(vaults.waitForExistence(timeout: 60))
@@ -22,15 +22,15 @@ final class TabletAuthenticatedRepositoryTests: XCTestCase {
     let search = element(app, "github-repository-search")
     XCTAssertTrue(search.waitForExistence(timeout: 10))
     search.tap()
-    search.typeText("refactoringhq/laputa")
-    let repository = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "refactoringhq/laputa,")).firstMatch
+    search.typeText("hdoria/metis")
+    let repository = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "hdoria/metis,")).firstMatch
     XCTAssertTrue(repository.waitForExistence(timeout: 30))
     XCTAssertGreaterThanOrEqual(repository.frame.height, 64)
     XCTAssertGreaterThan(repository.frame.width, 300)
     capture()
     repository.tap()
     XCTAssertTrue(app.staticTexts["Cloning repository..."].waitForExistence(timeout: 10))
-    let cloned = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@ AND label == %@", "select-vault-", "laputa")).firstMatch
+    let cloned = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@ AND label == %@", "select-vault-", "metislegacy")).firstMatch
     XCTAssertTrue(cloned.waitForExistence(timeout: 600))
     capture()
   }

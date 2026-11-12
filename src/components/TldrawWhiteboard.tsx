@@ -13,8 +13,9 @@ import {
   type TLUserPreferences,
 } from 'tldraw'
 import 'tldraw/tldraw.css'
+import { useDocumentLocale } from './useDocumentLocale'
 import { useDocumentThemeMode } from '../hooks/useDocumentThemeMode'
-import { resolveEffectiveLocale, translate, type AppLocale } from '../lib/i18n'
+import { translate, type AppLocale } from '../lib/i18n'
 import { trackEvent } from '../lib/telemetry'
 import type { ResolvedThemeMode } from '../lib/themeMode'
 import { useWhiteboardUi, whiteboardUiOverrides } from './useWhiteboardUi'
@@ -24,7 +25,7 @@ import { installWhiteboardRuntimeGuards } from './tldrawRuntimeGuards'
 import { useTldrawBoardStore } from './useTldrawBoardStore'
 
 const EMPTY_TLDRAW_TRANSLATION_URL = 'data:application/json;base64,e30K'
-const TOLARIA_TLDRAW_USER_ID = 'tolaria-whiteboard'
+const METIS_TLDRAW_USER_ID = 'metis-whiteboard'
 const WHITEBOARD_FULLSCREEN_BODY_CLASS = 'tldraw-whiteboard-fullscreen-open'
 
 function resolveTldrawAssetUrl(assetUrl: string | undefined): string {
@@ -100,35 +101,13 @@ function cssSize({ height, width }: PixelSize): CSSProperties {
 function tldrawUserPreferences(themeMode: ResolvedThemeMode): TLUserPreferences {
   return {
     ...defaultUserPreferences,
-    id: TOLARIA_TLDRAW_USER_ID,
+    id: METIS_TLDRAW_USER_ID,
     colorScheme: themeMode,
   }
 }
 
 function ignoreTldrawUserPreferencesUpdate(preferences: TLUserPreferences) {
   void preferences
-}
-
-function readDocumentLocale(): AppLocale {
-  if (typeof document === 'undefined') return 'en'
-  return resolveEffectiveLocale(document.documentElement.lang)
-}
-
-function useDocumentLocale(): AppLocale {
-  const [locale, setLocale] = useState(readDocumentLocale)
-
-  useEffect(() => {
-    if (typeof document === 'undefined') return
-
-    const syncLocale = () => setLocale(readDocumentLocale())
-    const observer = new MutationObserver(syncLocale)
-    observer.observe(document.documentElement, { attributeFilter: ['lang'], attributes: true })
-    syncLocale()
-
-    return () => observer.disconnect()
-  }, [])
-
-  return locale
 }
 
 interface WhiteboardRuntimeAlertProps {
@@ -181,13 +160,13 @@ function WhiteboardRuntimeAlerts({
   )
 }
 
-interface TolariaTldrawDialogProps {
+interface MetisTldrawDialogProps {
   dialog: TLUiDialog
   onClose: (id: string) => void
 }
 
 const DIALOG_OPEN_DISMISS_GRACE_MS = 250
-let retainedTolariaTldrawDialogs: TLUiDialog[] = []
+let retainedMetisTldrawDialogs: TLUiDialog[] = []
 
 function useDeferredDialogOpen() {
   const openedAtRef = useRef(0)
@@ -220,17 +199,17 @@ function shouldCloseFromOverlayClick(
   return isOverlayEvent(event) && !dialog.preventBackgroundClose && !mouseDownInsideContent
 }
 
-interface TolariaTldrawDialogContentProps {
+interface MetisTldrawDialogContentProps {
   dialog: TLUiDialog
   mouseDownInsideContentRef: MutableRefObject<boolean>
   onClose: () => void
 }
 
-function TolariaTldrawDialogContent({
+function MetisTldrawDialogContent({
   dialog,
   mouseDownInsideContentRef,
   onClose,
-}: TolariaTldrawDialogContentProps) {
+}: MetisTldrawDialogContentProps) {
   const ModalContent = dialog.component
   const handleClose = () => {
     mouseDownInsideContentRef.current = false
@@ -257,7 +236,7 @@ function TolariaTldrawDialogContent({
   )
 }
 
-const TolariaTldrawDialog = memo(function TolariaTldrawDialog({ dialog, onClose }: TolariaTldrawDialogProps) {
+const MetisTldrawDialog = memo(function MetisTldrawDialog({ dialog, onClose }: MetisTldrawDialogProps) {
   const overlayRef = useRef<HTMLDivElement>(null)
   const mouseDownInsideContentRef = useRef(false)
   const { openedAtRef, readyToOpen } = useDeferredDialogOpen()
@@ -300,7 +279,7 @@ const TolariaTldrawDialog = memo(function TolariaTldrawDialog({ dialog, onClose 
         dir="ltr"
         className="tlui-dialog__overlay"
       >
-        <TolariaTldrawDialogContent
+        <MetisTldrawDialogContent
           dialog={dialog}
           mouseDownInsideContentRef={mouseDownInsideContentRef}
           onClose={closeDialogNow}
@@ -310,16 +289,16 @@ const TolariaTldrawDialog = memo(function TolariaTldrawDialog({ dialog, onClose 
   )
 })
 
-function TolariaTldrawDialogs() {
+function MetisTldrawDialogs() {
   const { dialogs, removeDialog } = useDialogs()
-  const requestedDialogs = useValue('tolaria tldraw dialogs', () => dialogs.get(), [dialogs])
+  const requestedDialogs = useValue('metis tldraw dialogs', () => dialogs.get(), [dialogs])
   const [visibleDialogs, setVisibleDialogs] = useState<TLUiDialog[]>(() =>
-    retainedTolariaTldrawDialogs.length > 0 ? retainedTolariaTldrawDialogs : dialogs.get()
+    retainedMetisTldrawDialogs.length > 0 ? retainedMetisTldrawDialogs : dialogs.get()
   )
 
   const closeVisibleDialog = useCallback((id: string) => {
-    const nextDialogs = retainedTolariaTldrawDialogs.filter((dialog) => dialog.id !== id)
-    retainedTolariaTldrawDialogs = nextDialogs
+    const nextDialogs = retainedMetisTldrawDialogs.filter((dialog) => dialog.id !== id)
+    retainedMetisTldrawDialogs = nextDialogs
     setVisibleDialogs(nextDialogs)
     removeDialog(id)
   }, [removeDialog])
@@ -327,14 +306,14 @@ function TolariaTldrawDialogs() {
   useEffect(() => {
     if (requestedDialogs.length === 0) return
     // tldraw clears the dialog atom while Radix closes the menu; keep the last requested dialog mounted locally.
-    retainedTolariaTldrawDialogs = requestedDialogs
+    retainedMetisTldrawDialogs = requestedDialogs
     queueMicrotask(() => {
       setVisibleDialogs(requestedDialogs)
     })
   }, [requestedDialogs])
 
   return visibleDialogs.map((dialog) => (
-    <TolariaTldrawDialog
+    <MetisTldrawDialog
       key={dialog.id}
       dialog={dialog}
       onClose={closeVisibleDialog}
@@ -485,7 +464,7 @@ function useWhiteboardRuntime({
     setUserPreferences: ignoreTldrawUserPreferencesUpdate,
     userPreferences,
   })
-  const whiteboardUi = useWhiteboardUi({ locale, Dialogs: TolariaTldrawDialogs })
+  const whiteboardUi = useWhiteboardUi({ locale, Dialogs: MetisTldrawDialogs })
   const handleTldrawMount = useCallback((editor: Editor) =>
     installWhiteboardRuntimeGuards(editor, {
       onIncompatiblePaste: () => {
@@ -535,6 +514,7 @@ export function TldrawWhiteboard(props: TldrawWhiteboardProps) {
       style={cssSize(visibleSize)}
     >
       <Tldraw
+        licenseKey={import.meta.env.VITE_TLDRAW_LICENSE_KEY?.trim() || undefined}
         assetUrls={tldrawAssetUrls}
         components={tldrawUiComponents}
         key={`${props.boardId}:${attempt}`}

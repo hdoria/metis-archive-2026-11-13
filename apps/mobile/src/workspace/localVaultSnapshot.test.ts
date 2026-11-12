@@ -16,8 +16,8 @@ Body ${index}.
     const snapshot = buildLocalVaultWorkspaceSnapshot({
       files,
       maxNotes: 2,
-      vaultLabel: 'Laputa',
-      vaultPath: '/Users/luca/Laputa',
+      vaultLabel: 'MetisLegacy',
+      vaultPath: '/Users/luca/MetisLegacy',
     })
 
     expect(snapshot.notes.map((note) => note.title)).toEqual(['Note 4', 'Note 3'])
@@ -65,8 +65,8 @@ _archived: true
 # Archived Favorite
 `, 40),
       ],
-      vaultLabel: 'Laputa',
-      vaultPath: '/Users/luca/Laputa',
+      vaultLabel: 'MetisLegacy',
+      vaultPath: '/Users/luca/MetisLegacy',
     })
 
     expect(snapshot.sidebarSections.find((section) => section.id === 'favorites')?.items?.map((item) => item.label)).toEqual([
@@ -98,8 +98,8 @@ type: Type
 # Project
 `),
       ],
-      vaultLabel: 'Laputa',
-      vaultPath: '/Users/luca/Laputa',
+      vaultLabel: 'MetisLegacy',
+      vaultPath: '/Users/luca/MetisLegacy',
     })
 
     expect(snapshot.notes).toEqual([])
@@ -142,8 +142,8 @@ _archived: true
 # Old
 `, 4),
       ],
-      vaultLabel: 'Laputa',
-      vaultPath: '/Users/luca/Laputa',
+      vaultLabel: 'MetisLegacy',
+      vaultPath: '/Users/luca/MetisLegacy',
     })
 
     expect(snapshot.source).toMatchObject({ totalNotes: 5, visibleNotes: 1 })
@@ -185,8 +185,8 @@ _organized: false
 # Pasta
 `),
       ],
-      vaultLabel: 'Laputa',
-      vaultPath: '/Users/luca/Laputa',
+      vaultLabel: 'MetisLegacy',
+      vaultPath: '/Users/luca/MetisLegacy',
     })
 
     expect(snapshot.typeDefinitions?.Recipe).toBeUndefined()
@@ -227,8 +227,8 @@ _organized: false
 # Active Note
 `),
       ],
-      vaultLabel: 'Laputa',
-      vaultPath: '/Users/luca/Laputa',
+      vaultLabel: 'MetisLegacy',
+      vaultPath: '/Users/luca/MetisLegacy',
     })
 
     expect(snapshot.views?.map((view) => view.definition.name)).toEqual(['Active Projects'])
@@ -241,10 +241,10 @@ _organized: false
     })
   })
 
-  it('loads legacy desktop saved views from .laputa/views for read-only mobile snapshots', () => {
+  it('loads legacy desktop saved views from .metislegacy/views for read-only mobile snapshots', () => {
     const snapshot = buildLocalVaultWorkspaceSnapshot({
       files: [
-        vaultFile('.laputa/views/legacy-focus.yml', `name: Legacy Focus
+        vaultFile('.metislegacy/views/legacy-focus.yml', `name: Legacy Focus
 filters:
   all:
     - field: type
@@ -259,8 +259,8 @@ _organized: false
 # Active Project
 `),
       ],
-      vaultLabel: 'Laputa',
-      vaultPath: '/Users/luca/Laputa',
+      vaultLabel: 'MetisLegacy',
+      vaultPath: '/Users/luca/MetisLegacy',
     })
 
     expect(snapshot.views?.map((view) => view.definition.name)).toEqual(['Legacy Focus'])
@@ -274,8 +274,8 @@ _organized: false
   it('preserves desktop type document sidebar metadata for mobile navigation', () => {
     const snapshot = buildLocalVaultWorkspaceSnapshot({
       files: typeMetadataVaultFiles(),
-      vaultLabel: 'Laputa',
-      vaultPath: '/Users/luca/Laputa',
+      vaultLabel: 'MetisLegacy',
+      vaultPath: '/Users/luca/MetisLegacy',
     })
 
     expect(snapshot.typeDefinitions?.Project).toMatchObject({
@@ -326,8 +326,8 @@ Visible: false
 # Project
 `),
       ],
-      vaultLabel: 'Laputa',
-      vaultPath: '/Users/luca/Laputa',
+      vaultLabel: 'MetisLegacy',
+      vaultPath: '/Users/luca/MetisLegacy',
     })
 
     expect(snapshot.typeDefinitions?.Project).toMatchObject({
@@ -351,8 +351,8 @@ _icon: tag
 # Project
 `),
       ],
-      vaultLabel: 'Laputa',
-      vaultPath: '/Users/luca/Laputa',
+      vaultLabel: 'MetisLegacy',
+      vaultPath: '/Users/luca/MetisLegacy',
     })
 
     expect(snapshot.typeDefinitions?.Project?.icon).toBe('tag')
@@ -376,8 +376,8 @@ _archived: 1
 # Hidden
 `),
       ],
-      vaultLabel: 'Laputa',
-      vaultPath: '/Users/luca/Laputa',
+      vaultLabel: 'MetisLegacy',
+      vaultPath: '/Users/luca/MetisLegacy',
     })
 
     const favorite = snapshot.allNotes?.find((note) => note.id === 'Favorite Draft.md')
@@ -406,8 +406,8 @@ _organized: false
 # Scored
 `),
       ],
-      vaultLabel: 'Laputa',
-      vaultPath: '/Users/luca/Laputa',
+      vaultLabel: 'MetisLegacy',
+      vaultPath: '/Users/luca/MetisLegacy',
     })
 
     expect(snapshot.notes[0]?.properties).toContainEqual({
@@ -440,8 +440,8 @@ _archived: true
 # Old Project
 `),
       ],
-      vaultLabel: 'Laputa',
-      vaultPath: '/Users/luca/Laputa',
+      vaultLabel: 'MetisLegacy',
+      vaultPath: '/Users/luca/MetisLegacy',
     })
 
     expect(snapshot.sidebarSections.find((section) => section.id === 'primary')?.items).toEqual([
@@ -470,8 +470,8 @@ _archived: true
         vaultFile('Writing/Projects/Active Project.md', '# Active Project\n'),
       ],
       folderPaths: ['Writing', 'Writing/Empty'],
-      vaultLabel: 'Laputa',
-      vaultPath: '/Users/luca/Laputa',
+      vaultLabel: 'MetisLegacy',
+      vaultPath: '/Users/luca/MetisLegacy',
     })
 
     expect(snapshot.folderPaths).toEqual(['Writing', 'Writing/Empty'])

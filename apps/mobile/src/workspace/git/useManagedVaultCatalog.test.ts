@@ -81,21 +81,21 @@ describe('saved vault startup recovery', () => {
     vi.mocked(updateManagedGitCatalog).mockImplementation(async update => {
       return update(catalog)
     })
-    await act(async () => { await current().updateAlias(vault.id, '  Laputa / Notes  ') })
-    expect(current().vaults[0].alias).toBe('laputa-notes')
-    expect(current().restored?.selection).toMatchObject({ catalogVaultId: vault.id, vaultAlias: 'laputa-notes' })
+    await act(async () => { await current().updateAlias(vault.id, '  MetisLegacy / Notes  ') })
+    expect(current().vaults[0].alias).toBe('metislegacy-notes')
+    expect(current().restored?.selection).toMatchObject({ catalogVaultId: vault.id, vaultAlias: 'metislegacy-notes' })
   })
 
   it('adds a stable suffix when a custom slug collides with another vault', async () => {
     const current = await mountCatalog()
-    const collidingCatalog = { ...catalog, vaults: [vault, { ...vault, id: 'second', label: 'Laputa Notes' }] }
+    const collidingCatalog = { ...catalog, vaults: [vault, { ...vault, id: 'second', label: 'MetisLegacy Notes' }] }
     vi.mocked(updateManagedGitCatalog).mockImplementation(async update => update(collidingCatalog))
-    await act(async () => { await current().updateAlias(vault.id, 'Laputa Notes') })
-    expect(current().vaults[0].alias).toBe('laputa-notes')
+    await act(async () => { await current().updateAlias(vault.id, 'MetisLegacy Notes') })
+    expect(current().vaults[0].alias).toBe('metislegacy-notes')
     expect(current().restored?.selection?.vaultAlias).toBe(
       mobileWorkspaceDeepLinkSlug(current().vaults[0], current().vaults),
     )
-    expect(current().restored?.selection?.vaultAlias).toMatch(/^laputa-notes-[a-z0-9]{6}$/u)
+    expect(current().restored?.selection?.vaultAlias).toMatch(/^metislegacy-notes-[a-z0-9]{6}$/u)
   })
 
   it('uses the refreshed catalog slug for an active vault selection override', async () => {

@@ -1,6 +1,6 @@
 ---
 type: Event
-belongs_to: "[[25q1-laputa-v1]]"
+belongs_to: "[[25q1-metislegacy-v1]]"
 related_to:
   - "[[person-luca-rossi]]"
   - "[[person-matteo-cellini]]"

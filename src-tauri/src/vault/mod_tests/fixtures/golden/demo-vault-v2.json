@@ -1,32 +1,32 @@
 [
   {
-    "path": "24q4-laputa-start.md",
-    "filename": "24q4-laputa-start.md",
-    "title": "Start Laputa App Project",
+    "path": "24q4-metislegacy-start.md",
+    "filename": "24q4-metislegacy-start.md",
+    "title": "Start MetisLegacy App Project",
     "isA": "Project",
     "aliases": [
-      "[[Start Laputa App Project]]"
+      "[[Start MetisLegacy App Project]]"
     ],
     "belongsTo": [
       "[[24q4]]"
     ],
     "status": "Done",
-    "fileSize": 443,
-    "snippet": "The original spike that proved Tolaria could read a markdown vault, render note metadata, and support keyboard-first navigation. Set the initial four-panel layo...",
+    "fileSize": 456,
+    "snippet": "The original spike that proved Metis could read a markdown vault, render note metadata, and support keyboard-first navigation. Set the initial four-panel layout...",
     "relationships": {
       "owner": [
         "[[person-luca-rossi]]"
       ],
-      "Type": [
-        "[[project]]"
-      ],
       "belongs_to": [
         "[[24q4]]"
+      ],
+      "Type": [
+        "[[project]]"
       ]
     },
     "wordCount": 38,
     "outgoingLinks": [
-      "25q1-laputa-v1"
+      "25q1-metislegacy-v1"
     ],
     "hasH1": true,
     "fileKind": "markdown"
@@ -40,51 +40,51 @@
       "[[Q4 2024]]"
     ],
     "status": "Done",
-    "fileSize": 320,
-    "snippet": "The quarter where the Laputa prototype became real enough to replace sketches and notes. Started 24q4-laputa-start as the first working app spike. Captured the ...",
+    "fileSize": 335,
+    "snippet": "The quarter where the MetisLegacy prototype became real enough to replace sketches and notes. Started 24q4-metislegacy-start as the first working app spike. Cap...",
     "relationships": {
+      "has": [
+        "[[24q4-metislegacy-start]]"
+      ],
       "Type": [
         "[[quarter]]"
-      ],
-      "has": [
-        "[[24q4-laputa-start]]"
       ]
     },
     "wordCount": 29,
     "outgoingLinks": [
-      "24q4-laputa-start"
+      "24q4-metislegacy-start"
     ],
     "hasH1": true,
     "fileKind": "markdown"
   },
   {
-    "path": "25q1-laputa-v1.md",
-    "filename": "25q1-laputa-v1.md",
-    "title": "Laputa App V1",
+    "path": "25q1-metislegacy-v1.md",
+    "filename": "25q1-metislegacy-v1.md",
+    "title": "MetisLegacy App V1",
     "isA": "Project",
     "aliases": [
-      "[[Laputa App V1]]"
+      "[[MetisLegacy App V1]]"
     ],
     "belongsTo": [
       "[[25q1]]"
     ],
     "status": "Done",
-    "fileSize": 392,
+    "fileSize": 407,
     "snippet": "The first usable release for daily browsing, quick open, and note-property editing. Shipped the working command palette. Made the inspector practical for real f...",
     "relationships": {
-      "belongs_to": [
-        "[[25q1]]"
-      ],
       "Type": [
         "[[project]]"
       ],
       "owner": [
         "[[person-luca-rossi]]"
+      ],
+      "belongs_to": [
+        "[[25q1]]"
       ]
     },
     "wordCount": 31,
     "outgoingLinks": [
-      "25q2-laputa-v2"
+      "25q2-metislegacy-v2"
     ],
     "hasH1": true,
     "fileKind": "markdown"
@@ -98,14 +98,14 @@
       "[[Q1 2025]]"
     ],
     "status": "Done",
-    "fileSize": 201,
-    "snippet": "The first period where Laputa was usable for daily navigation, quick open, and inspector flows.",
+    "fileSize": 211,
+    "snippet": "The first period where MetisLegacy was usable for daily navigation, quick open, and inspector flows.",
     "relationships": {
+      "has": [
+        "[[25q1-metislegacy-v1]]"
+      ],
       "Type": [
         "[[quarter]]"
-      ],
-      "has": [
-        "[[25q1-laputa-v1]]"
       ]
     },
     "wordCount": 15,
@@ -113,39 +113,39 @@
     "fileKind": "markdown"
   },
   {
-    "path": "25q2-laputa-v2.md",
-    "filename": "25q2-laputa-v2.md",
-    "title": "Laputa App V2",
+    "path": "25q2-metislegacy-v2.md",
+    "filename": "25q2-metislegacy-v2.md",
+    "title": "MetisLegacy App V2",
     "isA": "Project",
     "aliases": [
-      "[[Laputa App V2]]"
+      "[[MetisLegacy App V2]]"
     ],
     "belongsTo": [
       "[[25q2]]"
     ],
     "relatedTo": [
-      "[[laputa-qa-reference]]"
+      "[[metislegacy-qa-reference]]"
     ],
     "status": "Active",
-    "fileSize": 463,
+    "fileSize": 483,
     "snippet": "The active polish project used for current QA, especially richer editing, keyboard navigation, and attachment rendering. Tightened the editor interaction model....",
     "relationships": {
-      "related_to": [
-        "[[laputa-qa-reference]]"
-      ],
-      "owner": [
-        "[[person-luca-rossi]]"
-      ],
       "Type": [
         "[[project]]"
       ],
+      "related_to": [
+        "[[metislegacy-qa-reference]]"
+      ],
       "belongs_to": [
         "[[25q2]]"
+      ],
+      "owner": [
+        "[[person-luca-rossi]]"
       ]
     },
     "wordCount": 33,
     "outgoingLinks": [
-      "laputa-qa-reference"
+      "metislegacy-qa-reference"
     ],
     "hasH1": true,
     "fileKind": "markdown"
@@ -159,14 +159,14 @@
       "[[Q2 2025]]"
     ],
     "status": "Active",
-    "fileSize": 191,
+    "fileSize": 196,
     "snippet": "The polish cycle focused on richer editing, faster linking, and better keyboard QA.",
     "relationships": {
-      "has": [
-        "[[25q2-laputa-v2]]"
-      ],
       "Type": [
         "[[quarter]]"
+      ],
+      "has": [
+        "[[25q2-metislegacy-v2]]"
       ]
     },
     "wordCount": 13,
@@ -184,11 +184,11 @@
     "fileSize": 203,
     "snippet": "The business-facing area used in QA to anchor a responsibility with linked procedures and metrics.",
     "relationships": {
-      "Type": [
-        "[[area]]"
-      ],
       "has": [
         "[[responsibility-sponsorships]]"
+      ],
+      "Type": [
+        "[[area]]"
       ]
     },
     "wordCount": 15,
@@ -196,10 +196,10 @@
     "fileKind": "markdown"
   },
   {
-    "path": "attachments/laputa-reference.png",
-    "filename": "laputa-reference.png",
-    "title": "laputa-reference.png",
-    "fileSize": 705442,
+    "path": "attachments/metislegacy-reference.png",
+    "filename": "metislegacy-reference.png",
+    "title": "metislegacy-reference.png",
+    "fileSize": 973131,
     "snippet": "",
     "wordCount": 0,
     "hasH1": false,
@@ -211,20 +211,20 @@
     "title": "Team sync — 2025-01-13",
     "isA": "Event",
     "belongsTo": [
-      "[[25q1-laputa-v1]]"
+      "[[25q1-metislegacy-v1]]"
     ],
     "relatedTo": [
       "[[person-luca-rossi]]",
       "[[person-matteo-cellini]]"
     ],
-    "fileSize": 287,
+    "fileSize": 292,
     "snippet": "Short checkpoint on V1 priorities: stabilize quick open, tighten keyboard navigation, and keep the inspector fast.",
     "relationships": {
-      "belongs_to": [
-        "[[25q1-laputa-v1]]"
-      ],
       "Type": [
         "[[event]]"
+      ],
+      "belongs_to": [
+        "[[25q1-metislegacy-v1]]"
       ],
       "related_to": [
         "[[person-luca-rossi]]",
@@ -235,31 +235,6 @@
     "properties": {
       "date": "2025-01-13"
     },
-    "hasH1": true,
-    "fileKind": "markdown"
-  },
-  {
-    "path": "laputa-qa-reference.md",
-    "filename": "laputa-qa-reference.md",
-    "title": "Laputa QA Reference",
-    "isA": "Note",
-    "aliases": [
-      "[[Laputa QA Reference]]"
-    ],
-    "relatedTo": [
-      "[[25q2-laputa-v2]]"
-    ],
-    "fileSize": 407,
-    "snippet": "This note anchors the fixture's binary attachment scenario and gives native QA a simple note with an embedded image. !Fixture reference image Use this note to c...",
-    "relationships": {
-      "related_to": [
-        "[[25q2-laputa-v2]]"
-      ],
-      "Type": [
-        "[[note]]"
-      ]
-    },
-    "wordCount": 44,
     "hasH1": true,
     "fileKind": "markdown"
   },
@@ -320,6 +295,51 @@
     "fileKind": "markdown"
   },
   {
+    "path": "metis-sheet-prototype-sample.md",
+    "filename": "metis-sheet-prototype-sample.md",
+    "title": "Metis Sheet Prototype Sample",
+    "isA": "Note",
+    "fileSize": 507,
+    "snippet": "Metric,January,February,March,Quarter Subscriptions,1200,1350,1500,=SUM(B2:D2) Services,800,900,700,=SUM(B3:D3) Expenses,650,700,760,=SUM(B4:D4) Net,=B2+B3-B4,=...",
+    "relationships": {
+      "Type": [
+        "[[note]]"
+      ]
+    },
+    "display": "sheet",
+    "wordCount": 43,
+    "properties": {
+      "tags": "spreadsheet"
+    },
+    "hasH1": false,
+    "fileKind": "markdown"
+  },
+  {
+    "path": "metislegacy-qa-reference.md",
+    "filename": "metislegacy-qa-reference.md",
+    "title": "MetisLegacy QA Reference",
+    "isA": "Note",
+    "aliases": [
+      "[[MetisLegacy QA Reference]]"
+    ],
+    "relatedTo": [
+      "[[25q2-metislegacy-v2]]"
+    ],
+    "fileSize": 427,
+    "snippet": "This note anchors the fixture's binary attachment scenario and gives native QA a simple note with an embedded image. !Fixture reference image Use this note to c...",
+    "relationships": {
+      "related_to": [
+        "[[25q2-metislegacy-v2]]"
+      ],
+      "Type": [
+        "[[note]]"
+      ]
+    },
+    "wordCount": 44,
+    "hasH1": true,
+    "fileKind": "markdown"
+  },
+  {
     "path": "note-on-clear-prose.md",
     "filename": "note-on-clear-prose.md",
     "title": "On Clear Prose",
@@ -346,8 +366,8 @@
     "aliases": [
       "[[Luca Rossi]]"
     ],
-    "fileSize": 168,
-    "snippet": "Owns the Laputa product work and remains the primary owner on the fixture's project notes.",
+    "fileSize": 173,
+    "snippet": "Owns the MetisLegacy product work and remains the primary owner on the fixture's project notes.",
     "relationships": {
       "Type": [
         "[[person]]"
@@ -399,11 +419,11 @@
       "owner": [
         "[[person-matteo-cellini]]"
       ],
-      "belongs_to": [
-        "[[responsibility-sponsorships]]"
-      ],
       "Type": [
         "[[procedure]]"
+      ],
+      "belongs_to": [
+        "[[responsibility-sponsorships]]"
       ]
     },
     "wordCount": 29,
@@ -430,11 +450,11 @@
     "fileSize": 389,
     "snippet": "Turn a signed sponsor into a smooth first placement with minimal back-and-forth. Confirm the publication date. Review copy and assets. Hand off recurring commun...",
     "relationships": {
-      "belongs_to": [
-        "[[responsibility-sponsorships]]"
-      ],
       "Type": [
         "[[procedure]]"
+      ],
+      "belongs_to": [
+        "[[responsibility-sponsorships]]"
       ],
       "owner": [
         "[[person-luca-rossi]]"
@@ -488,19 +508,19 @@
     "fileSize": 547,
     "snippet": "The compact responsibility used to verify that wikilink-valued fields render as relationships instead of plain text properties. status stays a normal property. ...",
     "relationships": {
-      "has_procedures": [
-        "[[procedure-quarterly-sponsor-outreach]]",
-        "[[procedure-sponsor-onboarding]]"
+      "has_measures": [
+        "[[measure-sponsorship-mrr]]",
+        "[[measure-close-rate]]"
       ],
       "belongs_to": [
         "[[area-building]]"
       ],
+      "has_procedures": [
+        "[[procedure-quarterly-sponsor-outreach]]",
+        "[[procedure-sponsor-onboarding]]"
+      ],
       "Type": [
         "[[responsibility]]"
-      ],
-      "has_measures": [
-        "[[measure-sponsorship-mrr]]",
-        "[[measure-close-rate]]"
       ]
     },
     "wordCount": 31,
@@ -524,26 +544,6 @@
     },
     "wordCount": 73,
     "hasH1": true,
-    "fileKind": "markdown"
-  },
-  {
-    "path": "tolaria-sheet-prototype-sample.md",
-    "filename": "tolaria-sheet-prototype-sample.md",
-    "title": "Tolaria Sheet Prototype Sample",
-    "isA": "Note",
-    "fileSize": 507,
-    "snippet": "Metric,January,February,March,Quarter Subscriptions,1200,1350,1500,=SUM(B2:D2) Services,800,900,700,=SUM(B3:D3) Expenses,650,700,760,=SUM(B4:D4) Net,=B2+B3-B4,=...",
-    "relationships": {
-      "Type": [
-        "[[note]]"
-      ]
-    },
-    "display": "sheet",
-    "wordCount": 43,
-    "properties": {
-      "tags": "spreadsheet"
-    },
-    "hasH1": false,
     "fileKind": "markdown"
   },
   {

@@ -1,4 +1,4 @@
-# Tolaria Web S2: testing the editor on a real iPad and iPhone
+# Metis Web S2: testing the editor on a real iPad and iPhone
 
 Spike S2 (TOL-6). The question is whether BlockNote is usable in Safari on iOS and iPadOS. Emulation in Playwright WebKit (see [s1-tauri-inventory.md](s1-tauri-inventory.md)) proves the bundle loads and accepts synthetic typing; it says nothing about the virtual keyboard, IME, selection handles or paste. Those need hands on a device.
 
@@ -31,15 +31,15 @@ Serve it to a device over Tailscale (recommended, works from anywhere, nothing p
 
 ```bash
 tailscale ip -4                                   # e.g. 100.x.y.z
-TOLARIA_WEB_HOST="$(tailscale ip -4)" pnpm preview:web
+METIS_WEB_HOST="$(tailscale ip -4)" pnpm preview:web
 # on the iPad or iPhone (Tailscale app connected): http://100.x.y.z:4173
 ```
 
 Binding to the Tailscale address keeps the server off every other interface. To use the MagicDNS name instead of the IP, allow that host name:
 
 ```bash
-TOLARIA_WEB_HOST="$(tailscale ip -4)" \
-TOLARIA_WEB_ALLOWED_HOSTS="agent-claude.your-tailnet.ts.net" \
+METIS_WEB_HOST="$(tailscale ip -4)" \
+METIS_WEB_ALLOWED_HOSTS="agent-claude.your-tailnet.ts.net" \
 pnpm preview:web
 ```
 
@@ -52,9 +52,9 @@ pnpm preview:web --host 192.168.1.20      # this machine's LAN address
 
 | Setting | Default | Purpose |
 |---|---|---|
-| `TOLARIA_WEB_HOST` or `--host <addr>` | `127.0.0.1` | Address to bind |
-| `TOLARIA_WEB_PORT` or `--port <n>` | `4173` | Port (the server exits if it is taken) |
-| `TOLARIA_WEB_ALLOWED_HOSTS` | empty | Comma-separated host names accepted in the `Host` header. IP addresses are always accepted |
+| `METIS_WEB_HOST` or `--host <addr>` | `127.0.0.1` | Address to bind |
+| `METIS_WEB_PORT` or `--port <n>` | `4173` | Port (the server exits if it is taken) |
+| `METIS_WEB_ALLOWED_HOSTS` | empty | Comma-separated host names accepted in the `Host` header. IP addresses are always accepted |
 
 Stop with `Ctrl+C`, then confirm nothing is listening:
 
@@ -82,7 +82,7 @@ All ten checks should pass before spending device time. Screenshots and `layout.
 
 Run on the iPad first, then the iPhone. For each row record pass, fail or partial, the device and OS version, and a screenshot or screen recording for anything that is not a clean pass.
 
-Open the note **Build Laputa App** (a long note with headings, nested lists, code and links) unless a row says otherwise.
+Open the note **Build MetisLegacy App** (a long note with headings, nested lists, code and links) unless a row says otherwise.
 
 ### Typing
 
@@ -165,7 +165,7 @@ Open the note **Build Laputa App** (a long note with headings, nested lists, cod
 
 | # | Check | Expected |
 |---|---|---|
-| L1 | Scroll **Build Laputa App** top to bottom with a flick | Smooth, no blank regions |
+| L1 | Scroll **Build MetisLegacy App** top to bottom with a flick | Smooth, no blank regions |
 | L2 | Scroll while the keyboard is open | Caret is not dragged back into view against the scroll |
 | L3 | Tap the status bar area to jump to the top | Jumps, or record that it does not |
 | L4 | Rubber-band at the top and bottom | The page itself does not bounce or reveal a white gap |

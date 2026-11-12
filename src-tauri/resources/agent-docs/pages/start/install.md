@@ -1,60 +1,29 @@
-# Install Tolaria
+# Install Métis
 
 Source: start/install.md
 URL: /start/install
 
-# Install Tolaria
+# Install Métis
 
-Tolaria is available on desktop (macOS, Windows, Linux) and mobile (iPhone, iPad).
+Métis is available as source code. Packaged builds will appear on [GitHub Releases](https://github.com/hdoria/metis/releases) when they are ready. This fork does not currently provide a Homebrew package or a public TestFlight invitation.
 
-Desktop builds are published through GitHub Releases and Homebrew. macOS is the primary day-to-day development target, with Windows and Linux builds supported through the release pipeline and fixed as platform issues are found.
+Public distribution is pending a free tldraw license for the included whiteboard editor. Local development retains the vendor’s own license checks.
 
-The mobile app for iOS is currently in beta via TestFlight.
+## Build from source
 
-## Download
+Install Node.js, pnpm, Rust, and the [Tauri platform prerequisites](https://v2.tauri.app/start/prerequisites/).
 
-Use the latest stable release unless you are intentionally testing pre-release builds:
-
-- <a href="https://tolaria.md/download/" target="_self">Download the latest stable build</a>
-- [Browse all GitHub releases](https://github.com/refactoringhq/tolaria/releases)
-- <a href="https://tolaria.md/releases/" target="_self">Read the release notes</a>
-
-## Homebrew
-
-On macOS you can install the cask:
-
-```bash
-brew install --cask tolaria
+```sh
+git clone https://github.com/hdoria/metis.git
+cd metis
+pnpm install --frozen-lockfile
+pnpm tauri dev
 ```
 
-## Mobile (iPhone and iPad)
+Use `pnpm dev` for the browser development preview. The native app is needed to verify desktop integration with local files and system Git.
 
-Tolaria for iOS is in **beta**. The mobile app brings Tolaria's core features to iPhone and iPad:
+## First launch
 
-- **WYSIWYG Markdown editor** — Fast, native rich-text editing
-- **Real git integration** — Auto-commit on save, with merge support for multi-device workflows  
-- **Sync with desktop** — Vaults sync through iCloud or Files and share the same git repository
+Open Métis, create a starter vault or choose an existing Markdown folder. Use `Cmd+K` on macOS or `Ctrl+K` on Windows and Linux to open the command palette.
 
-To join the beta, install Apple's TestFlight app, then open the [public TestFlight invite](https://testflight.apple.com/join/7aPD4GAB) on your iPhone or iPad.
-
-## Platform Status
-
-| Platform | Status | Notes |
-| --- | --- | --- |
-| macOS | Primary | Apple Silicon and Intel builds are published. Homebrew is available. |
-| Windows | Supported, early | NSIS installers and updater bundles are Tauri-signed. Authenticode publisher signing will be added after Windows certificate provisioning; company-managed SmartScreen, Defender, or WDAC policies can still require IT approval before install. |
-| Linux | Supported, early | AppImage, deb, and RPM artifacts are published. Desktop behavior depends on distribution WebKitGTK and input-method integration. |
-| iOS (iPhone, iPad) | Beta | Public beta via [TestFlight](https://testflight.apple.com/join/7aPD4GAB). |
-
-See [Supported Platforms](/reference/supported-platforms) for the current support policy.
-
-## Managed Windows Devices
-
-Do not disable SmartScreen or Windows Security to install Tolaria. On a managed Windows device, install Tolaria through your normal software approval path if policy blocks unsigned or unknown-publisher installers. After Authenticode provisioning is complete, validate that the downloaded installer has a valid Tolaria publisher signature before installing.
-
-## After Installing
-
-1. Open Tolaria.
-2. Choose the Getting Started vault if you want a guided sample.
-3. Or open an existing folder of Markdown files as a vault.
-4. Use the command palette with `Cmd+K` on macOS or `Ctrl+K` on Linux and Windows.
+See [First Launch](/start/first-launch) and [Supported Platforms](/reference/supported-platforms).

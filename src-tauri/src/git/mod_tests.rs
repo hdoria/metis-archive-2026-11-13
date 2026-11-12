@@ -391,7 +391,7 @@ fn test_ensure_gitignore_creates_file() {
 
     let content = fs::read_to_string(dir.path().join(".gitignore")).unwrap();
     assert!(content.contains(".DS_Store"));
-    assert!(content.contains(".laputa/settings.json"));
+    assert!(content.contains(".metis/settings.json"));
 }
 
 #[test]
@@ -504,7 +504,7 @@ fn test_init_repo_creates_initial_commit_when_signing_is_misconfigured() {
         .output()
         .unwrap();
     git_command()
-        .args(["config", "gpg.program", "/missing/tolaria-test-gpg"])
+        .args(["config", "gpg.program", "/missing/metis-test-gpg"])
         .current_dir(&vault)
         .output()
         .unwrap();
@@ -560,13 +560,13 @@ fn test_init_repo_creates_gitignore() {
         ".gitignore should exclude .DS_Store"
     );
     assert!(
-        content.contains(".laputa/settings.json"),
+        content.contains(".metis/settings.json"),
         ".gitignore should exclude settings.json"
     );
     // Cache is now stored outside the vault — no need for .gitignore entry
     assert!(
-        !content.contains(".laputa-cache.json"),
-        ".gitignore should NOT contain .laputa-cache.json (cache is external)"
+        !content.contains(".metislegacy-cache.json"),
+        ".gitignore should NOT contain .metislegacy-cache.json (cache is external)"
     );
 }
 

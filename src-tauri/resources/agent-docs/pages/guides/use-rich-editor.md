@@ -5,7 +5,7 @@ URL: /guides/use-rich-editor
 
 # Use The Rich Editor
 
-Tolaria's rich editor gives you block-based editing while keeping the note as portable Markdown. Use these workflows to move quickly without losing access to the underlying file.
+Métis's rich editor gives you block-based editing while keeping the note as portable Markdown. Use these workflows to move quickly without losing access to the underlying file.
 
 ## Insert Common Blocks
 
@@ -36,7 +36,7 @@ Collapsed heading content travels with its heading when you copy, cut, delete, o
 
 Headings can hide the content below them until the next heading at the same or higher level. Use the disclosure control beside a heading, or select the heading block and press `Cmd+Enter` on macOS or `Ctrl+Enter` on Windows and Linux.
 
-Collapsing a section changes only the editor presentation. Tolaria does not add private folding syntax to the Markdown file.
+Collapsing a section changes only the editor presentation. Métis does not add private folding syntax to the Markdown file.
 
 ## Write Code
 
@@ -46,14 +46,14 @@ Choose the language from the code block control to enable syntax highlighting. L
 
 ## Add Callouts
 
-Tolaria renders Obsidian-style callouts and GitHub alert syntax as editable blocks while preserving the Markdown:
+Métis renders Obsidian-style callouts and GitHub alert syntax as editable blocks while preserving the Markdown:
 
 ```md
 > [!NOTE] Local-first
-> This note stays readable outside Tolaria.
+> This note stays readable outside Métis.
 ```
 
-Callouts stay expanded in the rich editor. Use a plain marker when you want Tolaria to render an editable callout:
+Callouts stay expanded in the rich editor. Use a plain marker when you want Métis to render an editable callout:
 
 ```md
 > [!TIP] Optional details
@@ -64,7 +64,7 @@ Obsidian's `+` and `-` fold markers are not supported yet; blocks that use them 
 
 ## Highlight Text
 
-Select text and use the formatting toolbar, or press `Cmd+Shift+M` on macOS and `Ctrl+Shift+M` on Windows and Linux. Tolaria saves highlights as `==highlighted text==`.
+Select text and use the formatting toolbar, or press `Cmd+Shift+M` on macOS and `Ctrl+Shift+M` on Windows and Linux. Métis saves highlights as `==highlighted text==`.
 
 ## Check The Markdown
 

@@ -7,8 +7,8 @@ import type { MobileNote, MobileWorkspaceSnapshot } from './mobileWorkspaceModel
 const request = {
   source: 'native' as const,
   vaultAlias: 'synthetic-713',
-  vaultLabel: 'Tolaria-QA-SYNTHETIC-713',
-  vaultRootUri: 'file:///synthetic/Tolaria-QA-SYNTHETIC-713',
+  vaultLabel: 'Metis-QA-SYNTHETIC-713',
+  vaultRootUri: 'file:///synthetic/Metis-QA-SYNTHETIC-713',
 }
 
 function emptyLocalFolder(): WorkspaceFileSystem & { files: Map<string, string> } {

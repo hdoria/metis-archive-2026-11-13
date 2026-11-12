@@ -121,12 +121,12 @@ fn build_codex_args_can_request_last_message_output_file() {
             vault_paths: Vec::new(),
             permission_mode: AiAgentPermissionMode::Safe,
         },
-        Some(Path::new("/tmp/tolaria-codex-last-message.txt")),
+        Some(Path::new("/tmp/metis-codex-last-message.txt")),
     ) {
         assert!(args.windows(2).any(|window| window
             == [
                 "--output-last-message",
-                "/tmp/tolaria-codex-last-message.txt",
+                "/tmp/metis-codex-last-message.txt",
             ]));
     }
 }
@@ -148,18 +148,18 @@ fn build_codex_args_uses_resolved_mcp_node_and_ui_bridge_env() {
 
     let command_override = args
         .iter()
-        .find(|arg| arg.starts_with("mcp_servers.tolaria.command="))
-        .expect("Codex should receive a transient Tolaria MCP command");
+        .find(|arg| arg.starts_with("mcp_servers.metis.command="))
+        .expect("Codex should receive a transient Metis MCP command");
 
     assert!(
         !command_override.ends_with(r#""node""#),
-        "Codex MCP command should use Tolaria's resolved Node path, got {command_override}"
+        "Codex MCP command should use Metis's resolved Node path, got {command_override}"
     );
     assert!(
         command_override.contains('/'),
         "Codex MCP command should be an absolute Node path, got {command_override}"
     );
-    assert!(args.iter().any(|arg| arg.contains(r#"WS_UI_PORT="9711""#)));
+    assert!(args.iter().any(|arg| arg.contains(r#"WS_UI_PORT="9731""#)));
 }
 
 #[test]
@@ -226,7 +226,7 @@ fn build_codex_command_avoids_windows_cmd_shim_for_complex_args() {
         vec![
             "exec".to_string(),
             "-c".to_string(),
-            r#"mcp_servers.tolaria.command="C:\\Program Files\\node.exe""#.to_string(),
+            r#"mcp_servers.metis.command="C:\\Program Files\\node.exe""#.to_string(),
         ],
         "/tmp/vault",
     )

@@ -12,7 +12,7 @@ const source = readFileSync(path, "utf8");
 const newNoteOnly = process.argv.includes("--new-note-only");
 const frames = readFrames(source);
 const events = readEvents(source);
-const expectedBuildId = process.env.EXPO_PUBLIC_TOLARIA_MOTION_BUILD_ID ?? null;
+const expectedBuildId = process.env.EXPO_PUBLIC_METIS_MOTION_BUILD_ID ?? null;
 const observedBuildIds = [
 	...[...frames.values()].flat().map((sample) => sample.buildId),
 	...events.map((event) => event.buildId),
@@ -124,7 +124,7 @@ function occurredBefore(event, otherEvent) {
 
 function hasPendingPreparation(prepared) {
 	return (
-		Number(process.env.TOLARIA_MOTION_EXPECT_PREPARATION_DELAY_MS ?? 0) > 0 &&
+		Number(process.env.METIS_MOTION_EXPECT_PREPARATION_DELAY_MS ?? 0) > 0 &&
 		!prepared
 	);
 }
@@ -141,7 +141,7 @@ function startupCreatePassed(report) {
 
 function readFrames(log) {
 	const frames = new Map();
-	for (const payload of payloads(log, "TOLARIA_MOTION_FRAME")) {
+	for (const payload of payloads(log, "METIS_MOTION_FRAME")) {
 		const sample = JSON.parse(payload);
 		const samples = frames.get(sample.id) ?? [];
 		samples.push(sample);
@@ -151,7 +151,7 @@ function readFrames(log) {
 }
 
 function readEvents(log) {
-	return payloads(log, "TOLARIA_MOTION_EVENT").map((payload) =>
+	return payloads(log, "METIS_MOTION_EVENT").map((payload) =>
 		JSON.parse(payload),
 	);
 }

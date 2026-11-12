@@ -4,8 +4,8 @@ final class TabletPrivacyTests: XCTestCase {
   func testUsageConsentPersistsAndCanBeRevoked() {
     continueAfterFailure = false
     XCUIDevice.shared.orientation = .landscapeLeft
-    let app = XCUIApplication(bundleIdentifier: "com.tolaria.mobile.dev")
-    app.launchArguments = ["--tolaria-mobile-search", "?source=fixture&qaRun=privacy"]
+    let app = XCUIApplication(bundleIdentifier: "io.github.hdoria.metis.mobile.dev")
+    app.launchArguments = ["--metis-mobile-search", "?source=fixture&qaRun=privacy"]
     app.launch()
     openSettings(app)
     let consent = element(app, "settings-analytics")

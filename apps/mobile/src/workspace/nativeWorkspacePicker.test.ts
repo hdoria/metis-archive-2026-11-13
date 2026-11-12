@@ -8,11 +8,11 @@ import {
 import type { NativeWorkspaceAccessModule } from './nativeWorkspaceAccess'
 
 describe('native workspace picker', () => {
-  const managedLaputaRecord = {
+  const managedMetisLegacyRecord = {
     index: {
       directories: ['Writing'],
       files: [{
-        absolutePath: 'file:///managed/Tolaria%20Vault/Writing/Launch%20note.md',
+        absolutePath: 'file:///managed/Metis%20Vault/Writing/Launch%20note.md',
         content: '# Launch note\n',
         createdAt: null,
         modifiedAt: 2,
@@ -20,14 +20,14 @@ describe('native workspace picker', () => {
         size: 14,
       }],
     },
-    label: 'Laputa',
-    uri: 'file:///managed/Tolaria%20Vault/',
+    label: 'MetisLegacy',
+    uri: 'file:///managed/Metis%20Vault/',
   }
-  const managedLaputaSelection = {
-    index: managedLaputaRecord.index,
-    vaultAlias: 'laputa',
-    vaultLabel: 'Laputa',
-    vaultRootUri: managedLaputaRecord.uri,
+  const managedMetisLegacySelection = {
+    index: managedMetisLegacyRecord.index,
+    vaultAlias: 'metislegacy',
+    vaultLabel: 'MetisLegacy',
+    vaultRootUri: managedMetisLegacyRecord.uri,
   }
 
   function accessModule(
@@ -42,12 +42,12 @@ describe('native workspace picker', () => {
 
   it('builds native repository requests from picked directories', () => {
     expect(nativeWorkspaceSelectionFromDirectory({
-      name: 'Laputa',
-      uri: 'file:///Users/luca/Laputa/',
+      name: 'MetisLegacy',
+      uri: 'file:///Users/luca/MetisLegacy/',
     })).toEqual({
-      vaultAlias: 'laputa',
-      vaultLabel: 'Laputa',
-      vaultRootUri: 'file:///Users/luca/Laputa/',
+      vaultAlias: 'metislegacy',
+      vaultLabel: 'MetisLegacy',
+      vaultRootUri: 'file:///Users/luca/MetisLegacy/',
     })
   })
 
@@ -69,46 +69,46 @@ describe('native workspace picker', () => {
 
   it('keeps picked directories session-scoped when the import module is unavailable', async () => {
     await expect(pickNativeWorkspaceDirectoryWithPicker(async () => ({
-      name: 'Laputa',
-      uri: 'file:///Users/luca/Laputa/',
+      name: 'MetisLegacy',
+      uri: 'file:///Users/luca/MetisLegacy/',
     }))).resolves.toEqual({
-      vaultAlias: 'laputa',
-      vaultLabel: 'Laputa',
-      vaultRootUri: 'file:///Users/luca/Laputa/',
+      vaultAlias: 'metislegacy',
+      vaultLabel: 'MetisLegacy',
+      vaultRootUri: 'file:///Users/luca/MetisLegacy/',
     })
   })
 
   it('uses the standalone native picker without invoking Expo file-system APIs', async () => {
     const pickDirectory = vi.fn()
     const module = accessModule({
-      pickAndImportWorkspace: vi.fn().mockResolvedValue(managedLaputaRecord),
+      pickAndImportWorkspace: vi.fn().mockResolvedValue(managedMetisLegacyRecord),
     })
 
     await expect(pickNativeWorkspaceDirectoryWithDependencies(pickDirectory, module))
-      .resolves.toEqual(managedLaputaSelection)
+      .resolves.toEqual(managedMetisLegacySelection)
     expect(pickDirectory).not.toHaveBeenCalled()
   })
 
   it('falls back to the Expo picker when the native picker is unavailable', async () => {
-    const pickDirectory = vi.fn().mockResolvedValue({ name: 'Laputa', uri: 'file:///Laputa/' })
+    const pickDirectory = vi.fn().mockResolvedValue({ name: 'MetisLegacy', uri: 'file:///MetisLegacy/' })
     const module = accessModule({
-      importWorkspace: vi.fn().mockResolvedValue(managedLaputaRecord),
+      importWorkspace: vi.fn().mockResolvedValue(managedMetisLegacyRecord),
     })
 
     await expect(pickNativeWorkspaceDirectoryWithDependencies(pickDirectory, module))
-      .resolves.toEqual(managedLaputaSelection)
+      .resolves.toEqual(managedMetisLegacySelection)
     expect(pickDirectory).toHaveBeenCalledOnce()
   })
 
   it('does not open the original folder when a managed import fails', async () => {
-    const pickDirectory = vi.fn().mockResolvedValue({ name: 'Laputa', uri: 'file:///original/' })
+    const pickDirectory = vi.fn().mockResolvedValue({ name: 'MetisLegacy', uri: 'file:///original/' })
     const module = accessModule({ importWorkspace: vi.fn().mockResolvedValue(null) })
     await expect(pickNativeWorkspaceDirectoryWithDependencies(pickDirectory, module))
       .rejects.toThrow('workspaceImportFailed')
   })
 
   it('uses session access only when no native importer exists', async () => {
-    const pickDirectory = vi.fn().mockResolvedValue({ name: 'Laputa', uri: 'file:///original/' })
+    const pickDirectory = vi.fn().mockResolvedValue({ name: 'MetisLegacy', uri: 'file:///original/' })
     await expect(pickNativeWorkspaceDirectoryWithDependencies(pickDirectory, null))
       .resolves.toMatchObject({ vaultRootUri: 'file:///original/' })
   })
@@ -117,17 +117,17 @@ describe('native workspace picker', () => {
     const module = accessModule({
       pickAndImportWorkspace: vi.fn().mockResolvedValue(null),
       restoreWorkspace: vi.fn().mockResolvedValue({
-        index: managedLaputaRecord.index,
+        index: managedMetisLegacyRecord.index,
         label: 'Work Vault',
-        uri: 'file:///managed/Tolaria%20Vault/',
+        uri: 'file:///managed/Metis%20Vault/',
       }),
     })
 
     await expect(restoreNativeWorkspaceDirectory(module)).resolves.toEqual({
-      index: managedLaputaRecord.index,
+      index: managedMetisLegacyRecord.index,
       vaultAlias: 'work-vault',
       vaultLabel: 'Work Vault',
-      vaultRootUri: 'file:///managed/Tolaria%20Vault/',
+      vaultRootUri: 'file:///managed/Metis%20Vault/',
     })
   })
 })

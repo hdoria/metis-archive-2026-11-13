@@ -26,7 +26,7 @@ export const mockEntries: VaultEntry[] = [
 	{
 		path: "/vault/project/build-app.md",
 		filename: "build-app.md",
-		title: "Build Laputa App",
+		title: "Build MetisLegacy App",
 		isA: "Project",
 		aliases: [],
 		belongsTo: [],

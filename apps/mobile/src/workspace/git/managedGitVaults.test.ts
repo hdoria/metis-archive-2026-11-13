@@ -11,8 +11,8 @@ it('restores only validated app-owned vault identifiers and credential-free repo
 })
 
 it('persists a normalized editable alias and rejects malformed saved aliases', () => {
-  const vault = { id: 'vault-123', repositoryUrl: 'https://github.com/team/notes.git', label: 'Notes', alias: 'laputa-notes' }
-  expect(parseManagedGitVaultCatalog(JSON.stringify({ vaults: [vault], activeId: vault.id })).vaults[0].alias).toBe('laputa-notes')
+  const vault = { id: 'vault-123', repositoryUrl: 'https://github.com/team/notes.git', label: 'Notes', alias: 'metislegacy-notes' }
+  expect(parseManagedGitVaultCatalog(JSON.stringify({ vaults: [vault], activeId: vault.id })).vaults[0].alias).toBe('metislegacy-notes')
   expect(() => parseManagedGitVaultCatalog(JSON.stringify({ vaults: [{ ...vault, alias: '../private' }] }))).toThrow()
 })
 

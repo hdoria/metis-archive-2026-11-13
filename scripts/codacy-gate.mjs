@@ -83,7 +83,7 @@ for (const tool of ['opengrep', 'trivy']) {
 }
 
 const reports = partitionApprovedReports(failures, root, {
-  channel: process.env.TOLARIA_OTA_CHANNEL ?? process.env.TOLARIA_UPDATE_CHANNEL,
+  channel: process.env.METIS_OTA_CHANNEL ?? process.env.METIS_UPDATE_CHANNEL,
 })
 for (const report of reports.approved) {
   console.warn(`Owner-approved until October 21: ${report.path}:${report.line} ${report.rule}`)

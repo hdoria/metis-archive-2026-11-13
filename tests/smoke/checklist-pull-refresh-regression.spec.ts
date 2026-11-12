@@ -21,7 +21,7 @@ function trackUnexpectedErrors(page: Page): string[] {
     if (message.type() !== 'error') return
 
     const text = message.text()
-    if (text.includes('ws://localhost:9711')) return
+    if (text.includes('ws://localhost:9731')) return
     errors.push(text)
   })
 

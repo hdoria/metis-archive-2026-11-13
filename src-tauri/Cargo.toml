@@ -1,15 +1,15 @@
 [package]
-name = "tolaria"
+name = "metis"
 version = "0.1.0"
 description = "Personal knowledge and life management app"
-authors = ["Luca Rossi"]
+authors = ["Hugo Doria", "Luca Rossi and contributors"]
 license = "AGPL-3.0-or-later"
-repository = ""
+repository = "https://github.com/hdoria/metis"
 edition = "2021"
 rust-version = "1.77.2"
 
 [lib]
-name = "tolaria_lib"
+name = "metis_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]

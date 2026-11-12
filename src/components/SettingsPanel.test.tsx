@@ -118,10 +118,10 @@ function editWorkspaceNameAndLabel(onUpdateWorkspaceIdentity: ReturnType<typeof 
 
 function editWorkspaceSlug(onUpdateWorkspaceIdentity: ReturnType<typeof vi.fn>) {
   const slugInput = screen.getByLabelText('Vault slug for Personal Notes')
-  fireEvent.change(slugInput, { target: { value: ' Laputa / Main ' } })
-  expect(onUpdateWorkspaceIdentity).not.toHaveBeenCalledWith('/personal', { alias: 'laputa-main' })
+  fireEvent.change(slugInput, { target: { value: ' MetisLegacy / Main ' } })
+  expect(onUpdateWorkspaceIdentity).not.toHaveBeenCalledWith('/personal', { alias: 'metislegacy-main' })
   fireEvent.blur(slugInput)
-  expect(onUpdateWorkspaceIdentity).toHaveBeenCalledWith('/personal', { alias: 'laputa-main' })
+  expect(onUpdateWorkspaceIdentity).toHaveBeenCalledWith('/personal', { alias: 'metislegacy-main' })
 }
 
 describe('SettingsPanel', () => {
@@ -244,7 +244,7 @@ describe('SettingsPanel', () => {
     const keyStorageButton = screen.getByText('No key').closest('button')
     if (!keyStorageButton) throw new Error('Key storage selector button was not rendered')
     fireEvent.pointerDown(keyStorageButton, { button: 0, pointerType: 'mouse' })
-    fireEvent.click(screen.getByRole('option', { name: 'Save locally in Tolaria' }))
+    fireEvent.click(screen.getByRole('option', { name: 'Save locally in Métis' }))
     fireEvent.change(screen.getByLabelText('API key'), { target: { value: 'lm-secret' } })
     fireEvent.click(screen.getByRole('button', { name: 'Add local model' }))
     await waitFor(() => expect(screen.getByText('Ollama · local-llama')).toBeInTheDocument())
@@ -393,7 +393,7 @@ describe('SettingsPanel', () => {
     const confirmation = within(teamRow).getByTestId('settings-workspace-remove-confirm-team')
     expect(screen.queryByTestId('confirm-delete-dialog')).not.toBeInTheDocument()
     expect(confirmation).toHaveTextContent('Remove vault?')
-    expect(confirmation).toHaveTextContent("This removes Team Vault from Tolaria's vault list. Files on disk are not deleted.")
+    expect(confirmation).toHaveTextContent("This removes Team Vault from Métis's vault list. Files on disk are not deleted.")
 
     fireEvent.click(within(confirmation).getByRole('button', { name: 'Cancel' }))
     expect(onRemoveVault).not.toHaveBeenCalled()

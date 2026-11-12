@@ -26,7 +26,7 @@ describe('NoteCodec', () => {
     const doc = await docOf(NOTE)
 
     expect(doc.getText('frontmatter').toString()).toBe('---\ntype: Note\n---\n')
-    expect(doc.getMap('meta').toJSON()).toEqual({ format: 'tolaria.blocknote/1', baseRevision: 'etag-1' })
+    expect(doc.getMap('meta').toJSON()).toEqual({ format: 'metis.blocknote/1', baseRevision: 'etag-1' })
     expect(codec.read(doc)).toBe(await codec.canonical(NOTE))
   })
 
@@ -95,7 +95,7 @@ describe('NoteCodec round trip of the layout around the body (TOL-222)', () => {
     '',
     'The quarter where the prototype became real.',
     '',
-    '- Started [[24q4-laputa-start]] as the first working app spike.',
+    '- Started [[24q4-metislegacy-start]] as the first working app spike.',
     '- Captured the initial panel layout and editor decisions.',
     '',
     '',

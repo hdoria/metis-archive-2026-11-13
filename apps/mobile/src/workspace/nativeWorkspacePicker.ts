@@ -112,7 +112,7 @@ function expoFileSystem(): ExpoFileSystemPickerModule {
 
 function fallbackWorkspaceLabel(uri: string) {
   const segment = uri.replace(/\/+$/u, '').split('/').filter(Boolean).at(-1)
-  if (!segment) return 'Tolaria Vault'
+  if (!segment) return 'Metis Vault'
 
   try {
     return decodeURIComponent(segment)

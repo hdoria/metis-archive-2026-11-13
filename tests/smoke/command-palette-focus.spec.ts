@@ -13,7 +13,7 @@ test("palette shortcut uses app navigation instead of the covered page center", 
     <input placeholder="Type a command..." hidden>
   `);
 	await page.evaluate(() => {
-		window.__laputaTest = {
+		window.__metislegacyTest = {
 			dispatchBrowserMenuCommand: (id) => {
 				document.body.dataset.menuCommand = id;
 			},

@@ -204,15 +204,15 @@ describe('mobile workspace suggestions', () => {
     expect(shouldShowMobileRelationshipCreateTarget(notes, '')).toBe(false)
     expect(shouldShowMobileRelationshipCreateTarget(notes, 'Open Source')).toBe(true)
     expect(shouldShowMobileRelationshipCreateTarget(notes, 'How I Run an Open Source Project')).toBe(false)
-    expect(shouldShowMobileRelationshipCreateTarget(notes, 'Tolaria/Mobile UI/How I Run an Open Source Project')).toBe(false)
-    expect(shouldShowMobileRelationshipCreateTarget(notes, '[[Tolaria/Mobile UI/How I Run an Open Source Project]]')).toBe(false)
+    expect(shouldShowMobileRelationshipCreateTarget(notes, 'Metis/Mobile UI/How I Run an Open Source Project')).toBe(false)
+    expect(shouldShowMobileRelationshipCreateTarget(notes, '[[Metis/Mobile UI/How I Run an Open Source Project]]')).toBe(false)
   })
 
   it('suggests active relationship targets before typing and excludes existing targets', () => {
     const scenario = applyMobileWorkspaceEdit(workspaceScenarioForId('default'), {
       key: 'related_to',
       noteId: 'workflow-orchestration',
-      targetRef: '[[Tolaria/Mobile UI/How I Run an Open Source Project]]',
+      targetRef: '[[Metis/Mobile UI/How I Run an Open Source Project]]',
       targetTitle: 'How I Run an Open Source Project',
       type: 'addRelationship',
     })
@@ -233,8 +233,8 @@ describe('mobile workspace suggestions', () => {
     const selectedNote = notes[2] ?? null
 
     expect(mobileTypeSuggestions(notes, selectedNote, '')).toEqual(['Essay', 'Procedure'])
-    expect(mobileFolderSuggestions(notes, selectedNote, '')).toEqual(['Tolaria/Mobile UI'])
-    expect(mobileFolderSuggestions(notes, selectedNote, 'mobile')).toEqual(['Tolaria/Mobile UI'])
+    expect(mobileFolderSuggestions(notes, selectedNote, '')).toEqual(['Metis/Mobile UI'])
+    expect(mobileFolderSuggestions(notes, selectedNote, 'mobile')).toEqual(['Metis/Mobile UI'])
   })
 
   it('suggests explicit empty folder paths when moving notes', () => {
@@ -277,7 +277,7 @@ describe('mobile workspace suggestions', () => {
     expect(mobileViewValueSuggestions(notes, 'filename', 'workflow')).toEqual(['Workflow Orchestration Essay.md'])
     expect(mobileViewValueSuggestions(notes, 'archived', 'fal')).toEqual(['false'])
     expect(mobileViewValueSuggestions(notes, 'tags', 'design')).toEqual(['Design'])
-    expect(mobileViewValueSuggestions(notes, 'belongs_to', 'mvp')).toContain('Tolaria MVP')
+    expect(mobileViewValueSuggestions(notes, 'belongs_to', 'mvp')).toContain('Metis MVP')
   })
 
   it('suggests Type-defined saved-view fields before they exist on note instances', () => {
@@ -321,7 +321,7 @@ describe('mobile workspace suggestions', () => {
           Priority: 'High',
         },
         relationships: {
-          depends_on: ['[[Tolaria/Mobile UI/How I Run an Open Source Project]]'],
+          depends_on: ['[[Metis/Mobile UI/How I Run an Open Source Project]]'],
         },
       },
     }
@@ -330,8 +330,8 @@ describe('mobile workspace suggestions', () => {
     expect(mobileViewValueSuggestionItems(notes, 'depends_on', 'open', typeDefinitions)).toEqual([
       expect.objectContaining({
         label: 'How I Run an Open Source Project',
-        meta: '[[Tolaria/Mobile UI/How I Run an Open Source Project]]',
-        value: '[[Tolaria/Mobile UI/How I Run an Open Source Project]]',
+        meta: '[[Metis/Mobile UI/How I Run an Open Source Project]]',
+        value: '[[Metis/Mobile UI/How I Run an Open Source Project]]',
       }),
     ])
   })
@@ -372,14 +372,14 @@ describe('mobile workspace suggestions', () => {
             kind: 'belongsTo' as const,
             values: [
               {
-                ref: '[[Projects/Tolaria MVP]]',
-                title: 'Tolaria MVP',
+                ref: '[[Projects/Metis MVP]]',
+                title: 'Metis MVP',
                 type: 'Project',
                 typeTone: 'purple' as const,
               },
               {
-                ref: '[[Archive/Tolaria MVP]]',
-                title: 'Tolaria MVP',
+                ref: '[[Archive/Metis MVP]]',
+                title: 'Metis MVP',
                 type: 'Project',
                 typeTone: 'purple' as const,
               },
@@ -391,14 +391,14 @@ describe('mobile workspace suggestions', () => {
     expect(mobileViewValueSuggestionItems(notes, 'belongs_to', 'mvp')).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          label: 'Tolaria MVP',
-          meta: '[[Projects/Tolaria MVP]]',
-          value: '[[Projects/Tolaria MVP]]',
+          label: 'Metis MVP',
+          meta: '[[Projects/Metis MVP]]',
+          value: '[[Projects/Metis MVP]]',
         }),
         expect.objectContaining({
-          label: 'Tolaria MVP',
-          meta: '[[Archive/Tolaria MVP]]',
-          value: '[[Archive/Tolaria MVP]]',
+          label: 'Metis MVP',
+          meta: '[[Archive/Metis MVP]]',
+          value: '[[Archive/Metis MVP]]',
         }),
       ]),
     )

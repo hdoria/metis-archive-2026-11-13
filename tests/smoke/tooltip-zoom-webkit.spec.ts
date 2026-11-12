@@ -11,9 +11,9 @@ async function setZoom(page: Page, zoom: number): Promise<void> {
 	await page.evaluate((level) => {
 		const root = document.documentElement.style;
 		root.setProperty("zoom", `${level}%`);
-		root.setProperty("--tolaria-overlay-zoom-factor", String(level / 100));
-		root.setProperty("--tolaria-overlay-zoom-inverse", String(100 / level));
-		window.dispatchEvent(new Event("laputa-zoom-change"));
+		root.setProperty("--metis-overlay-zoom-factor", String(level / 100));
+		root.setProperty("--metis-overlay-zoom-inverse", String(100 / level));
+		window.dispatchEvent(new Event("metislegacy-zoom-change"));
 	}, zoom);
 }
 

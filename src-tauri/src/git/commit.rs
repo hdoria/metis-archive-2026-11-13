@@ -175,11 +175,11 @@ mod tests {
 
         assert_eq!(
             local_config_value(vault, "user.name").as_deref(),
-            Some("Tolaria")
+            Some("Metis")
         );
         assert_eq!(
             local_config_value(vault, "user.email").as_deref(),
-            Some("vault@tolaria.default")
+            Some("vault@metis.default")
         );
 
         let author = git_command()
@@ -189,7 +189,7 @@ mod tests {
             .unwrap();
         assert_eq!(
             String::from_utf8_lossy(&author.stdout).trim(),
-            "Tolaria <vault@tolaria.default>"
+            "Metis <vault@metis.default>"
         );
     }
 
@@ -309,7 +309,7 @@ mod tests {
             .output()
             .unwrap();
         git_command()
-            .args(["config", "gpg.program", "/missing/tolaria-test-gpg"])
+            .args(["config", "gpg.program", "/missing/metis-test-gpg"])
             .current_dir(vault)
             .output()
             .unwrap();

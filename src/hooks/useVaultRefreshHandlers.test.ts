@@ -128,11 +128,11 @@ describe('useVaultRefreshHandlers', () => {
   it('refocuses the active editor through a window event', () => {
     const { handlers } = renderHandlers()
     const listener = vi.fn()
-    window.addEventListener('laputa:focus-editor', listener)
+    window.addEventListener('metislegacy:focus-editor', listener)
 
     handlers.refocusActiveEditor(notePath)
 
     expect((listener.mock.calls[0][0] as CustomEvent).detail).toEqual({ path: notePath })
-    window.removeEventListener('laputa:focus-editor', listener)
+    window.removeEventListener('metislegacy:focus-editor', listener)
   })
 })

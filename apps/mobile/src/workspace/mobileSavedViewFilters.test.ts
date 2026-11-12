@@ -130,20 +130,20 @@ filters:
 
   it('keeps quoted desktop wikilink filter values as scalar strings', () => {
     const view = parseMobileSavedViewFile({
-      relativePath: 'views/tolaria-links.yml',
-      content: `name: Tolaria Links
+      relativePath: 'views/metis-links.yml',
+      content: `name: Metis Links
 filters:
   all:
     - field: related_to
       op: contains
-      value: "[[tolaria]]"
+      value: "[[metis]]"
 `,
     }, 0)
 
     expect(evaluateMobileSavedView(requiredView(view), [
       note({
         id: 'match',
-        relationships: [relationship('related_to', [{ ref: '[[tolaria]]', title: 'Tolaria' }])],
+        relationships: [relationship('related_to', [{ ref: '[[metis]]', title: 'Metis' }])],
       }),
       note({
         id: 'miss',

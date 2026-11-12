@@ -9,7 +9,7 @@ The first launch flow is designed to get you into a real vault quickly without h
 
 ## What You Choose
 
-Tolaria asks whether you want to:
+Métis asks whether you want to:
 
 - Create or clone the Getting Started vault.
 - Open an existing local vault.
@@ -17,9 +17,9 @@ Tolaria asks whether you want to:
 
 The Getting Started vault is cloned locally and then disconnected from its remote. That keeps the sample safe to edit without accidentally pushing tutorial changes.
 
-## What Tolaria Creates
+## What Métis Creates
 
-Tolaria stores app-level settings on the local machine. Your notes stay in the vault folder you choose.
+Métis stores app-level settings on the local machine. Your notes stay in the vault folder you choose.
 
 | Data | Stored in |
 | --- | --- |
@@ -37,118 +37,56 @@ Tolaria stores app-level settings on the local machine. Your notes stay in the v
 
 ## AI Setup Prompt
 
-Tolaria can show an optional AI agents prompt after a vault is open. It checks common local install locations for supported coding agents and gives you setup paths, but you can dismiss it and use Tolaria without AI.
+Métis can show an optional AI agents prompt after a vault is open. It checks common local install locations for supported coding agents and gives you setup paths, but you can dismiss it and use Métis without AI.
 
 ---
 
-# Getting Started Vault
+# Getting Started vault
 
 Source: start/getting-started-vault.md
 URL: /start/getting-started-vault
 
-# Getting Started Vault
+# Getting Started vault
 
-The Getting Started vault is a small public sample vault hosted at [refactoringhq/tolaria-getting-started](https://github.com/refactoringhq/tolaria-getting-started).
+Métis includes a starter vault in the app. Creating it works offline and does not clone a remote repository.
 
-It exists to show Tolaria's conventions without requiring you to restructure your own notes first.
+The starter contains Markdown notes, type definitions, example properties, an editor playground, a sample spreadsheet and guides to the sidebar, Git and AI tools. Open **Get familiar with Métis** for a tour.
 
-## What It Demonstrates
+Métis creates a local Git repository for the starter without a remote. You can edit the notes, commit locally or delete the sample when you are finished. To sync a vault later, choose your own Git remote.
 
-- Markdown notes with YAML frontmatter.
-- Types such as Note, Project, Person, and Topic.
-- Wikilinks in note bodies.
-- Relationship fields in frontmatter.
-- Rich-editor blocks, callouts, collapsible sections, and durable formatting.
-- A spreadsheet with formulas and a cross-note frontmatter reference.
-- An HTML dashboard powered by vault expressions.
-- A standalone HTML report that can be previewed or edited in raw mode.
-- A local Git repository that can be connected to a remote later.
-- Vault guidance files plus example workflows for AI agents and direct models.
-
-In the cloned vault, open **Editor Playground** for block editing, **Project Dashboard** for vault expressions, and **Sample Report** for standalone HTML preview.
-
-## Local-Only By Default
-
-When Tolaria clones the sample, it removes the remote from the local copy. This makes the sample vault disposable. You can edit it freely, commit locally, and delete it later.
-
-To connect a vault to your own remote, use the bottom status bar remote chip or run `Add Remote` from the command palette.
-
-Tolaria also repairs starter-vault guidance files when needed. `AGENTS.md` is the canonical guidance file, `CLAUDE.md` is kept as a compatibility shim, and `GEMINI.md` is only created when you explicitly restore Antigravity/Gemini guidance.
-
-Start with the `Start here!` view and follow **Get familiar with Tolaria**. The checklist links to working examples, so you can try each feature without changing your own notes.
-
-## Use It Alongside Your Own Vaults
-
-You can keep the Getting Started vault open while working in your own notes. Enable `Settings` -> `Vaults` -> `Use multiple vaults at the same time`, then use the bottom-left vault menu to include both the sample vault and your real vault in the unified graph.
-
-This lets search, quick open, note lists, backlinks, and wikilink navigation span both vaults. Git actions still stay scoped to each vault's own repository, and new notes go to the default vault you choose in `Manage vaults`.
-
-## When To Move On
-
-After you understand the sample, open your own vault. Tolaria does not require a special folder structure: a folder of Markdown files is enough to start. You can remove the sample from Tolaria's vault list later without deleting its files from disk.
+You can also open an existing folder of Markdown files. Métis does not require a special folder structure. Removing a vault from the app's list does not delete the files on disk.
 
 ---
 
-# Install Tolaria
+# Install Métis
 
 Source: start/install.md
 URL: /start/install
 
-# Install Tolaria
+# Install Métis
 
-Tolaria is available on desktop (macOS, Windows, Linux) and mobile (iPhone, iPad).
+Métis is available as source code. Packaged builds will appear on [GitHub Releases](https://github.com/hdoria/metis/releases) when they are ready. This fork does not currently provide a Homebrew package or a public TestFlight invitation.
 
-Desktop builds are published through GitHub Releases and Homebrew. macOS is the primary day-to-day development target, with Windows and Linux builds supported through the release pipeline and fixed as platform issues are found.
+Public distribution is pending a free tldraw license for the included whiteboard editor. Local development retains the vendor’s own license checks.
 
-The mobile app for iOS is currently in beta via TestFlight.
+## Build from source
 
-## Download
+Install Node.js, pnpm, Rust, and the [Tauri platform prerequisites](https://v2.tauri.app/start/prerequisites/).
 
-Use the latest stable release unless you are intentionally testing pre-release builds:
-
-- <a href="https://tolaria.md/download/" target="_self">Download the latest stable build</a>
-- [Browse all GitHub releases](https://github.com/refactoringhq/tolaria/releases)
-- <a href="https://tolaria.md/releases/" target="_self">Read the release notes</a>
-
-## Homebrew
-
-On macOS you can install the cask:
-
-```bash
-brew install --cask tolaria
+```sh
+git clone https://github.com/hdoria/metis.git
+cd metis
+pnpm install --frozen-lockfile
+pnpm tauri dev
 ```
 
-## Mobile (iPhone and iPad)
+Use `pnpm dev` for the browser development preview. The native app is needed to verify desktop integration with local files and system Git.
 
-Tolaria for iOS is in **beta**. The mobile app brings Tolaria's core features to iPhone and iPad:
+## First launch
 
-- **WYSIWYG Markdown editor** — Fast, native rich-text editing
-- **Real git integration** — Auto-commit on save, with merge support for multi-device workflows  
-- **Sync with desktop** — Vaults sync through iCloud or Files and share the same git repository
+Open Métis, create a starter vault or choose an existing Markdown folder. Use `Cmd+K` on macOS or `Ctrl+K` on Windows and Linux to open the command palette.
 
-To join the beta, install Apple's TestFlight app, then open the [public TestFlight invite](https://testflight.apple.com/join/7aPD4GAB) on your iPhone or iPad.
-
-## Platform Status
-
-| Platform | Status | Notes |
-| --- | --- | --- |
-| macOS | Primary | Apple Silicon and Intel builds are published. Homebrew is available. |
-| Windows | Supported, early | NSIS installers and updater bundles are Tauri-signed. Authenticode publisher signing will be added after Windows certificate provisioning; company-managed SmartScreen, Defender, or WDAC policies can still require IT approval before install. |
-| Linux | Supported, early | AppImage, deb, and RPM artifacts are published. Desktop behavior depends on distribution WebKitGTK and input-method integration. |
-| iOS (iPhone, iPad) | Beta | Public beta via [TestFlight](https://testflight.apple.com/join/7aPD4GAB). |
-
-See [Supported Platforms](/reference/supported-platforms) for the current support policy.
-
-## Managed Windows Devices
-
-Do not disable SmartScreen or Windows Security to install Tolaria. On a managed Windows device, install Tolaria through your normal software approval path if policy blocks unsigned or unknown-publisher installers. After Authenticode provisioning is complete, validate that the downloaded installer has a valid Tolaria publisher signature before installing.
-
-## After Installing
-
-1. Open Tolaria.
-2. Choose the Getting Started vault if you want a guided sample.
-3. Or open an existing folder of Markdown files as a vault.
-4. Use the command palette with `Cmd+K` on macOS or `Ctrl+K` on Linux and Windows.
+See [First Launch](/start/first-launch) and [Supported Platforms](/reference/supported-platforms).
 
 ---
 
@@ -159,11 +97,11 @@ URL: /start/open-or-create-vault
 
 # Open Or Create A Vault
 
-A Tolaria vault is a folder on disk. The folder can contain Markdown notes, attachments, type definitions, saved views, and Git metadata.
+A Métis vault is a folder on disk. The folder can contain Markdown notes, attachments, type definitions, saved views, and Git metadata.
 
 ## Open An Existing Folder
 
-Choose an existing folder if you already have Markdown notes. Tolaria scans `.md` files and uses frontmatter when it exists.
+Choose an existing folder if you already have Markdown notes. Métis scans `.md` files and uses frontmatter when it exists.
 
 Good starting points:
 
@@ -174,7 +112,7 @@ Good starting points:
 
 ## Create A New Vault
 
-Choose a new empty folder if you want Tolaria conventions from the start. New notes and optional type definitions are created as Markdown files.
+Choose a new empty folder if you want Métis conventions from the start. New notes and optional type definitions are created as Markdown files.
 
 ## Use More Than One Vault
 
@@ -184,6 +122,6 @@ Once enabled, the bottom-left vault menu lets you include vaults in the unified 
 
 ## Git Is Recommended, Not Required
 
-Tolaria works well with a plain folder of Markdown files. You can open, edit, organize, and search notes without making the vault a Git repository.
+Métis works well with a plain folder of Markdown files. You can open, edit, organize, and search notes without making the vault a Git repository.
 
-Git is recommended when you want local history, diff views, recovery, pull, push, and remote sync without a proprietary backend. If a vault is not already a repository, Tolaria can initialize one when you explicitly ask it to.
+Git is recommended when you want local history, diff views, recovery, pull, push, and remote sync without a proprietary backend. If a vault is not already a repository, Métis can initialize one when you explicitly ask it to.

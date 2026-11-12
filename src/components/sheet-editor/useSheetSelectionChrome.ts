@@ -85,11 +85,11 @@ function useZoomSelectionChromeRefresh({
   }, [refreshWorkbook, scheduleSelectionChromePatch])
 
   useEffect(() => {
-    window.addEventListener('laputa-zoom-change', refreshForCurrentZoom)
+    window.addEventListener('metislegacy-zoom-change', refreshForCurrentZoom)
     window.addEventListener('resize', refreshForCurrentZoom)
 
     return () => {
-      window.removeEventListener('laputa-zoom-change', refreshForCurrentZoom)
+      window.removeEventListener('metislegacy-zoom-change', refreshForCurrentZoom)
       window.removeEventListener('resize', refreshForCurrentZoom)
       if (zoomRefreshFrameRef.current !== null) {
         cancelFrame(zoomRefreshFrameRef.current)

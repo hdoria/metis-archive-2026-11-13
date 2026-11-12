@@ -1,3 +1,4 @@
+import { SIGNED_UPDATES_ENABLED } from '../useUpdater'
 import { APP_COMMAND_IDS, getAppCommandShortcutDisplay } from '../appCommandCatalog'
 import type { CommandAction } from './types'
 import { rememberFeedbackDialogOpener } from '../../lib/feedbackDialogOpener'
@@ -68,14 +69,14 @@ function buildPrimarySettingsCommands({
       id: 'open-contribute',
       label: t('command.contribute'),
       group: 'Settings',
-      keywords: ['contribute', 'feedback', 'feature', 'canny', 'discussion', 'github', 'bug', 'report'],
+      keywords: ['contribute', 'feedback', 'feature', 'discussion', 'github', 'bug', 'report'],
       enabled: !!onOpenFeedback,
       execute: () => {
         rememberFeedbackDialogOpener(document.activeElement instanceof HTMLElement ? document.activeElement : null)
         onOpenFeedback?.()
       },
     },
-    { id: 'check-updates', label: t('command.checkUpdates'), group: 'Settings', keywords: ['update', 'version', 'upgrade', 'release'], enabled: true, execute: () => onCheckForUpdates?.() },
+    { id: 'check-updates', label: t('command.checkUpdates'), group: 'Settings', keywords: ['update', 'version', 'upgrade', 'release'], enabled: SIGNED_UPDATES_ENABLED, execute: () => { if (SIGNED_UPDATES_ENABLED) onCheckForUpdates?.() } },
   ]
 }
 

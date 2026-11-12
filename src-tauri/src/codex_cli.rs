@@ -254,7 +254,7 @@ where
     F: FnMut(AiAgentStreamEvent),
 {
     let last_message_dir = tempfile::Builder::new()
-        .prefix("tolaria-codex-last-message-")
+        .prefix("metis-codex-last-message-")
         .tempdir()
         .map_err(|error| format!("Failed to create Codex output directory: {error}"))?;
     let last_message_path = last_message_dir.path().join("last-message.txt");
@@ -341,9 +341,9 @@ fn build_codex_args(
         "-C".into(),
         request.vault_path.clone(),
         "-c".into(),
-        codex_config_string("mcp_servers.tolaria.command", &node_path.to_string_lossy()),
+        codex_config_string("mcp_servers.metis.command", &node_path.to_string_lossy()),
         "-c".into(),
-        codex_config_string_list("mcp_servers.tolaria.args", &[mcp_server_path.as_str()]),
+        codex_config_string_list("mcp_servers.metis.args", &[mcp_server_path.as_str()]),
         "-c".into(),
         codex_mcp_env_config(request),
     ];
@@ -385,7 +385,7 @@ fn codex_mcp_env_config(request: &AgentStreamRequest) -> String {
         &request.vault_paths,
     );
     format!(
-        r#"mcp_servers.tolaria.env={{VAULT_PATH="{}",VAULT_PATHS="{}",WS_UI_PORT="9711"}}"#,
+        r#"mcp_servers.metis.env={{VAULT_PATH="{}",VAULT_PATHS="{}",WS_UI_PORT="9731"}}"#,
         toml_escape(&request.vault_path),
         toml_escape(&vault_paths)
     )

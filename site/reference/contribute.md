@@ -1,32 +1,7 @@
-# Contribute
+# Contribute to Métis
 
-Tolaria is free and open source, and any kind of help is useful. Pick the path that matches what you want to do.
+Use [GitHub Issues](https://github.com/hdoria/metis/issues) to report bugs or propose changes, and [pull requests](https://github.com/hdoria/metis/pulls) for code contributions.
 
-## Newsletter
+Small, focused changes are easier to review. Include the problem, expected behavior, your change and the checks you ran. See the [contribution guide](https://github.com/hdoria/metis/blob/main/CONTRIBUTING.md).
 
-[Refactoring](https://refactoring.fm/) is Luca's newsletter and community for engineers building better teams and software with AI. Subscribing is the best way to support Tolaria.
-
-## Sponsors
-
-Tolaria is supported by a panel of tools Luca uses every day to keep the project healthy, tested, and ready for AI-assisted development:
-
-- [Codacy](https://codacy.com/tolaria?utm_source=tolaria&utm_medium=website&utm_campaign=refactoring)
-- [CodeScene](https://codescene.com/?utm_source=tolaria&utm_medium=website&utm_campaign=refactoring)
-- [CircleCI](https://circleci.com/?utm_source=tolaria&utm_medium=website&utm_campaign=refactoring)
-- [Unblocked](https://getunblocked.com/?utm_source=tolaria&utm_medium=website&utm_campaign=refactoring)
-
-## Feature Requests
-
-Use the [product board](https://tolaria.canny.io/) for feature ideas. Search first, upvote existing ideas, and create a new post when the request is genuinely new.
-
-## Community
-
-Join the [Tolaria Discord server](https://discord.gg/tRBC2u428B) for questions, conversations, show and tell, tips, and development updates.
-
-## Contribute Code
-
-Small, focused pull requests are welcome. Check the product board first so you build the right thing, then open a PR on [GitHub](https://github.com/refactoringhq/tolaria/pulls). The [contributing guide](https://github.com/refactoringhq/tolaria/blob/main/CONTRIBUTING.md) explains the local workflow.
-
-## Report A Bug
-
-Use [GitHub Issues](https://github.com/refactoringhq/tolaria/issues) for bugs. Include what happened, what you expected, and clear reproduction steps. If you are reporting from inside Tolaria, use the Contribute panel to copy sanitized diagnostics and attach them to the issue.
+The in-app contribution dialog can copy a sanitized diagnostics bundle. Read it before sharing and remove any remaining information you do not want to publish.

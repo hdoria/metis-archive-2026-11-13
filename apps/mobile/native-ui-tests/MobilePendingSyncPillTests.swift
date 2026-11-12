@@ -33,10 +33,10 @@ final class MobilePendingSyncPillTests: XCTestCase {
     continueAfterFailure = false
     let tablet = UIDevice.current.userInterfaceIdiom == .pad
     XCUIDevice.shared.orientation = tablet ? .landscapeLeft : .portrait
-    let app = XCUIApplication(bundleIdentifier: "md.tolaria.mobile.ota-validation")
+    let app = XCUIApplication(bundleIdentifier: "io.github.hdoria.metis.mobile.ota-validation")
     let search = "?source=native-vault&phoneState=sidebar&qaRun=owned-pending-sync"
-    app.launchArguments = ["--tolaria-mobile-search", search]
-    app.launchEnvironment["TOLARIA_MOBILE_SEARCH"] = search
+    app.launchArguments = ["--metis-mobile-search", search]
+    app.launchEnvironment["METIS_MOBILE_SEARCH"] = search
     addTeardownBlock { app.terminate() }
     app.launch()
     XCTAssertTrue(element(app, "sidebar-sync-action").waitForExistence(timeout: 30))

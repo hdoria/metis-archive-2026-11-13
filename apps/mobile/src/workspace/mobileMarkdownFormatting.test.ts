@@ -42,9 +42,9 @@ describe('mobile markdown formatting', () => {
   })
 
   it('inserts desktop markdown links and selects the next editable segment', () => {
-    expect(applyMobileMarkdownFormat('Read Tolaria docs', { start: 5, end: 17 }, 'link')).toEqual({
-      selection: { start: 20, end: 28 },
-      text: 'Read [Tolaria docs](https://)',
+    expect(applyMobileMarkdownFormat('Read Métis docs', { start: 5, end: 15 }, 'link')).toEqual({
+      selection: { start: 18, end: 26 },
+      text: 'Read [Métis docs](https://)',
     })
     expect(applyMobileMarkdownFormat('Read ', { start: 5, end: 5 }, 'link')).toEqual({
       selection: { start: 6, end: 15 },

@@ -14,7 +14,7 @@ function dispatchAltKey(page: Page, key: string) {
 async function loadApp(page: Page) {
   await page.goto('/')
   // Clear stored view mode so we start fresh
-  await page.evaluate(() => localStorage.removeItem('laputa-view-mode'))
+  await page.evaluate(() => localStorage.removeItem('metislegacy-view-mode'))
   await page.reload()
   await page.waitForTimeout(500)
 }

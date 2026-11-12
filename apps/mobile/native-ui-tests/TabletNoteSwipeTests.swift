@@ -88,10 +88,10 @@ final class TabletNoteSwipeTests: XCTestCase {
   }
 
   private func launchFixture() -> XCUIApplication {
-    let app = XCUIApplication(bundleIdentifier: "com.tolaria.mobile.dev")
+    let app = XCUIApplication(bundleIdentifier: "io.github.hdoria.metis.mobile.dev")
     let search = "?source=fixture&phoneState=list&editorMode=wysiwyg&qaRun=row-swipe-\(UUID().uuidString)"
-    app.launchArguments = ["--tolaria-mobile-search", search]
-    app.launchEnvironment["TOLARIA_MOBILE_SEARCH"] = search
+    app.launchArguments = ["--metis-mobile-search", search]
+    app.launchEnvironment["METIS_MOBILE_SEARCH"] = search
     addTeardownBlock { app.terminate() }
     app.launch()
     return app

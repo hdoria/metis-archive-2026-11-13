@@ -31,15 +31,15 @@ final class MobilePendingCatalogTests: XCTestCase {
   }
 
   private func requireFixture(_ scenario: String) throws {
-    try XCTSkipUnless(ProcessInfo.processInfo.environment["TOLARIA_QA_PENDING_CATALOG"] == scenario,
+    try XCTSkipUnless(ProcessInfo.processInfo.environment["METIS_QA_PENDING_CATALOG"] == scenario,
       "Requires a disposable pending-catalog fixture")
     continueAfterFailure = false
   }
 
   private func launchWorkspace() -> XCUIApplication {
     XCUIDevice.shared.orientation = .portrait
-    let app = XCUIApplication(bundleIdentifier: "com.tolaria.mobile.dev")
-    app.launchArguments = ["--tolaria-mobile-search", "?source=native-vault&phoneState=list&qaRun=pending-catalog"]
+    let app = XCUIApplication(bundleIdentifier: "io.github.hdoria.metis.mobile.dev")
+    app.launchArguments = ["--metis-mobile-search", "?source=native-vault&phoneState=list&qaRun=pending-catalog"]
     app.launch()
     return app
   }

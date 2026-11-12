@@ -46,16 +46,16 @@ async function seedEditorWithTestTable(
 }
 
 function unregisterSeedBlockNoteTableBridge(
-  seedBlockNoteTable: NonNullable<Window['__laputaTest']>['seedBlockNoteTable'],
+  seedBlockNoteTable: NonNullable<Window['__metislegacyTest']>['seedBlockNoteTable'],
 ) {
-  const testBridge = window.__laputaTest
+  const testBridge = window.__metislegacyTest
   if (!testBridge || testBridge.seedBlockNoteTable !== seedBlockNoteTable) return
   delete testBridge.seedBlockNoteTable
 }
 
 function registerSeedBlockNoteTableBridge(editor: ReturnType<typeof useCreateBlockNote>) {
   const seedBlockNoteTable = seedEditorWithTestTable.bind(null, editor)
-  window.__laputaTest = { ...window.__laputaTest, seedBlockNoteTable }
+  window.__metislegacyTest = { ...window.__metislegacyTest, seedBlockNoteTable }
   return unregisterSeedBlockNoteTableBridge.bind(null, seedBlockNoteTable)
 }
 

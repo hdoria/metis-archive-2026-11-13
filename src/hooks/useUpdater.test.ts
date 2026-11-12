@@ -140,16 +140,14 @@ describe("useUpdater", () => {
 		expect(mockInvoke).not.toHaveBeenCalled();
 	});
 
-	it("checks for stable updates after the startup delay", async () => {
+	it("does not check automatically until signed Métis updates are configured", async () => {
 		vi.mocked(isTauri).mockReturnValue(true);
 		installInvokeHandlers({ checkResult: null });
 
 		renderUpdater("stable");
 		await advanceAutoCheck();
 
-		expect(mockInvoke).toHaveBeenCalledWith("check_for_app_update", {
-			releaseChannel: "stable",
-		});
+		expect(mockInvoke).not.toHaveBeenCalled();
 	});
 
 	it("does not automatically check for updates when automatic checks are disabled", async () => {
@@ -380,7 +378,7 @@ describe("useUpdater", () => {
 		});
 
 		expect(mockOpenExternalUrl).toHaveBeenCalledWith(
-			"https://tolaria.md/releases/",
+			"https://github.com/hdoria/metis/releases",
 		);
 	});
 

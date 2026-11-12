@@ -19,7 +19,7 @@ export type NativeMobileCommandPaletteAssertionFailure = {
   message: string
 }
 
-export const nativeMobileCommandPaletteLogPrefix = 'TOLARIA_MOBILE_COMMAND_PALETTE_PROBE'
+export const nativeMobileCommandPaletteLogPrefix = 'METIS_MOBILE_COMMAND_PALETTE_PROBE'
 
 export function nativeMobileCommandPaletteLogLine(
   proof: NativeMobileCommandPaletteProof,

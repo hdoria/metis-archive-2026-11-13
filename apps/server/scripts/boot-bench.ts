@@ -9,7 +9,7 @@ const NOTE_COUNT = 6000
 const BENCHMARK_RUNS = 3
 
 async function tmpDir(): Promise<string> {
-  const base = join(tmpdir(), `tolaria-boot-bench-${Date.now()}-${randomBytes(8).toString('hex')}`)
+  const base = join(tmpdir(), `metis-boot-bench-${Date.now()}-${randomBytes(8).toString('hex')}`)
   await mkdir(base, { recursive: true })
   return base
 }
@@ -80,7 +80,7 @@ async function measureBootTime(remoteDir: string): Promise<number> {
 }
 
 async function main(): Promise<void> {
-  console.log('=== Tolaria Server Boot Benchmark ===\n')
+  console.log('=== Metis Server Boot Benchmark ===\n')
   
   const remoteDir = await tmpDir()
   

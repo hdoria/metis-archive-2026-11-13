@@ -1,6 +1,6 @@
 [
   {
-    "note": "demo-vault-v2/24q4-laputa-start.md",
+    "note": "demo-vault-v2/24q4-metislegacy-start.md",
     "byteStable": false,
     "differences": [
       {
@@ -40,7 +40,7 @@
     ]
   },
   {
-    "note": "demo-vault-v2/25q1-laputa-v1.md",
+    "note": "demo-vault-v2/25q1-metislegacy-v1.md",
     "byteStable": false,
     "differences": [
       {
@@ -80,7 +80,7 @@
     ]
   },
   {
-    "note": "demo-vault-v2/25q2-laputa-v2.md",
+    "note": "demo-vault-v2/25q2-metislegacy-v2.md",
     "byteStable": false,
     "differences": [
       {
@@ -160,35 +160,6 @@
     ]
   },
   {
-    "note": "demo-vault-v2/laputa-qa-reference.md",
-    "byteStable": false,
-    "differences": [
-      {
-        "kind": "blank-lines",
-        "source": [
-          ""
-        ],
-        "canonical": []
-      },
-      {
-        "kind": "image-path-prefix",
-        "source": [
-          "![Fixture reference image](attachments/laputa-reference.png)"
-        ],
-        "canonical": [
-          "![Fixture reference image](./attachments/laputa-reference.png)"
-        ]
-      },
-      {
-        "kind": "blank-lines",
-        "source": [
-          ""
-        ],
-        "canonical": []
-      }
-    ]
-  },
-  {
     "note": "demo-vault-v2/measure-close-rate.md",
     "byteStable": false,
     "differences": [
@@ -218,6 +189,40 @@
           ""
         ],
         "canonical": []
+      },
+      {
+        "kind": "blank-lines",
+        "source": [
+          ""
+        ],
+        "canonical": []
+      }
+    ]
+  },
+  {
+    "note": "demo-vault-v2/metis-sheet-prototype-sample.md",
+    "byteStable": true,
+    "differences": []
+  },
+  {
+    "note": "demo-vault-v2/metislegacy-qa-reference.md",
+    "byteStable": false,
+    "differences": [
+      {
+        "kind": "blank-lines",
+        "source": [
+          ""
+        ],
+        "canonical": []
+      },
+      {
+        "kind": "image-path-prefix",
+        "source": [
+          "![Fixture reference image](attachments/metislegacy-reference.png)"
+        ],
+        "canonical": [
+          "![Fixture reference image](./attachments/metislegacy-reference.png)"
+        ]
       },
       {
         "kind": "blank-lines",
@@ -438,11 +443,6 @@
         "canonical": []
       }
     ]
-  },
-  {
-    "note": "demo-vault-v2/tolaria-sheet-prototype-sample.md",
-    "byteStable": true,
-    "differences": []
   },
   {
     "note": "demo-vault-v2/topic-writing.md",
@@ -772,10 +772,10 @@
       {
         "kind": "image-path-prefix",
         "source": [
-          "![An image](attachments/laputa-reference.png)"
+          "![An image](attachments/metislegacy-reference.png)"
         ],
         "canonical": [
-          "![An image](./attachments/laputa-reference.png)"
+          "![An image](./attachments/metislegacy-reference.png)"
         ]
       }
     ]

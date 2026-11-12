@@ -125,7 +125,7 @@ function now(): number {
 
 function signalEditorTabSwapped(path: string): void {
   if (typeof window === 'undefined') return
-  window.dispatchEvent(new CustomEvent('laputa:editor-tab-swapped', {
+  window.dispatchEvent(new CustomEvent('metislegacy:editor-tab-swapped', {
     detail: { path },
   }))
   finishNoteOpenTrace(path)

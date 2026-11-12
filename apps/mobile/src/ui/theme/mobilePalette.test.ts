@@ -16,7 +16,7 @@ describe('mobile palette contract', () => {
     expect(mobilePalettes.dark.text).toBe('#E6E1D8')
     expect(mobilePalettes.dark.editor).toBe('#1F1E1B')
     expect(mobilePalettes.dark.sidebar).toBe('#191814')
-    expect(mobilePalettes.dark.primary).toBe('#78A4FF')
+    expect(mobilePalettes.dark.primary).toBe('#79B9A5')
     expect(mobilePalettes.dark.textInverse).toBe('#151411')
   })
 

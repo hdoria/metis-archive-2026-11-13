@@ -45,7 +45,7 @@ export function appShellPreloadTags(files: readonly string[], base = '/'): HtmlT
 
 export function appShellPreload(): Plugin {
   return {
-    name: 'tolaria-app-shell-preload',
+    name: 'metis-app-shell-preload',
     apply: 'build',
     transformIndexHtml: {
       order: 'post',

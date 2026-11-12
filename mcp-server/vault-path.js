@@ -8,7 +8,10 @@ const appConfigPolicy =
 		? require("./app-config-policy.json")
 		: createRequire(import.meta.url)("./app-config-policy.json");
 
-const APP_CONFIG_DIR = appConfigPolicy.current_namespace;
+const requestedNamespace = process.env.METIS_APP_CONFIG_NAMESPACE?.trim();
+const APP_CONFIG_DIR = requestedNamespace === appConfigPolicy.development_namespace
+  ? appConfigPolicy.development_namespace
+  : appConfigPolicy.current_namespace;
 const APP_CONFIG_FILES = Object.freeze(appConfigPolicy.files);
 
 function parseVaultPathList(rawValue) {
@@ -172,7 +175,7 @@ export function requireVaultPaths(env = process.env, options = {}) {
 		const configuredPaths = configuredVaultPaths(options);
 		if (configuredPaths.length > 0) return configuredPaths;
 		throw new Error(
-			"VAULT_PATH is required. Open a vault in Tolaria before starting MCP tools.",
+			"VAULT_PATH is required. Open a vault in Metis before starting MCP tools.",
 		);
 	}
 	return vaultPaths;

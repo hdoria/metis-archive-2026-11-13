@@ -1,40 +1,15 @@
-# Contribute
+# Contribute to Métis
 
 Source: reference/contribute.md
 URL: /reference/contribute
 
-# Contribute
+# Contribute to Métis
 
-Tolaria is free and open source, and any kind of help is useful. Pick the path that matches what you want to do.
+Use [GitHub Issues](https://github.com/hdoria/metis/issues) to report bugs or propose changes, and [pull requests](https://github.com/hdoria/metis/pulls) for code contributions.
 
-## Newsletter
+Small, focused changes are easier to review. Include the problem, expected behavior, your change and the checks you ran. See the [contribution guide](https://github.com/hdoria/metis/blob/main/CONTRIBUTING.md).
 
-[Refactoring](https://refactoring.fm/) is Luca's newsletter and community for engineers building better teams and software with AI. Subscribing is the best way to support Tolaria.
-
-## Sponsors
-
-Tolaria is supported by a panel of tools Luca uses every day to keep the project healthy, tested, and ready for AI-assisted development:
-
-- [Codacy](https://codacy.com/tolaria?utm_source=tolaria&utm_medium=website&utm_campaign=refactoring)
-- [CodeScene](https://codescene.com/?utm_source=tolaria&utm_medium=website&utm_campaign=refactoring)
-- [CircleCI](https://circleci.com/?utm_source=tolaria&utm_medium=website&utm_campaign=refactoring)
-- [Unblocked](https://getunblocked.com/?utm_source=tolaria&utm_medium=website&utm_campaign=refactoring)
-
-## Feature Requests
-
-Use the [product board](https://tolaria.canny.io/) for feature ideas. Search first, upvote existing ideas, and create a new post when the request is genuinely new.
-
-## Community
-
-Join the [Tolaria Discord server](https://discord.gg/tRBC2u428B) for questions, conversations, show and tell, tips, and development updates.
-
-## Contribute Code
-
-Small, focused pull requests are welcome. Check the product board first so you build the right thing, then open a PR on [GitHub](https://github.com/refactoringhq/tolaria/pulls). The [contributing guide](https://github.com/refactoringhq/tolaria/blob/main/CONTRIBUTING.md) explains the local workflow.
-
-## Report A Bug
-
-Use [GitHub Issues](https://github.com/refactoringhq/tolaria/issues) for bugs. Include what happened, what you expected, and clear reproduction steps. If you are reporting from inside Tolaria, use the Contribute panel to copy sanitized diagnostics and attach them to the issue.
+The in-app contribution dialog can copy a sanitized diagnostics bundle. Read it before sharing and remove any remaining information you do not want to publish.
 
 ---
 
@@ -74,7 +49,7 @@ For each stable release:
 1. Use the public release history as the source of truth for what shipped.
 2. Map every user-facing highlight to a concept, guide, reference, or troubleshooting page.
 3. Add or refresh a Getting Started vault example when the feature is best learned by opening a real file.
-4. Review the landing page separately and promote only the capabilities that explain Tolaria's durable value.
+4. Review the landing page separately and promote only the capabilities that explain Métis's durable value.
 5. Remove instructions for features that were withheld from the final release.
 
 ## Page Types
@@ -104,7 +79,7 @@ URL: /reference/file-layout
 
 # File Layout
 
-Tolaria is not opinionated about folder structure. It finds notes recursively across the whole vault, stores new notes in the root by default, and uses types and relationships for real organization.
+Métis is not opinionated about folder structure. It finds notes recursively across the whole vault, stores new notes in the root by default, and uses types and relationships for real organization.
 
 ```txt
 my-vault/
@@ -123,9 +98,9 @@ my-vault/
 
 ## Root Notes
 
-Tolaria works well with a flat vault. Folders are optional and can be useful for compatibility with other tools, but they are not required for people, projects, topics, or any other note category.
+Métis works well with a flat vault. Folders are optional and can be useful for compatibility with other tools, but they are not required for people, projects, topics, or any other note category.
 
-Type is not inferred from folder location. It comes from frontmatter, and relationships are expressed with wikilinks in fields. That is what Tolaria uses for the sidebar, Properties panel, search, custom views, and neighborhood navigation.
+Type is not inferred from folder location. It comes from frontmatter, and relationships are expressed with wikilinks in fields. That is what Métis uses for the sidebar, Properties panel, search, custom views, and neighborhood navigation.
 
 ## Special Folders
 
@@ -144,7 +119,7 @@ Type definitions are Markdown notes with `type: Type` in frontmatter. New type d
 
 ## Git Files
 
-If the vault is a Git repository, `.git/` belongs to Git. Tolaria reads Git state but does not treat `.git/` as notes.
+If the vault is a Git repository, `.git/` belongs to Git. Métis reads Git state but does not treat `.git/` as notes.
 
 ---
 
@@ -155,7 +130,7 @@ URL: /reference/frontmatter-fields
 
 # Frontmatter Fields
 
-Tolaria uses conventions instead of a required schema.
+Métis uses conventions instead of a required schema.
 
 | Field | Meaning |
 | --- | --- |
@@ -177,7 +152,7 @@ Tolaria uses conventions instead of a required schema.
 
 ## Custom Fields
 
-You can add your own fields. If a field contains wikilinks, Tolaria can treat it as a relationship.
+You can add your own fields. If a field contains wikilinks, Métis can treat it as a relationship.
 
 ## System Fields
 
@@ -244,56 +219,16 @@ Use the command palette to discover the current command set.
 
 ---
 
-# Release Channels
+# Releases and updates
 
 Source: reference/release-channels.md
 URL: /reference/release-channels
 
-# Release Channels
+# Releases and updates
 
-Tolaria publishes Stable and Alpha release metadata to GitHub Pages.
+Métis does not yet have a signed automatic update channel. This build does not contact an upstream application's update server.
 
-## Stable
-
-Stable follows manually promoted releases. This is the right channel for normal use.
-
-The stable updater metadata lives at:
-
-```txt
-/stable/latest.json
-```
-
-The public download page points at the latest stable release.
-
-## Alpha
-
-Alpha follows pushes to `main`. It receives fixes and features earlier, but it can be rougher than Stable.
-
-The alpha updater metadata lives at:
-
-```txt
-/alpha/latest.json
-```
-
-Compatibility endpoints also point to the alpha metadata:
-
-```txt
-/latest.json
-/latest-canary.json
-```
-
-## Mobile Channels
-
-The iPhone and iPad app has its own Release channel setting with **Stable** (the default) and **Alpha**. The channel decides which over-the-air (OTA) updates the app downloads; it does not change the app build you installed.
-
-- Mobile Alpha updates are published from `main` after CI passes, like desktop Alpha.
-- Mobile Stable updates are published manually.
-- The app checks for an update when it launches and again when you return to it. A downloaded update applies on the next launch, or right away with **Restart now** in Settings.
-- OTA updates only cover JavaScript changes compatible with your installed build. Native changes need a new app build from TestFlight.
-
-## Before Switching
-
-Commit or push important vault changes before changing release channel or installing an update. Your notes are local files, but a clean Git state makes recovery simpler.
+Check [GitHub Releases](https://github.com/hdoria/metis/releases) for available Métis packages. Signing, automatic updates and mobile OTA delivery will be enabled only after the project has its own publishing configuration.
 
 ---
 
@@ -342,7 +277,7 @@ The frontmatter stores note metadata. The body stores rows and cells. There is n
 
 ## Frontmatter
 
-All ordinary Tolaria fields remain available:
+All ordinary Métis fields remain available:
 
 - `type`
 - `status`
@@ -353,7 +288,7 @@ All ordinary Tolaria fields remain available:
 
 The `_display: sheet` field is the display-as marker. Omit it for ordinary text notes.
 
-The `_sheet` key is reserved for spreadsheet presentation metadata. It follows the same system-field convention as other underscore-prefixed Tolaria fields: hidden from normal property editing, but visible and editable in raw source.
+The `_sheet` key is reserved for spreadsheet presentation metadata. It follows the same system-field convention as other underscore-prefixed Métis fields: hidden from normal property editing, but visible and editable in raw source.
 
 ## Body
 
@@ -369,7 +304,7 @@ Any cell whose input starts with `=` is treated as a formula. Other cells are tr
 
 ## `_sheet` Metadata
 
-Tolaria stores spreadsheet presentation state in `_sheet` as plain YAML.
+Métis stores spreadsheet presentation state in `_sheet` as plain YAML.
 
 | Field | Meaning |
 | --- | --- |
@@ -418,7 +353,7 @@ These formats affect presentation, not the underlying cell input in the CSV body
 
 ## Markdown Style Import
 
-When Tolaria imports a non-formula CSV cell, simple Markdown wrappers can seed initial styles:
+When Métis imports a non-formula CSV cell, simple Markdown wrappers can seed initial styles:
 
 | Cell text | Stored value | Style |
 | --- | --- | --- |
@@ -431,7 +366,7 @@ After save, the style belongs in `_sheet` metadata and the body keeps the unwrap
 
 ## Wikilinks
 
-Non-formula cells can store normal Tolaria wikilinks:
+Non-formula cells can store normal Métis wikilinks:
 
 ```csv
 Account,Source
@@ -439,7 +374,7 @@ Newsletter,[[newsletter-revenue]]
 Sponsors,[[sponsorship-pipeline]]
 ```
 
-Formula cells can reference another sheet note with Tolaria's cross-sheet syntax:
+Formula cells can reference another sheet note with Métis's cross-sheet syntax:
 
 ```txt
 =[[newsletter-revenue]].B5
@@ -454,7 +389,7 @@ Cross-sheet cell references resolve another sheet note by wikilink target, then 
 
 When editing a sheet note programmatically:
 
-- preserve the YAML frontmatter delimiter and ordinary Tolaria fields
+- preserve the YAML frontmatter delimiter and ordinary Métis fields
 - keep `_display: sheet` when the file should display as a spreadsheet
 - keep spreadsheet presentation state under `_sheet`
 - parse and serialize the body as CSV, not by splitting on every comma manually
@@ -475,9 +410,9 @@ URL: /reference/spreadsheet-functions
 
 # Spreadsheet Formulas
 
-Formula cells start with `=` and are evaluated by IronCalc through Tolaria's sheet editor.
+Formula cells start with `=` and are evaluated by IronCalc through Métis's sheet editor.
 
-Tolaria adds vault-aware sheet references on top of the normal spreadsheet formula model. Everything else should be treated as IronCalc formula behavior. IronCalc aims for Excel-compatible formulas, but the upstream project is still evolving, so verify advanced formulas against the IronCalc docs when precision matters.
+Métis adds vault-aware sheet references on top of the normal spreadsheet formula model. Everything else should be treated as IronCalc formula behavior. IronCalc aims for Excel-compatible formulas, but the upstream project is still evolving, so verify advanced formulas against the IronCalc docs when precision matters.
 
 The same `[[note]].field` target forms are also available to HTML block vault expressions. Use [Vault Expressions](/reference/vault-expressions) for `{{...}}` syntax and HTML formatting helpers.
 
@@ -501,9 +436,9 @@ Use parentheses when a model depends on precedence:
 =(B2+B3-B4)/B5
 ```
 
-## Tolaria Note References
+## Métis Note References
 
-Tolaria supports wikilink cell references for values that live in another sheet note:
+Métis supports wikilink cell references for values that live in another sheet note:
 
 ```txt
 =[[newsletter-revenue]].B5
@@ -512,7 +447,7 @@ Tolaria supports wikilink cell references for values that live in another sheet 
 =[[launch-brief]].2
 ```
 
-The target inside `[[...]]` resolves like a normal Tolaria wikilink. The cell address after the dot uses A1 notation.
+The target inside `[[...]]` resolves like a normal Métis wikilink. The cell address after the dot uses A1 notation.
 
 Absolute markers follow spreadsheet copy behavior:
 
@@ -548,7 +483,7 @@ Line references exclude YAML frontmatter, are 1-based, and preserve commas as te
 
 ## Autocomplete Functions
 
-Tolaria's formula autocomplete exposes the implemented function catalog from the bundled IronCalc engine. The current catalog has 195 functions.
+Métis's formula autocomplete exposes the implemented function catalog from the bundled IronCalc engine. The current catalog has 195 functions.
 
 The dropdown shows a small ranked set of matches while you type. Keep typing to narrow the result list. Function names with digits and dots, such as `BIN2DEC` and `ERFC.PRECISE`, are supported.
 
@@ -654,7 +589,7 @@ Format the result as a percentage with a cell `num_fmt` such as `0.00%`.
 
 ## IronCalc Function Families
 
-IronCalc documents formulas by category. Use these upstream pages for detailed syntax and examples. The upstream documentation may include newer functions that are not yet present in Tolaria's bundled IronCalc version.
+IronCalc documents formulas by category. Use these upstream pages for detailed syntax and examples. The upstream documentation may include newer functions that are not yet present in Métis's bundled IronCalc version.
 
 | Family | Link |
 | --- | --- |
@@ -675,47 +610,20 @@ For current upstream gaps, see IronCalc's [unsupported features](https://docs.ir
 
 ---
 
-# Supported Platforms
+# Supported platforms
 
 Source: reference/supported-platforms.md
 URL: /reference/supported-platforms
 
-# Supported Platforms
+# Supported platforms
 
-Tolaria is available on desktop (built with Tauri) and mobile (React Native with Expo). Releases currently target macOS, Windows, Linux, iPhone, and iPad.
+The source includes a Tauri desktop app for macOS, Windows and Linux, an Expo mobile app for iOS and Android, and a browser client with a server.
 
-| Platform | Current support | Notes |
-| --- | --- | --- |
-| macOS | Primary | Main development and QA target. Apple Silicon and Intel artifacts are published. |
-| Windows | Supported, early | NSIS installers and signed updater bundles are published. Menu, shell-path, and credential-helper behavior receive platform-specific fixes as they appear. |
-| Linux | Supported, early | AppImage, deb, and RPM artifacts are published. Behavior can depend on distro WebKitGTK packages, Wayland/X11 details, and input-method setup. |
-| iOS (iPhone, iPad) | Beta | Public beta via [TestFlight](https://testflight.apple.com/join/7aPD4GAB). WYSIWYG editor, real git sync, iCloud/Files integration. |
+This fork is at its initial development stage. Source availability does not mean that every platform has a tested, signed installer. Consult the repository's verification record and release notes for the exact platforms checked for each build.
 
-## Support Policy
+Desktop builds require the [Tauri platform prerequisites](https://v2.tauri.app/start/prerequisites/). Mobile builds require the corresponding native SDK and signing configuration. No public mobile OTA project or TestFlight invitation is configured by default.
 
-Primary support means the platform is part of normal development and release validation. Supported, early means release artifacts exist and the app is expected to work, but platform-specific bugs can take longer to diagnose than macOS issues. Beta means the platform is under active development with core features working but not all desktop features implemented yet.
-
-## Mobile vs Desktop Features
-
-The iOS app (iPhone and iPad) currently focuses on core note editing and sync:
-
-- ✅ WYSIWYG Markdown editing with TenTap/Tiptap
-- ✅ Git auto-commit and merge support
-- ✅ Sync through iCloud or Files
-- ✅ GitHub repository integration
-- ⏳ Desktop-only: AI panel, advanced search, some desktop power-user features are not yet on mobile
-
-The mobile app shares the same vault format and git repository as the desktop app, so you can seamlessly work across devices.
-
-## Reporting Platform Bugs
-
-Include:
-
-- Tolaria version.
-- Operating system and version.
-- CPU architecture.
-- Whether the vault is local-only or connected to a remote.
-- Steps to reproduce.
+When reporting a platform problem, include your operating system, CPU architecture, build version, vault type and steps to reproduce.
 
 ---
 
@@ -726,7 +634,7 @@ URL: /reference/vault-expressions
 
 # Vault Expressions
 
-Vault expressions let rendered content read values from Tolaria notes. The `{{...}}` template form currently runs in HTML blocks. Sheet formulas use the same `[[note]].field` reference forms inside `=` formulas, but spreadsheet calculations still use IronCalc functions.
+Vault expressions let rendered content read values from Métis notes. The `{{...}}` template form currently runs in HTML blocks. Sheet formulas use the same `[[note]].field` reference forms inside `=` formulas, but spreadsheet calculations still use IronCalc functions.
 
 ## Reference Syntax
 
@@ -741,7 +649,7 @@ Vault expressions let rendered content read values from Tolaria notes. The `{{..
 | `{{[[budget]].B5}}` | Single cell from a sheet note. |
 | `{{[[brief]].2}}` | Second raw body line from another note. |
 
-Wikilink targets resolve like normal Tolaria links, so they can use filenames, paths, or note titles when those targets are unambiguous.
+Wikilink targets resolve like normal Métis links, so they can use filenames, paths, or note titles when those targets are unambiguous.
 
 Line references are 1-based and exclude YAML frontmatter. `[[note]].A1` means grid or cell access and may split comma-separated content. `[[note]].1` means the whole first body line, preserving commas as text.
 
@@ -801,7 +709,7 @@ For scalar values, `json(...)` returns the JSON representation of that value. Fo
   "path": "/vault/acceleration-whiplash.md",
   "status": "Evergreened",
   "raw": "[[acceleration-whiplash]]",
-  "deepLink": "tolaria://refactoring-vault/acceleration-whiplash.md"
+  "deepLink": "metis://my-vault/acceleration-whiplash.md"
 }
 ```
 

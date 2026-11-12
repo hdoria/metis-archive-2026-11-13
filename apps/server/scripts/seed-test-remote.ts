@@ -9,10 +9,10 @@ import { dirname, join, resolve } from 'node:path'
 import { git } from '../src/git.ts'
 
 const AUTHOR = {
-  GIT_AUTHOR_NAME: 'Tolaria Seed',
-  GIT_AUTHOR_EMAIL: 'seed@tolaria.invalid',
-  GIT_COMMITTER_NAME: 'Tolaria Seed',
-  GIT_COMMITTER_EMAIL: 'seed@tolaria.invalid',
+  GIT_AUTHOR_NAME: 'Metis Seed',
+  GIT_AUTHOR_EMAIL: 'seed@metis.invalid',
+  GIT_COMMITTER_NAME: 'Metis Seed',
+  GIT_COMMITTER_EMAIL: 'seed@metis.invalid',
 }
 const DEFAULT_FILLER_NOTES = 200
 // Smallest valid PNG: one transparent pixel.
@@ -48,7 +48,7 @@ function fillerCount(raw: string | undefined): number {
 
 async function seed(target: string, fillerNotes: number): Promise<void> {
   if (existsSync(target)) throw new Error(`${target} already exists; remove it yourself if it is disposable`)
-  const work = await mkdtemp(join(tmpdir(), 'tolaria-seed-'))
+  const work = await mkdtemp(join(tmpdir(), 'metis-seed-'))
   try {
     await git(work, ['init', '-q', '-b', 'main'])
     await writeVault(work, fillerNotes)

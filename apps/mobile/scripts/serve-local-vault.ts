@@ -46,7 +46,7 @@ async function main() {
   })
 
   server.listen(port, host, () => {
-    console.log(`Tolaria mobile dev vault bridge: http://${localLanHint()}:${port}/snapshot`)
+    console.log(`Metis mobile dev vault bridge: http://${localLanHint()}:${port}/snapshot`)
     console.log(`Vault: ${vaultPath}`)
   })
 }

@@ -1,17 +1,17 @@
 import { currentVaultBasePath } from '../sharing/sharedVaultLocation'
 
-/** The Tolaria remote the web build talks to: where its `/v1` is, and the bearer credential. */
+/** The Metis remote the web build talks to: where its `/v1` is, and the bearer credential. */
 export interface RemoteVaultConfig {
   baseUrl: string
   token: string
 }
 
-type RemoteWindow = { TOLARIA_REMOTE_URL?: string; TOLARIA_REMOTE_TOKEN?: string }
+type RemoteWindow = { METIS_REMOTE_URL?: string; METIS_REMOTE_TOKEN?: string }
 
-/** The remote configured on window (`TOLARIA_REMOTE_URL`, `TOLARIA_REMOTE_TOKEN`), or null. */
+/** The remote configured on window (`METIS_REMOTE_URL`, `METIS_REMOTE_TOKEN`), or null. */
 export function remoteVaultConfig(): RemoteVaultConfig | null {
   if (typeof window === 'undefined') return null
-  const { TOLARIA_REMOTE_URL: baseUrl, TOLARIA_REMOTE_TOKEN: token } = window as RemoteWindow
+  const { METIS_REMOTE_URL: baseUrl, METIS_REMOTE_TOKEN: token } = window as RemoteWindow
   return baseUrl && token ? { baseUrl, token } : null
 }
 
@@ -22,7 +22,7 @@ export function remoteVaultConfig(): RemoteVaultConfig | null {
  */
 export function applySharedVaultBase(win: RemoteWindow = window as RemoteWindow): void {
   const base = currentVaultBasePath()
-  const serverUrl = win.TOLARIA_REMOTE_URL
+  const serverUrl = win.METIS_REMOTE_URL
   if (!base || !serverUrl || serverUrl.endsWith(base)) return
-  win.TOLARIA_REMOTE_URL = `${serverUrl}${base}`
+  win.METIS_REMOTE_URL = `${serverUrl}${base}`
 }

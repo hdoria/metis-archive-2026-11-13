@@ -3,14 +3,14 @@ use std::io::Write;
 use std::sync::Mutex;
 pub(super) use tempfile::TempDir;
 
-/// Serialize all cache tests that mutate the LAPUTA_CACHE_DIR env var.
+/// Serialize all cache tests that mutate the METIS_CACHE_DIR env var.
 /// `std::env::set_var` is process-global, so parallel tests would race.
 pub(super) static ENV_LOCK: Mutex<()> = Mutex::new(());
 
 /// Set up a temporary cache directory for test isolation.
 /// Caller MUST hold `ENV_LOCK` for the duration of the test.
 pub(super) fn set_test_cache_dir(dir: &Path) {
-    std::env::set_var("LAPUTA_CACHE_DIR", dir.to_string_lossy().as_ref());
+    std::env::set_var("METIS_CACHE_DIR", dir.to_string_lossy().as_ref());
 }
 
 pub(super) fn create_test_file(dir: &Path, name: &str, content: &str) {

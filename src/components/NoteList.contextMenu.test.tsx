@@ -25,12 +25,12 @@ function renderNoteListWithFullActionMenu() {
   })
 }
 
-function openBuildLaputaActions() {
-  fireEvent.contextMenu(screen.getByText('Build Laputa App'))
+function openBuildMetisLegacyActions() {
+  fireEvent.contextMenu(screen.getByText('Build MetisLegacy App'))
 }
 
-function clickBuildLaputaAction(label: string) {
-  openBuildLaputaActions()
+function clickBuildMetisLegacyAction(label: string) {
+  openBuildMetisLegacyActions()
   fireEvent.click(screen.getByText(label))
 }
 
@@ -64,7 +64,7 @@ describe('NoteList context menu', () => {
       onCopyGitUrl,
     })
 
-    openBuildLaputaActions()
+    openBuildMetisLegacyActions()
 
     expect(screen.getByTestId('note-list-context-menu')).toBeInTheDocument()
     expect(screen.getByTestId('note-list-context-menu')).toHaveClass('z-[12000]')
@@ -77,39 +77,39 @@ describe('NoteList context menu', () => {
     fireEvent.click(screen.getByText('Open in New Window'))
     expect(onOpenInNewWindow).toHaveBeenCalledWith(mockEntries[0])
 
-    clickBuildLaputaAction('Add to Favorites')
+    clickBuildMetisLegacyAction('Add to Favorites')
     expect(onToggleFavorite).toHaveBeenCalledWith(mockEntries[0].path)
 
-    clickBuildLaputaAction('Mark as Organized')
+    clickBuildMetisLegacyAction('Mark as Organized')
     expect(onToggleOrganized).toHaveBeenCalledWith(mockEntries[0].path)
 
-    clickBuildLaputaAction('Rename filename')
+    clickBuildMetisLegacyAction('Rename filename')
     expect(screen.getByTestId('note-list-rename-dialog')).toBeInTheDocument()
-    expect(screen.getByTestId('note-list-rename-input')).toHaveValue('26q1-laputa-app')
+    expect(screen.getByTestId('note-list-rename-input')).toHaveValue('26q1-metislegacy-app')
     fireEvent.change(screen.getByTestId('note-list-rename-input'), { target: { value: 'renamed-from-menu.md ' } })
     fireEvent.click(screen.getByText('Rename'))
     expect(onRenameFilename).toHaveBeenCalledWith(mockEntries[0].path, 'renamed-from-menu')
 
-    clickBuildLaputaAction("Open note's neighborhood")
+    clickBuildMetisLegacyAction("Open note's neighborhood")
     expect(onEnterNeighborhood).toHaveBeenCalledWith(mockEntries[0])
 
-    clickBuildLaputaAction('Reveal in Finder')
+    clickBuildMetisLegacyAction('Reveal in Finder')
     expect(onRevealFile).toHaveBeenCalledWith(mockEntries[0].path)
 
-    clickBuildLaputaAction('Copy file path')
+    clickBuildMetisLegacyAction('Copy file path')
     expect(onCopyFilePath).toHaveBeenCalledWith(mockEntries[0].path)
 
-    clickBuildLaputaAction('Copy git URL')
+    clickBuildMetisLegacyAction('Copy git URL')
     expect(canCopyGitUrl).toHaveBeenCalledWith(mockEntries[0])
     expect(onCopyGitUrl).toHaveBeenCalledWith(mockEntries[0])
 
-    clickBuildLaputaAction('Export note as PDF')
+    clickBuildMetisLegacyAction('Export note as PDF')
     expect(onExportPdf).toHaveBeenCalledWith(mockEntries[0])
 
-    clickBuildLaputaAction('Archive this note')
+    clickBuildMetisLegacyAction('Archive this note')
     expect(onBulkArchive).toHaveBeenCalledWith([mockEntries[0].path])
 
-    clickBuildLaputaAction('Delete this note')
+    clickBuildMetisLegacyAction('Delete this note')
     expect(onBulkDeletePermanently).toHaveBeenCalledWith([mockEntries[0].path])
   }, 20_000)
 
@@ -173,7 +173,7 @@ describe('NoteList context menu', () => {
       onCopyFilePath: vi.fn(),
     })
 
-    fireEvent.contextMenu(screen.getByText('Build Laputa App'))
+    fireEvent.contextMenu(screen.getByText('Build MetisLegacy App'))
 
     expect(screen.queryByText('Copy git URL')).not.toBeInTheDocument()
   })
@@ -185,7 +185,7 @@ describe('NoteList context menu', () => {
       onBulkDeletePermanently: vi.fn(),
     })
 
-    fireEvent.contextMenu(screen.getByText('Build Laputa App'), { clientX: 1000, clientY: 740 })
+    fireEvent.contextMenu(screen.getByText('Build MetisLegacy App'), { clientX: 1000, clientY: 740 })
 
     const menu = screen.getByTestId('note-list-context-menu')
     expect(menu.style.left).toBe('')
@@ -201,7 +201,7 @@ describe('NoteList context menu', () => {
     setViewportSize(420, 320)
     renderNoteListWithFullActionMenu()
 
-    fireEvent.contextMenu(screen.getByText('Build Laputa App'), { clientX: 271, clientY: 157 })
+    fireEvent.contextMenu(screen.getByText('Build MetisLegacy App'), { clientX: 271, clientY: 157 })
 
     const menu = screen.getByTestId('note-list-context-menu')
     expect(menu).toHaveStyle({

@@ -81,7 +81,7 @@ describe('immediate note persistence', () => {
   it('requests editor focus for the new path', async () => {
     const focusEvent = new Promise<CustomEvent>((resolve) => {
       window.addEventListener(
-        'laputa:focus-editor',
+        'metislegacy:focus-editor',
         (event) => { resolve(event as CustomEvent) },
         { once: true },
       )

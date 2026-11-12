@@ -70,11 +70,11 @@ describe('native WYSIWYG mutation probe', () => {
             expect.objectContaining({
               content: expect.arrayContaining([
                 expect.objectContaining({
-                  attrs: { tolariaAlignment: 'left' },
+                  attrs: { metisAlignment: 'left' },
                   type: 'tableHeader',
                 }),
                 expect.objectContaining({
-                  attrs: { tolariaAlignment: 'right' },
+                  attrs: { metisAlignment: 'right' },
                   type: 'tableHeader',
                 }),
               ]),
@@ -143,12 +143,12 @@ describe('native WYSIWYG mutation probe', () => {
       noteId: 'workflow-orchestration',
     })
     const logText = [
-      'TOLARIA_MOBILE_LAYOUT_METRIC {"id":"before"}',
+      'METIS_MOBILE_LAYOUT_METRIC {"id":"before"}',
       nativeWysiwygMutationLogLine(proof),
-      'TOLARIA_MOBILE_LAYOUT_METRIC {"id":"after"}',
+      'METIS_MOBILE_LAYOUT_METRIC {"id":"after"}',
     ].join('\n')
 
-    expect(nativeWysiwygMutationPreProofLogText(logText)).toBe('TOLARIA_MOBILE_LAYOUT_METRIC {"id":"before"}\n')
+    expect(nativeWysiwygMutationPreProofLogText(logText)).toBe('METIS_MOBILE_LAYOUT_METRIC {"id":"before"}\n')
     expect(assertNativeWysiwygMutationProofs(parseNativeWysiwygMutationProofs(logText))).toEqual([])
   })
 
@@ -162,12 +162,12 @@ describe('native WYSIWYG mutation probe', () => {
     const currentProof = nativeWysiwygMutationLogLine({ ...proof, noteId: 'current-run' })
     const logText = [
       staleProof,
-      'TOLARIA_MOBILE_LAYOUT_METRIC {"id":"current"}',
+      'METIS_MOBILE_LAYOUT_METRIC {"id":"current"}',
       currentProof,
-      'TOLARIA_MOBILE_LAYOUT_METRIC {"id":"late"}',
+      'METIS_MOBILE_LAYOUT_METRIC {"id":"late"}',
     ].join('\n')
 
-    expect(nativeWysiwygMutationPreProofLogText(logText)).toBe(`${staleProof}\nTOLARIA_MOBILE_LAYOUT_METRIC {"id":"current"}\n`)
+    expect(nativeWysiwygMutationPreProofLogText(logText)).toBe(`${staleProof}\nMETIS_MOBILE_LAYOUT_METRIC {"id":"current"}\n`)
     expect(assertNativeWysiwygMutationProofs(parseNativeWysiwygMutationProofs(logText))).toEqual([])
   })
 })

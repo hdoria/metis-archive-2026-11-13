@@ -74,16 +74,16 @@ async function bundleServiceWorker(version: string, precacheUrls: string[]): Pro
     target: 'safari15',
     write: false,
     define: {
-      __TOLARIA_SW_VERSION__: JSON.stringify(version),
-      __TOLARIA_SW_PRECACHE__: JSON.stringify(precacheUrls),
+      __METIS_SW_VERSION__: JSON.stringify(version),
+      __METIS_SW_PRECACHE__: JSON.stringify(precacheUrls),
     },
   })
   return result.outputFiles[0].text
 }
 
-export function tolariaServiceWorker(): Plugin {
+export function metisServiceWorker(): Plugin {
   return {
-    name: 'tolaria-web-service-worker',
+    name: 'metis-web-service-worker',
     apply: 'build',
     async generateBundle(_options, bundle) {
       const source = await bundleServiceWorker(buildVersion(bundle), shellPrecacheFiles(bundle))

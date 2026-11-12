@@ -13,9 +13,9 @@ let attachedVault
 let configDir
 
 before(async () => {
-  activeVault = await mkdtemp(path.join(os.tmpdir(), 'tolaria-mcp-active-'))
-  attachedVault = await mkdtemp(path.join(os.tmpdir(), 'tolaria-mcp-attached-'))
-  configDir = await mkdtemp(path.join(os.tmpdir(), 'tolaria-mcp-config-'))
+  activeVault = await mkdtemp(path.join(os.tmpdir(), 'metis-mcp-active-'))
+  attachedVault = await mkdtemp(path.join(os.tmpdir(), 'metis-mcp-attached-'))
+  configDir = await mkdtemp(path.join(os.tmpdir(), 'metis-mcp-config-'))
 })
 
 after(async () => {
@@ -39,7 +39,7 @@ describe('stdio vault lifecycle', () => {
       stderr: 'pipe',
     })
     const client = new Client(
-      { name: 'tolaria-vault-lifecycle-test', version: '0.0.0' },
+      { name: 'metis-vault-lifecycle-test', version: '0.0.0' },
       { capabilities: {} },
     )
 

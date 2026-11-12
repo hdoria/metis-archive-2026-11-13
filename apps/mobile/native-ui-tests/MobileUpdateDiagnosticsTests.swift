@@ -6,10 +6,10 @@ final class MobileUpdateDiagnosticsTests: XCTestCase {
     continueAfterFailure = false
     let tablet = UIDevice.current.userInterfaceIdiom == .pad
     XCUIDevice.shared.orientation = tablet ? .landscapeLeft : .portrait
-    let app = XCUIApplication(bundleIdentifier: "com.tolaria.mobile.dev")
+    let app = XCUIApplication(bundleIdentifier: "io.github.hdoria.metis.mobile.dev")
     let search = "?source=fixture&phoneState=sidebar&forceDesktopPanels=1&qaRun=update-diagnostics"
-    app.launchArguments = ["--tolaria-mobile-search", search]
-    app.launchEnvironment["TOLARIA_MOBILE_SEARCH"] = search
+    app.launchArguments = ["--metis-mobile-search", search]
+    app.launchEnvironment["METIS_MOBILE_SEARCH"] = search
     app.launch()
     addTeardownBlock { app.terminate() }
     let open = element(app, "open-mobile-settings")

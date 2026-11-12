@@ -13,35 +13,26 @@
     "section": "start",
     "headings": [
       "What You Choose",
-      "What Tolaria Creates",
+      "What Métis Creates",
       "First Commands To Try",
       "AI Setup Prompt"
     ]
   },
   {
-    "title": "Getting Started Vault",
+    "title": "Getting Started vault",
     "path": "pages/start/getting-started-vault.md",
     "url": "/start/getting-started-vault",
     "section": "start",
-    "headings": [
-      "What It Demonstrates",
-      "Local-Only By Default",
-      "Use It Alongside Your Own Vaults",
-      "When To Move On"
-    ]
+    "headings": []
   },
   {
-    "title": "Install Tolaria",
+    "title": "Install Métis",
     "path": "pages/start/install.md",
     "url": "/start/install",
     "section": "start",
     "headings": [
-      "Download",
-      "Homebrew",
-      "Mobile (iPhone and iPad)",
-      "Platform Status",
-      "Managed Windows Devices",
-      "After Installing"
+      "Build from source",
+      "First launch"
     ]
   },
   {
@@ -102,7 +93,7 @@
     "url": "/concepts/git",
     "section": "concepts",
     "headings": [
-      "What Tolaria Uses Git For",
+      "What Métis Uses Git For",
       "History And Diffs",
       "Local Commits",
       "Remotes",
@@ -392,33 +383,22 @@
     ]
   },
   {
-    "title": "Portent",
-    "path": "pages/templates/portent.md",
-    "url": "/templates/portent",
+    "title": "Vault templates",
+    "path": "pages/templates/vault-templates.md",
+    "url": "/templates/vault-templates",
     "section": "templates",
     "headings": [
-      "Core Questions",
-      "Types",
-      "Relationships",
-      "Lifecycle",
-      "Why Use It",
-      "Start From The Template",
-      "Learn More"
+      "Start with useful types",
+      "Connect related notes",
+      "Keep the template small"
     ]
   },
   {
-    "title": "Contribute",
+    "title": "Contribute to Métis",
     "path": "pages/reference/contribute.md",
     "url": "/reference/contribute",
     "section": "reference",
-    "headings": [
-      "Newsletter",
-      "Sponsors",
-      "Feature Requests",
-      "Community",
-      "Contribute Code",
-      "Report A Bug"
-    ]
+    "headings": []
   },
   {
     "title": "Docs Maintenance",
@@ -464,16 +444,11 @@
     ]
   },
   {
-    "title": "Release Channels",
+    "title": "Releases and updates",
     "path": "pages/reference/release-channels.md",
     "url": "/reference/release-channels",
     "section": "reference",
-    "headings": [
-      "Stable",
-      "Alpha",
-      "Mobile Channels",
-      "Before Switching"
-    ]
+    "headings": []
   },
   {
     "title": "Spreadsheet File Format",
@@ -498,7 +473,7 @@
     "section": "reference",
     "headings": [
       "Basic Syntax",
-      "Tolaria Note References",
+      "Métis Note References",
       "Autocomplete Functions",
       "Logical",
       "Math and trigonometry",
@@ -521,15 +496,11 @@
     ]
   },
   {
-    "title": "Supported Platforms",
+    "title": "Supported platforms",
     "path": "pages/reference/supported-platforms.md",
     "url": "/reference/supported-platforms",
     "section": "reference",
-    "headings": [
-      "Support Policy",
-      "Mobile vs Desktop Features",
-      "Reporting Platform Bugs"
-    ]
+    "headings": []
   },
   {
     "title": "Vault Expressions",

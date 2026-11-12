@@ -29,7 +29,7 @@ const ACTIVE_VAULT_ERROR = 'Note path must stay inside the active vault'
 const MCP_SERVER_DIR = path.dirname(fileURLToPath(import.meta.url))
 
 before(async () => {
-  tmpDir = await mkdtemp(path.join(os.tmpdir(), 'laputa-mcp-test-'))
+  tmpDir = await mkdtemp(path.join(os.tmpdir(), 'metislegacy-mcp-test-'))
 
   await mkdir(path.join(tmpDir, 'project'), { recursive: true })
   await mkdir(path.join(tmpDir, 'note'), { recursive: true })
@@ -160,12 +160,12 @@ describe('getNote', () => {
   })
 
   it('should reject absolute paths outside the vault', async () => {
-    await assertRejectsOutsideVault('laputa-mcp-outside-', outsideNote => outsideNote)
+    await assertRejectsOutsideVault('metislegacy-mcp-outside-', outsideNote => outsideNote)
   })
 
   it('should reject traversal paths outside the vault', async () => {
     await assertRejectsOutsideVault(
-      'laputa-mcp-traversal-',
+      'metislegacy-mcp-traversal-',
       outsideNote => path.relative(tmpDir, outsideNote),
     )
   })
@@ -173,7 +173,7 @@ describe('getNote', () => {
 
 describe('createNote', () => {
   it('creates a new markdown note inside the vault', async () => {
-    const vaultDir = await mkdtemp(path.join(os.tmpdir(), 'laputa-mcp-create-'))
+    const vaultDir = await mkdtemp(path.join(os.tmpdir(), 'metislegacy-mcp-create-'))
     const content = `---
 type: Note
 ---
@@ -191,7 +191,7 @@ type: Note
   })
 
   it('does not overwrite an existing note', async () => {
-    const vaultDir = await mkdtemp(path.join(os.tmpdir(), 'laputa-mcp-create-existing-'))
+    const vaultDir = await mkdtemp(path.join(os.tmpdir(), 'metislegacy-mcp-create-existing-'))
     const notePath = path.join(vaultDir, 'existing.md')
     await writeFile(notePath, '# Existing\n', 'utf-8')
 
@@ -207,14 +207,14 @@ type: Note
   })
 
   it('rejects absolute paths outside the vault', async () => {
-    await assertWriteRejectsOutsideVault('laputa-mcp-create-', (vaultDir, outsideNote) => (
+    await assertWriteRejectsOutsideVault('metislegacy-mcp-create-', (vaultDir, outsideNote) => (
       createNote(vaultDir, outsideNote, '# Outside\n')
     ))
   })
 
   it('rejects outside paths before creating missing parent folders', async () => {
-    const vaultDir = await mkdtemp(path.join(os.tmpdir(), 'laputa-mcp-create-vault-'))
-    const outsideDir = await mkdtemp(path.join(os.tmpdir(), 'laputa-mcp-create-outside-'))
+    const vaultDir = await mkdtemp(path.join(os.tmpdir(), 'metislegacy-mcp-create-vault-'))
+    const outsideDir = await mkdtemp(path.join(os.tmpdir(), 'metislegacy-mcp-create-outside-'))
     const outsideParent = path.join(outsideDir, 'missing-parent')
 
     try {
@@ -232,7 +232,7 @@ type: Note
 
 describe('updateNote', () => {
   it('replaces the content of an existing note', async () => {
-    const vaultDir = await mkdtemp(path.join(os.tmpdir(), 'laputa-mcp-update-'))
+    const vaultDir = await mkdtemp(path.join(os.tmpdir(), 'metislegacy-mcp-update-'))
     const notePath = path.join(vaultDir, 'note', 'existing.md')
     await mkdir(path.dirname(notePath), { recursive: true })
     await writeFile(notePath, '---\ntype: Note\n---\n\n# Old\n', 'utf-8')
@@ -249,13 +249,13 @@ describe('updateNote', () => {
   })
 
   it('throws ENOENT when updating a missing note', async () => {
-    await assertMissingNoteRejects('laputa-mcp-update-missing-', vaultDir => (
+    await assertMissingNoteRejects('metislegacy-mcp-update-missing-', vaultDir => (
       updateNote(vaultDir, 'note/missing.md', '# New\n')
     ))
   })
 
   it('fails with a clear conflict message when expectedMtime does not match', async () => {
-    const vaultDir = await mkdtemp(path.join(os.tmpdir(), 'laputa-mcp-update-conflict-'))
+    const vaultDir = await mkdtemp(path.join(os.tmpdir(), 'metislegacy-mcp-update-conflict-'))
     const notePath = path.join(vaultDir, 'stale.md')
     await writeFile(notePath, '# Stale\n', 'utf-8')
 
@@ -272,7 +272,7 @@ describe('updateNote', () => {
   })
 
   it('succeeds when expectedMtime matches the on-disk mtimeMs', async () => {
-    const vaultDir = await mkdtemp(path.join(os.tmpdir(), 'laputa-mcp-update-match-'))
+    const vaultDir = await mkdtemp(path.join(os.tmpdir(), 'metislegacy-mcp-update-match-'))
     const notePath = path.join(vaultDir, 'match.md')
     await writeFile(notePath, '# Original\n', 'utf-8')
     const { mtimeMs } = await getNote(vaultDir, 'match.md')
@@ -290,7 +290,7 @@ describe('updateNote', () => {
   })
 
   it('rejects absolute paths outside the vault', async () => {
-    await assertWriteRejectsOutsideVault('laputa-mcp-update-', (vaultDir, outsideNote) => (
+    await assertWriteRejectsOutsideVault('metislegacy-mcp-update-', (vaultDir, outsideNote) => (
       updateNote(vaultDir, outsideNote, '# Outside\n')
     ))
   })
@@ -298,7 +298,7 @@ describe('updateNote', () => {
 
 describe('appendToNote', () => {
   it('appends content to an existing note body', async () => {
-    const vaultDir = await mkdtemp(path.join(os.tmpdir(), 'laputa-mcp-append-'))
+    const vaultDir = await mkdtemp(path.join(os.tmpdir(), 'metislegacy-mcp-append-'))
     const notePath = path.join(vaultDir, 'log.md')
     await writeFile(notePath, '---\ntype: Note\n---\n\n# Log\n\nFirst entry.\n', 'utf-8')
 
@@ -315,13 +315,13 @@ describe('appendToNote', () => {
   })
 
   it('throws ENOENT when appending to a missing note', async () => {
-    await assertMissingNoteRejects('laputa-mcp-append-missing-', vaultDir => (
+    await assertMissingNoteRejects('metislegacy-mcp-append-missing-', vaultDir => (
       appendToNote(vaultDir, 'missing.md', 'More')
     ))
   })
 
   it('rejects absolute paths outside the vault', async () => {
-    await assertWriteRejectsOutsideVault('laputa-mcp-append-', (vaultDir, outsideNote) => (
+    await assertWriteRejectsOutsideVault('metislegacy-mcp-append-', (vaultDir, outsideNote) => (
       appendToNote(vaultDir, outsideNote, 'More')
     ))
   })
@@ -398,8 +398,8 @@ describe('vaultContext', () => {
 
   it('scales context collection with frontmatter size instead of note body size', async () => {
     const noteCount = 120
-    const smallVault = await mkdtemp(path.join(os.tmpdir(), 'laputa-mcp-context-small-'))
-    const largeVault = await mkdtemp(path.join(os.tmpdir(), 'laputa-mcp-context-large-'))
+    const smallVault = await mkdtemp(path.join(os.tmpdir(), 'metislegacy-mcp-context-small-'))
+    const largeVault = await mkdtemp(path.join(os.tmpdir(), 'metislegacy-mcp-context-large-'))
 
     try {
       await writeContextFixtureVault(smallVault, noteCount, 64)
@@ -484,8 +484,8 @@ describe('requireVaultPath', () => {
     )
   })
 
-  it('rejects missing vault paths instead of falling back to ~/Laputa', async () => {
-    const configDir = await mkdtemp(path.join(os.tmpdir(), 'tolaria-mcp-empty-config-'))
+  it('rejects missing vault paths instead of falling back to ~/MetisLegacy', async () => {
+    const configDir = await mkdtemp(path.join(os.tmpdir(), 'metis-mcp-empty-config-'))
     assert.throws(
       () => requireVaultPaths({}, { configDir }),
       /VAULT_PATH is required/,
@@ -503,12 +503,12 @@ describe('requireVaultPath', () => {
     )
   })
 
-  it('loads active mounted vault paths from Tolaria config when env is vault-neutral', async () => {
-    const configDir = await mkdtemp(path.join(os.tmpdir(), 'tolaria-mcp-config-'))
+  it('loads active mounted vault paths from Metis config when env is vault-neutral', async () => {
+    const configDir = await mkdtemp(path.join(os.tmpdir(), 'metis-mcp-config-'))
     const primaryVault = path.join(configDir, 'Primary Vault')
     const secondaryVault = path.join(configDir, 'Secondary Vault')
     const hiddenVault = path.join(configDir, 'Hidden Vault')
-    const configPath = path.join(configDir, 'com.tolaria.app', 'vaults.json')
+    const configPath = path.join(configDir, 'io.github.hdoria.metis', 'vaults.json')
 
     await mkdir(path.dirname(configPath), { recursive: true })
     await writeFile(configPath, JSON.stringify({
@@ -530,12 +530,12 @@ describe('requireVaultPath', () => {
     }
   })
 
-  it('uses one app config resolver for settings and vault registry files', async () => {
-    const configDir = await mkdtemp(path.join(os.tmpdir(), 'tolaria-mcp-shared-config-'))
+  it('ignores legacy namespaces for settings and vault registry files', async () => {
+    const configDir = await mkdtemp(path.join(os.tmpdir(), 'metis-mcp-shared-config-'))
     const files = ['settings.json', 'vaults.json']
 
     for (const fileName of files) {
-      const legacyPath = path.join(configDir, 'com.laputa.app', fileName)
+      const legacyPath = path.join(configDir, 'io.github.hdoria.metis.legacy', fileName)
       await mkdir(path.dirname(legacyPath), { recursive: true })
       await writeFile(legacyPath, '{}', 'utf-8')
     }
@@ -544,7 +544,7 @@ describe('requireVaultPath', () => {
       for (const fileName of files) {
         assert.equal(
           appConfigFilePath(fileName, { configDir }),
-          path.join(configDir, 'com.laputa.app', fileName),
+          path.join(configDir, 'io.github.hdoria.metis', fileName),
         )
       }
     } finally {
@@ -552,16 +552,16 @@ describe('requireVaultPath', () => {
     }
   })
 
-  it('loads macOS vault registry from the XDG-backed Tolaria config before Application Support', async () => {
-    const homeDir = await mkdtemp(path.join(os.tmpdir(), 'tolaria-mcp-macos-home-'))
+  it('loads macOS vault registry from the XDG-backed Metis config before Application Support', async () => {
+    const homeDir = await mkdtemp(path.join(os.tmpdir(), 'metis-mcp-macos-home-'))
     const primaryVault = path.join(homeDir, 'Primary Vault')
     const legacyPlatformVault = path.join(homeDir, 'Legacy Platform Vault')
-    const xdgConfigPath = path.join(homeDir, '.config', 'com.tolaria.app', 'vaults.json')
+    const xdgConfigPath = path.join(homeDir, '.config', 'io.github.hdoria.metis', 'vaults.json')
     const platformConfigPath = path.join(
       homeDir,
       'Library',
       'Application Support',
-      'com.tolaria.app',
+      'io.github.hdoria.metis',
       'vaults.json',
     )
 
@@ -738,7 +738,7 @@ async function connectMcpClient() {
   })
   const stderr = collectTransportStderr(transport)
   const client = new Client(
-    { name: 'tolaria-mcp-test-client', version: '0.0.0' },
+    { name: 'metis-mcp-test-client', version: '0.0.0' },
     { capabilities: {} },
   )
 

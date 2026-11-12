@@ -6,6 +6,7 @@ import { TldrawWhiteboard } from './TldrawWhiteboard'
 import { TooltipProvider } from './ui/tooltip'
 
 interface MockTldrawProps {
+  licenseKey?: string
   assetUrls: MockAssetUrls
   components?: {
     Canvas?: ComponentType
@@ -252,6 +253,7 @@ describe('TldrawWhiteboard', () => {
     document.documentElement.removeAttribute('data-theme')
     document.documentElement.classList.remove('dark')
     vi.clearAllMocks()
+    vi.unstubAllEnvs()
   })
 
   it('uses bundled tldraw assets instead of CDN URLs', () => {
@@ -262,7 +264,20 @@ describe('TldrawWhiteboard', () => {
     expectBundledTldrawAssetUrls(renderedTldrawAssetUrls())
   })
 
-  it('passes Tolaria dark mode to tldraw', () => {
+  it('forwards an optional distributor license to the vendor editor', () => {
+    vi.stubEnv('VITE_TLDRAW_LICENSE_KEY', ' metis-test-license ')
+    renderWhiteboard()
+    expect(renderedTldrawProps().licenseKey).toBe('metis-test-license')
+  })
+
+  it('keeps vendor license handling in place when no license is configured', () => {
+    vi.stubEnv('VITE_TLDRAW_LICENSE_KEY', '')
+    renderWhiteboard()
+    expect(screen.getByTestId('mock-tldraw')).toBeInTheDocument()
+    expect(renderedTldrawProps().licenseKey).toBeUndefined()
+  })
+
+  it('passes Métis dark mode to tldraw', () => {
     document.documentElement.setAttribute('data-theme', 'dark')
     document.documentElement.classList.add('dark')
 
@@ -271,7 +286,7 @@ describe('TldrawWhiteboard', () => {
     expect(renderedTldrawProps().user?.userPreferences.get().colorScheme).toBe('dark')
   })
 
-  it('updates the tldraw color scheme when Tolaria theme changes', async () => {
+  it('updates the tldraw color scheme when Métis theme changes', async () => {
     document.documentElement.setAttribute('data-theme', 'light')
 
     renderWhiteboard()

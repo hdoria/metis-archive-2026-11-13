@@ -39,13 +39,13 @@ export function mobileUiWorkspaceSourceRequest(
 		nativeWorkspace ?? startupPreviewSelection(startupPreview);
 	const devVaultUrl =
 		searchParams.get("devVaultUrl") ||
-		envValue("EXPO_PUBLIC_TOLARIA_DEV_VAULT_URL");
+		envValue("EXPO_PUBLIC_METIS_DEV_VAULT_URL");
 	const source = mobileUiRequestedWorkspaceSource({
 		hasDevVaultUrl: devVaultUrl !== null,
 		hasNativeWorkspace: previewWorkspace !== null,
 		requestedSource:
 			searchParams.get("source") ??
-			envValue("EXPO_PUBLIC_TOLARIA_WORKSPACE_SOURCE"),
+			envValue("EXPO_PUBLIC_METIS_WORKSPACE_SOURCE"),
 		searchParams,
 	});
 	return {
@@ -61,28 +61,28 @@ function workspaceRequest(
 ): MobileUiWorkspaceRequest {
 	return {
 		scenarioId:
-			searchParams.get("scenario") || envValue("EXPO_PUBLIC_TOLARIA_SCENARIO"),
+			searchParams.get("scenario") || envValue("EXPO_PUBLIC_METIS_SCENARIO"),
 		source,
 		vaultAlias: previewWorkspace
 			? previewWorkspace.vaultAlias
 			: queryOrEnv(
 					searchParams,
 					"vaultAlias",
-					"EXPO_PUBLIC_TOLARIA_NATIVE_VAULT_ALIAS",
+					"EXPO_PUBLIC_METIS_NATIVE_VAULT_ALIAS",
 				),
 		vaultLabel: previewWorkspace
 			? previewWorkspace.vaultLabel
 			: queryOrEnv(
 					searchParams,
 					"vaultLabel",
-					"EXPO_PUBLIC_TOLARIA_NATIVE_VAULT_LABEL",
+					"EXPO_PUBLIC_METIS_NATIVE_VAULT_LABEL",
 				),
 		vaultRootUri: previewWorkspace
 			? previewWorkspace.vaultRootUri
 			: queryOrEnv(
 					searchParams,
 					"vaultUri",
-					"EXPO_PUBLIC_TOLARIA_NATIVE_VAULT_URI",
+					"EXPO_PUBLIC_METIS_NATIVE_VAULT_URI",
 				),
 		workspaceIndex: previewWorkspace?.index,
 	};

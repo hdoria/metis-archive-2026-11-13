@@ -9,7 +9,7 @@ Platform: mobile
 
 ## Context
 
-Tolaria Mobile's existing parity guidance treats desktop as the visual source of truth for nearly every surface. That is appropriate for note content and note-type identity, but it prevents the phone and tablet shells from using familiar, accessible platform navigation and controls. The approved native-UI plan adopts platform conventions for chrome without changing document semantics or note identity.
+Metis Mobile's existing parity guidance treats desktop as the visual source of truth for nearly every surface. That is appropriate for note content and note-type identity, but it prevents the phone and tablet shells from using familiar, accessible platform navigation and controls. The approved native-UI plan adopts platform conventions for chrome without changing document semantics or note identity.
 
 ## Decision
 

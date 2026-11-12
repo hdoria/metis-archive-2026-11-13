@@ -7,17 +7,17 @@ import { useEditorMemoryProbeController } from './useEditorMemoryProbeController
 
 declare global {
   interface Window {
-    __tolariaEditorMemoryProbe?: EditorMemoryProbeApi
+    __metisEditorMemoryProbe?: EditorMemoryProbeApi
   }
 }
 
 function useEditorMemoryProbeBridge(api: EditorMemoryProbeApi): void {
   useEffect(() => {
     if (!import.meta.env.DEV) return
-    window.__tolariaEditorMemoryProbe = api
+    window.__metisEditorMemoryProbe = api
     return () => {
-      if (window.__tolariaEditorMemoryProbe?.run === api.run) {
-        delete window.__tolariaEditorMemoryProbe
+      if (window.__metisEditorMemoryProbe?.run === api.run) {
+        delete window.__metisEditorMemoryProbe
       }
     }
   }, [api])

@@ -6,7 +6,7 @@ import { test, expect, type Locator, type Page, type TestInfo } from '@playwrigh
 // desktop and on iPhone/iPad emulation. Layout measurements are attached to the
 // report so mobile regressions/improvements are visible without a device.
 
-const NOTE_TITLE = 'Build Laputa App'
+const NOTE_TITLE = 'Build MetisLegacy App'
 const TYPED_TEXT = 'Typed in the static web build'
 
 interface PaneBox {

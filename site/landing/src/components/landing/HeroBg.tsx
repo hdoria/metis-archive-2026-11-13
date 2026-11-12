@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-// Hero background: an ASCII field behind the copy of the full-bleed blue hero (default since 27 Oct, Luca).
+// Hero background: an ASCII field behind the copy of the full-bleed blue hero (default since default theme).
 // ?bg=plain shows the plain blue. One absolutely positioned layer (no layout shift), white at low alpha so the
 // white copy keeps its contrast, asleep off-screen and when hidden, and a static frame under reduced motion.
 export function heroBgFromUrl(): boolean {

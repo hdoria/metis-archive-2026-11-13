@@ -2,24 +2,24 @@ import { describe, expect, test } from 'vitest'
 import { resolvePlatformCapabilities } from './platformCapabilities'
 
 describe('resolvePlatformCapabilities', () => {
-  test('tauri backend enables all desktop features', () => {
+  test('tauri backend enables desktop features with updates unconfigured', () => {
     const capabilities = resolvePlatformCapabilities('tauri')
     
     expect(capabilities.git).toBe(true)
     expect(capabilities.mcp).toBe(true)
-    expect(capabilities.updater).toBe(true)
+    expect(capabilities.updater).toBe(false)
     expect(capabilities.multiWindow).toBe(true)
     expect(capabilities.openCode).toBe(true)
     expect(capabilities.cliAgents).toBe(true)
     expect(capabilities.perNoteEditors).toBe(false)
   })
 
-  test('mock backend enables all desktop features', () => {
+  test('mock backend enables desktop features with updates unconfigured', () => {
     const capabilities = resolvePlatformCapabilities('mock')
     
     expect(capabilities.git).toBe(true)
     expect(capabilities.mcp).toBe(true)
-    expect(capabilities.updater).toBe(true)
+    expect(capabilities.updater).toBe(false)
     expect(capabilities.multiWindow).toBe(true)
     expect(capabilities.openCode).toBe(true)
     expect(capabilities.cliAgents).toBe(true)

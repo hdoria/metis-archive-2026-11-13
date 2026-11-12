@@ -60,7 +60,7 @@ describe('useMenuEvents editor find state', () => {
     }))
 
     act(() => {
-      window.dispatchEvent(new CustomEvent('laputa:editor-find-availability', {
+      window.dispatchEvent(new CustomEvent('metislegacy:editor-find-availability', {
         detail: { enabled: true },
       }))
     })

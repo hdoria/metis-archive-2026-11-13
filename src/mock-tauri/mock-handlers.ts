@@ -55,10 +55,10 @@ function mockSearchContent(content: string, excludeFrontmatter?: boolean): strin
 
 function mockModifiedFiles(): ModifiedFile[] {
   return [
-    { path: '/Users/luca/Laputa/26q1-laputa-app.md', relativePath: '26q1-laputa-app.md', status: 'modified' },
-    { path: '/Users/luca/Laputa/facebook-ads-strategy.md', relativePath: 'facebook-ads-strategy.md', status: 'modified' },
-    { path: '/Users/luca/Laputa/ai-agents-primer.md', relativePath: 'ai-agents-primer.md', status: 'added' },
-    { path: '/Users/luca/Laputa/old-draft.md', relativePath: 'old-draft.md', status: 'deleted' },
+    { path: '/Users/luca/MetisLegacy/26q1-metislegacy-app.md', relativePath: '26q1-metislegacy-app.md', status: 'modified' },
+    { path: '/Users/luca/MetisLegacy/facebook-ads-strategy.md', relativePath: 'facebook-ads-strategy.md', status: 'modified' },
+    { path: '/Users/luca/MetisLegacy/ai-agents-primer.md', relativePath: 'ai-agents-primer.md', status: 'added' },
+    { path: '/Users/luca/MetisLegacy/old-draft.md', relativePath: 'old-draft.md', status: 'deleted' },
   ]
 }
 
@@ -450,7 +450,7 @@ export const mockHandlers = {
     const basePaths = new Set(base.map(f => f.path))
     const extra: ModifiedFile[] = [...mockSavedSinceCommit]
       .filter(p => !basePaths.has(p))
-      .map(p => ({ path: p, relativePath: p.replace(/^.*?\/Laputa\//, ''), status: 'modified' as const }))
+      .map(p => ({ path: p, relativePath: p.replace(/^.*?\/MetisLegacy\//, ''), status: 'modified' as const }))
     return [...base, ...extra]
   },
   get_file_diff: (args: { path: string }) => mockFileDiff(args.path),
@@ -470,7 +470,7 @@ export const mockHandlers = {
   }),
   get_build_number: () => 'bDEV',
   should_use_external_media_preview: () => false,
-  get_last_commit_info: (): LastCommitInfo => ({ shortHash: 'a1b2c3d', commitUrl: 'https://github.com/lucaong/laputa-vault/commit/a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0' }),
+  get_last_commit_info: (): LastCommitInfo => ({ shortHash: 'a1b2c3d', commitUrl: 'https://github.com/example/metis-vault/commit/a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0' }),
   is_git_repo: () => true,
   git_workspace_info: ({ vaultPath }: { vaultPath?: string } = {}) => ({
     vaultRoot: vaultPath ?? '/mock-vault',
@@ -489,8 +489,8 @@ export const mockHandlers = {
   git_file_url: (args?: { vaultPath?: string; vault_path?: string; path?: string }): string | null => {
     const vaultPath = args?.vaultPath ?? args?.vault_path ?? mockLastVaultPath ?? DEFAULT_MOCK_VAULT_PATH
     if (!getMockRemoteState(vaultPath)) return null
-    const path = args?.path?.replace(/^.*?\/Laputa\//, '') ?? 'note.md'
-    return `https://github.com/lucaong/laputa-vault/blob/main/${encodeURI(path)}`
+    const path = args?.path?.replace(/^.*?\/MetisLegacy\//, '') ?? 'note.md'
+    return `https://github.com/example/metis-vault/blob/main/${encodeURI(path)}`
   },
   git_provider_status: (): GitProviderStatus => ({
     selected_provider: mockSettings.git_provider ?? 'native',
@@ -554,8 +554,8 @@ export const mockHandlers = {
     const limit = args.limit ?? 30
     const ts = Math.floor(Date.now() / 1000)
     const commits: PulseCommit[] = [
-      { hash: 'a1b2c3d4e5f6', shortHash: 'a1b2c3d', message: 'Update project notes and add new experiment', date: ts - 3600, githubUrl: 'https://github.com/lucaong/laputa-vault/commit/a1b2c3d4e5f6', files: [{ path: '26q1-laputa-app.md', status: 'modified', title: '26q1 laputa app' }, { path: 'ai-search.md', status: 'added', title: 'ai search' }], added: 1, modified: 1, deleted: 0 },
-      { hash: 'b2c3d4e5f6g7', shortHash: 'b2c3d4e', message: 'Reorganize people notes', date: ts - 86400, githubUrl: 'https://github.com/lucaong/laputa-vault/commit/b2c3d4e5f6g7', files: [{ path: 'alice-johnson.md', status: 'modified', title: 'alice johnson' }, { path: 'bob-smith.md', status: 'modified', title: 'bob smith' }, { path: 'old-contact.md', status: 'deleted', title: 'old contact' }], added: 0, modified: 2, deleted: 1 },
+      { hash: 'a1b2c3d4e5f6', shortHash: 'a1b2c3d', message: 'Update project notes and add new experiment', date: ts - 3600, githubUrl: 'https://github.com/example/metis-vault/commit/a1b2c3d4e5f6', files: [{ path: '26q1-metislegacy-app.md', status: 'modified', title: '26q1 metislegacy app' }, { path: 'ai-search.md', status: 'added', title: 'ai search' }], added: 1, modified: 1, deleted: 0 },
+      { hash: 'b2c3d4e5f6g7', shortHash: 'b2c3d4e', message: 'Reorganize people notes', date: ts - 86400, githubUrl: 'https://github.com/example/metis-vault/commit/b2c3d4e5f6g7', files: [{ path: 'alice-johnson.md', status: 'modified', title: 'alice johnson' }, { path: 'bob-smith.md', status: 'modified', title: 'bob smith' }, { path: 'old-contact.md', status: 'deleted', title: 'old contact' }], added: 0, modified: 2, deleted: 1 },
       { hash: 'c3d4e5f6g7h8', shortHash: 'c3d4e5f', message: 'Add daily journal entry', date: ts - 172800, githubUrl: null, files: [{ path: '2026-03-03.md', status: 'added', title: '2026 03 03' }], added: 1, modified: 0, deleted: 0 },
     ]
     return commits.slice(0, limit)
@@ -590,7 +590,7 @@ export const mockHandlers = {
       ],
     },
   ]),
-  get_agent_docs_path: () => '/mock/Tolaria/resources/agent-docs',
+  get_agent_docs_path: () => '/mock/Metis/resources/agent-docs',
   get_vault_ai_guidance_status: () => ({ ...mockVaultAiGuidanceStatus }),
   restore_vault_ai_guidance: () => {
     mockVaultAiGuidanceStatus = {
@@ -611,16 +611,16 @@ export const mockHandlers = {
     return null
   },
   save_image: (args: { vault_path?: string; filename: string; data: string }) => {
-    const vault = args.vault_path ?? '/Users/luca/Laputa'
+    const vault = args.vault_path ?? '/Users/luca/MetisLegacy'
     return `${vault}/attachments/${Date.now()}-${args.filename}`
   },
   copy_image_to_vault: (args: { vault_path?: string; source_path: string }) => {
-    const vault = args.vault_path ?? '/Users/luca/Laputa'
+    const vault = args.vault_path ?? '/Users/luca/MetisLegacy'
     const filename = args.source_path.split('/').pop() ?? 'image.png'
     return `${vault}/attachments/${Date.now()}-${filename}`
   },
   download_remote_image_to_vault: (args: { vault_path?: string; url: string }) => {
-    const vault = args.vault_path ?? '/Users/luca/Laputa'
+    const vault = args.vault_path ?? '/Users/luca/MetisLegacy'
     const filename = new URL(args.url).pathname.split('/').pop() || 'remote-image.png'
     return `${vault}/attachments/${Date.now()}-${filename}`
   },
@@ -725,12 +725,12 @@ export const mockHandlers = {
   check_mcp_status: () => 'installed',
   get_mcp_config_snippet: () => JSON.stringify({
     mcpServers: {
-      tolaria: {
+      metis: {
         type: 'stdio',
         command: 'node',
-        args: ['/mock/Tolaria/mcp-server/index.js'],
+        args: ['/mock/Metis/mcp-server/index.js'],
         env: {
-          WS_UI_PORT: '9711',
+          WS_UI_PORT: '9731',
         },
       },
     },
@@ -738,12 +738,12 @@ export const mockHandlers = {
   get_opencode_mcp_config_snippet: () => JSON.stringify({
     $schema: 'https://opencode.ai/config.json',
     mcp: {
-      tolaria: {
+      metis: {
         type: 'local',
-        command: ['node', '/mock/Tolaria/mcp-server/index.js'],
+        command: ['node', '/mock/Metis/mcp-server/index.js'],
         enabled: true,
         environment: {
-          WS_UI_PORT: '9711',
+          WS_UI_PORT: '9731',
         },
       },
     },

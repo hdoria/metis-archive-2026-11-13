@@ -15,7 +15,7 @@ afterEach(async () => {
 });
 
 async function repository() {
-	const dir = await mkdtemp(join(tmpdir(), "tolaria-git-"));
+	const dir = await mkdtemp(join(tmpdir(), "metis-git-"));
 	roots.push(dir);
 	await git.init({ fs, dir, defaultBranch: "main" });
 	await writeFile(join(dir, "note.md"), "---\ntags: [work]\n---\n# Original\n");

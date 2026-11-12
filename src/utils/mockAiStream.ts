@@ -1,4 +1,4 @@
-import type { MockAiStreamChunk, MockAiStreamHook } from '../types/laputaTestBridge'
+import type { MockAiStreamChunk, MockAiStreamHook } from '../types/metislegacyTestBridge'
 import type { AgentStreamCallbacks } from './streamAiAgent'
 
 function releaseMockChunk(chunk: MockAiStreamChunk, callbacks: AgentStreamCallbacks): boolean {

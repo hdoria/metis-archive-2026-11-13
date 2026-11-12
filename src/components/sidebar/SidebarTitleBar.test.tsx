@@ -52,7 +52,7 @@ describe('SidebarTitleBar', () => {
     const { container } = renderTitleBar()
 
     expect(container.firstElementChild).toHaveStyle({
-      paddingLeft: 'var(--tolaria-macos-traffic-light-padding, 90px)',
+      paddingLeft: 'var(--metis-macos-traffic-light-padding, 90px)',
     })
   })
 })

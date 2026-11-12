@@ -5,8 +5,8 @@ final class TabletGitHubControlsTests: XCTestCase {
   func testDeviceAuthorizationCodeCopiesWithoutOpeningTheBrowser() {
     continueAfterFailure = false
     XCUIDevice.shared.orientation = .landscapeLeft
-    let app = XCUIApplication(bundleIdentifier: "com.tolaria.mobile.dev")
-    app.launchArguments = ["--tolaria-mobile-search", "?source=native&qaRun=github-code"]
+    let app = XCUIApplication(bundleIdentifier: "io.github.hdoria.metis.mobile.dev")
+    app.launchArguments = ["--metis-mobile-search", "?source=native&qaRun=github-code"]
     app.launch()
     let vaults = app.buttons["Manage vaults"]
     XCTAssertTrue(vaults.waitForExistence(timeout: 30))

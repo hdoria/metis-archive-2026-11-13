@@ -40,7 +40,7 @@ async function pullFromRemote(page: Page) {
 
 async function triggerPullCommand(page: Page) {
 	await page.evaluate(() => {
-		window.__laputaTest?.dispatchAppCommand?.("vault-pull");
+		window.__metislegacyTest?.dispatchAppCommand?.("vault-pull");
 	});
 }
 
@@ -48,7 +48,7 @@ async function installEditorSwapProbe(page: Page) {
 	await page.evaluate(() => {
 		const probeWindow = window as typeof window & EditorSwapProbeWindow;
 		probeWindow.__editorSwapEvents = [];
-		window.addEventListener("laputa:editor-tab-swapped", (event) => {
+		window.addEventListener("metislegacy:editor-tab-swapped", (event) => {
 			const customEvent = event as CustomEvent<{ path?: string }>;
 			probeWindow.__editorSwapEvents?.push(customEvent.detail?.path ?? "");
 		});

@@ -4,7 +4,7 @@ import {
   collapsedSectionEndBlock,
   collapsedSectionHiddenBlockIds,
   toggleCollapsedHeading,
-} from './tolariaCollapsedSections'
+} from './metisCollapsedSections'
 
 type KeyListener = (event: KeyboardEvent) => void
 type NavigationKey = 'ArrowDown' | 'ArrowUp' | 'Backspace' | 'Enter'
@@ -203,8 +203,8 @@ describe('createRichEditorEmptyListNavigationExtension', () => {
     const linkedChild = {
       children: [],
       content: [{
-        content: [{ styles: {}, text: 'Tolaria', type: 'text' }],
-        href: 'https://tolaria.app',
+        content: [{ styles: {}, text: 'Métis', type: 'text' }],
+        href: 'https://metis.app',
         type: 'link',
       }],
       id: 'linked-child',

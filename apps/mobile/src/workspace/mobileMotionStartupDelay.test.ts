@@ -9,7 +9,7 @@ afterEach(() => {
 
 it("keeps the artificial startup delay disabled outside development", async () => {
 	vi.stubGlobal("__DEV__", false);
-	vi.stubEnv("EXPO_PUBLIC_TOLARIA_MOTION_STARTUP_DELAY_MS", "5000");
+	vi.stubEnv("EXPO_PUBLIC_METIS_MOTION_STARTUP_DELAY_MS", "5000");
 	await expect(
 		waitForMotionStartupDelay(new AbortController().signal),
 	).resolves.toBeUndefined();
@@ -17,7 +17,7 @@ it("keeps the artificial startup delay disabled outside development", async () =
 
 it("waits only for the configured debug delay and releases promptly on cancellation", async () => {
 	vi.stubGlobal("__DEV__", true);
-	vi.stubEnv("EXPO_PUBLIC_TOLARIA_MOTION_STARTUP_DELAY_MS", "5000");
+	vi.stubEnv("EXPO_PUBLIC_METIS_MOTION_STARTUP_DELAY_MS", "5000");
 	vi.useFakeTimers();
 	const controller = new AbortController();
 	const waiting = waitForMotionStartupDelay(controller.signal);

@@ -7,7 +7,7 @@ describe('mobile type icon names', () => {
     expect(mobileTypeIconCandidates('Quarter', 'calendar-blank')).toEqual(['calendar-blank', 'Quarter'])
   })
 
-  it('keeps real Laputa configured Phosphor icon names as first candidates', () => {
+  it('keeps real MetisLegacy configured Phosphor icon names as first candidates', () => {
     expect(mobileTypeIconCandidates('Evergreen', 'leaf')[0]).toBe('leaf')
     expect(mobileTypeIconCandidates('Restaurant', 'brain')[0]).toBe('brain')
     expect(mobileTypeIconCandidates('Health', 'stethoscope')[0]).toBe('stethoscope')

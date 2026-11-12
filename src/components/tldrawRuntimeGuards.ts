@@ -134,10 +134,10 @@ function installZoomAwareViewport(editor: Editor): () => void {
   }
 
   scheduleViewportUpdate()
-  window.addEventListener('laputa-zoom-change', scheduleViewportUpdate)
+  window.addEventListener('metislegacy-zoom-change', scheduleViewportUpdate)
 
   return () => {
-    window.removeEventListener('laputa-zoom-change', scheduleViewportUpdate)
+    window.removeEventListener('metislegacy-zoom-change', scheduleViewportUpdate)
     animationFrameIds.forEach((id) => { window.cancelAnimationFrame(id) })
     timeoutIds.forEach((id) => { window.clearTimeout(id) })
     editor.updateViewportScreenBounds = updateViewportScreenBounds

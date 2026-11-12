@@ -1,11 +1,11 @@
 {
-  "name": "Tolaria",
-  "short_name": "Tolaria",
+  "name": "Métis",
+  "short_name": "Métis",
   "description": "A note-taking app for developers",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FFFFFF",
-  "theme_color": "#155DFF",
+  "theme_color": "#17463F",
   "icons": [
     {
       "src": "/icon-192.png",

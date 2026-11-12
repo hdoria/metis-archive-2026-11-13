@@ -40,7 +40,7 @@ afterEach(async () => { await act(async () => root.unmount()); vi.unstubAllGloba
 it.each([false, true])('keeps Open local folder inside Available Vaults, including an empty catalog (busy=%s)', async busy => {
   const openFolder = vi.fn(async () => undefined)
   const manager: ComponentProps<typeof MobileSavedVaults>['manager'] = { busy, openFolder,
-    catalog: { localVaults: [], vaults: [], updateAlias: vi.fn(async () => 'laputa') }, active: { selection: null, git: null },
+    catalog: { localVaults: [], vaults: [], updateAlias: vi.fn(async () => 'metislegacy') }, active: { selection: null, git: null },
     select: vi.fn(async () => undefined), selectLocal: vi.fn(async () => undefined), forget: vi.fn(async () => undefined) }
   await act(async () => root.render(createElement(MobileSavedVaults, { manager })))
   const section = host.querySelector('[data-testid="saved-vaults"]')
@@ -53,7 +53,7 @@ it.each([false, true])('keeps Open local folder inside Available Vaults, includi
 })
 
 it('saves the edited slug without sending it to analytics', async () => {
-  const updateAlias = vi.fn(async () => 'laputa')
+  const updateAlias = vi.fn(async () => 'metislegacy')
   const manager: ComponentProps<typeof MobileSavedVaults>['manager'] = { busy: false, openFolder: vi.fn(),
     catalog: { localVaults: [], vaults: [{ id: 'stable-id', label: 'Personal Vault', repositoryUrl: 'https://github.com/example/vault' }], updateAlias },
     active: { selection: null, git: null }, select: vi.fn(async () => undefined), selectLocal: vi.fn(async () => undefined),
@@ -62,11 +62,11 @@ it('saves the edited slug without sending it to analytics', async () => {
   const input = host.querySelector<HTMLInputElement>('[data-testid="vault-slug-stable-id"]')
   if (!input) throw new Error('Vault slug input was not rendered')
   await act(async () => {
-    Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')?.set?.call(input, 'Laputa')
+    Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')?.set?.call(input, 'MetisLegacy')
     input.dispatchEvent(new Event('change', { bubbles: true }))
     input.dispatchEvent(new FocusEvent('focusout', { bubbles: true }))
   })
-  expect(updateAlias).toHaveBeenCalledWith('stable-id', 'Laputa')
+  expect(updateAlias).toHaveBeenCalledWith('stable-id', 'MetisLegacy')
   expect(analytics.capture).toHaveBeenCalledWith({ name: 'mobile_setting_changed', setting: 'vaultSlug' })
-  expect(JSON.stringify(analytics.capture.mock.calls)).not.toContain('Laputa')
+  expect(JSON.stringify(analytics.capture.mock.calls)).not.toContain('MetisLegacy')
 })

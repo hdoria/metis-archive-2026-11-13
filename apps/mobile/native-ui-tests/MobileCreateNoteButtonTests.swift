@@ -25,10 +25,10 @@ final class MobileCreateNoteButtonTests: XCTestCase {
   private func launchWorkspace(_ orientation: UIDeviceOrientation) -> XCUIApplication {
     continueAfterFailure = false
     XCUIDevice.shared.orientation = orientation
-    let app = XCUIApplication(bundleIdentifier: "com.tolaria.mobile.dev")
+    let app = XCUIApplication(bundleIdentifier: "io.github.hdoria.metis.mobile.dev")
     let search = "?source=fixture&phoneState=list&qaRun=create-button"
-    app.launchArguments = ["--tolaria-mobile-search", search]
-    app.launchEnvironment["TOLARIA_MOBILE_SEARCH"] = search
+    app.launchArguments = ["--metis-mobile-search", search]
+    app.launchEnvironment["METIS_MOBILE_SEARCH"] = search
     app.launch()
     XCTAssertTrue(fixtureNote(app).waitForExistence(timeout: 30))
     return app

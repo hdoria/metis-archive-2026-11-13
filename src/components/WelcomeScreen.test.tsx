@@ -1,8 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { beforeEach, describe, it, expect, vi } from 'vitest'
 import { WelcomeScreen } from './WelcomeScreen'
-import tolariaIcon from '@/assets/tolaria-icon.svg'
-import { TOLARIA_FIRST_LAUNCH_DOCS_URL } from '@/constants/feedback'
+import metisIcon from '@/assets/metis-icon.svg'
+import { METIS_FIRST_LAUNCH_DOCS_URL } from '@/constants/feedback'
 
 const dragRegionMouseDown = vi.fn()
 const openExternalUrl = vi.fn()
@@ -16,7 +16,7 @@ vi.mock('@/utils/url', () => ({
 
 const defaultProps = {
   mode: 'welcome' as const,
-  defaultVaultPath: '~/Documents/Laputa',
+  defaultVaultPath: '~/Documents/MetisLegacy',
   onCreateVault: vi.fn(),
   onRetryCreateVault: vi.fn(),
   onCreateEmptyVault: vi.fn(),
@@ -35,15 +35,15 @@ describe('WelcomeScreen', () => {
   describe('welcome mode', () => {
     it('renders welcome title and subtitle', () => {
       render(<WelcomeScreen {...defaultProps} />)
-      expect(screen.getByText('Welcome to Tolaria')).toBeInTheDocument()
+      expect(screen.getByText('Welcome to Métis')).toBeInTheDocument()
       expect(screen.getByText('Markdown knowledge management for the age of AI')).toBeInTheDocument()
     })
 
-    it('renders the local Tolaria branding icon', () => {
+    it('renders the local Métis branding icon', () => {
       render(<WelcomeScreen {...defaultProps} />)
 
-      const brandIcon = screen.getByAltText('Tolaria icon')
-      expect(brandIcon).toHaveAttribute('src', tolariaIcon)
+      const brandIcon = screen.getByAltText('Métis icon')
+      expect(brandIcon).toHaveAttribute('src', metisIcon)
     })
 
     it('shows the onboarding actions in the guided-first order', () => {
@@ -62,14 +62,14 @@ describe('WelcomeScreen', () => {
 
     it('shows the simplified template option description', () => {
       render(<WelcomeScreen {...defaultProps} />)
-      expect(screen.getByText('Download the Getting Started vault')).toBeInTheDocument()
-      expect(screen.queryByText(/~\/Documents\/Laputa/)).not.toBeInTheDocument()
+      expect(screen.getByText('Create a local Getting Started vault')).toBeInTheDocument()
+      expect(screen.queryByText(/~\/Documents\/MetisLegacy/)).not.toBeInTheDocument()
     })
 
-    it('shows offline guidance and disables the template option when offline', () => {
+    it('creates the bundled starter while offline', () => {
       render(<WelcomeScreen {...defaultProps} isOffline={true} />)
-      expect(screen.getByTestId('welcome-create-vault')).toBeDisabled()
-      expect(screen.getByText(/Requires internet - clone later/)).toBeInTheDocument()
+      expect(screen.getByTestId('welcome-create-vault')).not.toBeDisabled()
+      expect(screen.getByText('Create a local Getting Started vault')).toBeInTheDocument()
     })
 
     it('calls onCreateEmptyVault when create empty button is clicked', () => {
@@ -134,7 +134,7 @@ describe('WelcomeScreen', () => {
 
     it('shows loading text on template button while creating', () => {
       render(<WelcomeScreen {...defaultProps} creatingAction="template" />)
-      expect(screen.getByTestId('welcome-create-vault')).toHaveTextContent(/Downloading template/)
+      expect(screen.getByTestId('welcome-create-vault')).toHaveTextContent(/Creating vault/)
       expect(screen.getByTestId('welcome-status')).toHaveAttribute('aria-live', 'polite')
     })
 
@@ -171,13 +171,13 @@ describe('WelcomeScreen', () => {
 
     it('does not show path badge in welcome mode', () => {
       render(<WelcomeScreen {...defaultProps} />)
-      expect(screen.queryByText('~/Laputa')).not.toBeInTheDocument()
+      expect(screen.queryByText('~/MetisLegacy')).not.toBeInTheDocument()
     })
 
     it('opens the first-launch docs from the welcome card', () => {
       render(<WelcomeScreen {...defaultProps} />)
       fireEvent.click(screen.getByTestId('welcome-docs-link'))
-      expect(openExternalUrl).toHaveBeenCalledWith(TOLARIA_FIRST_LAUNCH_DOCS_URL)
+      expect(openExternalUrl).toHaveBeenCalledWith(METIS_FIRST_LAUNCH_DOCS_URL)
     })
   })
 
@@ -185,18 +185,18 @@ describe('WelcomeScreen', () => {
     const missingProps = {
       ...defaultProps,
       mode: 'vault-missing' as const,
-      missingPath: '~/Laputa',
+      missingPath: '~/MetisLegacy',
     }
 
     it('keeps the missing-vault state framed as welcome', () => {
       render(<WelcomeScreen {...missingProps} />)
-      expect(screen.getByText('Welcome to Tolaria')).toBeInTheDocument()
+      expect(screen.getByText('Welcome to Métis')).toBeInTheDocument()
       expect(screen.getByText(/folder may have moved or been deleted/)).toBeInTheDocument()
     })
 
     it('does not show the missing vault path in a badge', () => {
       render(<WelcomeScreen {...missingProps} />)
-      expect(screen.queryByText('~/Laputa')).not.toBeInTheDocument()
+      expect(screen.queryByText('~/MetisLegacy')).not.toBeInTheDocument()
     })
 
     it('keeps the existing-vault action label in the friendly recovery state', () => {

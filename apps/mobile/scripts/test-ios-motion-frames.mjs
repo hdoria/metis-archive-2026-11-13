@@ -10,32 +10,32 @@ if (!device)
 	throw new Error(
 		"Usage: node test-ios-motion-frames.mjs SIMULATOR_UDID [ARTIFACT_DIRECTORY]",
 	);
-if (process.env.EXPO_PUBLIC_TOLARIA_MOTION_FRAME_PROBE !== "1") {
+if (process.env.EXPO_PUBLIC_METIS_MOTION_FRAME_PROBE !== "1") {
 	throw new Error(
-		"Start Metro with EXPO_PUBLIC_TOLARIA_MOTION_FRAME_PROBE=1 before running the motion tests",
+		"Start Metro with EXPO_PUBLIC_METIS_MOTION_FRAME_PROBE=1 before running the motion tests",
 	);
 }
-if (!process.env.EXPO_PUBLIC_TOLARIA_MOTION_BUILD_ID) {
+if (!process.env.EXPO_PUBLIC_METIS_MOTION_BUILD_ID) {
 	throw new Error(
-		"Set EXPO_PUBLIC_TOLARIA_MOTION_BUILD_ID to the commit/build identifier loaded by Metro",
+		"Set EXPO_PUBLIC_METIS_MOTION_BUILD_ID to the commit/build identifier loaded by Metro",
 	);
 }
 
 const output = resolve(
-	requestedOutput ?? join(tmpdir(), "tolaria-motion-frame-qa"),
+	requestedOutput ?? join(tmpdir(), "metis-motion-frame-qa"),
 );
 const project = join(output, "project");
-const metroLogPath = process.env.TOLARIA_MOTION_LOG_PATH;
+const metroLogPath = process.env.METIS_MOTION_LOG_PATH;
 if (!metroLogPath)
 	throw new Error(
-		"Set TOLARIA_MOTION_LOG_PATH to the file receiving this build's Metro output",
+		"Set METIS_MOTION_LOG_PATH to the file receiving this build's Metro output",
 	);
 mkdirSync(output, { recursive: true });
 run("xcrun", [
 	"simctl",
 	"get_app_container",
 	device,
-	"com.tolaria.mobile.dev",
+	"io.github.hdoria.metis.mobile.dev",
 	"app",
 ]);
 run("ruby", [
@@ -45,17 +45,17 @@ run("ruby", [
 	project,
 ]);
 const motionSearch =
-	process.env.TOLARIA_MOTION_SEARCH ??
+	process.env.METIS_MOTION_SEARCH ??
 	"?source=fixture&phoneState=list&editorMode=wysiwyg&layoutProbe=1&qaRun=tol339-motion";
 const logStartOffset = statSync(metroLogPath).size;
-const focusedCheck = process.env.TOLARIA_MOTION_CHECK;
+const focusedCheck = process.env.METIS_MOTION_CHECK;
 run(
 	"xcrun",
 	[
 		"simctl",
 		"uninstall",
 		device,
-		"com.tolaria.mobile.tablet-gesture-tests.xctrunner",
+		"io.github.hdoria.metis.mobile.tablet-gesture-tests.xctrunner",
 	],
 	{ allowFailure: true },
 );
@@ -109,8 +109,8 @@ run("xcrun", [
 	"launch",
 	"--terminate-running-process",
 	device,
-	"com.tolaria.mobile.dev",
-	"--tolaria-mobile-search",
+	"io.github.hdoria.metis.mobile.dev",
+	"--metis-mobile-search",
 	motionSearch,
 ]);
 const resultBundle = join(output, `motion-${Date.now()}.xcresult`);

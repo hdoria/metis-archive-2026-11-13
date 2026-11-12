@@ -16,7 +16,7 @@ import {
 } from './vaultAccess'
 import { applySharedVaultBase, remoteVaultConfig } from '../vaultBackend/remoteConfig'
 
-type RemoteWindow = { TOLARIA_REMOTE_URL?: string; TOLARIA_REMOTE_TOKEN?: string }
+type RemoteWindow = { METIS_REMOTE_URL?: string; METIS_REMOTE_TOKEN?: string }
 
 const NOTE = 'projects/alpha.md'
 const viewerOfNote: VaultAccessState = { kind: 'shared', access: { subject: 'u_1', grants: [{ scope: NOTE, role: 'viewer' }] } }
@@ -29,7 +29,7 @@ const vaultEditor: VaultAccessState = { kind: 'shared', access: { subject: 'u_1'
 
 function openPage(path: string): void {
   window.history.replaceState(null, '', path)
-  Object.assign(window as RemoteWindow, { TOLARIA_REMOTE_URL: 'https://front.test', TOLARIA_REMOTE_TOKEN: 'via-front' })
+  Object.assign(window as RemoteWindow, { METIS_REMOTE_URL: 'https://front.test', METIS_REMOTE_TOKEN: 'via-front' })
   applySharedVaultBase()
 }
 
@@ -39,8 +39,8 @@ afterEach(() => {
   vi.useRealTimers()
   vi.unstubAllGlobals()
   window.history.replaceState(null, '', '/')
-  delete (window as RemoteWindow).TOLARIA_REMOTE_URL
-  delete (window as RemoteWindow).TOLARIA_REMOTE_TOKEN
+  delete (window as RemoteWindow).METIS_REMOTE_URL
+  delete (window as RemoteWindow).METIS_REMOTE_TOKEN
   resetVaultAccessForTests()
 })
 

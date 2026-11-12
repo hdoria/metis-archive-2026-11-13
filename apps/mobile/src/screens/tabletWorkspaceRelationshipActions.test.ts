@@ -99,14 +99,14 @@ describe('tablet workspace relationship actions', () => {
   })
 
   it('builds guarded desktop remove-relationship edits', () => {
-    expect(removeRelationshipEdit(' workflow-orchestration ', ' belongs_to ', ' [[Projects/Laputa]] ')).toEqual({
+    expect(removeRelationshipEdit(' workflow-orchestration ', ' belongs_to ', ' [[Projects/MetisLegacy]] ')).toEqual({
       key: 'belongs_to',
       noteId: 'workflow-orchestration',
-      ref: '[[Projects/Laputa]]',
+      ref: '[[Projects/MetisLegacy]]',
       type: 'removeRelationship',
     })
-    expect(removeRelationshipEdit('', 'belongs_to', '[[Projects/Laputa]]')).toBeNull()
-    expect(removeRelationshipEdit('workflow-orchestration', '', '[[Projects/Laputa]]')).toBeNull()
+    expect(removeRelationshipEdit('', 'belongs_to', '[[Projects/MetisLegacy]]')).toBeNull()
+    expect(removeRelationshipEdit('workflow-orchestration', '', '[[Projects/MetisLegacy]]')).toBeNull()
     expect(removeRelationshipEdit('workflow-orchestration', 'belongs_to', '')).toBeNull()
   })
 })

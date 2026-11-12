@@ -1,6 +1,5 @@
 import "./App.testUtils";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
-import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
 import App from "./App";
 import {
@@ -12,139 +11,32 @@ import {
 	render,
 	SLOW_APP_READY_TIMEOUT_MS,
 } from "./App.testUtils";
-import type { UpdateCheckResult, UpdateStatus } from "./hooks/useUpdater";
 import { useUpdater } from "./hooks/useUpdater";
 import type { Settings } from "./types";
 import { streamAiAgent } from "./utils/streamAiAgent";
 
-function mockUpdaterWithStatus(
-	checkForUpdates: () => Promise<UpdateCheckResult>,
-) {
-	vi.mocked(useUpdater).mockImplementation(() => {
-		const [status, setStatus] = useState<UpdateStatus>({ state: "idle" });
-		return {
-			status,
-			actions: {
-				checkForUpdates: async () => {
-					setStatus({ state: "checking" });
-					const result = await checkForUpdates();
-					if (result.kind === "available") {
-						setStatus({
-							state: "available",
-							version: result.version,
-							displayVersion: result.displayVersion,
-							notes: undefined,
-						});
-					} else if (result.kind === "error") {
-						setStatus({ state: "error", kind: "check" });
-					} else {
-						setStatus({ state: "idle" });
-					}
-					return result;
-				},
-				startDownload: vi.fn(),
-				openReleaseNotes: vi.fn(),
-				dismiss: vi.fn(),
-			},
-		};
-	});
-}
-
 describe("App.integrations", () => {
-	it("shows visible feedback when a manual update check finds an update", async () => {
-		mockUpdaterWithStatus(async () => ({
-			kind: "available",
-			version: "2026.4.25",
-			displayVersion: "2026.4.25",
-		}));
+	it("keeps the build label disabled without a signed update service", async () => {
+        const checkForUpdates = vi.fn(async () => ({ kind: "up-to-date" as const }));
+        vi.mocked(useUpdater).mockReturnValue(createMockUpdaterResult(checkForUpdates));
+        render(<App />);
+        await screen.findByText("All Notes");
+        const buildLabel = screen.getByTestId("status-build-number");
+        expect(buildLabel).toHaveAttribute("aria-disabled", "true");
+        fireEvent.click(buildLabel);
+        expect(checkForUpdates).not.toHaveBeenCalled();
+        expect(screen.queryByTestId("update-banner")).not.toBeInTheDocument();
+    });
 
-		render(<App />);
-
-		await waitFor(() => {
-			expect(screen.getByText("All Notes")).toBeInTheDocument();
-		});
-
-		fireEvent.click(screen.getByTestId("status-build-number"));
-
-		await waitFor(() => {
-			const bottomStack = screen.getByTestId("app-bottom-banner-stack");
-			expect(bottomStack).toContainElement(screen.getByTestId("update-banner"));
-			expect(screen.getByTestId("update-banner")).toHaveTextContent(
-				"Tolaria 2026.4.25 is available",
-			);
-		});
-	});
-
-	it("shows visible feedback when a menu-driven update check finds no eligible update", async () => {
-		vi.mocked(useUpdater).mockReturnValue(
-			createMockUpdaterResult(async () => ({ kind: "up-to-date" })),
-		);
-
-		render(<App />);
-
-		await waitFor(() => {
-			expect(screen.getByText("All Notes")).toBeInTheDocument();
-			expect(typeof window.__laputaTest?.dispatchBrowserMenuCommand).toBe(
-				"function",
-			);
-		});
-
-		act(() => {
-			window.__laputaTest?.dispatchBrowserMenuCommand?.(
-				"app-check-for-updates",
-			);
-		});
-
-		await waitFor(() => {
-			expect(
-				screen.getByText("No newer stable update is available right now"),
-			).toBeInTheDocument();
-		});
-	});
-
-	it("shows immediate feedback while a menu-driven update check is pending", async () => {
-		let resolveUpdate: ((result: { kind: "up-to-date" }) => void) | null = null;
-		const checkForUpdates = vi.fn(
-			() =>
-				new Promise<{ kind: "up-to-date" }>((resolve) => {
-					resolveUpdate = resolve;
-				}),
-		);
-		mockUpdaterWithStatus(checkForUpdates);
-
-		render(<App />);
-
-		await waitFor(() => {
-			expect(screen.getByText("All Notes")).toBeInTheDocument();
-			expect(typeof window.__laputaTest?.dispatchBrowserMenuCommand).toBe(
-				"function",
-			);
-		});
-
-		act(() => {
-			window.__laputaTest?.dispatchBrowserMenuCommand?.(
-				"app-check-for-updates",
-			);
-		});
-
-		await waitFor(() => {
-			const bottomStack = screen.getByTestId("app-bottom-banner-stack");
-			expect(bottomStack).toContainElement(screen.getByTestId("update-banner"));
-			expect(bottomStack).toHaveTextContent("Checking for updates...");
-		});
-		expect(checkForUpdates).toHaveBeenCalledOnce();
-
-		await act(async () => {
-			resolveUpdate?.({ kind: "up-to-date" });
-			await Promise.resolve();
-		});
-
-		await waitFor(() => {
-			expect(
-				screen.getByText("No newer stable update is available right now"),
-			).toBeInTheDocument();
-		});
-	});
+    it("explains unavailable updates without checking a service from menu commands", async () => {
+        const checkForUpdates = vi.fn(async () => ({ kind: "up-to-date" as const }));
+        vi.mocked(useUpdater).mockReturnValue(createMockUpdaterResult(checkForUpdates));
+        render(<App />);
+        await screen.findByText("All Notes");
+        act(() => window.__metislegacyTest?.dispatchBrowserMenuCommand?.("app-check-for-updates"));
+        expect(await screen.findByText("Automatic updates are not configured for this build.")).toBeInTheDocument();
+        expect(checkForUpdates).not.toHaveBeenCalled();
+    });
 
 	it("shows the external AI setup dialog from the menu when AI onboarding is active", async () => {
 		localStorage.removeItem(AI_AGENTS_ONBOARDING_DISMISSED_STORAGE_NAME);
@@ -168,13 +60,13 @@ describe("App.integrations", () => {
 		);
 
 		await waitFor(() => {
-			expect(typeof window.__laputaTest?.dispatchBrowserMenuCommand).toBe(
+			expect(typeof window.__metislegacyTest?.dispatchBrowserMenuCommand).toBe(
 				"function",
 			);
 		});
 
 		act(() => {
-			window.__laputaTest?.dispatchBrowserMenuCommand?.("vault-install-mcp");
+			window.__metislegacyTest?.dispatchBrowserMenuCommand?.("vault-install-mcp");
 		});
 
 		await waitFor(() => {

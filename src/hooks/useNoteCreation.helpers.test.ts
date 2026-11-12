@@ -264,10 +264,10 @@ describe('resolveNewNote', () => {
 
   it('blocks creation when macOS /tmp aliases point at the same note path', () => {
     const plan = planNewNoteCreation({
-      entries: [makeEntry({ path: '/private/tmp/tolaria-vault/briefing.md', filename: 'briefing.md' })],
+      entries: [makeEntry({ path: '/private/tmp/metis-vault/briefing.md', filename: 'briefing.md' })],
       title: 'Briefing',
       type: 'Note',
-      vaultPath: '/tmp/tolaria-vault',
+      vaultPath: '/tmp/metis-vault',
     })
 
     expect(plan.status).toBe('blocked')

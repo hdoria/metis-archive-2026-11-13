@@ -1,15 +1,23 @@
-/* global module */
-const easProjectId = 'ec8f7035-5dea-4264-8e40-8cdf0d5cb377'
+/* global module, process */
 
-function updateConfiguration(profile, requestedChannel) {
+function easProjectId(value = process.env.METIS_EAS_PROJECT_ID) {
+  const projectId = (value || '').trim()
+  if (projectId && !/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(projectId)) {
+    throw new Error('METIS_EAS_PROJECT_ID must be the UUID of your own Expo project')
+  }
+  return projectId
+}
+
+function updateConfiguration(profile, requestedChannel, project = process.env.METIS_EAS_PROJECT_ID) {
   const channel = { testflight: 'alpha', production: 'stable', 'ota-validation': 'ota-validation' }[profile]
   if (requestedChannel && requestedChannel !== channel) {
-    throw new Error('TOLARIA_UPDATE_CHANNEL must match the build profile')
+    throw new Error('METIS_UPDATE_CHANNEL must match the build profile')
   }
-  if (!channel) return { enabled: false }
+  const projectId = easProjectId(project)
+  if (!channel || !projectId) return { enabled: false }
   return {
     enabled: true,
-    url: `https://u.expo.dev/${easProjectId}`,
+    url: `https://u.expo.dev/${projectId}`,
     requestHeaders: { 'expo-channel-name': channel },
     checkAutomatically: 'ON_LOAD',
     fallbackToCacheTimeout: 0,

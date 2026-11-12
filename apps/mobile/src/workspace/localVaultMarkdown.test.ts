@@ -79,7 +79,7 @@ const expectedDesktopBlocks = [
 ]
 
 describe('localVaultMarkdown', () => {
-  it('parses desktop markdown blocks used by Tolaria notes', () => {
+  it('parses desktop markdown blocks used by Metis notes', () => {
     const blocks = localVaultEditorBlocks(desktopMarkdownFixture)
     expect(blocks).toMatchObject(expectedDesktopBlocks)
     const taskItems = blocks.find((block) => block.kind === 'tasks')?.kind === 'tasks'

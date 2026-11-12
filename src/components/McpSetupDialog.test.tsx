@@ -4,12 +4,12 @@ import { McpSetupDialog } from './McpSetupDialog'
 
 const MANUAL_CONFIG = JSON.stringify({
   mcpServers: {
-    tolaria: {
+    metis: {
       type: 'stdio',
       command: 'node',
-      args: ['/Applications/Tolaria.app/Contents/Resources/mcp-server/index.js'],
+      args: ['/Applications/Métis.app/Contents/Resources/mcp-server/index.js'],
       env: {
-        WS_UI_PORT: '9711',
+        WS_UI_PORT: '9731',
       },
     },
   },
@@ -18,12 +18,12 @@ const MANUAL_CONFIG = JSON.stringify({
 const OPENCODE_CONFIG = JSON.stringify({
   $schema: 'https://opencode.ai/config.json',
   mcp: {
-    tolaria: {
+    metis: {
       type: 'local',
-      command: ['node', '/Applications/Tolaria.app/Contents/Resources/mcp-server/index.js'],
+      command: ['node', '/Applications/Métis.app/Contents/Resources/mcp-server/index.js'],
       enabled: true,
       environment: {
-        WS_UI_PORT: '9711',
+        WS_UI_PORT: '9731',
       },
     },
   },
@@ -53,7 +53,7 @@ describe('McpSetupDialog', () => {
     expect(screen.getByTestId('mcp-config-snippet')).toHaveTextContent('"type": "stdio"')
     expect(screen.getByTestId('mcp-config-snippet')).toHaveTextContent('"mcpServers"')
     expect(screen.getByTestId('mcp-config-snippet')).not.toHaveTextContent('"VAULT_PATH"')
-    expect(screen.getByTestId('mcp-config-snippet')).toHaveTextContent('"WS_UI_PORT": "9711"')
+    expect(screen.getByTestId('mcp-config-snippet')).toHaveTextContent('"WS_UI_PORT": "9731"')
     expect(screen.getByTestId('mcp-opencode-config-snippet')).toHaveTextContent('"mcp"')
     expect(screen.getByTestId('mcp-opencode-config-snippet')).toHaveTextContent('"type": "local"')
     expect(screen.getByTestId('mcp-opencode-config-snippet')).toHaveTextContent('"command": [')

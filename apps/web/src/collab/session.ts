@@ -9,7 +9,7 @@ export interface CollabSession {
   note: string
 }
 
-const STORAGE_KEY = 'tolaria:collab-session'
+const STORAGE_KEY = 'metis:collab-session'
 const NOTE_PARAM = 'note'
 
 function stored(): Partial<CollabSession> {

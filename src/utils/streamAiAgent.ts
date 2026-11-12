@@ -46,14 +46,14 @@ function mockAgentResponse(agent: AiAgentId, message: string): string {
   if (message.indexOf(CONVERSATION_HISTORY_OPEN_MARKER) >= 0) {
     return mockConversationResponse(agentLabel, message)
   }
-  return `[mock-${agentLabel.toLowerCase()}] You said: "${message}" — This note is related to [[Build Laputa App]] and [[Matteo Cellini]].`
+  return `[mock-${agentLabel.toLowerCase()}] You said: "${message}" — This note is related to [[Build MetisLegacy App]] and [[Matteo Cellini]].`
 }
 
 function mockConversationResponse(agentLabel: string, message: string): string {
   const allUserLines = message.match(USER_HISTORY_LINE_RE) ?? []
   const lastLine = allUserLines.at(-1) ?? ''
   const lastUserMsg = lastLine.replace('[user]: ', '')
-  return `[mock-${agentLabel.toLowerCase()} turns=${allUserLines.length}] You asked: "${lastUserMsg}" — This note is related to [[Build Laputa App]] and [[Matteo Cellini]].`
+  return `[mock-${agentLabel.toLowerCase()} turns=${allUserLines.length}] You asked: "${lastUserMsg}" — This note is related to [[Build MetisLegacy App]] and [[Matteo Cellini]].`
 }
 
 function handleStreamEvent(

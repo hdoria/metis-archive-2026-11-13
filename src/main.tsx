@@ -75,7 +75,7 @@ async function installMacosFullscreenChromeTracking(): Promise<void> {
   }
 }
 
-const IS_WEB_BUILD = import.meta.env.VITE_TOLARIA_WEB_BUILD === 'true'
+const IS_WEB_BUILD = import.meta.env.VITE_METIS_WEB_BUILD === 'true'
 
 async function loadAppModule() {
   markStartupPhase('app_module_requested')
@@ -141,7 +141,7 @@ function dispatchDeterministicShortcutEvent(init: AppCommandShortcutEventInit) {
   target.dispatchEvent(new KeyboardEvent('keydown', init))
 }
 
-window.__laputaTest = {
+window.__metislegacyTest = {
   dispatchAppCommand(id: string) {
     if (!isAppCommandId(id)) {
       throw new Error(`Unknown app command: ${id}`)
@@ -161,11 +161,11 @@ window.__laputaTest = {
       return invoke('trigger_menu_command', { id })
     }
 
-    if (!window.__laputaTest?.dispatchBrowserMenuCommand) {
-      throw new Error('Tolaria test bridge is missing dispatchBrowserMenuCommand')
+    if (!window.__metislegacyTest?.dispatchBrowserMenuCommand) {
+      throw new Error('Metis test bridge is missing dispatchBrowserMenuCommand')
     }
 
-    window.__laputaTest.dispatchBrowserMenuCommand(id)
+    window.__metislegacyTest.dispatchBrowserMenuCommand(id)
     return undefined
   },
   triggerShortcutCommand(id: string, options?: AppCommandShortcutEventOptions) {
@@ -201,9 +201,9 @@ function isStartupDefaultExportImportError(error: unknown): boolean {
 }
 
 function fatalRenderOverlay(): HTMLElement {
-  const existing = document.getElementById('tolaria-fatal-render-error')
+  const existing = document.getElementById('metis-fatal-render-error')
   const overlay = existing ?? document.createElement('pre')
-  overlay.id = 'tolaria-fatal-render-error'
+  overlay.id = 'metis-fatal-render-error'
   overlay.style.cssText = [
     'position:fixed',
     'inset:24px',
@@ -226,7 +226,7 @@ function showFatalRenderError(
 ): void {
   const overlay = fatalRenderOverlay()
   overlay.textContent = [
-    'Tolaria render error',
+    'Metis render error',
     '',
     errorText(error),
     '',
@@ -275,7 +275,7 @@ function captureRecoverableReactRootError(
 
 function getRequiredRootElement(): HTMLElement {
   const root = document.getElementById('root')
-  if (!root) throw new Error('Tolaria root element is missing')
+  if (!root) throw new Error('Metis root element is missing')
   return root
 }
 

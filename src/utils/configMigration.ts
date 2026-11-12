@@ -104,9 +104,9 @@ export function migrateLocalStorageToVaultConfig(loaded: VaultConfig | null): Va
 
   applyZoomMigration(result)
   applyViewModeMigration(result)
-  applyJsonRecordMigration(result, 'tag_colors', LS_KEYS.tagColors, 'laputa:tag-color-overrides')
-  applyJsonRecordMigration(result, 'status_colors', LS_KEYS.statusColors, 'laputa:status-color-overrides')
-  applyJsonRecordMigration(result, 'property_display_modes', LS_KEYS.propertyModes, 'laputa:display-mode-overrides')
+  applyJsonRecordMigration(result, 'tag_colors', LS_KEYS.tagColors, 'metislegacy:tag-color-overrides')
+  applyJsonRecordMigration(result, 'status_colors', LS_KEYS.statusColors, 'metislegacy:status-color-overrides')
+  applyJsonRecordMigration(result, 'property_display_modes', LS_KEYS.propertyModes, 'metislegacy:display-mode-overrides')
   markMigrationCompleted()
 
   return result

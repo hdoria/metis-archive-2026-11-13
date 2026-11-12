@@ -5,8 +5,8 @@ import {
   documentBlockIds,
   selectedDocumentBlocks,
 } from './richEditorBlockSelectionDocument'
-import type { TolariaBlockNoteEditor } from './tolariaBlockNoteDom'
-import { toggleCollapsedHeading } from './tolariaCollapsedSections'
+import type { MetisBlockNoteEditor } from './metisBlockNoteDom'
+import { toggleCollapsedHeading } from './metisCollapsedSections'
 import type { RichEditorBlockSelectionEditor } from './richEditorBlockSelectionTypes'
 
 type FixtureBlock = {
@@ -18,7 +18,7 @@ type FixtureBlock = {
 }
 
 function editorFor(blocks: FixtureBlock[]) {
-  return { document: blocks } as RichEditorBlockSelectionEditor & TolariaBlockNoteEditor
+  return { document: blocks } as RichEditorBlockSelectionEditor & MetisBlockNoteEditor
 }
 
 describe('rich editor block-selection document helpers', () => {

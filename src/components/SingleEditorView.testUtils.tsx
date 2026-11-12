@@ -208,21 +208,21 @@ vi.mock('./blockNoteSideMenuHoverGuard', () => ({
   useBlockNoteSideMenuHoverGuard: (containerRef: unknown) => state.hoverGuardMock(containerRef),
 }))
 
-vi.mock('./tolariaEditorFormattingConfig', () => ({
-  getTolariaSlashMenuItems: vi.fn(async () => []),
+vi.mock('./metisEditorFormattingConfig', () => ({
+  getMetisSlashMenuItems: vi.fn(async () => []),
 }))
 
-vi.mock('./tolariaEditorFormatting', () => ({
-  TolariaFormattingToolbar: () => <div data-testid="tolaria-formatting-toolbar" />,
-  TolariaFormattingToolbarController: (props: Record<string, unknown>) => {
+vi.mock('./metisEditorFormatting', () => ({
+  MetisFormattingToolbar: () => <div data-testid="metis-formatting-toolbar" />,
+  MetisFormattingToolbarController: (props: Record<string, unknown>) => {
     state.capturedToolbarProps = props
-    return <div data-testid="tolaria-formatting-toolbar-controller" />
+    return <div data-testid="metis-formatting-toolbar-controller" />
   },
 }))
 
-vi.mock('./tolariaBlockNoteSideMenu', () => ({
-  TolariaCollapsedHeadingsController: () => <div data-testid="tolaria-collapsed-headings-controller" />,
-  TolariaSideMenu: () => <div data-testid="tolaria-side-menu" />,
+vi.mock('./metisBlockNoteSideMenu', () => ({
+  MetisCollapsedHeadingsController: () => <div data-testid="metis-collapsed-headings-controller" />,
+  MetisSideMenu: () => <div data-testid="metis-side-menu" />,
 }))
 
 vi.mock('./useEditorLinkActivation', () => ({

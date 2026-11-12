@@ -49,11 +49,11 @@ fn release_channel_accepts_alpha() {
 fn release_channel_endpoints_match_expected_paths() {
     assert_eq!(
         ReleaseChannel::Alpha.updater_endpoint().unwrap().as_str(),
-        "https://refactoringhq.github.io/tolaria/alpha/latest.json"
+        "https://hdoria.github.io/metis/alpha/latest.json"
     );
     assert_eq!(
         ReleaseChannel::Stable.updater_endpoint().unwrap().as_str(),
-        "https://refactoringhq.github.io/tolaria/stable/latest.json"
+        "https://hdoria.github.io/metis/stable/latest.json"
     );
 }
 
@@ -63,17 +63,17 @@ fn alpha_release_metadata_url_uses_highest_calendar_sequence_tag() {
             github_alpha_release(
                 "alpha-v2026.5.8-alpha.0007",
                 "2026-05-08T07:00:00Z",
-                "https://github.com/refactoringhq/tolaria/releases/download/alpha-v2026.5.8-alpha.0007/alpha-latest.json",
+                "https://github.com/hdoria/metis/releases/download/alpha-v2026.5.8-alpha.0007/alpha-latest.json",
             ),
             github_alpha_release(
                 "alpha-v2026.5.8-alpha.0017",
                 "2026-05-08T17:00:00Z",
-                "https://github.com/refactoringhq/tolaria/releases/download/alpha-v2026.5.8-alpha.0017/alpha-latest.json",
+                "https://github.com/hdoria/metis/releases/download/alpha-v2026.5.8-alpha.0017/alpha-latest.json",
             ),
             github_alpha_release(
                 "alpha-v2026.5.7-alpha.0099",
                 "2026-05-07T23:00:00Z",
-                "https://github.com/refactoringhq/tolaria/releases/download/alpha-v2026.5.7-alpha.0099/alpha-latest.json",
+                "https://github.com/hdoria/metis/releases/download/alpha-v2026.5.7-alpha.0099/alpha-latest.json",
             ),
         ];
 
@@ -81,7 +81,7 @@ fn alpha_release_metadata_url_uses_highest_calendar_sequence_tag() {
             latest_alpha_release_metadata_url(&releases)
                 .unwrap()
                 .as_str(),
-            "https://github.com/refactoringhq/tolaria/releases/download/alpha-v2026.5.8-alpha.0017/alpha-latest.json"
+            "https://github.com/hdoria/metis/releases/download/alpha-v2026.5.8-alpha.0017/alpha-latest.json"
         );
 }
 
@@ -250,4 +250,13 @@ fn github_alpha_release(
             browser_download_url: browser_download_url.into(),
         }],
     }
+}
+
+#[test]
+fn signed_updates_are_disabled_and_no_signing_key_is_bundled() {
+    let config: serde_json::Value =
+        serde_json::from_str(include_str!("../../tauri.conf.json")).unwrap();
+    assert!(!super::SIGNED_UPDATES_ENABLED);
+    assert!(config["plugins"].get("updater").is_none());
+    assert_eq!(config["bundle"]["createUpdaterArtifacts"], false);
 }

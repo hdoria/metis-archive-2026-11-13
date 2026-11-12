@@ -45,7 +45,7 @@ describe('mobile quick open', () => {
       'workflow-orchestration',
     ])
     expect(mobileQuickOpenResults(notes, 'unexpected success').map((note) => note.id)).toEqual(['open-source-project'])
-    expect(mobileQuickOpenResults(notes, 'tolaria/releases').map((note) => note.id)).toEqual(['release-2026-05-02'])
+    expect(mobileQuickOpenResults(notes, 'metis/releases').map((note) => note.id)).toEqual(['release-2026-05-02'])
     expect(mobileQuickOpenResults(notes, 'design').map((note) => note.id)).toContain('workflow-orchestration')
     expect(mobileQuickOpenResults(notes, 'procedure').map((note) => note.id)).toContain('open-source-project')
   })

@@ -164,7 +164,7 @@ final class MobileMotionFrameTests: XCTestCase {
   }
 
   private func attachToMotionFixture() -> XCUIApplication {
-    let app = XCUIApplication(bundleIdentifier: "com.tolaria.mobile.dev")
+    let app = XCUIApplication(bundleIdentifier: "io.github.hdoria.metis.mobile.dev")
     app.activate()
     XCTAssertTrue(app.state == .runningForeground, "The scripted motion fixture is not foregrounded")
     return app

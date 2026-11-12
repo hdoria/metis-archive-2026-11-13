@@ -13,8 +13,8 @@ mod subprocess;
 pub(crate) use extraction::extract_mcp_server_to_stable_dir;
 pub(crate) use runtime::{find_mcp_runtime, find_node};
 
-const MCP_SERVER_NAME: &str = "tolaria";
-const LEGACY_MCP_SERVER_NAME: &str = "laputa";
+const MCP_SERVER_NAME: &str = "metis";
+const LEGACY_MCP_SERVER_NAME: &str = "metislegacy";
 
 /// Status of the MCP server installation.
 #[derive(Debug, Serialize, Clone, PartialEq)]
@@ -150,16 +150,16 @@ fn push_unique_path(paths: &mut Vec<PathBuf>, path: PathBuf) {
 
 fn linux_package_mcp_server_dirs(root: &Path) -> Vec<PathBuf> {
     vec![
-        root.join("Tolaria").join("mcp-server"),
-        root.join("Tolaria").join("resources").join("mcp-server"),
-        root.join("lib").join("Tolaria").join("mcp-server"),
+        root.join("Metis").join("mcp-server"),
+        root.join("Metis").join("resources").join("mcp-server"),
+        root.join("lib").join("Metis").join("mcp-server"),
         root.join("lib")
-            .join("Tolaria")
+            .join("Metis")
             .join("resources")
             .join("mcp-server"),
-        root.join("lib").join("tolaria").join("mcp-server"),
+        root.join("lib").join("metis").join("mcp-server"),
         root.join("lib")
-            .join("tolaria")
+            .join("metis")
             .join("resources")
             .join("mcp-server"),
     ]
@@ -190,8 +190,8 @@ pub fn spawn_ws_bridge_with_paths(
         .arg(&script)
         .env("VAULT_PATH", vault_path)
         .env("VAULT_PATHS", active_vault_paths)
-        .env("WS_PORT", "9710")
-        .env("WS_UI_PORT", "9711")
+        .env("WS_PORT", "9730")
+        .env("WS_UI_PORT", "9731")
         .stdin(std::process::Stdio::null())
         .stdout(std::process::Stdio::null())
         .stderr(std::process::Stdio::piped())
@@ -277,7 +277,7 @@ fn entry_uses_stdio(entry: &serde_json::Value) -> bool {
 }
 
 fn entry_has_ui_port(entry: &serde_json::Value) -> bool {
-    entry["env"]["WS_UI_PORT"].as_str() == Some("9711")
+    entry["env"]["WS_UI_PORT"].as_str() == Some("9731")
 }
 
 /// Build the durable external MCP server entry JSON for an index.js path.
@@ -288,7 +288,8 @@ fn build_mcp_entry(runtime_command: &str, index_js: &str) -> serde_json::Value {
         "command": runtime_command,
         "args": [index_js],
         "env": {
-            "WS_UI_PORT": "9711"
+            "WS_UI_PORT": "9731",
+            "METIS_APP_CONFIG_NAMESPACE": crate::app_config::active_namespace()
         }
     })
 }
@@ -306,9 +307,7 @@ fn build_mcp_config_snippet(entry: &serde_json::Value) -> Result<String, String>
 pub fn mcp_config_snippet(vault_path: &str) -> Result<String, String> {
     let _ = vault_path;
     let runtime = find_mcp_runtime().map_err(|e| {
-        format!(
-            "Node.js 18+ or Bun 1+ is required on PATH before Tolaria can build MCP config: {e}"
-        )
+        format!("Node.js 18+ or Bun 1+ is required on PATH before Metis can build MCP config: {e}")
     })?;
     let server_dir = mcp_server_dir_for_registration()?;
     let index_js = index_js_client_path(&server_dir);
@@ -323,7 +322,7 @@ pub fn opencode_mcp_config_snippet(vault_path: &str) -> Result<String, String> {
     let _ = vault_path;
     let runtime = find_mcp_runtime().map_err(|e| {
         format!(
-            "Node.js 18+ or Bun 1+ is required on PATH before Tolaria can build OpenCode MCP config: {e}"
+            "Node.js 18+ or Bun 1+ is required on PATH before Metis can build OpenCode MCP config: {e}"
         )
     })?;
     let server_dir = mcp_server_dir_for_registration()?;
@@ -348,12 +347,12 @@ fn register_mcp_to_configs(entry: &serde_json::Value, config_paths: &[PathBuf]) 
     status.to_string()
 }
 
-/// Register Tolaria as an MCP server in external AI tool config files.
+/// Register Metis as an MCP server in external AI tool config files.
 pub fn register_mcp(vault_path: &str) -> Result<String, String> {
     let _ = vault_path;
     let runtime = find_mcp_runtime().map_err(|e| {
         format!(
-            "Node.js 18+ or Bun 1+ is required on PATH before Tolaria can register MCP tools: {e}"
+            "Node.js 18+ or Bun 1+ is required on PATH before Metis can register MCP tools: {e}"
         )
     })?;
     let server_dir = mcp_server_dir_for_registration()?;
@@ -373,7 +372,7 @@ pub fn register_mcp(vault_path: &str) -> Result<String, String> {
     Ok(status)
 }
 
-/// Insert or update the Tolaria entry in an MCP config file.
+/// Insert or update the Metis entry in an MCP config file.
 fn upsert_mcp_config(config_path: &Path, entry: &serde_json::Value) -> Result<bool, String> {
     if let Some(parent) = config_path.parent() {
         std::fs::create_dir_all(parent)
@@ -493,7 +492,7 @@ pub fn remove_mcp() -> String {
 
 /// Check whether the MCP server is properly installed and registered.
 ///
-/// Returns `Installed` when the Tolaria entry exists for the active vault in
+/// Returns `Installed` when the Metis entry exists for the active vault in
 /// an external AI tool config and the referenced index.js file is present.
 /// Otherwise returns `NotInstalled`.
 pub fn check_mcp_status(vault_path: &str) -> McpStatus {
@@ -539,7 +538,7 @@ mod tests {
             "type": "stdio",
             "command": "node",
             "args": [index_js],
-            "env": { "WS_UI_PORT": "9711" }
+            "env": { "WS_UI_PORT": "9731" }
         })
     }
 
@@ -559,14 +558,11 @@ mod tests {
         index_js: &'a str,
     }
 
-    fn assert_registered_tolaria_server(
-        config: &serde_json::Value,
-        expected: ExpectedMcpServer<'_>,
-    ) {
+    fn assert_registered_metis_server(config: &serde_json::Value, expected: ExpectedMcpServer<'_>) {
         let server = &config["mcpServers"][MCP_SERVER_NAME];
         assert_eq!(server["args"][0], expected.index_js);
         assert!(server["env"]["VAULT_PATH"].is_null());
-        assert_eq!(server["env"]["WS_UI_PORT"], "9711");
+        assert_eq!(server["env"]["WS_UI_PORT"], "9731");
     }
 
     fn write_index_js(dir: &Path) -> PathBuf {
@@ -595,7 +591,8 @@ mod tests {
                 "command": "/usr/local/bin/node",
                 "args": ["/path/to/index.js"],
                 "env": {
-                    "WS_UI_PORT": "9711"
+                    "WS_UI_PORT": "9731",
+                    "METIS_APP_CONFIG_NAMESPACE": "io.github.hdoria.metis"
                 }
             })
         );
@@ -603,13 +600,13 @@ mod tests {
 
     #[test]
     fn build_mcp_entry_strips_windows_extended_length_script_prefix() {
-        let entry = build_mcp_entry("node", r"\\?\D:\Tolaria\mcp-server\index.js");
+        let entry = build_mcp_entry("node", r"\\?\D:\Metis\mcp-server\index.js");
 
-        assert_eq!(entry["args"][0], r"D:\Tolaria\mcp-server\index.js",);
+        assert_eq!(entry["args"][0], r"D:\Metis\mcp-server\index.js",);
     }
 
     #[test]
-    fn build_mcp_config_snippet_wraps_tolaria_server_entry() {
+    fn build_mcp_config_snippet_wraps_metis_server_entry() {
         let entry = test_mcp_entry("/path/to/index.js");
         let snippet = build_mcp_config_snippet(&entry).unwrap();
         let config: serde_json::Value = serde_json::from_str(&snippet).unwrap();
@@ -624,15 +621,13 @@ mod tests {
     #[test]
     fn mcp_server_dir_candidates_prefer_resource_root_before_linux_packages() {
         let dev_path = Path::new("/repo/mcp-server");
-        let resource_roots = vec![PathBuf::from(
-            "/Applications/Tolaria.app/Contents/Resources",
-        )];
+        let resource_roots = vec![PathBuf::from("/Applications/Metis.app/Contents/Resources")];
         let candidates = mcp_server_dir_candidates(dev_path, &resource_roots);
 
-        let resource_dir = PathBuf::from("/Applications/Tolaria.app/Contents/Resources/mcp-server");
+        let resource_dir = PathBuf::from("/Applications/Metis.app/Contents/Resources/mcp-server");
         let linux_pos = candidates
             .iter()
-            .position(|path| path == &PathBuf::from("/usr/local/Tolaria/mcp-server"))
+            .position(|path| path == &PathBuf::from("/usr/local/Metis/mcp-server"))
             .unwrap();
 
         assert_eq!(candidates[0], dev_path);
@@ -643,25 +638,25 @@ mod tests {
     #[test]
     fn mcp_server_dir_candidates_include_linux_package_resource_roots() {
         let dev_path = Path::new("/repo/mcp-server");
-        let resource_roots = vec![PathBuf::from("/opt/tolaria")];
+        let resource_roots = vec![PathBuf::from("/opt/metis")];
         let candidates = mcp_server_dir_candidates(dev_path, &resource_roots);
         let expected = vec![
-            PathBuf::from("/opt/tolaria/Tolaria/mcp-server"),
-            PathBuf::from("/opt/tolaria/Tolaria/resources/mcp-server"),
-            PathBuf::from("/opt/tolaria/lib/Tolaria/mcp-server"),
-            PathBuf::from("/opt/tolaria/lib/Tolaria/resources/mcp-server"),
-            PathBuf::from("/opt/tolaria/lib/tolaria/mcp-server"),
-            PathBuf::from("/opt/tolaria/lib/tolaria/resources/mcp-server"),
-            PathBuf::from("/usr/local/Tolaria/mcp-server"),
-            PathBuf::from("/usr/local/Tolaria/resources/mcp-server"),
-            PathBuf::from("/usr/local/lib/Tolaria/mcp-server"),
-            PathBuf::from("/usr/local/lib/Tolaria/resources/mcp-server"),
-            PathBuf::from("/usr/local/lib/tolaria/mcp-server"),
-            PathBuf::from("/usr/local/lib/tolaria/resources/mcp-server"),
-            PathBuf::from("/usr/lib/Tolaria/mcp-server"),
-            PathBuf::from("/usr/lib/Tolaria/resources/mcp-server"),
-            PathBuf::from("/usr/lib/tolaria/mcp-server"),
-            PathBuf::from("/usr/lib/tolaria/resources/mcp-server"),
+            PathBuf::from("/opt/metis/Metis/mcp-server"),
+            PathBuf::from("/opt/metis/Metis/resources/mcp-server"),
+            PathBuf::from("/opt/metis/lib/Metis/mcp-server"),
+            PathBuf::from("/opt/metis/lib/Metis/resources/mcp-server"),
+            PathBuf::from("/opt/metis/lib/metis/mcp-server"),
+            PathBuf::from("/opt/metis/lib/metis/resources/mcp-server"),
+            PathBuf::from("/usr/local/Metis/mcp-server"),
+            PathBuf::from("/usr/local/Metis/resources/mcp-server"),
+            PathBuf::from("/usr/local/lib/Metis/mcp-server"),
+            PathBuf::from("/usr/local/lib/Metis/resources/mcp-server"),
+            PathBuf::from("/usr/local/lib/metis/mcp-server"),
+            PathBuf::from("/usr/local/lib/metis/resources/mcp-server"),
+            PathBuf::from("/usr/lib/Metis/mcp-server"),
+            PathBuf::from("/usr/lib/Metis/resources/mcp-server"),
+            PathBuf::from("/usr/lib/metis/mcp-server"),
+            PathBuf::from("/usr/lib/metis/resources/mcp-server"),
         ];
 
         assert_candidates_include(&candidates, &expected);
@@ -672,47 +667,45 @@ mod tests {
         let dev_path = Path::new("/repo/mcp-server");
         let candidates = mcp_server_dir_candidates(dev_path, &[]);
 
-        assert!(candidates.contains(&PathBuf::from("/usr/lib/Tolaria/mcp-server")));
+        assert!(candidates.contains(&PathBuf::from("/usr/lib/Metis/mcp-server")));
     }
 
     #[test]
     fn mcp_server_dir_candidates_include_linux_appimage_resource_root() {
         let dev_path = Path::new("/repo/mcp-server");
-        let resource_roots = vec![PathBuf::from("/tmp/.mount_tolaria/usr")];
+        let resource_roots = vec![PathBuf::from("/tmp/.mount_metis/usr")];
         let candidates = mcp_server_dir_candidates(dev_path, &resource_roots);
 
         assert_candidates_include(
             &candidates,
             &[PathBuf::from(
-                "/tmp/.mount_tolaria/usr/lib/tolaria/resources/mcp-server",
+                "/tmp/.mount_metis/usr/lib/metis/resources/mcp-server",
             )],
         );
     }
 
     #[test]
     fn mcp_server_dir_candidates_include_runtime_dev_roots_when_build_path_is_stale() {
-        let stale_dev_path = Path::new("/Users/runner/work/tolaria/tolaria/mcp-server");
-        let current_dir = Path::new("/Users/luca/Workspace/tolaria");
+        let stale_dev_path = Path::new("/Users/runner/work/metis/metis/mcp-server");
+        let current_dir = Path::new("/Users/luca/Workspace/metis");
         let candidates = mcp_server_dir_candidates_for(stale_dev_path, &[], Some(current_dir));
 
-        assert!(candidates.contains(&PathBuf::from("/Users/luca/Workspace/tolaria/mcp-server")));
+        assert!(candidates.contains(&PathBuf::from("/Users/luca/Workspace/metis/mcp-server")));
         assert!(candidates.contains(&PathBuf::from(
-            "/Users/luca/Workspace/tolaria/src-tauri/resources/mcp-server"
+            "/Users/luca/Workspace/metis/src-tauri/resources/mcp-server"
         )));
     }
 
     #[test]
     fn mcp_server_dir_candidates_include_macos_bundle_resources() {
         let dev_path = Path::new("/repo/mcp-server");
-        let resource_roots = vec![PathBuf::from(
-            "/Applications/Tolaria.app/Contents/Resources",
-        )];
+        let resource_roots = vec![PathBuf::from("/Applications/Metis.app/Contents/Resources")];
         let candidates = mcp_server_dir_candidates_for(dev_path, &resource_roots, None);
 
         assert_candidates_include(
             &candidates,
             &[PathBuf::from(
-                "/Applications/Tolaria.app/Contents/Resources/mcp-server",
+                "/Applications/Metis.app/Contents/Resources/mcp-server",
             )],
         );
     }
@@ -727,7 +720,7 @@ mod tests {
         assert!(!was_update);
 
         let config = read_config(&config_path);
-        assert_registered_tolaria_server(
+        assert_registered_metis_server(
             &config,
             ExpectedMcpServer {
                 index_js: "/test/index.js",
@@ -758,7 +751,7 @@ mod tests {
 
         let existing = serde_json::json!({
             "mcpServers": {
-                "laputa": {
+                "metislegacy": {
                     "command": "node",
                     "args": ["/old/index.js"],
                     "env": { "VAULT_PATH": "/old" }
@@ -848,7 +841,7 @@ mod tests {
         assert!(!was_update);
         assert_eq!(config["theme"], "GitHub");
         assert_eq!(config["mcpServers"]["other"]["command"], "example");
-        assert_registered_tolaria_server(
+        assert_registered_metis_server(
             &config,
             ExpectedMcpServer {
                 index_js: "/antigravity/index.js",
@@ -946,7 +939,7 @@ mod tests {
 
         let raw = std::fs::read_to_string(&claude_user_cfg).unwrap();
         let config: serde_json::Value = serde_json::from_str(&raw).unwrap();
-        assert_registered_tolaria_server(
+        assert_registered_metis_server(
             &config,
             ExpectedMcpServer {
                 index_js: "/test/index.js",
@@ -1089,8 +1082,8 @@ mod tests {
         let config_path = tmp.path().join("mcp.json");
         let config = serde_json::json!({
             "mcpServers": {
-                "tolaria": { "command": "node", "args": ["/index.js"] },
-                "laputa": { "command": "node", "args": ["/legacy.js"] },
+                "metis": { "command": "node", "args": ["/index.js"] },
+                "metislegacy": { "command": "node", "args": ["/legacy.js"] },
                 "other-server": { "command": "other", "args": [] }
             }
         });
@@ -1112,7 +1105,7 @@ mod tests {
         let config = serde_json::json!({
             "preferredEditor": "vim",
             "mcpServers": {
-                "tolaria": { "command": "node", "args": ["/index.js"] }
+                "metis": { "command": "node", "args": ["/index.js"] }
             }
         });
         std::fs::create_dir_all(config_path.parent().unwrap()).unwrap();
@@ -1148,11 +1141,11 @@ mod tests {
         let config_path = tmp.path().join("mcp.json");
         let config = serde_json::json!({
             "mcpServers": {
-                "tolaria": {
+                "metis": {
                     "type": "stdio",
                     "command": "node",
                     "args": [index_js.to_string_lossy()],
-                    "env": { "WS_UI_PORT": "9711" }
+                    "env": { "WS_UI_PORT": "9731" }
                 }
             }
         });

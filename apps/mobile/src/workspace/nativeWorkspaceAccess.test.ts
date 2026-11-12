@@ -31,15 +31,15 @@ describe('native workspace access', () => {
     const module: NativeWorkspaceAccessModule = {
       importWorkspace: vi.fn(),
       pickAndImportWorkspace: vi.fn().mockResolvedValue({
-        label: 'Laputa',
-        uri: 'file:///managed/Tolaria%20Vault/',
+        label: 'MetisLegacy',
+        uri: 'file:///managed/Metis%20Vault/',
       }),
       restoreWorkspace: vi.fn(),
     }
 
     await expect(pickAndImportNativeWorkspace(module)).resolves.toEqual({
-      label: 'Laputa',
-      uri: 'file:///managed/Tolaria%20Vault/',
+      label: 'MetisLegacy',
+      uri: 'file:///managed/Metis%20Vault/',
     })
   })
 

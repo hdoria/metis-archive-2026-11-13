@@ -11,10 +11,10 @@ import {
 	startGitTestServer,
 } from "../src/workspace/git/gitTestServer.ts";
 
-const device = process.env.TOLARIA_QA_DEVICE;
+const device = process.env.METIS_QA_DEVICE;
 if (!device)
-	throw new Error("Set TOLARIA_QA_DEVICE to an explicit simulator UUID");
-const bundleId = process.env.TOLARIA_QA_BUNDLE_ID ?? "com.tolaria.mobile.dev";
+	throw new Error("Set METIS_QA_DEVICE to an explicit simulator UUID");
+const bundleId = process.env.METIS_QA_BUNDLE_ID ?? "io.github.hdoria.metis.mobile.dev";
 const runGit = (args) =>
 	execFileSync("git", args, { env: gitTestEnvironment(), stdio: "pipe" })
 		.toString()
@@ -56,7 +56,7 @@ async function receive(request, response, resolve, reject) {
 }
 
 async function probe() {
-	const root = await mkdtemp(join(tmpdir(), "tolaria-background-"));
+	const root = await mkdtemp(join(tmpdir(), "metis-background-"));
 	let server;
 	let timer;
 	let resolveProof;
@@ -124,7 +124,7 @@ function handleRequest(request, response, resolve, reject) {
 	if (request.url === "/ready") {
 		response.end("ok");
 		console.log(
-			"READY: switching the simulator to Settings to leave Tolaria in the background.",
+			"READY: switching the simulator to Settings to leave Metis in the background.",
 		);
 		execFileSync("xcrun", [
 			"simctl",
