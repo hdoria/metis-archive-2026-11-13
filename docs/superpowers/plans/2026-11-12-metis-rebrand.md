@@ -18,7 +18,7 @@ Preserve AGPL-3.0-or-later and attribution. Keep user vaults untouched. No upstr
 - [x] Replace upstream-specific agent instructions and CI publication flows with local validation and fork CI.
 - [x] Run install, lint, desktop/web build, localization, relevant tests, Rust checks and UI smoke where supported.
 - [x] Independent final audit of identity, attribution, services and verification evidence; fix findings.
-- [ ] Commit, push main, verify remote SHA and report exact limits.
+- [x] Commit, push main, verify remote SHA and report exact limits. Rebrand commit: `31ab0159589f6a3fa36df87b380814199d807a7a`; remote main matched. See release-record.md for evidence and limits.
 
 ## Review focus
 
