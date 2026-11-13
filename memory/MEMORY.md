@@ -7,3 +7,5 @@
 - [Respect the selected hosting provider](feedback-hosting-provider.md)
 
 - [Audit owner identity beyond visible branding](feedback-owner-identity.md)
+
+- [Verify maintainer identity in repository file views](feedback-license-presentation.md)

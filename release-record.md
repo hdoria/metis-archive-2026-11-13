@@ -91,3 +91,9 @@ The signature is ad-hoc. No valid Apple signing identity is installed, notarizat
 Independent artifact review repeated signature, checksum, read-only mounting and all 69 file comparisons without discrepancies. It confirmed the packaged identity, license, credits and icon, and detached the volume afterward.
 
 Vercel deployment `dpl_8XAnnF5HtAWH9GRg5bnYf7S13wrc` reached READY at https://metisapp.com.br. Its updated credits returned HTTPS 200 with certificate validation enabled and matched the current source byte for byte, including Hugo Dória as maintainer. The former personal identity is absent from that page. The public site does not distribute the local application package.
+
+## License presentation follow-up (2026-11-12)
+
+LICENSE now starts with a Métis notice naming Hugo Dória for modifications and new branding. The complete AGPL document, including its own copyright, remains byte-for-byte identical after that prefix. Independent review confirmed the scoped notice and unchanged license body. A new file commit records the current maintainer's actual change without rewriting previous authorship.
+
+The local app and DMG were repackaged with the updated license, retaining the same release executable and ad-hoc signing. The app's strict signature check passed and its bundled LICENSE.txt matched the source. The updated DMG is 23,116,244 bytes with SHA-256 `968ff00ba76a9b9f9947e11e12d52f83eecd66d6799e493b226cb3b331bbdd1a`, superseding the earlier package hash. Apple signing and notarization remain pending.
