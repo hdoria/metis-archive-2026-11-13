@@ -36,7 +36,7 @@ See [Tauri macOS signing](https://v2.tauri.app/distribute/sign/macos/) and [Appl
 
 ## Popcode signing setup
 
-The Apple Developer portal confirms Popcode's team ID as `C42XKG5G6X`. The existing iOS Fastlane setup uses `iosdev@popcode.com.br`, but its project team and API-key issuer differ from Popcode's. Do not copy that project's certificate storage or API credentials into this workflow.
+The Apple Developer portal confirms Popcode's team ID as `C42XKG5G6X`. App Store Connect confirms `contato@popcode.com.br` is its Account Holder. Use that account to create Developer ID Application certificates: the existing iOS account `iosdev@popcode.com.br` has Admin access, which is insufficient for this operation. The existing iOS project's team and API-key issuer also differ from Popcode's; do not copy its certificate storage or API credentials into this workflow.
 
 Fastlane 2.241.2 is installed and explicitly pinned outside the repository at `~/.local/share/metis-fastlane/fastlane`. Its wrapper isolates Ruby gems and selects `/Applications/Xcode.app/Contents/Developer` only for its subprocess. Version and `cert --help` checks passed. Authentication and certificate creation are still pending.
 
@@ -47,14 +47,15 @@ The local interactive setup is `~/.config/metis/signing/configurar-assinatura.co
 ```sh
 env -u CERT_API_KEY -u CERT_API_KEY_PATH -u DELIVER_API_KEY -u DELIVER_API_KEY_PATH \
   -u APP_STORE_CONNECT_API_KEY -u APP_STORE_CONNECT_API_KEY_PATH \
+  -u FASTLANE_SESSION -u SPACESHIP_SESSION -u FASTLANE_PASSWORD \
   FASTLANE_DONT_STORE_PASSWORD=1 ~/.local/share/metis-fastlane/fastlane cert \
-  --username iosdev@popcode.com.br --team_id C42XKG5G6X \
+  --username contato@popcode.com.br --team_id C42XKG5G6X \
   --type developer_id_application --platform macos --force false \
   --skip_set_partition_list true \
   --output_path ~/.config/metis/signing
 
 xcrun notarytool store-credentials metis-popcode \
-  --apple-id iosdev@popcode.com.br --team-id C42XKG5G6X
+  --apple-id contato@popcode.com.br --team-id C42XKG5G6X
 ```
 
 The first command requires the normal Apple ID password and any requested two-factor verification. The second requires an app-specific password and saves it in macOS Keychain. Keep passwords out of chat, shell arguments and Git. The local setup clears inherited API-key options so the Apple ID flow cannot silently use another project's issuer. Its signing directory is private to the current user.
