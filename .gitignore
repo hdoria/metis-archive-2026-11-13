@@ -79,6 +79,9 @@ CODE-HEALTH-REPORT.md
 .env.local
 .env.*.local
 
+# Vercel project linking, local environment and deployment output.
+.vercel/
+
 # Codacy's runtime cache is local, while the pinned launcher, the CLI mode file
 # and the tool configurations used by the repository gate are versioned. The
 # generated files (cli-config.yaml, eslint.config.mjs, languages-config.yaml,

@@ -7,6 +7,7 @@ import * as eslintConfig from 'eslint/config'
 
 export default eslintConfig.defineConfig([
   eslintConfig.globalIgnores([
+    '.vercel/',
     'dist',
     'apps/web/dist',
     'coverage',
