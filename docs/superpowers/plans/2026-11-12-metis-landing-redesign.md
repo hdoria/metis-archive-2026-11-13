@@ -28,7 +28,7 @@ Evidence comes from `site/concepts`, `site/guides`, the search backend and MCP i
 - [x] Optimize responsive WebP derivatives and implement the redesigned landing.
 - [x] Check behavior, typecheck, build and lint; inspect desktop/mobile layout and keyboard navigation.
 - [x] Independent review of truthfulness, responsive layout, accessibility, assets and regressions.
-- [ ] Commit/push main and deploy via documented Vercel CLI; verify live HTML and assets.
+- [x] Commit/push main and deploy via documented Vercel CLI; verify live HTML and assets.
 
 ## Review focus and stop condition
 
@@ -42,3 +42,13 @@ Look for false product promises, download availability mismatch, broken links, c
 - Browser review: desktop layout, note search/selection/backlinks, feature tabs and keyboard focus; mobile layout at an actual 390 × 844 CSS-pixel iframe viewport, including hero, spreadsheet, AI diagram, FAQ expansion and footer. No clipping observed in these checks.
 - Fresh-context reviewer approved the final working tree with no remaining findings. Contrast and content-height findings were corrected before approval. `git diff --check` passed.
 - Original imagery has responsive WebP variants; largest hero is 155,310 bytes. No new dependencies or app-binary changes.
+
+## Publication
+
+- Implementation commit: `554897a6b4e66a1d4e14ce3921958a3addf3199a`, pushed to `main`.
+- Vercel production deployment: https://metis-landing-k3nvudv46-popcode.vercel.app, in `popcode/metis-landing`.
+- Opened https://metisapp.com.br in Safari and confirmed the new hero and artwork loaded over HTTPS.
+- Verified exact SHA-256 equality between the local production build and all ten public artifacts: HTML, credits, license, JavaScript, CSS and five WebP images. TLS certificate validation remained enabled.
+- Verified `www` redirects with HTTP 308 and preserves `/creditos.html?qa=landing`.
+- Pre-push build, 21 locale catalogs and 3 mobile update-isolation tests passed. The CLI returned no GitHub workflow runs for this commit at verification time; no remote-CI success is claimed.
+- Public binary distribution remains pending the free whiteboard license, as stated on the landing.
