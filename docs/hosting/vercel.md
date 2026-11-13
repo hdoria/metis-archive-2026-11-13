@@ -20,7 +20,7 @@ The build must include `index.html`, `creditos.html`, `LICENSE.txt`, fonts and a
 
 ## Domain
 
-The authoritative delegation now points to Cloudflare (`arch.ns.cloudflare.com` and `lana.ns.cloudflare.com`), confirmed against the .br parent zone. Keep those nameservers and manage web records in Cloudflare. The Vercel project reports verified ownership for both hostnames, with DNS configuration still pending.
+The authoritative delegation now points to Cloudflare (`arch.ns.cloudflare.com` and `lana.ns.cloudflare.com`), confirmed against the .br parent zone. Keep those nameservers and manage web records in Cloudflare. On 2026-11-12, Vercel reported `configured-correctly` and verified ownership for both hostnames after the DNS records were applied.
 
 On 2026-11-12, Vercel recommended these Cloudflare records:
 
@@ -36,6 +36,8 @@ npx vercel@65.15.0 domains verify metisapp.com.br --project metis-landing --scop
 npx vercel@65.15.0 domains verify www.metisapp.com.br --project metis-landing --scope popcode --json
 ```
 
-See the [project domain settings](https://vercel.com/popcode/metis-landing/settings/domains) and [Vercel domain setup guide](https://vercel.com/docs/domains/set-up-custom-domain). After DNS changes, verify both hostnames, HTTPS and the www redirect. Domain ownership alone does not establish working DNS or TLS.
+See the [project domain settings](https://vercel.com/popcode/metis-landing/settings/domains) and [Vercel domain setup guide](https://vercel.com/docs/domains/set-up-custom-domain). After future DNS changes, verify both hostnames, HTTPS and the www redirect. Domain ownership alone does not establish working DNS or TLS.
+
+HTTPS was validated on both hostnames after issuing the managed certificate through Vercel. The landing, credits and license returned 200 with certificate validation enabled. The www redirect returned 308 and preserved the path and query string. Tests used public DNS results with curl's `--resolve` because the local system resolver still cached the earlier missing records; propagation to every resolver is not claimed.
 
 The previous Sites publication remains a historical private preview. Its pending custom-domain binding was removed and its identity manifest archived as `docs/hosting/sites-preview.json`; it is not the active deployment configuration. Migration of the landing does not publish or distribute application binaries.

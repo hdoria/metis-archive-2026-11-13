@@ -65,3 +65,9 @@ Hugo selected the Popcode team. Production deployment `dpl_2cwVAWc8pfhRF85yGbaWs
 Both metisapp.com.br and www.metisapp.com.br are attached to popcode/metis-landing, with ownership verified. DNS is still pending; the authoritative .br delegation now names Cloudflare. Exact CNAME recommendations are recorded in docs/hosting/vercel.md. Custom-domain HTTPS and the live www redirect remain unverified until those DNS records are applied.
 
 The former Sites domain binding was removed, and listing its custom domains returned an empty array. Its owner-private preview remains available as historical fallback. The Sites manifest was archived. GitHub integration rejected the repository connection; deployments currently use the documented CLI workflow.
+
+## Custom-domain activation (2026-11-12)
+
+After Hugo applied DNS, Vercel verified both hostnames as `configured-correctly`. Public resolvers 1.1.1.1 and 8.8.8.8 returned the expected Vercel addresses, and www returned the recommended CNAME. The initial HTTPS handshake had no certificate; `vercel certs issue metisapp.com.br www.metisapp.com.br --scope popcode` successfully issued the managed certificate for both names. TLS 1.3 and hostname validation then passed for both domains.
+
+HTTPS requests for the landing, credits and license returned 200 and matched local artifacts. A request to `https://www.metisapp.com.br/creditos.html?check=domain` returned 308 to `https://metisapp.com.br/creditos.html?check=domain`, preserving path and query. These checks used public DNS addresses with curl's `--resolve`, without disabling certificate validation. The local system resolver still cached missing DNS records at verification time; universal propagation is not claimed. No application code or deployed artifact changed.
