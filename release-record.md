@@ -99,3 +99,11 @@ LICENSE includes a Métis notice naming Hugo Dória for modifications and new br
 GitHub's license detector rejected the notice when placed before the GNU text. Independent reproduction with Licensee 9.20.0 and 10.1.0 found 95.831% similarity for that layout and an exact AGPL-3.0 match when the same notice follows the complete original document. The notice was moved to that footer position to preserve automatic license detection.
 
 The local app and DMG were repackaged with the updated license, retaining the same release executable and ad-hoc signing. The app's strict signature check passed and its bundled LICENSE.txt matched the source. The updated DMG is 23,116,285 bytes with SHA-256 `734e8873fe8d88548e1ebdad12a1118f1de18adf9f544c822ce6c3115fbea916`, superseding the earlier package hashes. Apple signing and notarization remain pending.
+
+The footer correction was pushed as `5b3ceb2e5dcb563876f17da6139ed50dadb56ba7`. Independent checks confirmed an exact AGPL-3.0 match locally and AGPL-3.0 through GitHub's API, with Hugo Dória / hdoria as the latest LICENSE commit author. The updated Vercel production deployment reached READY; `https://metisapp.com.br/LICENSE.txt` returned HTTP 200 with valid TLS and matched the source SHA-256 `2e898d290812c00ec4bb138a4e58290d2d34ece0cad1f5b6e9ae9b617dbba695`.
+
+## Popcode Apple signing preparation (2026-11-12)
+
+The signed-in Apple Developer portal confirms Popcode team `C42XKG5G6X`; no Developer ID Application certificate appeared in its certificate list. App Store Connect confirmed a different API-key issuer from the existing iOS project's configuration. No corresponding Popcode private API key was found in the inspected local locations, and no existing code-signing identity is installed.
+
+Fastlane 2.237.0 is available in an isolated local installation. Its certificate command, explicitly selecting the Popcode team and Developer ID Application type, reached the Apple ID password prompt. It was stopped without authentication, certificate creation or revocation. An interactive local setup now covers Apple ID authentication and the `metis-popcode` notarization credential profile. The user must complete the local prompts before official signing can proceed. The existing local DMG remains ad-hoc; no notarized package or public binary release is claimed.

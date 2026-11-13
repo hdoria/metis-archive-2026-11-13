@@ -33,3 +33,30 @@ To prepare a Developer ID-signed and notarized package, provide these through th
 The current Mac has `notarytool` through Command Line Tools, but no valid code-signing identity was found. Once credentials are configured, rebuild with the Developer ID identity, submit for notarization, staple the ticket and verify Gatekeeper acceptance before distribution.
 
 See [Tauri macOS signing](https://v2.tauri.app/distribute/sign/macos/) and [Apple Developer ID](https://developer.apple.com/developer-id/). Public distribution also awaits the whiteboard vendor license already recorded in `release-record.md`.
+
+## Popcode signing setup
+
+The Apple Developer portal confirms Popcode's team ID as `C42XKG5G6X`. The existing iOS Fastlane setup uses `iosdev@popcode.com.br`, but its project team and API-key issuer differ from Popcode's. Do not copy that project's certificate storage or API credentials into this workflow.
+
+Fastlane 2.237.0 was installed outside the repository at `~/.local/share/metis-fastlane/fastlane`. Its wrapper isolates Ruby gems and selects `/Applications/Xcode.app/Contents/Developer` only for its subprocess. Version and `cert --help` checks passed. The initial certificate command reached the Apple ID password prompt; authentication and certificate creation are still pending.
+
+The local interactive setup is `~/.config/metis/signing/configurar-assinatura.command`. It waits for user input before running:
+
+```sh
+env -u CERT_API_KEY -u CERT_API_KEY_PATH -u DELIVER_API_KEY -u DELIVER_API_KEY_PATH \
+  -u APP_STORE_CONNECT_API_KEY -u APP_STORE_CONNECT_API_KEY_PATH \
+  FASTLANE_DONT_STORE_PASSWORD=1 ~/.local/share/metis-fastlane/fastlane cert \
+  --username iosdev@popcode.com.br --team_id C42XKG5G6X \
+  --type developer_id_application --platform macos --force false \
+  --skip_set_partition_list true \
+  --output_path ~/.config/metis/signing
+
+xcrun notarytool store-credentials metis-popcode \
+  --apple-id iosdev@popcode.com.br --team-id C42XKG5G6X
+```
+
+The first command requires the normal Apple ID password and any requested two-factor verification. The second requires an app-specific password and saves it in macOS Keychain. Keep passwords out of chat, shell arguments and Git. The local setup clears inherited API-key options so the Apple ID flow cannot silently use another project's issuer. Its signing directory is private to the current user.
+
+`cert` creates a Developer ID Application G2 certificate if needed and never revokes existing certificates. No `match nuke` is needed. The certificate's private key stays in the local signing directory and Keychain; retain a secure backup before deleting that directory. Because automatic keychain partition changes are disabled, macOS may ask for permission when `codesign` first uses the key.
+
+After setup, verify that `security find-identity -v -p codesigning` lists a Developer ID Application identity for `C42XKG5G6X`, then sign, notarize, staple and assess a fresh package. Completing setup alone does not make the current ad-hoc DMG a notarized release. See [Fastlane cert](https://docs.fastlane.tools/actions/cert/) and [Fastlane authentication](https://docs.fastlane.tools/getting-started/ios/authentication/).
