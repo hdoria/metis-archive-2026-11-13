@@ -29,7 +29,7 @@ export const MOCK_ENTRIES_PART_1: VaultEntry[] = [
     sidebarLabel: null,
     template: null, sort: null, view: null, visible: null,
     outgoingLinks: ['q1-2026', 'software-development', 'matteo-cellini', 'maria-bianchi', 'marco-verdi'],
-    properties: { Priority: 'High', 'Due date': '2026-06-15', Owner: 'Luca Rossi' },
+    properties: { Priority: 'High', 'Due date': '2026-06-15', Owner: 'Alex Costa' },
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
@@ -63,7 +63,7 @@ export const MOCK_ENTRIES_PART_1: VaultEntry[] = [
     sidebarLabel: null,
     template: null, sort: null, view: null, visible: null,
     outgoingLinks: ['on-writing-well', 'engineering-leadership-101', 'ai-agents-primer', 'growth', 'writing'],
-    properties: { Priority: 'High', Rating: 5, Cadence: 'Weekly', Owner: 'Luca Rossi' },
+    properties: { Priority: 'High', Rating: 5, Cadence: 'Weekly', Owner: 'Alex Costa' },
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
@@ -119,7 +119,7 @@ export const MOCK_ENTRIES_PART_1: VaultEntry[] = [
     sidebarLabel: null,
     template: null, sort: null, view: null, visible: null,
     outgoingLinks: ['grow-newsletter'],
-    properties: { Owner: 'Luca Rossi', Cadence: 'Weekly' },
+    properties: { Owner: 'Alex Costa', Cadence: 'Weekly' },
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
@@ -176,7 +176,7 @@ export const MOCK_ENTRIES_PART_1: VaultEntry[] = [
     sidebarLabel: null,
     template: null, sort: null, view: null, visible: null,
     outgoingLinks: ['trading', 'algorithmic-trading', 'ema200-backtest-results'],
-    properties: { Priority: 'Low', 'Due date': '2026-03-01', Owner: 'Luca Rossi' },
+    properties: { Priority: 'Low', 'Due date': '2026-03-01', Owner: 'Alex Costa' },
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {

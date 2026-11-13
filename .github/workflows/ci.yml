@@ -39,6 +39,8 @@ jobs:
       - run: pnpm test:web-config
       - run: pnpm test:server
       - run: pnpm docs:build
+      - run: pnpm --filter @metis/landing test
+      - run: pnpm --filter @metis/landing build
 
   mobile:
     runs-on: ubuntu-latest

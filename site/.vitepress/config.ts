@@ -120,7 +120,7 @@ export default defineConfig({
     footer: {
       message: "Free and open source. Local-first, Git-first, and Markdown-based.",
       copyright:
-        "Métis is AGPL-3.0-or-later. See the repository NOTICE for source attributions.",
+        "Métis. <a href='https://github.com/hdoria/metis/blob/main/site/landing/public/creditos.html'>Credits and licenses</a>.",
     },
   },
 });

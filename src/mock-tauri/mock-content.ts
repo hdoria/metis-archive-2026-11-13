@@ -8,7 +8,7 @@ export const MOCK_CONTENT: Record<string, string> = {
 title: Build MetisLegacy App
 type: Project
 status: Active
-owner: Luca Rossi
+owner: Alex Costa
 deadline: 2026-03-31
 published: true
 archived: false
@@ -122,7 +122,7 @@ And this is a second paragraph to verify inter-paragraph spacing is correct. Goo
 title: Grow Newsletter
 type: Responsibility
 status: Active
-owner: Luca Rossi
+owner: Alex Costa
 ---
 
 # Grow Newsletter
@@ -176,7 +176,7 @@ Revenue stream from newsletter sponsorships. [[Matteo Cellini]] handles day-to-d
 title: Write Weekly Essays
 type: Procedure
 status: Active
-owner: Luca Rossi
+owner: Alex Costa
 cadence: Weekly
 belongs_to:
   - "[[grow-newsletter]]"
@@ -242,7 +242,7 @@ belongs_to:
 title: Stock Screener — EMA200 Wick Bounce
 type: Experiment
 status: Active
-owner: Luca Rossi
+owner: Alex Costa
 domains: [Finance, Quantitative Analysis]
 tools: [Python, pandas, TradingView]
 related_to:
@@ -352,7 +352,7 @@ related_to:
 2026-02-14
 
 ## Attendees
-- Luca Rossi
+- Alex Costa
 - [[Matteo Cellini]]
 
 ## Notes
@@ -362,8 +362,8 @@ related_to:
 - Inspector panel can wait for M4
 
 ## Action Items
-- [ ] Luca: finalize ontology mapping
-- [x] Luca: set up Tauri v2 project scaffold
+- [ ] Alex: finalize ontology mapping
+- [x] Alex: set up Tauri v2 project scaffold
 - [ ] Matteo: test with real vault data
 `,
   '/Users/luca/MetisLegacy/software-development.md': `---
@@ -629,7 +629,7 @@ title: Website Redesign
 type: Project
 status: Done
 archived: true
-owner: Luca Rossi
+owner: Alex Costa
 belongs_to:
   - "[[q3-2025]]"
 ---
@@ -648,7 +648,7 @@ title: Twitter Thread Growth Experiment
 type: Experiment
 status: Done
 archived: true
-owner: Luca Rossi
+owner: Alex Costa
 related_to:
   - "[[grow-newsletter]]"
 ---

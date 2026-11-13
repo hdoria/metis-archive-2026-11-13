@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "build:metis-md": "tsc -b && vite build --mode metis-md",
-    "typecheck": "tsc -b"
+    "typecheck": "tsc -b",
+    "test": "vitest run --config vitest.config.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

@@ -33,6 +33,6 @@ Packaged Métis releases will be listed on [GitHub Releases](https://github.com/
 
 Start with the [documentation](site/docs.md), [installation instructions](site/start/install.md), and [contribution guide](CONTRIBUTING.md). Report reproducible problems in [Issues](https://github.com/hdoria/metis/issues).
 
-## License and attribution
+## License
 
-See [LICENSE](LICENSE), [NOTICE](NOTICE), and [third-party notices](THIRD_PARTY_NOTICES.md). The source history and original authors' rights are preserved. Métis is an independent project maintained by Hugo Doria.
+The source is [AGPL-3.0-or-later](LICENSE). Project provenance and dependency notices are collected on the [credits page](site/landing/public/creditos.html).

@@ -2,7 +2,7 @@
 """Generate a large synthetic vault for scale and performance checks.
 
 Creates a realistic 2-year knowledge vault (Q1 2024 - Q4 2025) for a
-fictional persona based on Luca Rossi, founder of Refactoring.
+fictional persona, Alex Costa, who runs the Caderno Aberto newsletter.
 
 The curated `demo-vault-v2/` fixture is intentionally small and lives in git.
 This script generates the larger corpus on demand outside that checked-in QA
@@ -130,12 +130,12 @@ RESPONSIBILITIES = [
      ["measure-subscribers", "measure-open-rate"],
      ["procedure-monthly-subscriber-metrics", "procedure-referral-program",
       "procedure-welcome-email-sequence", "procedure-seo-content-optimization"],
-     "Growing the Refactoring newsletter subscriber base through organic content, SEO, referrals, and strategic partnerships.\n\n## KPIs\n- Subscribers: target 100k by end 2025\n- Open rate: maintain >45%"),
+     "Growing the Caderno Aberto newsletter subscriber base through organic content, SEO, referrals, and strategic partnerships.\n\n## KPIs\n- Subscribers: target 100k by end 2025\n- Open rate: maintain >45%"),
     ("responsibility-sponsorships", "Sponsorships", "area-building",
      ["measure-sponsorship-mrr", "measure-close-rate"],
      ["procedure-monthly-sponsor-report", "procedure-quarterly-sponsor-outreach",
       "procedure-sponsor-onboarding", "procedure-invoice-processing", "procedure-sponsor-renewal"],
-     "Selling and managing sponsorships for Refactoring. Building long-term relationships with B2B tech companies.\n\n## KPIs\n- MRR: grow from €8k to €22k\n- Close rate: maintain >30%"),
+     "Selling and managing sponsorships for Caderno Aberto. Building long-term relationships with B2B tech companies.\n\n## KPIs\n- MRR: grow from €8k to €22k\n- Close rate: maintain >30%"),
     ("responsibility-content-production", "Content Production", "area-building",
      ["measure-articles-per-week", "measure-essay-quality-score"],
      ["procedure-weekly-newsletter", "procedure-monthly-pillar-planning",
@@ -147,7 +147,7 @@ RESPONSIBILITIES = [
      ["measure-podcast-downloads", "measure-podcast-episodes-per-month"],
      ["procedure-podcast-recording", "procedure-podcast-guest-outreach",
       "procedure-podcast-editing", "procedure-podcast-show-notes", "procedure-podcast-analytics"],
-     "Running the Refactoring podcast — bi-weekly episodes with tech leaders on engineering culture, leadership, and building.\n\n## KPIs\n- Downloads per episode: target 5k+\n- Episodes per month: 2"),
+     "Running the Caderno Aberto podcast — bi-weekly episodes with tech leaders on engineering culture, leadership, and building.\n\n## KPIs\n- Downloads per episode: target 5k+\n- Episodes per month: 2"),
     ("responsibility-team-management", "Team Management", "area-building",
      ["measure-team-nps", "measure-task-completion-rate"],
      ["procedure-weekly-team-sync", "procedure-biweekly-1on1-matteo",
@@ -224,31 +224,31 @@ TOPICS = [
 # (slug, name, tier, tags, bio)
 PERSONS = [
     # Self
-    ("person-luca-rossi", "Luca Rossi", "1st 🥇", ["Self"],
-     "Founder of Refactoring, a B2B tech newsletter and podcast. Based in Milan. Cyclist, guitarist, reader."),
+    ("person-alex-costa", "Alex Costa", "1st 🥇", ["Self"],
+     "Founder of Caderno Aberto, a B2B tech newsletter and podcast. Based in Milan. Cyclist, guitarist, reader."),
     # Team
     ("person-matteo-cellini", "Matteo Cellini", "1st 🥇", ["Team"],
-     "Head of Partnerships at Refactoring. Joined in 2022. Manages sponsor relationships and revenue growth."),
+     "Head of Partnerships at Caderno Aberto. Joined in 2022. Manages sponsor relationships and revenue growth."),
     ("person-paco-furiani", "Paco Furiani", "1st 🥇", ["Team"],
-     "Head of Operations at Refactoring. Keeps everything running — billing, tools, workflows, and logistics."),
+     "Head of Operations at Caderno Aberto. Keeps everything running — billing, tools, workflows, and logistics."),
     ("person-sara-ricci", "Sara Ricci", "1st 🥇", ["Team"],
-     "Editor at Refactoring. Hired in Q2 2024. Sharp eye for structure and clarity in technical writing."),
+     "Editor at Caderno Aberto. Hired in Q2 2024. Sharp eye for structure and clarity in technical writing."),
     ("person-marco-bianchi", "Marco Bianchi", "2nd 🥈", ["Team"],
-     "Freelance developer. Helps with the Refactoring website, landing pages, and tooling."),
+     "Freelance developer. Helps with the Caderno Aberto website, landing pages, and tooling."),
     # Partner
     ("person-giulia-marchetti", "Giulia Marchetti", "1st 🥇", ["Personal"],
-     "Luca's girlfriend. Met in early 2024. Works as a UX researcher at a Milan fintech. Loves hiking and contemporary art."),
+     "Alex's girlfriend. Met in early 2024. Works as a UX researcher at a Milan fintech. Loves hiking and contemporary art."),
     # Family
     ("person-elena-rossi", "Elena Rossi", "1st 🥇", ["Family"],
-     "Luca's sister. Lives in Rome. Works in publishing. They talk every week."),
+     "Alex's sister. Lives in Rome. Works in publishing. They talk every week."),
     ("person-roberto-rossi", "Roberto Rossi", "1st 🥇", ["Family"],
-     "Luca's father. Retired engineer. Lives near Lake Como. Passionate about woodworking."),
+     "Alex's father. Retired engineer. Lives near Lake Como. Passionate about woodworking."),
     ("person-maria-colombo", "Maria Colombo", "1st 🥇", ["Family"],
-     "Luca's mother. Retired teacher. Lives near Lake Como. Amazing cook — Luca's pasta recipes come from her."),
+     "Alex's mother. Retired teacher. Lives near Lake Como. Amazing cook — Alex's pasta recipes come from her."),
     ("person-antonio-marchetti", "Antonio Marchetti", "2nd 🥈", ["Family"],
      "Giulia's brother. Architect based in Turin. They see each other at family gatherings."),
     ("person-nonna-lucia", "Nonna Lucia", "1st 🥇", ["Family"],
-     "Luca's grandmother. 87 years old, lives in Lecco. Luca visits her monthly. Best risotto in Lombardy."),
+     "Alex's grandmother. 87 years old, lives in Lecco. Alex visits her monthly. Best risotto in Lombardy."),
     # Friends
     ("person-davide-conti", "Davide Conti", "2nd 🥈", ["Friend"],
      "College friend, software engineer at a Milan startup. They grab dinner regularly and talk tech."),
@@ -259,31 +259,31 @@ PERSONS = [
     ("person-federico-moretti", "Federico Moretti", "2nd 🥈", ["Friend"],
      "Startup founder, runs a small devtools company. They swap founder war stories over aperitivo."),
     ("person-valentina-rizzo", "Valentina Rizzo", "2nd 🥈", ["Friend"],
-     "Journalist covering Italian tech. Occasionally writes about Refactoring. Good source for ecosystem news."),
+     "Journalist covering Italian tech. Occasionally writes about Caderno Aberto. Good source for ecosystem news."),
     ("person-andrea-colombo", "Andrea Colombo", "2nd 🥈", ["Friend"],
-     "Works in finance. Luca's go-to person for investment discussions and portfolio sanity checks."),
+     "Works in finance. Alex's go-to person for investment discussions and portfolio sanity checks."),
     ("person-silvia-mancini", "Silvia Mancini", "3rd 🥉", ["Friend"],
      "Doctor, friend from university. They catch up every few months. Good grounding influence."),
     ("person-tommaso-greco", "Tommaso Greco", "2nd 🥈", ["Friend"],
-     "Musician and music teacher. They jam together occasionally — Luca on guitar, Tommaso on keys."),
+     "Musician and music teacher. They jam together occasionally — Alex on guitar, Tommaso on keys."),
     ("person-elisa-barbieri", "Elisa Barbieri", "3rd 🥉", ["Friend"],
      "High school teacher, old friend. They meet at group dinners in Milan."),
     ("person-gianluca-esposito", "Gianluca Esposito", "2nd 🥈", ["Friend"],
-     "Chef, runs a small restaurant in Navigli. Luca's favourite place for a weeknight dinner."),
+     "Chef, runs a small restaurant in Navigli. Alex's favourite place for a weeknight dinner."),
     ("person-francesca-marino", "Francesca Marino", "3rd 🥉", ["Friend"],
-     "Photographer. Took the photos for the Refactoring website and brand."),
+     "Photographer. Took the photos for the Caderno Aberto website and brand."),
     ("person-lorenzo-galli", "Lorenzo Galli", "3rd 🥉", ["Friend"],
-     "Lawyer, handles Refactoring's contracts. Efficient and straightforward."),
+     "Lawyer, handles Caderno Aberto's contracts. Efficient and straightforward."),
     ("person-marta-pellegrini", "Marta Pellegrini", "3rd 🥉", ["Friend"],
-     "Friend from the gym. Personal trainer by profession. Helped Luca design his strength program."),
+     "Friend from the gym. Personal trainer by profession. Helped Alex design his strength program."),
     ("person-nicola-fabbri", "Nicola Fabbri", "3rd 🥉", ["Friend"],
      "Neighbor, retired university professor (philosophy). Great conversations on the terrace."),
     ("person-giulia-conti", "Giulia Conti", "3rd 🥉", ["Friend"],
      "Giulia Marchetti's best friend. They often hang out as a group on weekends."),
     ("person-stefano-villa", "Stefano Villa", "3rd 🥉", ["Friend"],
-     "Old colleague from Luca's pre-Refactoring days. Now a VP Eng at a Milan scale-up."),
+     "Old colleague from Alex's pre-Caderno Aberto days. Now a VP Eng at a Milan scale-up."),
     ("person-anna-fontana", "Anna Fontana", "3rd 🥉", ["Friend"],
-     "Runs a yoga studio near Luca's apartment. Giulia introduced them."),
+     "Runs a yoga studio near Alex's apartment. Giulia introduced them."),
     ("person-mattia-de-luca", "Mattia De Luca", "3rd 🥉", ["Friend"],
      "Davide's roommate. Data engineer. They sometimes all go out together."),
     # Podcast guests (30)
@@ -393,12 +393,12 @@ PERSONAL_CONTACTS = FRIEND_SLUGS + FAMILY_SLUGS + ["person-giulia-marchetti"]
 # (slug, title, quarter, responsibility, status, body)
 PROJECTS = [
     ("24q1-launch-sponsorship-packages","Launch Sponsorship Packages","24q1","responsibility-sponsorships","Done","Define and launch the first structured sponsorship tiers. Create media kit and pricing deck."),
-    ("24q1-redesign-newsletter-template","Redesign Newsletter Template","24q1","responsibility-content-production","Done","Redesign the Refactoring email layout for better readability and visual hierarchy."),
+    ("24q1-redesign-newsletter-template","Redesign Newsletter Template","24q1","responsibility-content-production","Done","Redesign the Caderno Aberto email layout for better readability and visual hierarchy."),
     ("24q1-plan-cycling-season","Plan 2024 Cycling Season","24q1","responsibility-health-fitness","Done","Plan races, training blocks, and equipment upgrades for the 2024 cycling season."),
     ("24q1-set-investing-framework","Set Up Investing Framework","24q1","responsibility-personal-finance","Done","Define a personal investment policy statement and set up automated monthly contributions to index funds."),
-    ("24q1-podcast-season-1","Podcast Season 1 Launch","24q1","responsibility-podcast","Done","Launch the Refactoring podcast with 6 episodes recorded in advance. Focus: engineering culture."),
+    ("24q1-podcast-season-1","Podcast Season 1 Launch","24q1","responsibility-podcast","Done","Launch the Caderno Aberto podcast with 6 episodes recorded in advance. Focus: engineering culture."),
     ("24q2-hire-editor","Hire Editor (Sara)","24q2","responsibility-team-management","Done","Hire a part-time editor to raise newsletter quality and free up writing time."),
-    ("24q2-build-podcast-landing-page","Build Podcast Landing Page","24q2","responsibility-podcast","Done","Create a dedicated landing page for the Refactoring podcast with episode archive and subscribe CTA."),
+    ("24q2-build-podcast-landing-page","Build Podcast Landing Page","24q2","responsibility-podcast","Done","Create a dedicated landing page for the Caderno Aberto podcast with episode archive and subscribe CTA."),
     ("24q2-10-pillar-articles","Write 10 Pillar Articles","24q2","responsibility-content-production","Done","Write 10 in-depth articles targeting high-traffic SEO terms in the developer/engineering space."),
     ("24q2-spring-gran-fondo","Spring Gran Fondo 2024","24q2","responsibility-health-fitness","Done","Train for and complete the Granfondo di Varese — 130km route, 2200m elevation."),
     ("24q2-sponsor-crm","Set Up Sponsor CRM","24q2","responsibility-sponsorships","Done","Build an Airtable CRM to track sponsor outreach, deal status, invoices, and renewal dates."),
@@ -423,7 +423,7 @@ PROJECTS = [
     ("25q2-metislegacy-v2","MetisLegacy App V2","25q2","responsibility-learning","Done","V2 with BlockNote editor, wiki-links autocomplete, and redesigned theme system."),
     ("25q2-dolomites-trip","Cycling Trip: Dolomites","25q2","responsibility-health-fitness","Done","5-day cycling trip with Alessandro. Stelvio + Mortirolo. 650km total."),
     ("25q3-ebook","Write Newsletter Growth E-book","25q3","responsibility-content-production","Done","15,000-word e-book on newsletter growth for technical founders. Free lead magnet."),
-    ("25q3-community-launch","Launch Refactoring Community","25q3","responsibility-grow-newsletter","Open","Private Discord for premium subscribers. Still in soft launch."),
+    ("25q3-community-launch","Launch Caderno Aberto Community","25q3","responsibility-grow-newsletter","Open","Private Discord for premium subscribers. Still in soft launch."),
     ("25q3-podcast-season-4","Podcast Season 4","25q3","responsibility-podcast","Open","Theme: AI and the changing face of software engineering. 8 episodes planned."),
     ("25q3-leaddev-london","LeadDev London 2025","25q3","responsibility-content-production","Done","Attend LeadDev London: meet guests, write post-conference piece, speak on a panel."),
     ("25q3-peak-training","Summer Cycling Peak Training","25q3","responsibility-health-fitness","Done","Peak training block for September gran fondo. Hit 420km in August."),
@@ -441,7 +441,7 @@ EXPERIMENTS = [
     ("24q3-morning-journaling","Morning Journaling Habit","24q3","Done","Tried daily morning journaling for 8 weeks. Mixed results — useful in stressful periods, harder to maintain when calm."),
     ("24q4-linkedin-crossposting","LinkedIn Cross-posting Experiment","24q4","Done","Repurposed newsletter essays on LinkedIn for 6 weeks. +800 followers, modest referral traffic."),
     ("25q1-paid-newsletter-trial","Paid Newsletter Trial","25q1","Abandoned","Tested a Substack-style paid tier. Conversion too low to justify the overhead."),
-    ("25q3-discord-community-soft","Discord Community Soft Launch","25q3","Open","Soft-launched the Refactoring community with 50 beta subscribers. Still iterating on engagement."),
+    ("25q3-discord-community-soft","Discord Community Soft Launch","25q3","Open","Soft-launched the Caderno Aberto community with 50 beta subscribers. Still iterating on engagement."),
 ]
 
 # ── GOALS ─────────────────────────────────────────────────────────
@@ -450,7 +450,7 @@ GOALS = [
     ("2024-double-revenue","Double Sponsorship Revenue","2024","Done","Grow MRR from €7k to €14k+ through better packages and more sponsors."),
     ("2024-complete-two-gran-fondos","Complete Two Gran Fondos","2024","Done","Finish at least two gran fondos in the 2024 cycling season."),
     ("2024-read-24-books","Read 24 Books in 2024","2024","Behind","Target: 2 books/month. Actual: 18. Good effort, missed the target."),
-    ("2024-launch-podcast","Launch Refactoring Podcast","2024","Done","Launch and sustain the podcast through at least 2 seasons."),
+    ("2024-launch-podcast","Launch Caderno Aberto Podcast","2024","Done","Launch and sustain the podcast through at least 2 seasons."),
     ("2025-reach-85k-subscribers","Reach 85k Subscribers","2025","Open","End 2025 with 85,000+ subscribers. On track at 75k in Q3."),
     ("2025-reach-22k-mrr","Reach €22k MRR","2025","Open","Grow sponsorship revenue to €22k/month by end of year."),
     ("2025-ship-metislegacy","Ship MetisLegacy App","2025","Done","Build and use MetisLegacy v1 as my daily knowledge management tool."),
@@ -475,7 +475,7 @@ EVERGREENS = [
     ("the-two-types-of-hard","The Two Types of Hard",["topic-productivity-systems","topic-mental-health"],
      "There are two kinds of difficulty in creative work. The first is the hard of skill — you literally don't know how to do the thing yet. The second is the hard of resistance — you know how, but starting feels uncomfortable.\n\nMistaking one for the other is dangerous. If you think resistance is skill gap, you'll spend time learning when you should be shipping. If you think skill gap is resistance, you'll force output when you actually need to learn.\n\nThe tell: skill-gap hard gets easier with study and practice. Resistance hard gets easier with starting. Both are real; neither should be romanticized."),
     ("podcasting-is-relationship-building","Podcasting Is Relationship Building at Scale",["topic-podcasting","topic-b2b-marketing"],
-     "A podcast guest who has a good experience will often become an advocate for your brand in ways that are hard to manufacture any other way. They share the episode with their audience, mention it in talks, and remember you warmly when your paths cross again.\n\nThe distribution value of a podcast episode is real but often secondary to the relationship value. Some of Refactoring's best sponsor introductions came from guests who had been on the show and recommended us to a contact.\n\nThis reframes how to think about guest selection. The right question isn't just 'who has the biggest audience?' but 'who do I want a real relationship with?'"),
+     "A podcast guest who has a good experience will often become an advocate for your brand in ways that are hard to manufacture any other way. They share the episode with their audience, mention it in talks, and remember you warmly when your paths cross again.\n\nThe distribution value of a podcast episode is real but often secondary to the relationship value. Some of Caderno Aberto's best sponsor introductions came from guests who had been on the show and recommended us to a contact.\n\nThis reframes how to think about guest selection. The right question isn't just 'who has the biggest audience?' but 'who do I want a real relationship with?'"),
     ("writing-for-clarity-vs-writing-for-credit","Writing for Clarity vs. Writing for Credit",["topic-writing"],
      "There are two failure modes in technical writing. The first is jargon-as-camouflage: using complexity to signal expertise, so the reader can't tell if you actually know what you're talking about. The second is oversimplification-as-humility: stripping out necessary nuance to seem accessible.\n\nClarity is harder than either. It requires understanding a topic well enough to choose exactly which complexity to preserve and which to discard — and being honest about which parts you don't fully understand yourself.\n\nThe best technical writers I've read are ruthlessly honest about the limits of their knowledge. This is what earns trust."),
     ("on-founder-energy-management","On Founder Energy Management",["topic-mental-health","topic-productivity-systems"],
@@ -493,7 +493,7 @@ EVERGREENS = [
     ("recovery-week-in-training","The Importance of Recovery Weeks",["topic-cycling-training","topic-sleep-recovery"],
      "Every serious cycling training plan includes a recovery week every 3-4 weeks: significantly reduced volume, same intensity. This isn't optional.\n\nWithout recovery weeks, training stress accumulates until the athlete either gets sick, injured, or simply stops improving. The body adapts during recovery, not during training. Training is just the stimulus.\n\nI've made the mistake of skipping recovery weeks when training was going well — 'why back off if I feel strong?' Invariably, the 5th or 6th week of consecutive load is when something breaks. Respect the cycle."),
     ("the-real-job-of-a-newsletter","The Real Job of a Newsletter",["topic-content-strategy","topic-newsletter-growth"],
-     "People subscribe to newsletters for different reasons: to learn, to stay informed, to feel part of a community, to be entertained, to have a trusted filter. But they stay subscribed for one reason: the newsletter reliably delivers on the implicit promise it made when they subscribed.\n\nThe biggest growth lever for any newsletter isn't content, distribution, or growth hacks — it's understanding the real job the reader is hiring the newsletter to do, and doing that job consistently well.\n\nFor Refactoring, the job is: 'help me think more clearly about engineering, leadership, and building software at scale, without taking too much of my time.'"),
+     "People subscribe to newsletters for different reasons: to learn, to stay informed, to feel part of a community, to be entertained, to have a trusted filter. But they stay subscribed for one reason: the newsletter reliably delivers on the implicit promise it made when they subscribed.\n\nThe biggest growth lever for any newsletter isn't content, distribution, or growth hacks — it's understanding the real job the reader is hiring the newsletter to do, and doing that job consistently well.\n\nFor Caderno Aberto, the job is: 'help me think more clearly about engineering, leadership, and building software at scale, without taking too much of my time.'"),
     ("ai-wont-replace-thinking","AI Won't Replace Thinking — It Will Raise the Bar",["topic-ai-ml","topic-writing"],
      "The first generation of AI writing tools made it possible to produce content without thinking. The next generation is making it impossible to compete without thinking — deeply.\n\nWhen everyone can generate serviceable prose in seconds, the competitive advantage shifts to the things AI can't replicate: genuine expertise, authentic perspective, earned trust, and original insight. Surface-level content becomes worthless. Depth becomes more valuable.\n\nFor writers with real knowledge and real opinions, this is good news. For those who were providing formatting around thin ideas, the reckoning is here."),
     ("on-consistency-in-creative-work","On Consistency in Creative Work",["topic-writing","topic-productivity-systems"],
@@ -565,7 +565,7 @@ def generate_years():
             "Is A": "Year",
             "Created at": f"{year}-01-01",
             "Has": [wl(q) for q in quarters],
-        }, f"# {year}\nAnother year of building Refactoring, shipping content, and growing the audience. Review written in December.")
+        }, f"# {year}\nAnother year of building Caderno Aberto, shipping content, and growing the audience. Review written in December.")
 
 
 def generate_quarters():
@@ -708,7 +708,7 @@ def generate_projects():
             "Belongs to": wl(quarter),
             "Advances": wl(responsibility),
             "Status": status,
-            "Owner": wl("person-luca-rossi"),
+            "Owner": wl("person-alex-costa"),
         }, f"# {title}\n{body}")
 
 
@@ -719,13 +719,13 @@ def generate_experiments():
             "Is A": "Experiment",
             "Belongs to": wl(quarter),
             "Status": status,
-            "Owner": wl("person-luca-rossi"),
+            "Owner": wl("person-alex-costa"),
         }, f"# {title}\n{body}")
 
 
 def build_procedure_map():
     return {
-        "procedure-weekly-newsletter": ("Weekly Newsletter", "responsibility-content-production", "Weekly", "Draft, edit, and publish the weekly Refactoring newsletter. Includes essay writing, curated links, and sponsor block."),
+        "procedure-weekly-newsletter": ("Weekly Newsletter", "responsibility-content-production", "Weekly", "Draft, edit, and publish the weekly Caderno Aberto newsletter. Includes essay writing, curated links, and sponsor block."),
         "procedure-monthly-subscriber-metrics": ("Monthly Subscriber Metrics Review", "responsibility-grow-newsletter", "Monthly", "Review subscriber growth, churn, open rates, and click rates. Update the tracking spreadsheet."),
         "procedure-referral-program": ("Referral Program Management", "responsibility-grow-newsletter", "Weekly", "Check referral program performance. Reward top referrers. A/B test referral copy."),
         "procedure-welcome-email-sequence": ("Welcome Email Sequence Review", "responsibility-grow-newsletter", "Monthly", "Review and update the onboarding email sequence for new subscribers."),
@@ -745,7 +745,7 @@ def build_procedure_map():
         "procedure-podcast-recording": ("Podcast Recording", "responsibility-podcast", "Bi-weekly", "Record bi-weekly podcast episode. Prep call with guest, record 60-90 min, send for editing."),
         "procedure-podcast-guest-outreach": ("Podcast Guest Outreach", "responsibility-podcast", "Monthly", "Identify and contact 5 potential guests. Maintain a 3-month booking horizon."),
         "procedure-podcast-editing": ("Podcast Editing Review", "responsibility-podcast", "Bi-weekly", "Review Paco's edit of the latest episode. Approve or request changes."),
-        "procedure-podcast-show-notes": ("Podcast Show Notes", "responsibility-podcast", "Bi-weekly", "Write show notes and episode summary for the Refactoring website and newsletter."),
+        "procedure-podcast-show-notes": ("Podcast Show Notes", "responsibility-podcast", "Bi-weekly", "Write show notes and episode summary for the Caderno Aberto website and newsletter."),
         "procedure-podcast-analytics": ("Podcast Analytics Review", "responsibility-podcast", "Monthly", "Review download numbers, listener retention, and episode performance by topic."),
         "procedure-weekly-team-sync": ("Weekly Team Sync", "responsibility-team-management", "Weekly", "Monday 10am team sync. Agenda: blockers, priorities, coordination."),
         "procedure-biweekly-1on1-matteo": ("1:1 with Matteo", "responsibility-team-management", "Bi-weekly", "Bi-weekly 1:1 with Matteo. Cover: sponsor pipeline, blockers, personal growth, feedback."),
@@ -770,7 +770,7 @@ def generate_procedures():
             "Is A": "Procedure",
             "Belongs to": wl(responsibility),
             "Cadence": cadence,
-            "Owner": wl("person-luca-rossi"),
+            "Owner": wl("person-alex-costa"),
         }, f"# {proc_name}\n{body}")
 
 
@@ -832,7 +832,7 @@ def generate_tasks():
             "Is A": "Task",
             "Belongs to": wl(quarter),
             "Status": status,
-            "Owner": wl("person-luca-rossi"),
+            "Owner": wl("person-alex-costa"),
         }, f"# {rendered_title}\n")
 
 
@@ -915,7 +915,7 @@ def generate_cycling_interval_event(current_date: date) -> int:
         current_date,
         ["Health", "Sport"],
         "60-min interval session. 4x8min at threshold power.",
-        [wl("person-luca-rossi")],
+        [wl("person-alex-costa")],
     )
     return 1
 
@@ -978,10 +978,10 @@ def generate_friday_workout_or_sponsor_event(current_date: date) -> int:
 
 
 def generate_long_ride_event(current_date: date) -> int:
-    relations = [wl("person-luca-rossi")]
+    relations = [wl("person-alex-costa")]
     ride_note = "Solo long ride."
     if random.random() < 0.4:
-        relations = [wl("person-luca-rossi"), wl("person-alessandro-ferrari")]
+        relations = [wl("person-alex-costa"), wl("person-alessandro-ferrari")]
         ride_note = "Long ride with Alessandro."
     distance = random.randint(80, 130)
     elevation = random.randint(800, 2000)

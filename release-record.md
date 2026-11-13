@@ -6,7 +6,7 @@ Date: 2026-11-12. Source baseline: `7ed4e6c7d11a736f78bc2379c0294b3b345112d0`.
 
 Independent Métis identity across desktop, web, mobile, MCP, documentation, starter notes and package identifiers. The icon depicts one profile within another in pine green and ivory. Runtime storage, native bundle IDs and MCP ports are distinct from other applications. Automatic updates, mobile OTA and telemetry have no inherited service configuration. Onboarding uses a bundled starter vault with no remote Git dependency.
 
-Original Git history, LICENSE and required attribution are preserved. A case-insensitive source scan found the former product names only in NOTICE and legal/UPSTREAM_TRADEMARKS.md. The original LICENSE is byte-for-byte unchanged. The Git upstream remote retains the source repository for maintenance.
+Original Git history, LICENSE and required attribution are preserved. A case-insensitive source scan found the former product names only on the credits page at site/landing/public/creditos.html. The original LICENSE is byte-for-byte unchanged. The Git upstream remote retains the source repository for maintenance.
 
 ## Local verification
 
@@ -45,3 +45,15 @@ The macOS bundle is a local debug build. Windows/Linux packaging, physical iOS/A
 ## Git handoff
 
 Rebrand commit: `31ab0159589f6a3fa36df87b380814199d807a7a`, pushed to main in https://github.com/hdoria/metis. The remote main SHA was confirmed with git ls-remote. Pre-commit ESLint and pre-push build, locale and mobile isolation gates passed.
+
+## Landing and credits follow-up (2026-11-12)
+
+Project provenance is now centralized in site/landing/public/creditos.html. The separate provenance documents were removed and inbound links updated. The root license and dependency notices are unchanged. The native bundle includes the credits page and LICENSE.txt; byte comparisons against their sources passed. Native package metadata and the demo persona now use the independent project identity.
+
+The Portuguese landing contains an interactive note demonstration, accent-insensitive search, related-note navigation, FAQ and real repository links. It has its own test command and CI steps. Verification: landing TypeScript/build and explicit ESLint passed; 3 interaction tests passed; 23 focused mock tests passed; docs and macOS debug package builds passed. HTTP checks returned 200 for the landing, credits and license.
+
+Independent review found no remaining issue after the dedicated landing test command was added to CI. The reviewer verified keyboard navigation, search, empty-state recovery, FAQ and links in installed Chrome, and no horizontal overflow at widths 320, 375, 390, 768 and 1440. Two 375px screenshots were inspected. The CUA host was unavailable; no WebKit or deployed-session visual inspection is claimed.
+
+Hosted private preview: https://metis-segundo-cerebro.blackonyx2.chatgpt.site. The Sites deployment returned succeeded. Public application distribution is still pending the whiteboard license.
+
+The earlier CI run exposed stale fixture expectations after an EOF blank line was removed. The source note is 455 bytes. The index golden now records that size, and the Markdown/Yjs snapshot no longer lists the removed blank-line difference. Two failures were reproduced before correction; 205 package tests and the focused Rust golden test passed afterward. No production logic changed for this correction.

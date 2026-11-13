@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs"
+import { existsSync, readFileSync } from "node:fs"
 import { resolve } from "node:path"
 import tailwindcss from "@tailwindcss/vite"
 import react from "@vitejs/plugin-react"
@@ -12,11 +12,26 @@ import { defineConfig, type PluginOption } from "vite"
 // - "preview": the private preview build. Adds what lives in ../preview (search-engine opt-out, private assets, service worker) and
 //   writes ../public for the Worker.
 const previewDir = resolve(import.meta.dirname, "../preview")
+const licensePath = resolve(import.meta.dirname, "../../LICENSE")
+
+const licenseAsset: PluginOption = {
+  name: "metis-license",
+  generateBundle() {
+    this.emitFile({ type: "asset", fileName: "LICENSE.txt", source: readFileSync(licensePath, "utf8") })
+  },
+  configureServer(server) {
+    server.middlewares.use((request, response, next) => {
+      if (request.url?.split("?")[0] !== "/LICENSE.txt") return next()
+      response.setHeader("Content-Type", "text/plain; charset=utf-8")
+      response.end(readFileSync(licensePath, "utf8"))
+    })
+  },
+}
 
 export default defineConfig(async ({ mode }) => {
   const site = process.env.METIS_SITE ?? (mode === "metis-md" || !existsSync(previewDir) ? "metis.md" : "preview")
   const isPreview = site === "preview"
-  const plugins: PluginOption[] = [react(), tailwindcss()]
+  const plugins: PluginOption[] = [react(), tailwindcss(), licenseAsset]
   if (isPreview) plugins.push((await import(resolve(previewDir, "vite-plugin.mjs"))).default())
   return {
     plugins,

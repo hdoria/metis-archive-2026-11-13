@@ -8,7 +8,7 @@ Follow the user's global AGENTS.md. Plan before cross-cutting changes. Keep chan
 
 ## Identity and privacy
 
-Use Métis in display text and metis in machine identifiers. Keep configuration in io.github.hdoria.metis. Never read another application's secrets or modify its settings. Test only disposable vaults. Preserve LICENSE and NOTICE. Keep THIRD_PARTY_NOTICES accurate.
+Use Métis in display text and metis in machine identifiers. Keep configuration in io.github.hdoria.metis. Never read another application's secrets or modify its settings. Test only disposable vaults. Preserve LICENSE and dependency licenses. Keep project provenance exclusively in site/landing/public/creditos.html, and include that page in distribution resources.
 
 ## Distribution
 
