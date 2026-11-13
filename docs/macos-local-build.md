@@ -38,7 +38,9 @@ See [Tauri macOS signing](https://v2.tauri.app/distribute/sign/macos/) and [Appl
 
 The Apple Developer portal confirms Popcode's team ID as `C42XKG5G6X`. The existing iOS Fastlane setup uses `iosdev@popcode.com.br`, but its project team and API-key issuer differ from Popcode's. Do not copy that project's certificate storage or API credentials into this workflow.
 
-Fastlane 2.237.0 was installed outside the repository at `~/.local/share/metis-fastlane/fastlane`. Its wrapper isolates Ruby gems and selects `/Applications/Xcode.app/Contents/Developer` only for its subprocess. Version and `cert --help` checks passed. The initial certificate command reached the Apple ID password prompt; authentication and certificate creation are still pending.
+Fastlane 2.241.2 is installed and explicitly pinned outside the repository at `~/.local/share/metis-fastlane/fastlane`. Its wrapper isolates Ruby gems and selects `/Applications/Xcode.app/Contents/Developer` only for its subprocess. Version and `cert --help` checks passed. Authentication and certificate creation are still pending.
+
+The initially reused version, 2.237.0, failed before authentication with `Service key is empty`: Apple's old public configuration endpoint returns HTTP 404. Updating to the official 2.241.2 release fixes that lookup. A credential-free test reproduced the old failure, then verified that the new version obtains the current public widget key using a HEAD request without cookies or redirects. No private session or hardcoded key was used. See [the upstream fix](https://github.com/fastlane/fastlane/pull/30206).
 
 The local interactive setup is `~/.config/metis/signing/configurar-assinatura.command`. It waits for user input before running:
 

@@ -9,3 +9,5 @@
 - [Audit owner identity beyond visible branding](feedback-owner-identity.md)
 
 - [Verify maintainer identity in repository file views](feedback-license-presentation.md)
+
+- [Verify authentication prerequisites before a user handoff](feedback-signing-authentication-preflight.md)
