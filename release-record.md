@@ -94,6 +94,8 @@ Vercel deployment `dpl_8XAnnF5HtAWH9GRg5bnYf7S13wrc` reached READY at https://me
 
 ## License presentation follow-up (2026-11-12)
 
-LICENSE now starts with a Métis notice naming Hugo Dória for modifications and new branding. The complete AGPL document, including its own copyright, remains byte-for-byte identical after that prefix. Independent review confirmed the scoped notice and unchanged license body. A new file commit records the current maintainer's actual change without rewriting previous authorship.
+LICENSE includes a Métis notice naming Hugo Dória for modifications and new branding. The complete AGPL document, including its own copyright, remains byte-for-byte identical. Independent review confirmed the scoped notice and unchanged license body. A new file commit records the current maintainer's actual change without rewriting previous authorship.
 
-The local app and DMG were repackaged with the updated license, retaining the same release executable and ad-hoc signing. The app's strict signature check passed and its bundled LICENSE.txt matched the source. The updated DMG is 23,116,244 bytes with SHA-256 `968ff00ba76a9b9f9947e11e12d52f83eecd66d6799e493b226cb3b331bbdd1a`, superseding the earlier package hash. Apple signing and notarization remain pending.
+GitHub's license detector rejected the notice when placed before the GNU text. Independent reproduction with Licensee 9.20.0 and 10.1.0 found 95.831% similarity for that layout and an exact AGPL-3.0 match when the same notice follows the complete original document. The notice was moved to that footer position to preserve automatic license detection.
+
+The local app and DMG were repackaged with the updated license, retaining the same release executable and ad-hoc signing. The app's strict signature check passed and its bundled LICENSE.txt matched the source. The updated DMG is 23,116,285 bytes with SHA-256 `734e8873fe8d88548e1ebdad12a1118f1de18adf9f544c822ce6c3115fbea916`, superseding the earlier package hashes. Apple signing and notarization remain pending.
