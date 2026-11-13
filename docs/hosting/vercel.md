@@ -38,6 +38,6 @@ npx vercel@65.15.0 domains verify www.metisapp.com.br --project metis-landing --
 
 See the [project domain settings](https://vercel.com/popcode/metis-landing/settings/domains) and [Vercel domain setup guide](https://vercel.com/docs/domains/set-up-custom-domain). After future DNS changes, verify both hostnames, HTTPS and the www redirect. Domain ownership alone does not establish working DNS or TLS.
 
-HTTPS was validated on both hostnames after issuing the managed certificate through Vercel. The landing, credits and license returned 200 with certificate validation enabled. The www redirect returned 308 and preserved the path and query string. Tests used public DNS results with curl's `--resolve` because the local system resolver still cached the earlier missing records; propagation to every resolver is not claimed.
+HTTPS was validated on both hostnames after issuing the managed certificate through Vercel. The landing, credits and license returned 200 with certificate validation enabled. The www redirect returned 308 and preserved the path and query string. Tests used public DNS results with curl's `--resolve` because the local system resolver still did not resolve the hostnames; propagation to every resolver is not claimed.
 
 The previous Sites publication remains a historical private preview. Its pending custom-domain binding was removed and its identity manifest archived as `docs/hosting/sites-preview.json`; it is not the active deployment configuration. Migration of the landing does not publish or distribute application binaries.
