@@ -2,7 +2,17 @@
 
 ## Status
 
-Accepted
+Superseded in the Métis fork on 2026-11-13. The decision below is preserved as
+historical context, not as an operational setup guide.
+
+Current repository validation is defined in [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml)
+and [`.husky`](../../.husky). CircleCI and Chunk configuration are not tracked.
+Signed macOS packaging and Sentry symbol uploads currently follow the local
+[packaging](../macos-local-build.md) and [error-reporting](../sentry-setup.md) guides.
+The landing uses the [Vercel CLI workflow](../hosting/vercel.md). No current CI
+workflow publishes releases or updater feeds; signed automatic updates remain
+disabled. See [Getting Started](../GETTING-STARTED.md#local-validation-and-github-ci)
+for the active workflow.
 
 ## Context
 

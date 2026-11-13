@@ -2,6 +2,16 @@
 
 This audit covers the tracked configuration, the local production build, and the GitHub repository. It does not claim access to external SaaS dashboards or account-wide installations.
 
+## Legacy cleanup and CI activation — 2026-11-13
+
+The two manual Todoist task commands and the legacy network demo server have been removed. Their dependency/reference scan found no active caller; no Todoist account migration is needed for these retired commands. The current Getting Started, Architecture, Abstractions and Performance guides now describe the actual GitHub workflow, local hooks and manual benchmarks. ADR 0268 is explicitly superseded, preserving its historical decision text.
+
+The missing CI runs were traced to GitHub's initial fork workflow activation gate. REST reported repository Actions enabled and the workflow active, but the authenticated Actions page still displayed “Workflows aren't being run on this forked repository.” Enabling the reviewed read-only workflow produced “Actions Enabled.” No trigger filters, credentials or repository permissions were changed. See [CI verification](../.github/SETUP.md#verify-ci-delivery) for checking an exact commit and the supported manual dispatch command.
+
+Remaining integration work: automated signed releases and desktop updates; a continued tldraw license beyond the trial; optional Vercel Git deployment; and mobile OAuth/EAS/telemetry provisioning. Retained manual mobile publishing scripts still depend on CircleCI-specific branch input and mandatory PostHog configuration; their migration belongs to the mobile release work, and they are not invoked by the current CI. Historical ADRs and spike reports are not current deployment instructions.
+
+The initial audit below remains a dated snapshot. Its Todoist/demo-server rows and obsolete operational-documentation findings have been superseded by this cleanup.
+
 ## Sentry setup update — 2026-11-13
 
 Sentry is now configured in Popcode's `metis-desktop` (React) and `metis-native` (Rust) projects. Real test errors reached both projects with readable original frames and source context. The new production build embeds those owned destinations and retains per-user crash-reporting opt-in. PostHog remains unconfigured. This applies to the new build, not previously generated or installed packages; see [setup and verification](sentry-setup.md) and [local package versions](macos-local-build.md).

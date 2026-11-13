@@ -195,7 +195,7 @@ Rich-editor Markdown boundaries stay on the editor fast path while keeping one o
 
 Rich-editor typing keeps BlockNote's per-transaction work minimal. Metis creates BlockNote with animation bookkeeping disabled so the `previousBlockType` extension, which scans the old and new ProseMirror documents on every edit, is not installed. Collapsed-heading rendering attaches its mutation observer and `editor.onChange` subscription only while at least one heading/list section is collapsed, then detaches when the final section expands. Heading folds follow the document outline through divider blocks and stop at the next same-or-higher heading. Development builds wrap ProseMirror dispatch once per editor view and log `richEditorDispatch` timings for large or slow transactions, giving QA a direct signal for edit-time stutter instead of only note-open speed. The pinned `prosemirror-view` dependency normalizes a stale child boundary to the live parent end during DOM-selection synchronization so editor teardown or remount cannot dereference a child removed mid-scan; see [ADR-0183](./adr/0183-normalize-stale-prosemirror-selection-boundaries.md).
 
-Core perceived latency is protected by a synthetic production-browser benchmark. `pnpm perf` injects deterministic 500-entry startup/note fixtures and a 2,000-entry virtualized-list fixture, discards a warmup, then aggregates five measured runs. Startup phases publish standard `metis:<phase>` User Timing marks; note scenarios combine visible editor/content milestones with opt-in note/editor trace durations; list scrolling waits through the destination paint. `.editor-performance-thresholds.json` stores ratcheted median budgets and p90 diagnostics. CircleCI runs the gate in a dedicated browser job, while native `METIS_STARTUP_TRACE=1` remains the richer host-level diagnostic tier. See `docs/PERFORMANCE.md` for the instrumentation audit and baseline policy.
+Core perceived latency is protected by a synthetic production-browser benchmark. `pnpm perf` injects deterministic 500-entry startup/note fixtures and a 2,000-entry virtualized-list fixture, discards a warmup, then aggregates five measured runs. Startup phases publish standard `metis:<phase>` User Timing marks; note scenarios combine visible editor/content milestones with opt-in note/editor trace durations; list scrolling waits through the destination paint. `.editor-performance-thresholds.json` stores ratcheted median budgets and p90 diagnostics. The benchmark is run manually; the current GitHub CI does not invoke it. Native `METIS_STARTUP_TRACE=1` remains the richer host-level diagnostic tier. See `docs/PERFORMANCE.md` for the instrumentation audit and baseline policy.
 
 ## Tech Stack
 
@@ -1241,93 +1241,66 @@ Shortcut routing is explicit:
   - native menu-command proof through `trigger_menu_command`
 - The browser harness is only a deterministic desktop command bridge; exact native accelerator delivery still requires real Tauri QA for commands flagged as manual-native-critical
 
-## Auto-Release & In-App Updates
+## Validation, Packaging & In-App Updates
 
-### Release Pipeline
+### Current Workflow
 
-Every qualifying push to `main` triggers the `alpha-release` workflow in `.circleci/config.yml`:
+[`.github/workflows/ci.yml`](../.github/workflows/ci.yml) owns repository validation
+on pushes and pull requests targeting `main`, plus manual dispatch. Its frontend,
+mobile and native jobs run the declared build, lint and test commands. The local
+[`.husky`](../.husky) hooks run lint before commit and build, locale validation and
+the mobile fork-configuration test before push. They do not invoke remote sidecars.
 
-A push does not qualify when its head commit only changes paths that never ship in the desktop app: `site/`, `.circleci/`, `.github/workflows/README.md`, and the Metis Web lane (`apps/`, `packages/`, `docs/web/`). `shouldSkipAlphaRelease` in `scripts/release-version.mjs` owns that list and emits `SKIP_RELEASE=true`, which halts every alpha build job.
+Signed macOS packages currently use the local procedure in
+[macOS packaging](macos-local-build.md). Instrumented desktop packages also follow
+[desktop error reporting](sentry-setup.md), including source-map and native-symbol
+uploads before signing the matching artifacts. The validation workflow does not
+configure signing, notarization, Sentry uploads, GitHub Release publication or
+updater-feed publication. CircleCI and Chunk configuration and the former release
+workflows are absent; [ADR 0268](adr/0268-circleci-owns-ci-and-release-orchestration.md)
+is retained as a superseded historical decision.
 
-```
-push to main
-  → version job: compute calendar alpha version YYYY.M.D-alpha.N
-    and a GitHub-sorted tag alpha-vYYYY.M.D-alpha.NNNN
-      → use today's UTC date unless the latest stable-vYYYY.M.D tag already uses today
-      → if stable already uses today, advance alpha to the next calendar day so semver still increases
-      → ignore future stable dates for normal numbering
-      → if historical future tags poisoned semver ordering, publish one recovery bridge before
-        returning the next qualifying main push to the real UTC calendar series; the bridge and
-        corrected release are intentionally separate publications so updater ordering remains monotonic
-  → four parameterized CircleCI build jobs fan out in parallel:
-      → pnpm install, stamp version, pnpm build, tauri build --target aarch64-apple-darwin --bundles app
-      → pnpm install, stamp version, pnpm build, tauri build --target x86_64-apple-darwin --bundles app
-      → upload signed Apple Silicon and Intel .app.tar.gz + .sig updater artifacts named Metis_<version>_macOS_Silicon and Metis_<version>_macOS_Intel
-      → pnpm install, stamp version
-      → export the host-owned AppImage library exclusion policy
-      → tauri build --target x86_64-unknown-linux-gnu --bundles deb,rpm,appimage
-      → inspect the sealed AppImage library inventory and verify installer + updater-signature artifacts
-      → upload .deb, .rpm, .AppImage, and signed Linux updater bundles
-      → pnpm install, stamp version, optionally import the Windows code-signing certificate
-      → tauri build --target x86_64-pc-windows-msvc --bundles nsis, with Authenticode signing config only when certificate secrets are present
-      → verify Windows app executable and installer Authenticode signatures when Authenticode signing ran
-      → upload NSIS installer, optional MSI artifacts, and signed Windows updater bundles
-  → release job:
-      → generate alpha-latest.json with darwin-aarch64, darwin-x86_64, Linux, and Windows updater URLs
-      → publish GitHub prerelease alpha-vYYYY.M.D-alpha.NNNN named Metis Alpha YYYY.M.D.N
-  → publish-main-docs job:
-      → build the site with scripts/build-pages-site.sh: metis.md landing at /, VitePress docs, then the release pages and updater manifests, then verify-pages-site.sh
-      → build static HTML release history page at /releases/
-      → publish alpha/latest.json
-      → refresh latest.json + latest-canary.json as compatibility aliases to alpha
-      → preserve stable/latest.json
-      → commit the generated site to `gh-pages` for GitHub's managed Pages deployment
-```
+The landing is deployed to Vercel with the CLI procedure in
+[the hosting guide](hosting/vercel.md). GitHub autodeployment is not connected.
+The retained `scripts/build-pages-site.sh` and release-page helpers describe a
+separate legacy Pages assembly path, not the current landing deployment.
 
-Stable promotions trigger the `stable-release` workflow in `.circleci/config.yml`:
+For manual Linux packaging, `scripts/appimage-launcher-tools.mjs` owns the explicit
+host-library boundary. With Tauri CLI 2.12.1 or newer and stock linuxdeploy/GTK
+plugins, export its exclusion list as `LINUXDEPLOY_EXCLUDED_LIBRARIES`, then run
+`validate-appimage-libraries` on the sealed AppImages. This keeps systemd/udev,
+D-Bus, Wayland, epoxy and nghttp2 on the host while retaining a coherent bundled
+GTK/GLib stack for older distributions. The stricter `validate-appimages` command
+also requires the symlink-safe AppRun and fcitx payload produced by the experimental
+output-plugin shim; it is not a check for stock packaging. The shim remains for
+local investigation because pre-seeding it previously failed before sealing the
+AppImage. See [the manual packaging commands](GETTING-STARTED.md#linux-appimage-packaging-checks)
+and [ADR 0184](adr/0184-host-compatible-appimage-library-boundary.md) for the design
+history. No current CI job produces these release artifacts.
 
-```
-push vYYYY-MM-DD or stable-vYYYY.M.D tag
-  → version job: validate the tag date and reject dates later than the current UTC day
-  → four parameterized CircleCI build jobs fan out in parallel:
-      → pnpm install, stamp version, pnpm build, tauri build --target aarch64-apple-darwin
-      → pnpm install, stamp version, pnpm build, tauri build --target x86_64-apple-darwin
-      → upload signed Apple Silicon and Intel .app.tar.gz + .sig and .dmg artifacts named Metis_<version>_macOS_Silicon and Metis_<version>_macOS_Intel
-      → pnpm install, stamp version
-      → export the host-owned AppImage library exclusion policy
-      → tauri build --target x86_64-unknown-linux-gnu --bundles deb,rpm,appimage
-      → inspect the sealed AppImage library inventory and verify installer + updater-signature artifacts
-      → upload .deb, .rpm, .AppImage, and signed Linux updater bundles
-      → pnpm install, stamp version, optionally import the Windows code-signing certificate
-      → tauri build --target x86_64-pc-windows-msvc --bundles nsis, with Authenticode signing config only when certificate secrets are present
-      → verify Windows app executable and installer Authenticode signatures when Authenticode signing ran
-      → upload NSIS installer, optional MSI artifacts, and signed Windows updater bundles
-  → release job:
-      → generate stable-latest.json with macOS Apple Silicon, macOS Intel, Linux, and Windows updater URLs plus platform-specific manual download URLs
-      → publish GitHub release Metis YYYY.M.D
-  → publish-stable-docs job:
-      → build the site with scripts/build-pages-site.sh: metis.md landing at /, VitePress docs, then the release pages and updater manifests, then verify-pages-site.sh
-      → build static HTML release history page at /releases/
-      → publish stable/latest.json
-      → publish stable/download/ and download/ as permanent download pages that keep the browser page visible while the platform installer starts, default Linux visitors to AppImage, require an explicit Windows installer click with managed-device guidance, and expose RPM as a manual Linux option when the stable release includes one
-      → preserve alpha/latest.json
-      → commit the generated site to `gh-pages` for GitHub's managed Pages deployment
-```
+### Retained Calendar-Version Policy
 
-GitHub Pages is served from GitHub Actions deployments (`deploy-docs.yml` on docs/landing pushes and the `pages` job of `release.yml` after each Alpha). Every Pages publisher, including the CircleCI jobs above, builds through `scripts/build-pages-site.sh`, which lays the landing over the docs and runs `assemble-pages-site.sh` last so the updater manifests always win; `scripts/verify-pages-site.test.sh` fails if a publisher bypasses it.
-
-Linux AppImage release jobs pin Tauri CLI 2.12.1 or newer so packaging uses the updated stock linuxdeploy and GTK plugins. `scripts/appimage-launcher-tools.mjs` owns the explicit host-library boundary: the CircleCI release job and the reusable GitHub Actions artifact workflow (`.github/workflows/release-build-artifacts.yml`) both export its linuxdeploy exclusion list for systemd/udev, D-Bus, Wayland, epoxy, and nghttp2 as `LINUXDEPLOY_EXCLUDED_LIBRARIES`, then run `validate-appimage-libraries`, which extracts every sealed AppImage and fails if any excluded family is present. The stricter `validate-appimages` command additionally requires the symlink-safe AppRun and fcitx payload that only the experimental output-plugin shim produces, so it is not a release gate for stock packaging. GTK and GLib remain bundled as one coherent application stack for older distributions. The experimental output-plugin shim remains available for local investigation, but release packaging does not pre-seed it because that path previously exited before sealing the AppImage. See [ADR-0184](./adr/0184-host-compatible-appimage-library-boundary.md).
-
-### Versioning
+`scripts/release-version.mjs` retains the tested calendar-version rules below for
+compatibility. No current CI workflow invokes them to publish releases or stamp
+package versions. The checked-in package versions govern ordinary local builds.
 
 - Stable promotions use git tags in the form `stable-vYYYY.M.D` and stamp the technical version `YYYY.M.D`.
 - Alpha builds stamp the technical version `YYYY.M.D-alpha.N` and display it as `Alpha YYYY.M.D.N`. The GitHub release tag zero-pads the sequence as `alpha-vYYYY.M.D-alpha.NNNN` so GitHub release ordering remains chronological.
 - If the latest stable tag already uses today's date, alpha advances to the next calendar day before assigning `-alpha.N` so Alpha remains semver-newer than Stable across channel switches.
 - Stable tags dated after the current UTC day fail before builds start. If an older workflow already accepted one, alpha emits one future technical bridge with a current-date `.0` display label, then returns to the real calendar series on the following publication.
-- The workflows stamp the computed version into `tauri.conf.json` and `Cargo.toml` at build time.
+- A future release workflow would need to explicitly stamp the computed version into `tauri.conf.json` and `Cargo.toml`; validation CI does not do this.
 - This keeps display strings clean while preserving semver monotonicity when a user switches between Stable and Alpha.
 
 ### In-App Updates
+
+Signed automatic updates are disabled: `SIGNED_UPDATES_ENABLED` is `false` in both
+`src/hooks/useUpdater.ts` and `src-tauri/src/app_updater.rs`, the updater plugin is
+not registered, and `tauri.conf.json` sets `createUpdaterArtifacts` to `false` with
+no updater endpoint or public key. Apple signing/notarization of a local package
+does not enable Tauri updates. Enabling them requires an explicitly configured
+Métis-owned release service and updater signing key.
+
+The retained implementation describes this flow only when that capability is enabled:
 
 ```
 App startup (3s delay)
@@ -1339,7 +1312,7 @@ App startup (3s delay)
     → network error → fail silently
 ```
 
-Alpha metadata discovery follows GitHub publication time rather than the highest embedded calendar
+The retained alpha metadata resolver follows GitHub publication time rather than the highest embedded calendar
 version. This lets a corrected release supersede a future-dated recovery bridge. Normal updater
 checks still require a semver increase; the only exception lets an installed calendar version
 beyond tomorrow accept a candidate dated today or tomorrow, which is the bounded recovery path
@@ -1350,7 +1323,10 @@ future-dated metadata.
 
 ### Telemetry (Opt-in)
 
-Anonymous crash reporting (Sentry) and usage analytics (PostHog), both **opt-in only**.
+Crash reporting (Sentry) and usage analytics (PostHog) both require explicit opt-in
+and their own build configuration. The local desktop setup configures owned Sentry
+projects as described in [desktop error reporting](sentry-setup.md); it does not
+configure PostHog. The sequence below shows the SDK paths when configured.
 
 ```mermaid
 sequenceDiagram
@@ -1387,23 +1363,25 @@ sequenceDiagram
 **Architecture:**
 - **Rust:** `sentry` crate initialized in `lib.rs::setup()` via `telemetry::init_sentry_from_settings()`
 - **JS:** `@sentry/react` + `posthog-js` initialized lazily by `useTelemetry` hook; the React root also wires `onCaughtError`, `onUncaughtError`, and `onRecoverableError` through `Sentry.reactErrorHandler()` so production React invariants include component stack context when crash reporting is enabled.
-- **Release grouping:** packaged release workflows pass `VITE_SENTRY_RELEASE` from the computed build version, but the app only assigns Sentry's `release` field for stable calendar builds (`YYYY.M.D`). Alpha/prerelease/internal builds omit `release` so they do not create normal Sentry Releases entries, while both frontend and Rust Sentry scopes tag `metis.build_version` and `metis.release_kind` for diagnostics.
+- **Release grouping:** the local desktop workflow passes `VITE_SENTRY_RELEASE` and `VITE_SENTRY_ENVIRONMENT` to the frontend and `SENTRY_RELEASE` and `SENTRY_ENVIRONMENT` at native compile time. The frontend accepts owned `metis-desktop@<version>+<build>` releases alongside stable calendar formats; Rust accepts the explicit release override and retains its calendar fallback. Both paths keep build-version and release-kind diagnostics. Follow [desktop error reporting](sentry-setup.md) for exact symbol matching and uploads.
 - **Settings:** `telemetry_consent`, `crash_reporting_enabled`, `analytics_enabled`, `anonymous_id` in `Settings` struct
 - **Consent:** `TelemetryConsentDialog` shown when `telemetry_consent === null`
 
 ### Updates
 
-Metis uses the Tauri updater plugin for automatic updates:
+The inactive updater implementation retains the following components for a future
+explicitly configured release service:
 
-- `src-tauri/tauri.conf.json` points the default desktop feed at `stable/latest.json`
-- `useUpdater(releaseChannel, automaticChecksEnabled)` waits 3 seconds after launch when automatic checks are enabled, then calls Rust commands instead of hard-coding one updater endpoint in the frontend
-- `automatic_update_checks_enabled` is an installation-local Settings flag that defaults to enabled; disabling it skips only the startup/background probe, not manual status-bar update checks
+- `src-tauri/tauri.conf.json` has no updater endpoint or public key; the plugin remains unregistered
+- `useUpdater(releaseChannel, automaticChecksEnabled)` would wait 3 seconds after launch when both signed updates and automatic checks are enabled, then call Rust commands instead of hard-coding one updater endpoint in the frontend
+- `automatic_update_checks_enabled` is a retained installation-local preference; it does not override the disabled capability, and the current update command and status-bar action remain disabled
 - `src-tauri/src/app_updater.rs` maps the selected channel to `alpha/latest.json` or `stable/latest.json`
 - `download_and_install_app_update` streams progress events back into `UpdateBanner`
 
 ### Feature Flags (PostHog + Release Channels)
 
-Feature flags are backed by PostHog and evaluated per release channel:
+Feature-flag code supports PostHog evaluation per release channel. PostHog is not
+configured by the current desktop setup; these are retained evaluation rules:
 
 - **Alpha**: all features always enabled (no PostHog lookup)
 - **Stable** (default): PostHog rules decide which features are enabled
@@ -1424,7 +1402,7 @@ const enabled = useFeatureFlag('example_flag') // boolean
 2. Create the flag on PostHog with Stable rollout rules and any optional beta-cohort targeting
 3. Use `useFeatureFlag('your_flag')` in components
 
-Release channel is selectable in Settings as `alpha` or `stable` and passed to PostHog as a person property via `identify()`. Beta targeting is managed in PostHog, not in the updater settings. See ADR-0057.
+The retained channel model supports `alpha` or `stable` and can pass the value to PostHog via `identify()` when analytics is configured and consented. Current updater UI is disabled and PostHog is not configured by the desktop setup. ADR 0057 records the historical rollout model.
 
 ## Platform Support — iOS / iPadOS (Prototype)
 

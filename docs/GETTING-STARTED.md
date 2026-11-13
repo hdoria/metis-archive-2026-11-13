@@ -4,7 +4,7 @@ How to navigate the codebase, run the app, and find what you need.
 
 ## Prerequisites
 
-- **Node.js** 18+ and **pnpm**
+- **Node.js** 26 and **pnpm** 10.33.0 (matching GitHub CI)
 - **Rust** 1.77.2+ (for the Tauri backend)
 - **git** CLI (required by the git integration features; Windows users may choose native Git or WSL2 Git in Settings)
 
@@ -47,7 +47,7 @@ If your distribution stores the 64-bit library elsewhere, use that path instead,
 
 ### Linux AppImage packaging checks
 
-Linux release CI uses Tauri CLI 2.12.1 or newer with its updated stock linuxdeploy and GTK plugins. Before packaging, the job exports Metis's host-library exclusion policy; after packaging, it extracts every sealed AppImage and verifies that those libraries are absent:
+Linux packaging is a manual workflow; the current GitHub CI does not produce Linux release artifacts. With Tauri CLI 2.12.1 or newer and its stock linuxdeploy and GTK plugins, export Métis's host-library exclusion policy before packaging, then extract and validate every sealed AppImage:
 
 ```bash
 export LINUXDEPLOY_EXCLUDED_LIBRARIES="$(node scripts/appimage-launcher-tools.mjs print-linuxdeploy-exclusions)"
@@ -56,7 +56,7 @@ node scripts/appimage-launcher-tools.mjs validate-appimage-libraries \
   src-tauri/target/x86_64-unknown-linux-gnu/release/bundle/appimage/*.AppImage
 ```
 
-The exclusion boundary keeps systemd/udev, D-Bus, Wayland, epoxy, and nghttp2 on the host while retaining the coherent bundled GTK/GLib stack needed by older distributions. Release validation also verifies that the Linux job produced an AppImage, at least one installer bundle, and updater signature artifacts. Windows release jobs always require Tauri updater signatures; when Authenticode certificate secrets are configured, they also import the CI code-signing certificate, build NSIS with a generated Tauri Authenticode signing config, and verify the app executable plus installer signatures before upload. The experimental AppImage output-plugin shim in `scripts/appimage-launcher-tools.mjs` remains available for local investigation but is not pre-seeded in release packaging; its stricter `validate-appimages` check (symlink-safe AppRun plus fcitx payload) only passes for shim-built AppImages. Without the exclusion export, linuxdeploy still bundles these libraries on Tauri CLI 2.12.1, so keep both steps together.
+The exclusion boundary keeps systemd/udev, D-Bus, Wayland, epoxy, and nghttp2 on the host while retaining the coherent bundled GTK/GLib stack needed by older distributions. The experimental AppImage output-plugin shim in `scripts/appimage-launcher-tools.mjs` remains available for local investigation; its stricter `validate-appimages` check (symlink-safe AppRun plus fcitx payload) only passes for shim-built AppImages. Without the exclusion export, linuxdeploy still bundles these libraries on Tauri CLI 2.12.1, so keep both steps together. These checks validate packaging only; they do not configure signing, publication or automatic updates.
 
 ## Quick Start
 
@@ -72,7 +72,7 @@ pnpm dev
 pnpm tauri dev
 
 # Run tests
-pnpm test    # Vitest unit tests
+pnpm test    # Unit, configuration, server and script tests
 cargo test   # Rust tests (from src-tauri/)
 
 # Or, run Rust tests from root project directory
@@ -89,7 +89,7 @@ The tablet/phone app lives in `apps/mobile`, separate from the Tauri desktop app
 Track work and acceptance evidence in the
 [Métis issue tracker](https://github.com/hdoria/metis/issues),
 not repository readiness reports. Durable decisions use the shared `docs/adr`
-numbering and a `Platform: mobile` header. Reference the TOL issue in commits.
+numbering and a `Platform: mobile` header. Reference the Métis GitHub issue in commits.
 
 ```bash
 pnpm install
@@ -128,65 +128,49 @@ TenTap editor after changing its WebView extensions:
 node apps/mobile/scripts/build-wysiwyg-editor-html.mjs
 ```
 
-Routine `mobile-ui-foundation` hooks run the scoped mobile checks. Promotion and
-release-readiness work requires `METIS_MOBILE_FULL_GATE=1` and the release gates;
-a successful local build is not permission to distribute it. CircleCI owns
-release orchestration. Follow [ADR 0227](adr/0227-mobile-ios-distribution-identity.md)
-for the explicit TestFlight identity and build-number configuration. Development
-and distribution apps have separate sandboxes; preserve existing installations.
-Keep signing/upload secrets out of `EXPO_PUBLIC_*`, the manifest and Git.
+The GitHub CI mobile lane runs the checks declared in
+[`.github/workflows/ci.yml`](../.github/workflows/ci.yml). Native interaction QA
+remains a separate local check. Mobile distribution and OTA require explicit
+Métis-owned configuration; a successful local build does not configure either.
+Development and distribution apps have separate sandboxes; preserve existing
+installations. Keep signing/upload secrets out of `EXPO_PUBLIC_*`, the manifest
+and Git.
 
-## Chunk Sidecar Validation
+## Local Validation And GitHub CI
 
-The experimental `.chunk/config.json` mirrors the portable parts of the local git hook gate as named validations. Use it for inner-loop checks before running the full pre-push hook:
+The executable sources of truth are [`.github/workflows/ci.yml`](../.github/workflows/ci.yml)
+and the [`.husky`](../.husky) hooks:
 
-```bash
-chunk validate --list
-chunk validate lint
-chunk validate typecheck
-chunk validate frontend-coverage
-```
+- `pre-commit` runs `pnpm lint --quiet`.
+- `pre-push` runs `pnpm build`, `pnpm l10n:validate` and the mobile fork-configuration test.
+- GitHub Actions validates pushes and pull requests targeting `main`, with a manual
+  dispatch option. Its frontend, mobile and native jobs cover the commands declared
+  in the workflow; the native lane runs Rust tests on macOS.
 
-Remote sidecar validation requires CircleCI authentication:
+Run the relevant local tests before pushing. The hooks are a small local gate, not
+all of CI. Browser smoke and performance benchmarks remain explicit local commands;
+keep native Tauri QA and app-focus screenshot checks on the host machine.
 
-```bash
-chunk auth set circleci
-chunk sidecar setup --name metis-hooks
-chunk validate --remote lint
-```
+The smoke server scans `index.html` for desktop dependencies. Keep the separate web
+collaboration prototype out of this dependency scan: its workspace dependencies can
+abort prebundling and trigger page reloads during smoke interactions. Command-palette
+tests wait for mounted command routing and focus sidebar navigation before sending a
+single shortcut; editor tests wait for visible, enabled controls.
 
-For Playwright smoke, prefer the shared-server shard runner after setup:
+There is no tracked CircleCI or Chunk configuration. Historical sidecar and release
+instructions do not describe the current fork's workflow.
 
-The smoke server scans `index.html` for desktop dependencies. Keep the separate web collaboration prototype out of this dependency scan: its workspace dependencies can abort prebundling and trigger page reloads during smoke interactions. Command-palette tests wait for mounted command routing and focus sidebar navigation before sending a single shortcut; editor tests wait for visible, enabled controls.
+## Packaging And Deployment
 
-```bash
-chunk sidecar ssh --sidecar-id <playwright-sidecar-id> -- 'cd /home/user/metis && PLAYWRIGHT_CONCURRENCY=4 bash .chunk/run-playwright-shards.sh 8'
-```
+GitHub CI validates the repository; it does not sign or publish application releases,
+upload Sentry symbols, publish updater feeds or deploy the landing. Signed macOS
+packages are built locally using [macOS packaging](macos-local-build.md); instrumented
+packages additionally follow [desktop error reporting](sentry-setup.md) so the uploaded
+source maps and native symbols match the packaged executable. Signed automatic
+updates remain disabled.
 
-The pre-push hook uses the faster sidecar path automatically when Chunk is available. It syncs the checkout to three independent sidecars and fans out the automatic gates:
-
-- `metis-hooks-frontend-2`: lint and build first, then frontend coverage.
-- `metis-hooks-rust`: clippy, rustfmt, and Rust coverage.
-- `metis-hooks-playwright`: curated Playwright smoke with a shared Vite server and eight shards.
-
-Set `METIS_LEGACY_PREPUSH_LOCAL=1` to force the local fallback path. If CircleCI has duplicate sidecar names, pin lanes with `SIDECAR_FRONTEND_ID`, `SIDECAR_RUST_ID`, and `SIDECAR_PLAYWRIGHT_ID`.
-
-The sidecar is Linux-based, so keep native macOS Tauri QA and app-focus screenshot checks on the host machine. The Chunk config is intended for portable frontend, Rust, coverage, and Playwright smoke checks. Avoid starting multiple `chunk validate --remote ...` processes against the same sidecar at once; each validate run syncs the checkout, so concurrent validates can race.
-
-## CircleCI
-
-CircleCI is the authoritative outer-loop CI/CD system. `.circleci/config.yml` reuses the Chunk
-frontend and Playwright lanes, runs the same Rust lint/format and coverage commands in parallel,
-then owns native macOS, Linux, and Windows release builds, GitHub Release publication, and
-documentation deployment.
-
-Validate configuration changes before pushing:
-
-```bash
-circleci config validate .circleci/config.yml
-```
-
-See `.circleci/README.md` for required contexts, secrets, branch checks, and release behavior.
+Deploy the landing with the Vercel CLI using [the hosting guide](hosting/vercel.md).
+A Git push does not deploy it because GitHub autodeployment is not connected.
 
 ## Starter Vaults And Remotes
 
@@ -377,7 +361,7 @@ metis/
 ├── vite.config.ts                # Vite bundler config
 ├── tsconfig.json                 # TypeScript config
 ├── playwright.config.ts          # Full Playwright regression config
-├── playwright.smoke.config.ts    # Curated pre-push Playwright config
+├── playwright.smoke.config.ts    # Curated local Playwright smoke config
 ├── ui-design.pen                 # Master design file
 ├── AGENTS.md                     # Canonical shared instructions for coding agents
 ├── CLAUDE.md                     # Claude Code compatibility shim importing AGENTS.md as an organized Note
@@ -478,7 +462,7 @@ metis/
 | `src/hooks/useMainWindowSizeConstraints.ts` | Derives the main-window minimum width from the visible panes and asks Tauri to grow back to fit wider layouts. |
 | `src/hooks/useVaultConfig.ts` | Per-vault local UI preferences (zoom, view mode, colors, Inbox columns, explicit organization workflow, Git setup prompt preference, AI permission mode). |
 | `src/components/SettingsPanel.tsx` | Settings UI for telemetry, release channel, Git visibility, sync interval, UI language, content display preferences, default AI agent, and the vault-level explicit organization toggle. |
-| `src/hooks/useUpdater.ts` | In-app updates using the selected alpha/stable feed. |
+| `src/hooks/useUpdater.ts` | Retained alpha/stable updater state machine; signed updates are disabled. |
 
 ## Architecture Patterns
 

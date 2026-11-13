@@ -12,7 +12,7 @@ modifies a real vault.
 | Renderer startup | `startupPerformance` phases plus native `record_startup_milestone` traces | User Timing marks for React shell, active-vault usability, and app interactivity |
 | Note open | `noteOpen` and editor block resolve/apply traces | Small and 130 KB note scenarios measure visible editor, first/full content, edit frame, and trace durations |
 | Note-list navigation | DEV-only keyboard-move trace | A 2,000-row Virtuoso fixture scrolls near the end and waits through the rendered paint |
-| Native process startup | `METIS_STARTUP_TRACE=1` native trace | Release/native diagnostic tier; excluded from the per-commit browser gate because host startup varies materially |
+| Native process startup | `METIS_STARTUP_TRACE=1` native trace | Release/native diagnostic tier; excluded from the manual browser benchmark because host startup varies materially |
 | Create-note focus and search | Local timing helpers and focused behavioral tests | Not yet budgeted: their mock/native boundaries dominate browser timing, so a threshold would currently protect test plumbing rather than user latency |
 
 The benchmark opts existing DEV-only note/editor trace logging into the production build
@@ -33,9 +33,11 @@ all scenarios. `pnpm perf:editor` is the faster compatibility subset for small a
 note opens. A machine-readable report is written to
 `test-results/performance-summary.json`.
 
-CircleCI runs `pnpm perf:ci` in the dedicated `performance-regression` job. Keeping this
-separate from the curated Playwright smoke lane prevents a noisy performance rerun from
-blocking functional smoke sharding or consuming its five-minute budget.
+These benchmarks are manual: the current [GitHub CI](../.github/workflows/ci.yml)
+and local hooks do not invoke them. `pnpm perf:ci` remains an available local command
+that builds the renderer and runs five measured iterations after one warmup; its name
+does not imply a configured CI job. Run it separately from functional Playwright smoke
+checks and retain the report with the test evidence.
 
 ## Budgets and baseline changes
 
@@ -72,10 +74,10 @@ to investigate variance and tighten the scenario before raising or adding a budg
 6,000-note vault: `apps/server/scripts/seed-test-remote.ts` writes 5,996 filler notes plus
 its four hand-written notes into a throwaway git remote under the system temp directory,
 a Metis server serves it on loopback, and one headless Chromium session drives the static
-bundle. It never reads a real vault. CircleCI runs it in the single-container `web-bench`
-job, in parallel with `web-gates`; the job fails when any measurement is over its budget.
-Every run prints the table in the job log and stores `big-vault.json` and `big-vault.md`
-as the `web-bench` artifact (`test-results/web-bench/` locally).
+bundle. It never reads a real vault. Run it manually; no current CI job invokes it.
+The command fails when any measurement is over its budget. Every run prints the table
+in the console and stores `big-vault.json` and `big-vault.md` under
+`test-results/web-bench/`.
 
 The run, in order: a cold open with no cache, three warm opens from the IndexedDB snapshot
 the cold open wrote (TOL-173), five seconds for the background reload, a note opened from
@@ -96,9 +98,9 @@ Each budget is a single sample except warm open (median of three) and typing (me
 | Memory | JS heap after a forced GC, warm, before opening a note | 80 MB |
 
 Warm open keeps the 1 s cache-first paint budget of `apps/web/tests/cache-startup.spec.ts`.
-The other budgets were calibrated on the 8-vCPU agent box (load average 4–9, with the whole
-stack also pinned to two cores) and leave roughly 2.5–5× headroom over the slowest local run,
-so CircleCI's 4-vCPU Docker `large` runners stay green without hiding a real regression:
+The following historical calibration used an 8-vCPU agent box (load average 4–9,
+with the whole stack also pinned to two cores) and left roughly 2.5–5× headroom over
+the slowest local run. These values are baseline context, not results from current CI:
 
 | Metric | Local runs (10) |
 |---|---|
