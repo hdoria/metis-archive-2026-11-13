@@ -3,6 +3,8 @@ export const LINKS = {
   docs: 'https://github.com/hdoria/metis/blob/main/site/docs.md',
   start: 'https://github.com/hdoria/metis#run-the-desktop-app',
   issues: 'https://github.com/hdoria/metis/issues',
+  ai: 'https://github.com/hdoria/metis/blob/main/site/concepts/ai.md',
+  license: 'https://github.com/hdoria/metis/blob/main/LICENSE',
   credits: `${import.meta.env.BASE_URL}creditos.html`,
 }
 
@@ -71,6 +73,14 @@ export const FAQS = [
   {
     question: 'Preciso criar uma conta?',
     answer: 'Você pode usar uma pasta local no desktop sem criar uma conta. Integrações e sincronização com serviços externos usam as contas que você escolher conectar.',
+  },
+  {
+    question: 'A IA faz parte do app?',
+    answer: 'Você escolhe se quer usar IA. Conecte um modelo local com Ollama ou LM Studio, ou configure um provedor hospedado com suas credenciais. Esses serviços podem cobrar. Agentes e o servidor MCP também precisam de configuração.',
+  },
+  {
+    question: 'O que significa ser open source?',
+    answer: 'O código do Métis está no GitHub sob a licença AGPL-3.0. Você pode estudar, modificar e distribuir o projeto seguindo os termos da licença. Sugestões e contribuições são bem-vindas.',
   },
   {
     question: 'Já posso instalar?',
