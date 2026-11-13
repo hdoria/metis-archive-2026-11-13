@@ -1,9 +1,20 @@
 import { ArrowDownIcon, ArrowRightIcon, ArrowUpRightIcon, BracketsCurlyIcon, CheckIcon, CodeIcon, FilePdfIcon, FileTextIcon, FolderOpenIcon, GithubLogoIcon, GitBranchIcon, HardDrivesIcon, TrayIcon, LinkIcon, PencilSimpleIcon, PlusIcon, TerminalWindowIcon } from '@phosphor-icons/react'
 import { FAQS, LINKS } from './content'
 import FeatureWorkbench from './FeatureWorkbench'
-import NotesPreview from './NotesPreview'
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`
+
+function ProductScreenshot({ image, title, alt, featured = false }: { image: string; title: string; alt: string; featured?: boolean }) {
+  return (
+    <figure className="product-screenshot">
+      <a className="screenshot-link" href={asset(`images/${image}.webp`)} target="_blank" rel="noopener noreferrer" aria-label={`Ampliar ${title.toLocaleLowerCase('pt-BR')} em uma nova aba`}>
+        <img src={asset(`images/${image}.webp`)} srcSet={`${asset(`images/${image}-960.webp`)} 960w, ${asset(`images/${image}.webp`)} 2920w`} sizes={featured ? '(max-width: 760px) calc(100vw - 40px), (max-width: 1100px) calc(100vw - 72px), (max-width: 1392px) calc(100vw - 112px), 1280px' : '(max-width: 760px) calc(100vw - 40px), (max-width: 1100px) calc((100vw - 100px) / 2), (max-width: 1392px) calc((100vw - 140px) / 2), 626px'} width="2920" height="1718" alt={alt} loading="lazy" decoding="async" />
+        <span className="screenshot-link-bar"><strong>{title}</strong><span>Ampliar<ArrowUpRightIcon size={17} aria-hidden="true" /></span></span>
+      </a>
+      <figcaption>Tela real do Métis com conteúdo de demonstração.</figcaption>
+    </figure>
+  )
+}
 
 export default function App() {
   return (
@@ -30,8 +41,12 @@ export default function App() {
           <div className="hero-foundations"><span><FileTextIcon size={19} aria-hidden="true" />Notas em Markdown</span><span><LinkIcon size={19} aria-hidden="true" />Ideias conectadas</span><span><GitBranchIcon size={19} aria-hidden="true" />Histórico com Git</span><span><BracketsCurlyIcon size={19} aria-hidden="true" />Seu acervo, seu código</span></div>
         </section>
         <section className="demo-section section-space page-width" id="demonstracao" aria-labelledby="demo-title">
-          <div className="section-heading"><div><p className="eyebrow">Escreva e conecte</p><h2 id="demo-title">A próxima ideia<br />começa numa nota.</h2></div><p>Escreva no editor visual ou direto em Markdown. Siga os links entre notas e encontre o que precisa pela busca. Na prévia, abra as notas, faça uma busca e siga os links.</p></div>
-          <NotesPreview />
+          <div className="section-heading"><div><p className="eyebrow">O Métis por dentro</p><h2 id="demo-title">A próxima ideia<br />começa numa nota.</h2></div><p>Escreva no editor visual ou direto em Markdown. Conecte notas e trabalhe com seus dados em planilhas. Estas são telas reais do Métis com conteúdo de demonstração. Clique pra ampliar.</p></div>
+          <ProductScreenshot image="metis-editor" title="Editor de notas" alt="Interface real do Métis com a lista de notas à esquerda e uma nota aberta com checklist e links" featured />
+          <div className="screenshot-grid">
+            <ProductScreenshot image="metis-connections" title="Conexões entre notas" alt="Interface real do Métis com a vizinhança da nota em lista e o painel de propriedades e backlinks aberto" />
+            <ProductScreenshot image="metis-spreadsheet" title="Planilhas no acervo" alt="Interface real do Métis com uma planilha de leituras do mês e células de totais" />
+          </div>
           <div className="demo-tools"><span><CheckIcon size={16} aria-hidden="true" />Editor visual e Markdown</span><span><CheckIcon size={16} aria-hidden="true" />Links nos dois sentidos</span><span><CheckIcon size={16} aria-hidden="true" />Busca em notas e trechos</span></div>
         </section>
         <section className="resources-section section-space" id="recursos" aria-labelledby="resources-title">
