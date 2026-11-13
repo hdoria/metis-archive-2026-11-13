@@ -107,8 +107,15 @@ describe('initSentry', () => {
     initSentry('anonymous-user')
 
     const options = sentryMocks.init.mock.calls[0]?.[0]
-    expect(Object.keys(options).sort()).toEqual(['beforeSend', 'dsn', 'release', 'sendDefaultPii'])
+    expect(Object.keys(options).sort()).toEqual(['beforeSend', 'dsn', 'environment', 'release', 'sendDefaultPii'])
     expect(sentryMocks.setTag).not.toHaveBeenCalledWith('platform', 'web')
+  })
+
+  it('passes the configured environment to the SDK', () => {
+    vi.stubEnv('VITE_SENTRY_DSN', 'https://public@example.ingest.sentry.io/123456')
+    vi.stubEnv('VITE_SENTRY_ENVIRONMENT', 'verification')
+    initSentry('anonymous-user')
+    expect(sentryMocks.init).toHaveBeenCalledWith(expect.objectContaining({ environment: 'verification' }))
   })
 
   it('drops active whiteboard platform permission rejections before sending them to Sentry', () => {

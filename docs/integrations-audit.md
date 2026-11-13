@@ -2,7 +2,13 @@
 
 This audit covers the tracked configuration, the local production build, and the GitHub repository. It does not claim access to external SaaS dashboards or account-wide installations.
 
-## Current runtime telemetry
+## Sentry setup update — 2026-11-13
+
+Sentry is now configured in Popcode's `metis-desktop` (React) and `metis-native` (Rust) projects. Real test errors reached both projects with readable original frames and source context. The new production build embeds those owned destinations and retains per-user crash-reporting opt-in. PostHog remains unconfigured. This applies to the new build, not previously generated or installed packages; see [setup and verification](sentry-setup.md) and [local package versions](macos-local-build.md).
+
+The initial audit below is preserved as a snapshot taken before provisioning. Its absent-DSN findings and recommendation to create Sentry projects have been superseded by this setup. Other integration findings remain unchanged.
+
+## Runtime telemetry at initial audit
 
 - Sentry integration exists in `src/lib/telemetry.ts` and `src-tauri/src/telemetry.rs`. JavaScript requires `VITE_SENTRY_DSN`; Rust embeds `SENTRY_DSN` at compile time. Both also require the user's crash-reporting opt-in. Neither value was present in the current build environment or effective production environment files.
 - PostHog integration exists in `src/lib/telemetry.ts`. It requires `VITE_POSTHOG_KEY` and the user's analytics opt-in. No key was present. Its code defaults to `https://us.i.posthog.com`; `.env.example` suggests the EU host, but that example is not loaded as configuration. No project currently receives Métis product analytics from this build.

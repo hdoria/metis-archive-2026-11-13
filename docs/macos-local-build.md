@@ -1,8 +1,8 @@
 # macOS local package
 
-The current package targets Apple Silicon (arm64), macOS 11 or later. The official local package is signed with Developer ID Application: Popcode (`C42XKG5G6X`), notarized by Apple and accepted by Gatekeeper. The earlier ad-hoc test build is retained separately.
+The current package targets Apple Silicon (arm64), macOS 11 or later. The official local package is signed with Developer ID Application: Popcode (`C42XKG5G6X`), notarized by Apple and accepted by Gatekeeper. The earlier ad-hoc test build is retained separately. For the newest build with Sentry and the tldraw trial, use the Sentry-enabled evaluation package below.
 
-## Install the signed package
+## Original signed package
 
 - Installer: `src-tauri/target/release/bundle/signed/dmg/Métis_0.1.0_aarch64.dmg`
 - Standalone app: `src-tauri/target/release/bundle/signed/macos/Métis.app`
@@ -24,6 +24,18 @@ A separate, freshly compiled Apple Silicon package now includes a tldraw evaluat
 The new app and DMG are signed by Popcode, notarized by Apple with `Accepted` and no issues, stapled and accepted by Gatekeeper. Independent review repeated signature/ticket checks, queried Apple's results, mounted the image read-only, compared its contents, and verified the exact licensed frontend blobs inside the native executable. The old signed DMG checksum remains unchanged. The new evaluation package has not been installed or published.
 
 Validation also passed 18 whiteboard tests and 59 telemetry tests. A disposable Chromium session rendered the real whiteboard, observed its actual licensed state, created a rectangle and saved a snapshot without a license gate or external requests. That smoke test is a browser test, not a launch of the new native package. Sanitized build/package evidence is retained in `src-tauri/target/metis-local-package/tldraw-evaluation-2026-11-13/`; [the integration audit](integrations-audit.md) records telemetry behavior and remaining account decisions.
+
+## Sentry-enabled evaluation package — 2026-11-13
+
+The newest local package adds Popcode-owned React and Rust error-reporting destinations, release/environment metadata and matching uploaded source maps/native symbols. Error reporting still requires the user's opt-in. It retains the tldraw evaluation license expiring on **2026-11-27**; continued public distribution awaits the appropriate license.
+
+- Installer: `src-tauri/target/release/bundle/sentry-evaluation/dmg/Métis_0.1.0_aarch64_sentry_avaliacao.dmg`
+- App: `src-tauri/target/release/bundle/sentry-evaluation/macos/Métis.app`
+- DMG: 23,986,223 bytes; SHA-256 `adf593d813551a0a7233d39ab7f9c53ef3ad2ba67efc8bf6d2ce84fcee55fe0b`.
+
+Both the app and DMG were signed with Popcode's existing Developer ID, notarized with `Accepted` and no issues, stapled and accepted by Gatekeeper. The mounted payload matched the signed app. Exact configuration-bearing frontend blobs and the native DSN/release were verified inside the executable without printing their values. Temporary verification triggers and public source maps are absent from the shipped build. This is an arm64 package for macOS 11 or later; no installation, public upload or launch against personal data occurred. Older packages remain unchanged.
+
+See [Sentry setup](sentry-setup.md) for the build/upload workflow, verified React and Rust events, and test limitations. Sanitized production evidence is in `src-tauri/target/metis-sentry-verification/`; signing records are in `src-tauri/target/metis-local-package/sentry-evaluation-artifact.URqfGy/`.
 
 ## Build and verify an ad-hoc test package
 

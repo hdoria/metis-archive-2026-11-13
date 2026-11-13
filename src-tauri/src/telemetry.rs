@@ -71,6 +71,17 @@ fn sentry_release_for_version(version: &'static str) -> Option<Cow<'static, str>
     is_stable_calendar_release(version).then(|| version.into())
 }
 
+fn sentry_release_for_build(raw: Option<&str>, version: &'static str) -> Option<Cow<'static, str>> {
+    normalize_embedded_env(raw)
+        .map(Cow::Owned)
+        .or_else(|| sentry_release_for_version(version))
+}
+
+fn sentry_environment_for_build(raw: Option<&str>) -> Option<Cow<'static, str>> {
+    // Preserve the SDK's runtime environment and build-mode fallback when unset.
+    normalize_embedded_env(raw).map(Cow::Owned)
+}
+
 fn sentry_release_kind(version: &str) -> &'static str {
     if is_stable_calendar_release(version) {
         "stable"
@@ -101,7 +112,8 @@ pub fn init_sentry_from_settings() -> bool {
     let build_version = env!("CARGO_PKG_VERSION");
     let guard = sentry::init(sentry::ClientOptions {
         dsn: Some(dsn),
-        release: sentry_release_for_version(build_version),
+        release: sentry_release_for_build(option_env!("SENTRY_RELEASE"), build_version),
+        environment: sentry_environment_for_build(option_env!("SENTRY_ENVIRONMENT")),
         send_default_pii: false,
         before_send: Some(std::sync::Arc::new(|mut event| {
             if let Some(ref mut msg) = event.message {
@@ -214,6 +226,43 @@ mod tests {
     #[test]
     fn test_sentry_release_for_local_dev_version_is_none() {
         assert!(sentry_release_for_version("0.1.0").is_none());
+    }
+
+    #[test]
+    fn test_sentry_release_override_takes_precedence() {
+        for version in ["2026.4.28", "2026.4.28-alpha.7", "0.1.0"] {
+            assert_eq!(
+                sentry_release_for_build(Some("  metis@0.1.0+abc123  "), version).as_deref(),
+                Some("metis@0.1.0+abc123")
+            );
+        }
+    }
+
+    #[test]
+    fn test_sentry_release_absent_or_blank_preserves_calendar_fallback() {
+        for raw in [None, Some(""), Some(" \t\n "), Some("\" \"")] {
+            assert_eq!(
+                sentry_release_for_build(raw, "2026.4.28").as_deref(),
+                Some("2026.4.28")
+            );
+            assert_eq!(sentry_release_for_build(raw, "2026.4.28-alpha.7"), None);
+            assert_eq!(sentry_release_for_build(raw, "0.1.0"), None);
+        }
+    }
+
+    #[test]
+    fn test_sentry_environment_override_is_trimmed() {
+        assert_eq!(
+            sentry_environment_for_build(Some("  staging  ")).as_deref(),
+            Some("staging")
+        );
+    }
+
+    #[test]
+    fn test_sentry_environment_absent_or_blank_preserves_sdk_fallback() {
+        for raw in [None, Some(""), Some(" \t\n "), Some("\" \"")] {
+            assert_eq!(sentry_environment_for_build(raw), None);
+        }
     }
 
     #[test]

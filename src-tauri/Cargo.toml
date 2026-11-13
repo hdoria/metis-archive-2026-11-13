@@ -53,3 +53,7 @@ objc2-foundation = "0.3.2"
 png = "0.17.16"
 
 [dev-dependencies]
+
+[profile.release.package.metis]
+debug = 1
+split-debuginfo = "packed"

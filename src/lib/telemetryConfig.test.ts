@@ -9,6 +9,8 @@ function resolveConfig(overrides: {
   VITE_METIS_WEB_BUILD?: string
   VITE_SENTRY_DSN?: string
   VITE_SENTRY_RELEASE?: string
+  VITE_SENTRY_ENVIRONMENT?: string
+  PROD?: boolean
   VITE_POSTHOG_KEY?: string
   VITE_POSTHOG_HOST?: string
 } = {}) {
@@ -52,6 +54,7 @@ describe('resolveFrontendTelemetryConfig', () => {
         sentryDsn: 'https://public@example.ingest.sentry.io/123456',
         sentryBuildVersion: '2026.4.23',
         sentryRelease: '2026.4.23',
+        sentryEnvironment: 'development',
         posthogKey: 'phc_test_key',
         posthogHost: 'https://eu.i.posthog.com',
       },
@@ -68,6 +71,7 @@ describe('resolveFrontendTelemetryConfig', () => {
         sentryDsn: 'https://public@example.ingest.sentry.io/123456',
         sentryBuildVersion: '2026.4.23',
         sentryRelease: '2026.4.23',
+        sentryEnvironment: 'development',
         posthogKey: 'phc_test_key',
         posthogHost: 'https://eu.i.posthog.com',
       },
@@ -90,6 +94,23 @@ describe('resolveFrontendTelemetryConfig', () => {
 
   it('keeps stable calendar versions as Sentry releases', () => {
     expect(resolveConfig({ VITE_SENTRY_RELEASE: '2026.4.28' }).sentryRelease).toBe('2026.4.28')
+  })
+
+  it('accepts owned desktop releases with semantic versions and build identifiers', () => {
+    expect(resolveConfig({ VITE_SENTRY_RELEASE: 'metis-desktop@0.1.0+sentry.20261113' }).sentryRelease)
+      .toBe('metis-desktop@0.1.0+sentry.20261113')
+    expect(resolveConfig({ VITE_SENTRY_RELEASE: 'metis-desktop@not-a-version' }).sentryRelease).toBe('')
+  })
+
+  it('separates production and development environments unless explicitly configured', () => {
+    expect(resolveConfig({ PROD: true }).sentryEnvironment).toBe('production')
+    expect(resolveConfig({ PROD: false }).sentryEnvironment).toBe('development')
+    expect(resolveConfig({ PROD: true, VITE_SENTRY_ENVIRONMENT: ' verification ' }).sentryEnvironment)
+      .toBe('verification')
+  })
+
+  it.each(['', 'false', 'with spaces', '../private'])('ignores invalid environment %j', (environment) => {
+    expect(resolveConfig({ PROD: true, VITE_SENTRY_ENVIRONMENT: environment }).sentryEnvironment).toBe('production')
   })
 
   it('drops prerelease versions from the Sentry release field', () => {
@@ -119,6 +140,7 @@ describe('resolveFrontendTelemetryConfig', () => {
       sentryDsn: '',
       sentryBuildVersion: '2026.4.23',
       sentryRelease: '2026.4.23',
+      sentryEnvironment: 'development',
       posthogKey: 'phc_test_key',
       posthogHost: null,
     })
@@ -133,6 +155,7 @@ describe('resolveFrontendTelemetryConfig', () => {
       sentryDsn: '',
       sentryBuildVersion: '2026.4.23',
       sentryRelease: '2026.4.23',
+      sentryEnvironment: 'development',
       posthogKey: 'phc_test_key',
       posthogHost: null,
     })
@@ -145,6 +168,7 @@ describe('resolveFrontendTelemetryConfig', () => {
       sentryDsn: 'http://public@localhost:9000/123456',
       sentryBuildVersion: '2026.4.23',
       sentryRelease: '2026.4.23',
+      sentryEnvironment: 'development',
       posthogKey: 'phc_test_key',
       posthogHost: 'http://localhost:8010',
     })

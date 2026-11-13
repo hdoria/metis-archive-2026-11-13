@@ -277,10 +277,11 @@ export function initSentry(anonymousId: AnonymousTelemetryId): void {
   sentryInitialized = true
 }
 
-function sentryOptions({ platform, sentryDsn, sentryRelease }: FrontendTelemetryConfig): Sentry.BrowserOptions {
+function sentryOptions({ platform, sentryDsn, sentryRelease, sentryEnvironment }: FrontendTelemetryConfig): Sentry.BrowserOptions {
   const options = {
     dsn: sentryDsn,
     release: sentryRelease || undefined,
+    environment: sentryEnvironment,
     sendDefaultPii: false,
     beforeSend: scrubSentryEvent,
   }

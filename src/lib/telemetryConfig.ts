@@ -1,6 +1,7 @@
 const DEFAULT_POSTHOG_HOST = 'https://us.i.posthog.com'
 // The web build's release (TOL-232): apps/web/sentryWebBuild.ts names it after the commit.
 const WEB_RELEASE_PREFIX = 'metis-web@'
+const DESKTOP_RELEASE = /^metis-desktop@\d+\.\d+\.\d+(?:\+[0-9A-Za-z.-]+)?$/
 const HEX_DIGITS = /^[0-9a-f]+$/
 const MIN_COMMIT_LENGTH = 7
 const MAX_COMMIT_LENGTH = 40
@@ -18,6 +19,8 @@ type TelemetryEnv = {
   VITE_METIS_WEB_BUILD?: string
   VITE_SENTRY_DSN?: string
   VITE_SENTRY_RELEASE?: string
+  VITE_SENTRY_ENVIRONMENT?: string
+  PROD?: boolean
   VITE_POSTHOG_KEY?: string
   VITE_POSTHOG_HOST?: string
 }
@@ -41,6 +44,7 @@ export type FrontendTelemetryConfig = {
   sentryDsn: string
   sentryBuildVersion: string
   sentryRelease: string
+  sentryEnvironment: string
   posthogKey: string
   posthogHost: string | null
 }
@@ -113,8 +117,14 @@ function isAllowedTelemetryHostname({ hostname }: HostnameInput): boolean {
 }
 
 function resolveSentryRelease(platform: TelemetryPlatform, { value }: TelemetryValueInput): string {
-  if (platform === 'desktop') return normalizeSentryRelease({ value })
+  if (platform === 'desktop') return DESKTOP_RELEASE.test(value) ? value : normalizeSentryRelease({ value })
   return isWebRelease({ value }) ? value : ''
+}
+
+function resolveSentryEnvironment(env: TelemetryEnv): string {
+  const value = sanitizeTelemetryEnvValue(env.VITE_SENTRY_ENVIRONMENT)
+  if (/^[a-z0-9_-]{1,64}$/i.test(value) && !DISALLOWED_TELEMETRY_VALUES.has(value.toLowerCase())) return value
+  return env.PROD ? 'production' : 'development'
 }
 
 function isWebRelease({ value }: TelemetryValueInput): boolean {
@@ -172,7 +182,7 @@ export function resolveFrontendTelemetryConfig(
     value: sanitizeTelemetryEnvValue(env.VITE_POSTHOG_HOST),
   })
 
-  return { platform, sentryDsn, sentryBuildVersion, sentryRelease, posthogKey, posthogHost }
+  return { platform, sentryDsn, sentryBuildVersion, sentryRelease, sentryEnvironment: resolveSentryEnvironment(env), posthogKey, posthogHost }
 }
 
 export { DEFAULT_POSTHOG_HOST as _defaultPostHogHostForTest }
