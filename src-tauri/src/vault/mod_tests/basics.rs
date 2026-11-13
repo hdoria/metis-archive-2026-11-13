@@ -1,6 +1,6 @@
 use super::*;
 
-const FULL_FM_CONTENT: &str = "---\ntitle: MetisLegacy Project\nIs A: Project\naliases:\n  - MetisLegacy\n  - Castle in the Sky\nBelongs to:\n  - Studio Ghibli\nRelated to:\n  - Miyazaki\nStatus: Active\nOwner: Luca\nCadence: Weekly\n---\n# MetisLegacy Project\n\nThis is a project note.\n";
+const FULL_FM_CONTENT: &str = "---\ntitle: MetisLegacy Project\nIs A: Project\naliases:\n  - MetisLegacy\n  - Castle in the Sky\nBelongs to:\n  - Studio Ghibli\nRelated to:\n  - Miyazaki\nStatus: Active\nOwner: Hugo Dória\nCadence: Weekly\n---\n# MetisLegacy Project\n\nThis is a project note.\n";
 
 #[test]
 fn test_reload_entry_returns_fresh_data() {
@@ -58,7 +58,7 @@ fn test_parse_full_frontmatter_scalars() {
             .properties
             .get("Owner")
             .and_then(|value| value.as_str()),
-        Some("Luca")
+        Some("Hugo Dória")
     );
     assert_eq!(
         entry

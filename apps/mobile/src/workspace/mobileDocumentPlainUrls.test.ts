@@ -11,7 +11,7 @@ describe('mobile document plain URLs', () => {
   })
 
   it('keeps bare email punctuation unchanged after native saves', () => {
-    const paragraph = 'Contact luca_rossi+mobile@example.com for context.'
+    const paragraph = 'Contact hugo_doria+mobile@example.com for context.'
     const document = paragraphDocument(paragraph)
 
     expect(tiptapJsonToMobileMarkdown(document)).toBe(paragraph)

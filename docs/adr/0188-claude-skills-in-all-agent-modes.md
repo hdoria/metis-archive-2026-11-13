@@ -8,7 +8,7 @@ date: 2026-10-14
 
 ## Context
 
-The AI panel passes an explicit Claude Code tool allowlist. Omitting `Skill` prevents users from invoking installed Claude Code skills in either permission mode. Luca approved treating this as a bug on 2026-10-14 (Todoist 6hhVP2Cf6fqhM7rv).
+The AI panel passes an explicit Claude Code tool allowlist. Omitting `Skill` prevents users from invoking installed Claude Code skills in either permission mode. The upstream maintainer approved treating this as a bug on 2026-10-14 (Todoist 6hhVP2Cf6fqhM7rv).
 
 ## Decision
 

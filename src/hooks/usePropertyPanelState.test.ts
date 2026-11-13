@@ -204,7 +204,7 @@ describe('usePropertyPanelState', () => {
         properties: {
           Projects: [],
           Genres: ['science fiction', 'classic'],
-          Owner: 'Luca',
+          Owner: 'Hugo Dória',
         },
       }),
     ]
@@ -223,7 +223,7 @@ describe('usePropertyPanelState', () => {
       ['Genres', []],
     ])
     expect(result.current.typeDerivedPropertyEntries).toEqual([
-      ['Owner', 'Luca'],
+      ['Owner', 'Hugo Dória'],
     ])
 
     act(() => {

@@ -44,7 +44,7 @@ test.describe('Dynamic wikilink relationship detection', () => {
   })
 
   test('existing wikilink relationships still render correctly', async ({ page }) => {
-    // Open "Start MetisLegacy App Project" — has Belongs to: [[24q4]], Owner: [[person-luca-rossi]]
+    // Open "Start MetisLegacy App Project" — has Belongs to: [[24q4]], Owner: [[person-hugo-doria]]
     await openNoteViaQuickOpen(page, 'Start MetisLegacy App')
 
     // Wait for note content to load

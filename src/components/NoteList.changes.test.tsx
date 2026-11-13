@@ -13,7 +13,7 @@ function changeFile(
 ): ModifiedFile {
   return {
     path: entry.path,
-    relativePath: entry.path.replace('/Users/luca/MetisLegacy/', ''),
+    relativePath: entry.path.replace('/Users/hugo/MetisLegacy/', ''),
     status,
     ...overrides,
   }
@@ -88,7 +88,7 @@ describe('NoteList changes view', () => {
   it('matches entries by relative path suffix across machines', () => {
     const crossMachineEntries: VaultEntry[] = mockEntries.map((entry) => ({
       ...entry,
-      path: entry.path.replace('/Users/luca/MetisLegacy', '/Users/other-machine/OtherVault'),
+      path: entry.path.replace('/Users/hugo/MetisLegacy', '/Users/other-machine/OtherVault'),
     }))
 
     renderNoteList({
@@ -141,8 +141,8 @@ describe('NoteList changes view', () => {
   it('shows deleted notes as rows when files are deleted', () => {
     const filesWithDeleted = [
       changeFile(mockEntries[0], 'modified', { addedLines: 42, deletedLines: 7 }),
-      { path: '/Users/luca/MetisLegacy/note/gone.md', relativePath: 'note/gone.md', status: 'deleted' as const, deletedLines: 5 },
-      { path: '/Users/luca/MetisLegacy/note/also-gone.md', relativePath: 'note/also-gone.md', status: 'deleted' as const, deletedLines: 2 },
+      { path: '/Users/hugo/MetisLegacy/note/gone.md', relativePath: 'note/gone.md', status: 'deleted' as const, deletedLines: 5 },
+      { path: '/Users/hugo/MetisLegacy/note/also-gone.md', relativePath: 'note/also-gone.md', status: 'deleted' as const, deletedLines: 2 },
     ]
 
     renderNoteList({ selection: changesSelection, modifiedFiles: filesWithDeleted })
@@ -158,7 +158,7 @@ describe('NoteList changes view', () => {
     renderNoteList({
       selection: changesSelection,
       modifiedFiles: [
-        { path: '/Users/luca/MetisLegacy/note/gone.md', relativePath: 'note/gone.md', status: 'deleted' as const, deletedLines: 5 },
+        { path: '/Users/hugo/MetisLegacy/note/gone.md', relativePath: 'note/gone.md', status: 'deleted' as const, deletedLines: 5 },
       ],
     })
 
@@ -174,7 +174,7 @@ describe('NoteList changes view', () => {
     renderNoteList({
       selection: allSelection,
       modifiedFiles: [
-        { path: '/Users/luca/MetisLegacy/note/gone.md', relativePath: 'note/gone.md', status: 'deleted' as const, deletedLines: 5 },
+        { path: '/Users/hugo/MetisLegacy/note/gone.md', relativePath: 'note/gone.md', status: 'deleted' as const, deletedLines: 5 },
       ],
     })
     expect(screen.queryByText(/notes? deleted/)).not.toBeInTheDocument()
@@ -211,7 +211,7 @@ describe('NoteList changes view', () => {
     renderNoteList({
       selection: changesSelection,
       modifiedFiles: [
-        { path: '/Users/luca/MetisLegacy/note/gone.md', relativePath: 'note/gone.md', status: 'deleted' as const, deletedLines: 5 },
+        { path: '/Users/hugo/MetisLegacy/note/gone.md', relativePath: 'note/gone.md', status: 'deleted' as const, deletedLines: 5 },
       ],
       onDiscardFile: vi.fn(),
     })
@@ -247,7 +247,7 @@ describe('NoteList changes view', () => {
     renderNoteList({
       selection: changesSelection,
       modifiedFiles: [
-        { path: '/Users/luca/MetisLegacy/note/gone.md', relativePath: 'note/gone.md', status: 'deleted' as const, deletedLines: 5 },
+        { path: '/Users/hugo/MetisLegacy/note/gone.md', relativePath: 'note/gone.md', status: 'deleted' as const, deletedLines: 5 },
       ],
       onDiscardFile: vi.fn(),
     })

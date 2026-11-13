@@ -71,7 +71,7 @@ describe('graphWorkspaceVaults', () => {
 describe('workspaceIdentityFromVault', () => {
   it('falls back to the path name when native omits a vault label', () => {
     const workspace = workspaceIdentityFromVault({
-      path: '/Users/luca/Workspace/metislegacy',
+      path: '/Users/hugo/Workspace/metislegacy',
     } as VaultOption)
 
     expect(workspace.label).toBe('metislegacy')
@@ -82,7 +82,7 @@ describe('workspaceIdentityFromVault', () => {
   it('keeps the slug path-derived when the display name changes', () => {
     const workspace = workspaceIdentityFromVault({
       label: 'Personal Main',
-      path: '/Users/luca/Workspace/metislegacy',
+      path: '/Users/hugo/Workspace/metislegacy',
     } as VaultOption)
 
     expect(workspace.label).toBe('Personal Main')

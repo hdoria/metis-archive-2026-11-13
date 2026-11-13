@@ -27,9 +27,9 @@ test.describe('Inline wikilink editor regression', () => {
     const editor = page.getByTestId('agent-input')
     await expect(editor).toBeFocused()
 
-    await page.keyboard.type('luca')
+    await page.keyboard.type('hugo')
 
-    await expectNormalizedEditorText(editor, 'luca')
+    await expectNormalizedEditorText(editor, 'hugo')
     await expectEditorSelectionRange(page, {
       expectedRange: { start: 4, end: 4 },
       target: { dataTestId: 'agent-input' },
@@ -61,7 +61,7 @@ test.describe('Inline wikilink editor regression', () => {
     await page.context().grantPermissions(['clipboard-read', 'clipboard-write'])
     await expect(editor).toBeFocused()
 
-    await page.keyboard.type('luca')
+    await page.keyboard.type('hugo')
     await page.keyboard.press('Meta+A')
     await page.keyboard.press('Meta+X')
 
@@ -69,7 +69,7 @@ test.describe('Inline wikilink editor regression', () => {
     await expectNormalizedEditorText(editor, '')
     await expect
       .poll(() => page.evaluate(() => navigator.clipboard.readText()))
-      .toBe('luca')
+      .toBe('hugo')
     await expectNoPageErrors(pageErrors)
   })
 

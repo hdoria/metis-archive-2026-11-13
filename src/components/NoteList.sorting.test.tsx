@@ -370,7 +370,7 @@ describe('NoteList sort controls', () => {
     const entries = [
       makeEntry({ path: '/book-a.md', title: 'Book A', isA: 'Book', properties: { Rating: 3 } }),
       makeEntry({ path: '/book-b.md', title: 'Book B', isA: 'Book', properties: { Priority: 'High' } }),
-      makeEntry({ path: '/project-a.md', title: 'Project A', isA: 'Project', properties: { Owner: 'Luca' } }),
+      makeEntry({ path: '/project-a.md', title: 'Project A', isA: 'Project', properties: { Owner: 'Hugo Dória' } }),
     ]
 
     renderManagedViewSort(entries)

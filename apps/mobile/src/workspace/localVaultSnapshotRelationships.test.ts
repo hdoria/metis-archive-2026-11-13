@@ -7,7 +7,7 @@ describe('buildLocalVaultWorkspaceSnapshot', () => {
     const snapshot = buildLocalVaultWorkspaceSnapshot({
       files: realVaultRelationshipFiles(),
       vaultLabel: 'MetisLegacy',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
 
     expect(snapshot.source).toMatchObject({ kind: 'localVault', label: 'MetisLegacy', totalNotes: 3 })
@@ -55,7 +55,7 @@ type: Project
 `),
       ],
       vaultLabel: 'MetisLegacy',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
 
     expect(snapshot.notes[0]?.properties).toEqual([{
@@ -95,7 +95,7 @@ type: Journal
 `),
       ],
       vaultLabel: 'MetisLegacy',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
 
     expect(snapshot.notes[0]?.relationships[0]?.values[0]).toMatchObject({
@@ -122,7 +122,7 @@ Belongs to:
 # Source
 `)],
       vaultLabel: 'MetisLegacy',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
 
     expect(snapshot.notes[0]?.relationships[0]?.values[0]).toMatchObject({
@@ -152,7 +152,7 @@ type: Project
       ],
       vaultAlias: 'team',
       vaultLabel: 'Team Notes',
-      vaultPath: '/Users/luca/Team Notes',
+      vaultPath: '/Users/hugo/Team Notes',
     })
 
     expect(snapshot.source).toMatchObject({ alias: 'team', label: 'Team Notes' })

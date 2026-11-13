@@ -43,21 +43,21 @@ describe('native workspace picker', () => {
   it('builds native repository requests from picked directories', () => {
     expect(nativeWorkspaceSelectionFromDirectory({
       name: 'MetisLegacy',
-      uri: 'file:///Users/luca/MetisLegacy/',
+      uri: 'file:///Users/hugo/MetisLegacy/',
     })).toEqual({
       vaultAlias: 'metislegacy',
       vaultLabel: 'MetisLegacy',
-      vaultRootUri: 'file:///Users/luca/MetisLegacy/',
+      vaultRootUri: 'file:///Users/hugo/MetisLegacy/',
     })
   })
 
   it('derives a decoded vault label when the picker omits a directory name', () => {
     expect(nativeWorkspaceSelectionFromDirectory({
-      uri: 'file:///Users/luca/Work%20Vault/',
+      uri: 'file:///Users/hugo/Work%20Vault/',
     })).toEqual({
       vaultAlias: 'work-vault',
       vaultLabel: 'Work Vault',
-      vaultRootUri: 'file:///Users/luca/Work%20Vault/',
+      vaultRootUri: 'file:///Users/hugo/Work%20Vault/',
     })
   })
 
@@ -70,11 +70,11 @@ describe('native workspace picker', () => {
   it('keeps picked directories session-scoped when the import module is unavailable', async () => {
     await expect(pickNativeWorkspaceDirectoryWithPicker(async () => ({
       name: 'MetisLegacy',
-      uri: 'file:///Users/luca/MetisLegacy/',
+      uri: 'file:///Users/hugo/MetisLegacy/',
     }))).resolves.toEqual({
       vaultAlias: 'metislegacy',
       vaultLabel: 'MetisLegacy',
-      vaultRootUri: 'file:///Users/luca/MetisLegacy/',
+      vaultRootUri: 'file:///Users/hugo/MetisLegacy/',
     })
   })
 

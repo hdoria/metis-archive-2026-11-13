@@ -103,7 +103,7 @@ describe('noteListHelpers extra coverage', () => {
 
   it('extracts sortable properties and labels custom property sort keys', () => {
     const entries = [
-      makeEntry({ properties: { Priority: 'High', Owner: 'Luca' } }),
+      makeEntry({ properties: { Priority: 'High', Owner: 'Hugo Dória' } }),
       makeEntry({ properties: { Estimate: 3, Priority: 'Low' } }),
     ]
 

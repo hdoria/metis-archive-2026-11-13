@@ -154,7 +154,7 @@ pnpm build:web && METIS_REMOTE_URL=http://127.0.0.1:8787 pnpm preview:web
 # open http://127.0.0.1:4173/apps/web/collab.html?note=welcome.md in two browsers
 ```
 
-## Dependencies: a decision for Luca
+## Dependencies: a decision for Hugo Dória
 
 `yjs`, `y-protocols` and `lib0` are used directly by the new code but are **not declared in `package.json`**. They are installed, at the versions BlockNote pins, as dependencies of `@blocknote/core`; the code resolves them from pnpm's hoisting directory through one helper (`apps/server/yjsResolution.ts`), which the server runner, the Vitest config, the web Vite config and two `tsconfig` path maps use.
 
@@ -191,7 +191,7 @@ What to decide: approve a lockfile exception (or fix the findings in the desktop
 
 ## Next steps
 
-1. Luca: the dependency decision above.
+1. Hugo Dória: the dependency decision above.
 2. Shell integration: an editor per collaborative note, behind `VaultBackend.collab`, with the properties panel on the `frontmatter` type.
 3. Server note index (`GET /v1/entries`), then the remaining `VaultBackend` file operations.
 4. Document epoch, snapshot on a timer, pending conflict copies in the blob store.

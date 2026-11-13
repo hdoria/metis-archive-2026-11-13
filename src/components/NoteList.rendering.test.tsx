@@ -238,7 +238,7 @@ describe('NoteList rendering', () => {
       selection: {
         kind: 'folder',
         path: 'Projects/2026 Planning',
-        rootPath: '/Users/luca/MetisLegacy',
+        rootPath: '/Users/hugo/MetisLegacy',
       },
     })
 
@@ -249,7 +249,7 @@ describe('NoteList rendering', () => {
     expect(onCreateNote).toHaveBeenCalledWith(undefined, {
       creationPath: 'folder_header',
       folderPath: 'Projects/2026 Planning',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
   })
 
@@ -753,25 +753,25 @@ describe('NoteList rendering', () => {
 
   it('shows the inbox customize-columns action and falls back to type-defined chips', () => {
     renderBookNoteList({
-      entryOverrides: { properties: { Priority: 'High', Owner: 'Luca' } },
+      entryOverrides: { properties: { Priority: 'High', Owner: 'Hugo Dória' } },
       selection: { kind: 'filter', filter: 'inbox' },
       inboxNoteListProperties: null,
     })
 
     expect(screen.getByTitle('Customize Inbox columns')).toBeInTheDocument()
     expect(screen.getByText('High')).toBeInTheDocument()
-    expect(screen.queryByText('Luca')).not.toBeInTheDocument()
+    expect(screen.queryByText('Hugo Dória')).not.toBeInTheDocument()
   })
 
   it('shows the all-notes customize-columns action and falls back to type-defined chips', () => {
     renderBookNoteList({
-      entryOverrides: { properties: { Priority: 'High', Owner: 'Luca' } },
+      entryOverrides: { properties: { Priority: 'High', Owner: 'Hugo Dória' } },
       allNotesNoteListProperties: null,
     })
 
     expect(screen.getByTitle('Customize All Notes columns')).toBeInTheDocument()
     expect(screen.getByText('High')).toBeInTheDocument()
-    expect(screen.queryByText('Luca')).not.toBeInTheDocument()
+    expect(screen.queryByText('Hugo Dória')).not.toBeInTheDocument()
   })
 
   it('opens the all-notes column picker as a searchable combobox and saves new columns', async () => {
@@ -782,7 +782,7 @@ describe('NoteList rendering', () => {
       title: 'Archived Book',
       isA: 'Book',
       archived: true,
-      properties: { Owner: 'Luca' },
+      properties: { Owner: 'Hugo Dória' },
     })
 
     renderNoteList({
@@ -824,7 +824,7 @@ describe('NoteList rendering', () => {
     const onUpdateInboxNoteListProperties = vi.fn()
 
     renderNoteList({
-      entries: makeBookTypeEntries(['Priority'], { properties: { Priority: 'High', Owner: 'Luca' } }),
+      entries: makeBookTypeEntries(['Priority'], { properties: { Priority: 'High', Owner: 'Hugo Dória' } }),
       selection: { kind: 'filter', filter: 'inbox' },
       inboxNoteListProperties: null,
       onUpdateInboxNoteListProperties,
@@ -844,11 +844,11 @@ describe('NoteList rendering', () => {
 
   it('opens the view column picker from the global event and applies the saved columns', () => {
     renderManagedViewNoteList({
-      entries: makeBookTypeEntries(['Priority'], { properties: { Priority: 'High', Owner: 'Luca' } }),
+      entries: makeBookTypeEntries(['Priority'], { properties: { Priority: 'High', Owner: 'Hugo Dória' } }),
     })
 
     expect(screen.getByText('High')).toBeInTheDocument()
-    expect(screen.queryByText('Luca')).not.toBeInTheDocument()
+    expect(screen.queryByText('Hugo Dória')).not.toBeInTheDocument()
 
     act(() => {
       openNoteListPropertiesPicker('view')
@@ -857,7 +857,7 @@ describe('NoteList rendering', () => {
     expect(screen.getByTestId('list-properties-popover')).toBeInTheDocument()
     fireEvent.click(screen.getByRole('checkbox', { name: 'Owner' }))
 
-    expect(screen.getByText('Luca')).toBeInTheDocument()
+    expect(screen.getByText('Hugo Dória')).toBeInTheDocument()
   })
 
   it('shows an empty-state picker for views with no matching properties', () => {
@@ -898,7 +898,7 @@ describe('NoteList rendering', () => {
 
   it('keeps blank statuses out of the type column picker', () => {
     renderNoteList({
-      entries: makeBookTypeEntries([], { status: '', properties: { Owner: 'Luca' } }),
+      entries: makeBookTypeEntries([], { status: '', properties: { Owner: 'Hugo Dória' } }),
       selection: { kind: 'sectionGroup', type: 'Book' },
       onUpdateTypeSort: () => undefined,
     })
@@ -964,13 +964,13 @@ describe('NoteList rendering', () => {
 
   it('uses inbox overrides when configured', () => {
     renderNoteList({
-      entries: makeBookTypeEntries(['Priority'], { properties: { Priority: 'High', Owner: 'Luca' } }),
+      entries: makeBookTypeEntries(['Priority'], { properties: { Priority: 'High', Owner: 'Hugo Dória' } }),
       selection: { kind: 'filter', filter: 'inbox' },
       inboxNoteListProperties: ['Owner'],
       onUpdateInboxNoteListProperties: () => undefined,
     })
 
-    expect(screen.getByText('Luca')).toBeInTheDocument()
+    expect(screen.getByText('Hugo Dória')).toBeInTheDocument()
     expect(screen.queryByText('High')).not.toBeInTheDocument()
   })
 
@@ -1067,7 +1067,7 @@ describe('NoteList click behavior', () => {
 describe('NoteList type sections', () => {
   const typeEntry = {
     ...makeEntry({
-      path: '/Users/luca/MetisLegacy/types/project.md',
+      path: '/Users/hugo/MetisLegacy/types/project.md',
       filename: 'project.md',
       title: 'Project',
       isA: 'Type',

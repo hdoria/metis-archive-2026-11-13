@@ -80,13 +80,13 @@ describe('DynamicPropertiesPanel system metadata', () => {
           order: 4,
           sort: 'title:asc',
           '_sidebar_label': 'Projects',
-          Owner: 'Luca',
+          Owner: 'Hugo Dória',
         }}
       />,
     )
 
     expect(screen.getByText('Owner')).toBeInTheDocument()
-    expect(screen.getByText('Luca')).toBeInTheDocument()
+    expect(screen.getByText('Hugo Dória')).toBeInTheDocument()
     expect(screen.getByText('Icon')).toBeInTheDocument()
     expect(screen.getByTestId('icon-editable-display')).toHaveTextContent('rocket')
     expect(screen.queryByDisplayValue('legacy')).not.toBeInTheDocument()
@@ -107,7 +107,7 @@ _sheet:
   cells:
     B2:
       number_format: "$#,##0.00"
-Owner: Luca
+Owner: Hugo Dória
 ---
 Metric,January`)
 
@@ -120,7 +120,7 @@ Metric,January`)
     )
 
     expect(screen.getByText('Owner')).toBeInTheDocument()
-    expect(screen.getByText('Luca')).toBeInTheDocument()
+    expect(screen.getByText('Hugo Dória')).toBeInTheDocument()
     expect(screen.getByText('Display as')).toBeInTheDocument()
     expect(screen.getByText('Sheet')).toBeInTheDocument()
     expect(screen.queryByText('Display: sheet')).not.toBeInTheDocument()

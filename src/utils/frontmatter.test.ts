@@ -108,14 +108,14 @@ _sheet:
   cells:
     B2:
       number_format: "$#,##0.00"
-Owner: Luca
+Owner: Hugo Dória
 ---
 Metric,January`)
 
     expect(fm).toEqual({
       type: 'Sheet',
       _sheet: '',
-      Owner: 'Luca',
+      Owner: 'Hugo Dória',
     })
     expect(fm['frozen_rows']).toBeUndefined()
     expect(fm['columns']).toBeUndefined()

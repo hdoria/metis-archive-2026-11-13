@@ -13,7 +13,7 @@ import {
 } from './useNoteCreation'
 
 const makeEntry = (overrides: Partial<VaultEntry> = {}): VaultEntry => ({
-  path: '/Users/luca/MetisLegacy/test.md',
+  path: '/Users/hugo/MetisLegacy/test.md',
   filename: 'test.md',
   title: 'Test Note',
   isA: 'Note',
@@ -307,7 +307,7 @@ describe('resolveNewType', () => {
   it('uses provided vault path instead of hardcoded path', () => {
     const { entry } = resolveNewType({ typeName: 'Responsibility', vaultPath: '/other/vault' })
     expect(entry.path).toBe('/other/vault/responsibility.md')
-    expect(entry.path).not.toContain('/Users/luca/MetisLegacy')
+    expect(entry.path).not.toContain('/Users/hugo/MetisLegacy')
   })
 
   it('normalizes the built-in Notes label to the Note type definition', () => {

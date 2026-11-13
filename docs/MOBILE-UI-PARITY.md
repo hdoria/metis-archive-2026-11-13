@@ -116,7 +116,7 @@ The native app emits `METIS_MOBILE_LAYOUT_METRIC` lines for probed sidebar rows.
 The harness also exercises a read-only real-vault path. By default it looks for:
 
 ```text
-/Users/luca/MetisLegacy
+/Users/hugo/MetisLegacy
 ```
 
 Set `MOBILE_QA_VAULT_PATH` to override that path. The loader scans Markdown files read-only, injects a `MobileWorkspaceSnapshot` into local storage, and captures `local-vault` tablet/phone screenshots without touching vault content.

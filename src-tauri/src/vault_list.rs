@@ -146,25 +146,25 @@ mod tests {
             vaults: vec![
                 VaultEntry {
                     label: "My Vault".to_string(),
-                    path: "/Users/luca/MetisLegacy".to_string(),
+                    path: "/Users/hugo/MetisLegacy".to_string(),
                     ..Default::default()
                 },
                 VaultEntry {
                     label: "Work".to_string(),
-                    path: "/Users/luca/Work".to_string(),
+                    path: "/Users/hugo/Work".to_string(),
                     ..Default::default()
                 },
             ],
-            active_vault: Some("/Users/luca/MetisLegacy".to_string()),
+            active_vault: Some("/Users/hugo/MetisLegacy".to_string()),
             default_workspace_path: None,
             hidden_defaults: vec![],
         };
         let loaded = save_and_reload(&list);
         assert_eq!(loaded.vaults.len(), 2);
         assert_eq!(loaded.vaults[0].label, "My Vault");
-        assert_eq!(loaded.vaults[0].path, "/Users/luca/MetisLegacy");
+        assert_eq!(loaded.vaults[0].path, "/Users/hugo/MetisLegacy");
         assert_eq!(loaded.vaults[1].label, "Work");
-        assert_eq!(loaded.active_vault.as_deref(), Some("/Users/luca/MetisLegacy"));
+        assert_eq!(loaded.active_vault.as_deref(), Some("/Users/hugo/MetisLegacy"));
     }
 
     #[test]
@@ -240,13 +240,13 @@ mod tests {
             vaults: vec![],
             active_vault: None,
             default_workspace_path: None,
-            hidden_defaults: vec!["/Users/luca/Documents/Getting Started".to_string()],
+            hidden_defaults: vec!["/Users/hugo/Documents/Getting Started".to_string()],
         };
         let loaded = save_and_reload(&list);
         assert_eq!(loaded.hidden_defaults.len(), 1);
         assert_eq!(
             loaded.hidden_defaults[0],
-            "/Users/luca/Documents/Getting Started"
+            "/Users/hugo/Documents/Getting Started"
         );
     }
 

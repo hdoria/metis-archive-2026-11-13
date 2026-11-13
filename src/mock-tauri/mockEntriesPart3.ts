@@ -4,7 +4,7 @@ import { MOCK_NOW as now } from './mockNow'
 /** Part of the demo vault entries (see mock-entries.ts), split to keep each file small. */
 export const MOCK_ENTRIES_PART_3: VaultEntry[] = [
   {
-    path: '/Users/luca/MetisLegacy/note.md',
+    path: '/Users/hugo/MetisLegacy/note.md',
     filename: 'note.md',
     title: 'Note',
     isA: 'Type',
@@ -30,7 +30,7 @@ export const MOCK_ENTRIES_PART_3: VaultEntry[] = [
   },
   // --- Custom type documents ---
   {
-    path: '/Users/luca/MetisLegacy/config.md',
+    path: '/Users/hugo/MetisLegacy/config.md',
     filename: 'config.md',
     title: 'Config',
     isA: 'Type',
@@ -55,7 +55,7 @@ export const MOCK_ENTRIES_PART_3: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/recipe.md',
+    path: '/Users/hugo/MetisLegacy/recipe.md',
     filename: 'recipe.md',
     title: 'Recipe',
     isA: 'Type',
@@ -80,7 +80,7 @@ export const MOCK_ENTRIES_PART_3: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/book.md',
+    path: '/Users/hugo/MetisLegacy/book.md',
     filename: 'book.md',
     title: 'Book',
     isA: 'Type',
@@ -106,7 +106,7 @@ export const MOCK_ENTRIES_PART_3: VaultEntry[] = [
   },
   // --- Instances of custom types ---
   {
-    path: '/Users/luca/MetisLegacy/config/agents.md',
+    path: '/Users/hugo/MetisLegacy/config/agents.md',
     filename: 'agents.md',
     title: 'Agent Instructions',
     isA: 'Config',
@@ -133,7 +133,7 @@ export const MOCK_ENTRIES_PART_3: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/pasta-carbonara.md',
+    path: '/Users/hugo/MetisLegacy/pasta-carbonara.md',
     filename: 'pasta-carbonara.md',
     title: 'Pasta Carbonara',
     isA: 'Recipe',
@@ -160,7 +160,7 @@ export const MOCK_ENTRIES_PART_3: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/designing-data-intensive-applications.md',
+    path: '/Users/hugo/MetisLegacy/designing-data-intensive-applications.md',
     filename: 'designing-data-intensive-applications.md',
     title: 'Designing Data-Intensive Applications',
     isA: 'Book',
@@ -188,7 +188,7 @@ export const MOCK_ENTRIES_PART_3: VaultEntry[] = [
   },
   // --- Archived entries ---
   {
-    path: '/Users/luca/MetisLegacy/25q3-website-redesign.md',
+    path: '/Users/hugo/MetisLegacy/25q3-website-redesign.md',
     filename: '25q3-website-redesign.md',
     title: 'Website Redesign',
     isA: 'Project',
@@ -216,7 +216,7 @@ export const MOCK_ENTRIES_PART_3: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/twitter-thread-experiment.md',
+    path: '/Users/hugo/MetisLegacy/twitter-thread-experiment.md',
     filename: 'twitter-thread-experiment.md',
     title: 'Twitter Thread Growth Experiment',
     isA: 'Experiment',
@@ -245,7 +245,7 @@ export const MOCK_ENTRIES_PART_3: VaultEntry[] = [
   },
   // --- Refactoring entries for exact-match search testing ---
   {
-    path: '/Users/luca/MetisLegacy/refactoring.md',
+    path: '/Users/hugo/MetisLegacy/refactoring.md',
     filename: 'refactoring.md',
     title: 'Refactoring',
     isA: 'Area',
@@ -270,7 +270,7 @@ export const MOCK_ENTRIES_PART_3: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/refactoring-ideas.md',
+    path: '/Users/hugo/MetisLegacy/refactoring-ideas.md',
     filename: 'refactoring-ideas.md',
     title: 'Refactoring Ideas',
     isA: 'Note',
@@ -295,7 +295,7 @@ export const MOCK_ENTRIES_PART_3: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/refactoring-key-ideas.md',
+    path: '/Users/hugo/MetisLegacy/refactoring-key-ideas.md',
     filename: 'refactoring-key-ideas.md',
     title: 'Refactoring Key Ideas',
     isA: 'Note',
@@ -320,7 +320,7 @@ export const MOCK_ENTRIES_PART_3: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/refactoring-patterns.md',
+    path: '/Users/hugo/MetisLegacy/refactoring-patterns.md',
     filename: 'refactoring-patterns.md',
     title: 'Refactoring Patterns',
     isA: 'Note',

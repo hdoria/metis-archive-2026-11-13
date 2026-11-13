@@ -87,8 +87,8 @@ describe('DynamicRelationshipsPanel', () => {
   it.each([
     {
       name: 'applies type color via typeEntryMap',
-      entry: { path: '/vault/people/luca.md', filename: 'luca.md', title: 'Luca', isA: 'Person' as const },
-      ref: '[[Luca]]', key: 'Owner', tMap: typeEntryMap, expectedColor: 'var(--accent-yellow)',
+      entry: { path: '/vault/people/hugo-doria.md', filename: 'hugo-doria.md', title: 'Hugo Dória', isA: 'Person' as const },
+      ref: '[[Hugo Dória]]', key: 'Owner', tMap: typeEntryMap, expectedColor: 'var(--accent-yellow)',
     },
     {
       name: 'resolves by title when filename differs',
@@ -212,13 +212,13 @@ describe('DynamicRelationshipsPanel', () => {
     render(
       <DynamicRelationshipsPanel
         typeEntryMap={{}}
-        frontmatter={{ Owner: '[[person/luca]]' }}
-        entries={[makeEntry({ path: '/vault/person/luca.md', filename: 'luca.md', title: 'Luca', isA: 'Person' })]  }
+        frontmatter={{ Owner: '[[person/hugo-doria]]' }}
+        entries={[makeEntry({ path: '/vault/person/hugo-doria.md', filename: 'hugo-doria.md', title: 'Hugo Dória', isA: 'Person' })]  }
         onNavigate={onNavigate}
       />
     )
     expect(screen.getByText('Owner')).toBeInTheDocument()
-    expect(screen.getByText('Luca')).toBeInTheDocument()
+    expect(screen.getByText('Hugo Dória')).toBeInTheDocument()
   })
 
   it('renders + Add relationship button when onAddProperty provided', () => {
@@ -815,7 +815,7 @@ describe('GitHistoryPanel', () => {
 
   it('renders commit entries with hash and message', () => {
     const commits: GitCommit[] = [
-      { hash: 'abc1234567890', shortHash: 'abc1234', message: 'Initial commit', author: 'luca', date: Math.floor(Date.now() / 1000) - 3600 },
+      { hash: 'abc1234567890', shortHash: 'abc1234', message: 'Initial commit', author: 'Hugo Dória', date: Math.floor(Date.now() / 1000) - 3600 },
       { hash: 'def4567890123', shortHash: 'def4567', message: 'Fix bug', author: 'jane', date: Math.floor(Date.now() / 1000) - 86400 * 2 },
     ]
     render(<GitHistoryPanel commits={commits} onViewCommitDiff={onViewCommitDiff} />)

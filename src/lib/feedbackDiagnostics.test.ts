@@ -16,8 +16,8 @@ describe('feedbackDiagnostics', () => {
     const stopCapture = startFeedbackDiagnosticsCapture()
     const sampleToken = ['ghp', 'super-secret-token'].join('_')
 
-    console.error(`Load failed for /Users/luca/MétisLegacy/private.md with token ${sampleToken}`)
-    console.warn('Retrying from C:\\Users\\luca\\Notes\\vault.md')
+    console.error(`Load failed for /Users/hugo/MétisLegacy/private.md with token ${sampleToken}`)
+    console.warn('Retrying from C:\\Users\\hugo\\Notes\\vault.md')
 
     const bundle = buildSanitizedDiagnosticBundle({
       buildNumber: 'b281',
@@ -29,9 +29,9 @@ describe('feedbackDiagnostics', () => {
     expect(bundle).toContain('Release channel: alpha')
     expect(bundle).toContain('[error] Load failed for [redacted-path] with token [redacted-token]')
     expect(bundle).toContain('[warn] Retrying from [redacted-path]')
-    expect(bundle).not.toContain('/Users/luca/MétisLegacy/private.md')
+    expect(bundle).not.toContain('/Users/hugo/MétisLegacy/private.md')
     expect(bundle).not.toContain(sampleToken)
-    expect(bundle).not.toContain('C:\\Users\\luca\\Notes\\vault.md')
+    expect(bundle).not.toContain('C:\\Users\\hugo\\Notes\\vault.md')
 
     stopCapture()
     errorSpy.mockRestore()

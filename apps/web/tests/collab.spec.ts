@@ -93,7 +93,7 @@ test('three clients edit one note at the same time and converge', async ({ baseU
   const origin = baseURL as string
   const [chrome, safari] = browsers
   const ada = await join(chrome, { name: 'Ada Chromium', note: NOTE, device: devices['Desktop Chrome'], baseURL: origin })
-  const luca = await join(safari, { name: 'Luca WebKit', note: NOTE, device: devices['Desktop Safari'], baseURL: origin })
+  const hugo = await join(safari, { name: 'Hugo Dória WebKit', note: NOTE, device: devices['Desktop Safari'], baseURL: origin })
   const mia = await join(safari, { name: 'Mia Phone', note: NOTE, device: devices['iPhone 15'], baseURL: origin })
 
   // Presence: everyone sees three avatars, their own marked as such.
@@ -105,7 +105,7 @@ test('three clients edit one note at the same time and converge', async ({ baseU
   // Concurrent edits: all three type without waiting for each other, two of them in one block.
   await Promise.all([
     type(ada, { block: 'Welcome', at: 'End', text: ' from Chromium' }),
-    type(luca, { block: 'A throwaway vault.', at: 'End', text: ' WebKit was here.' }),
+    type(hugo, { block: 'A throwaway vault.', at: 'End', text: ' WebKit was here.' }),
     type(mia, { block: 'A throwaway vault.', at: 'Home', text: 'Phone first. ' }),
   ])
 
@@ -118,7 +118,7 @@ test('three clients edit one note at the same time and converge', async ({ baseU
     await expect(client.page.locator('.bn-collaboration-cursor__base')).toHaveCount(2)
   }
   const others = await ada.page.locator('.bn-collaboration-cursor__label').allTextContents()
-  expect(others.sort()).toEqual(['Luca WebKit', 'Mia Phone'])
+  expect(others.sort()).toEqual(['Hugo Dória WebKit', 'Mia Phone'])
 
   // The phone shows the whole surface inside its viewport.
   const viewport = mia.page.viewportSize() as { width: number }
@@ -145,14 +145,14 @@ test('a client that loses its connection says so and catches up', async ({ baseU
   const [chrome] = browsers
   const seat = { note: OFFLINE_NOTE, device: devices['Desktop Chrome'], baseURL: baseURL as string }
   const ada = await join(chrome, { ...seat, name: 'Ada Offline' })
-  const luca = await join(chrome, { ...seat, name: 'Luca Online' })
+  const hugo = await join(chrome, { ...seat, name: 'Hugo Dória Online' })
 
   await ada.context.setOffline(true)
   await type(ada, { block: 'Works on', at: 'End', text: ' Typed offline.' })
-  await type(luca, { block: 'Ada', at: 'End', text: ' while Ada was away' })
+  await type(hugo, { block: 'Ada', at: 'End', text: ' while Ada was away' })
   await ada.context.setOffline(false)
 
-  await expect(luca.page.getByTestId('collab-editor')).toContainText('Typed offline.')
+  await expect(hugo.page.getByTestId('collab-editor')).toContainText('Typed offline.')
 
   await expect(ada.page.getByTestId('collab-editor')).toContainText('while Ada was away')
   await expect(ada.page.getByTestId('collab-status')).toHaveAttribute('data-status', 'synced')

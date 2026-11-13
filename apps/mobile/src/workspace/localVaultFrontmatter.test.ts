@@ -89,8 +89,8 @@ Body.
   })
 
   it.each([
-    ['inline arrays', 'owner: [Luca]\ntags: [Design, Mobile]'],
-    ['YAML lists', 'owner:\n  - Luca\ntags:\n  - Design\n  - Mobile'],
+    ['inline arrays', 'owner: [Hugo Dória]\ntags: [Design, Mobile]'],
+    ['YAML lists', 'owner:\n  - Hugo Dória\ntags:\n  - Design\n  - Mobile'],
   ])('collapses one-item %s to scalars like desktop', (_format, frontmatter) => {
     const document = parseLocalVaultDocument(`---
 ${frontmatter}
@@ -98,9 +98,9 @@ ${frontmatter}
 Body.
 `)
 
-    expect(document.frontmatter.owner).toBe('Luca')
+    expect(document.frontmatter.owner).toBe('Hugo Dória')
     expect(document.frontmatter.tags).toEqual(['Design', 'Mobile'])
-    expect(frontmatterList(document.frontmatter, ['owner'])).toEqual(['Luca'])
+    expect(frontmatterList(document.frontmatter, ['owner'])).toEqual(['Hugo Dória'])
   })
 
   it('ignores desktop block-scalar frontmatter placeholders instead of exposing bogus properties', () => {
@@ -130,7 +130,7 @@ Status: Draft
 status: Active
 is a: Project
 type: Essay
-Owner: Luca
+Owner: Hugo Dória
 owner: Giulia
 Belongs to:
   - "[[Old Project]]"
@@ -178,7 +178,7 @@ Body.
 
   it('decodes desktop quoted frontmatter scalar escapes', () => {
     const document = parseLocalVaultDocument(String.raw`---
-title: "Luca \"Focus\" \u2605"
+title: "Hugo Dória \"Focus\" \u2605"
 Status: "Needs\nReview"
 aliases: ["Mobile \"QA\"", 'Owner''s Plan']
 related_to:
@@ -187,7 +187,7 @@ related_to:
 Body.
 `)
 
-    expect(frontmatterScalar(document.frontmatter, ['title'])).toBe('Luca "Focus" \u2605')
+    expect(frontmatterScalar(document.frontmatter, ['title'])).toBe('Hugo Dória "Focus" \u2605')
     expect(frontmatterScalar(document.frontmatter, ['Status', 'status'])).toBe('Needs\nReview')
     expect(frontmatterList(document.frontmatter, ['aliases'])).toEqual(['Mobile "QA"', "Owner's Plan"])
     expect(frontmatterRelationships(document.frontmatter)).toEqual({

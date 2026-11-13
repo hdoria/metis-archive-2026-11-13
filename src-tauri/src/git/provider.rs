@@ -412,16 +412,16 @@ mod tests {
     #[test]
     fn translates_windows_paths_for_wsl() {
         let cases = [
-            (r"C:\Users\Luca\Vault", "/mnt/c/Users/Luca/Vault"),
+            (r"C:\Users\hugo\Vault", "/mnt/c/Users/hugo/Vault"),
             ("D:/Work/Metis", "/mnt/d/Work/Metis"),
-            (r"\\wsl$\Ubuntu\home\luca\vault", "/home/luca/vault"),
+            (r"\\wsl$\Ubuntu\home\hugo\vault", "/home/hugo/vault"),
             (r"\\wsl.localhost\Debian\var\repo", "/var/repo"),
             (
                 r"\\?\UNC\wsl.localhost\Ubuntu\home\eugenio\developer\knowledge",
                 "/home/eugenio/developer/knowledge",
             ),
-            (r"\\?\UNC\wsl$\Ubuntu\home\luca\vault", "/home/luca/vault"),
-            (r"\\?\C:\Users\Luca\Vault", "/mnt/c/Users/Luca/Vault"),
+            (r"\\?\UNC\wsl$\Ubuntu\home\hugo\vault", "/home/hugo/vault"),
+            (r"\\?\C:\Users\hugo\Vault", "/mnt/c/Users/hugo/Vault"),
         ];
 
         for (path, expected) in cases {

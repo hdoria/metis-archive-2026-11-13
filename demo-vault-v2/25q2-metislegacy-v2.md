@@ -3,7 +3,7 @@ type: Project
 aliases:
   - "[[MetisLegacy App V2]]"
 belongs_to: "[[25q2]]"
-owner: "[[person-luca-rossi]]"
+owner: "[[person-hugo-doria]]"
 status: Active
 related_to:
   - "[[metislegacy-qa-reference]]"

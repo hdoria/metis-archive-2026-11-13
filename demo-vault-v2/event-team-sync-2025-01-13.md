@@ -2,7 +2,7 @@
 type: Event
 belongs_to: "[[25q1-metislegacy-v1]]"
 related_to:
-  - "[[person-luca-rossi]]"
+  - "[[person-hugo-doria]]"
   - "[[person-matteo-cellini]]"
 date: 2025-01-13
 ---

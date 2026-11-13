@@ -131,13 +131,13 @@ describe('compactMarkdown', () => {
   })
 
   it('moves trailing whitespace outside bold markers', () => {
-    const input = '**Luca **\n'
-    expect(compactMarkdown(input)).toBe('**Luca** \n')
+    const input = '**Hugo Dória **\n'
+    expect(compactMarkdown(input)).toBe('**Hugo Dória** \n')
   })
 
   it('moves leading whitespace outside bold markers', () => {
-    const input = '** Luca**\n'
-    expect(compactMarkdown(input)).toBe(' **Luca**\n')
+    const input = '** Hugo Dória**\n'
+    expect(compactMarkdown(input)).toBe(' **Hugo Dória**\n')
   })
 
   it('decodes multiple HTML entity types', () => {

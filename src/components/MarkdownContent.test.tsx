@@ -90,9 +90,9 @@ describe('MarkdownContent', () => {
   })
 
   it('renders GFM email autolinks when modern regex features are available', () => {
-    render(<MarkdownContent content="Contact luca@example.com" />)
-    const link = screen.getByRole('link', { name: 'luca@example.com' }) as HTMLAnchorElement
-    expect(link.getAttribute('href')).toBe('mailto:luca@example.com')
+    render(<MarkdownContent content="Contact hugo@example.com" />)
+    const link = screen.getByRole('link', { name: 'hugo@example.com' }) as HTMLAnchorElement
+    expect(link.getAttribute('href')).toBe('mailto:hugo@example.com')
   })
 
   it('renders mixed markdown', () => {

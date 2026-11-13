@@ -5,3 +5,5 @@
 - [Centralize project attribution](feedback-centralize-attribution.md)
 
 - [Respect the selected hosting provider](feedback-hosting-provider.md)
+
+- [Audit owner identity beyond visible branding](feedback-owner-identity.md)

@@ -2,7 +2,7 @@
 name = "metis"
 version = "0.1.0"
 description = "Personal knowledge and life management app"
-authors = ["Hugo Doria"]
+authors = ["Hugo Dória"]
 license = "AGPL-3.0-or-later"
 repository = "https://github.com/hdoria/metis"
 edition = "2021"

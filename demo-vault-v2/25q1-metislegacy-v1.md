@@ -3,7 +3,7 @@ type: Project
 aliases:
   - "[[MetisLegacy App V1]]"
 belongs_to: "[[25q1]]"
-owner: "[[person-luca-rossi]]"
+owner: "[[person-hugo-doria]]"
 status: Done
 ---
 

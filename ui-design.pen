@@ -4871,7 +4871,7 @@
                                           "x": 192
                                         },
                                         "38JOz": {
-                                          "content": "Luca",
+                                          "content": "Hugo Dória",
                                           "x": 8,
                                           "y": 3
                                         }
@@ -6221,7 +6221,7 @@
               "type": "text",
               "id": "ghv01-hint",
               "fill": "$--muted-foreground",
-              "content": "Connected as @lucaong",
+              "content": "Connected as @hdoria",
               "fontFamily": "Inter",
               "fontSize": 11,
               "fontWeight": "normal"
@@ -6488,7 +6488,7 @@
                           "type": "text",
                           "id": "ghv02-repo1-name",
                           "fill": "$--foreground",
-                          "content": "lucaong/metislegacy-vault",
+                          "content": "hdoria/metislegacy-vault",
                           "fontFamily": "Inter",
                           "fontSize": 13,
                           "fontWeight": "normal"
@@ -6558,7 +6558,7 @@
                           "type": "text",
                           "id": "ghv02-repo2-name",
                           "fill": "$--foreground",
-                          "content": "lucaong/metislegacy-app",
+                          "content": "hdoria/metislegacy-app",
                           "fontFamily": "Inter",
                           "fontSize": 13,
                           "fontWeight": "normal"
@@ -6628,7 +6628,7 @@
                           "type": "text",
                           "id": "ghv02-repo3-name",
                           "fill": "$--foreground",
-                          "content": "lucaong/dotfiles",
+                          "content": "hdoria/dotfiles",
                           "fontFamily": "Inter",
                           "fontSize": 13,
                           "fontWeight": "normal"
@@ -6993,7 +6993,7 @@
                   "type": "text",
                   "id": "ghv03-name-hint",
                   "fill": "$--muted-foreground",
-                  "content": "github.com/lucaong/my-vault",
+                  "content": "github.com/hdoria/my-vault",
                   "fontFamily": "Inter",
                   "fontSize": 11,
                   "fontWeight": "normal"
@@ -7319,7 +7319,7 @@
               "type": "text",
               "id": "ghv04-status",
               "fill": "$--foreground",
-              "content": "Cloning lucaong/metislegacy-vault...",
+              "content": "Cloning hdoria/metislegacy-vault...",
               "textAlign": "center",
               "fontFamily": "Inter",
               "fontSize": 14,
@@ -10862,7 +10862,7 @@
                           "x": 192
                         },
                         "38JOz": {
-                          "content": "Luca",
+                          "content": "Hugo Dória",
                           "x": 8,
                           "y": 3
                         }
@@ -13503,7 +13503,7 @@
                                           "x": 192
                                         },
                                         "38JOz": {
-                                          "content": "Luca",
+                                          "content": "Hugo Dória",
                                           "x": 8,
                                           "y": 3
                                         }

@@ -25,11 +25,11 @@ describe('native WYSIWYG wikilink picker model', () => {
 
   it('uses the shared mobile person mention candidates for native @ autocomplete', () => {
     const suggestions = mobileWysiwygWikilinkPickerSuggestions([
-      note({ title: 'Luca', type: 'Person' }),
-      note({ title: 'Luca Project', type: 'Project' }),
-    ], 'luc', 'personMention')
+      note({ title: 'Hugo Dória', type: 'Person' }),
+      note({ title: 'Hugo Dória Project', type: 'Project' }),
+    ], 'hug', 'personMention')
 
-    expect(suggestions.map((suggestion) => suggestion.title)).toEqual(['Luca'])
+    expect(suggestions.map((suggestion) => suggestion.title)).toEqual(['Hugo Dória'])
   })
 
   it('uses the shared desktop emoji catalog and ranking for native : autocomplete', () => {

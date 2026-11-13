@@ -687,12 +687,12 @@ mod tests {
     #[test]
     fn mcp_server_dir_candidates_include_runtime_dev_roots_when_build_path_is_stale() {
         let stale_dev_path = Path::new("/Users/runner/work/metis/metis/mcp-server");
-        let current_dir = Path::new("/Users/luca/Workspace/metis");
+        let current_dir = Path::new("/Users/hugo/Workspace/metis");
         let candidates = mcp_server_dir_candidates_for(stale_dev_path, &[], Some(current_dir));
 
-        assert!(candidates.contains(&PathBuf::from("/Users/luca/Workspace/metis/mcp-server")));
+        assert!(candidates.contains(&PathBuf::from("/Users/hugo/Workspace/metis/mcp-server")));
         assert!(candidates.contains(&PathBuf::from(
-            "/Users/luca/Workspace/metis/src-tauri/resources/mcp-server"
+            "/Users/hugo/Workspace/metis/src-tauri/resources/mcp-server"
         )));
     }
 

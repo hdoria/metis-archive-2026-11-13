@@ -5,7 +5,7 @@ _organized: true
 
 # Metis Web error telemetry (TOL-232)
 
-Errors in the web build (metis.lucaron.in) go to Sentry with readable stacks, through the same code the desktop app uses (`src/lib/telemetry.ts`, ADR 0016). Decision record: [ADR 0294](../adr/0294-web-build-error-telemetry-and-hidden-source-maps.md).
+Errors in the web build (the upstream hosted deployment) go to Sentry with readable stacks, through the same code the desktop app uses (`src/lib/telemetry.ts`, ADR 0016). Decision record: [ADR 0294](../adr/0294-web-build-error-telemetry-and-hidden-source-maps.md).
 
 ## What is sent, and when
 

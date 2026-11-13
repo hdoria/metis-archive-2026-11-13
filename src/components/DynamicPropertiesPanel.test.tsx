@@ -145,23 +145,23 @@ describe('DynamicPropertiesPanel', () => {
   })
 
   it('renders properties from frontmatter', () => {
-    renderPanel({ frontmatter: { cadence: 'Weekly', owner: 'Luca' } })
+    renderPanel({ frontmatter: { cadence: 'Weekly', owner: 'Hugo Dória' } })
     expect(screen.getByText('Cadence')).toBeInTheDocument()
     expect(screen.getByText('Weekly')).toBeInTheDocument()
     expect(screen.getByText('Owner')).toBeInTheDocument()
-    expect(screen.getByText('Luca')).toBeInTheDocument()
+    expect(screen.getByText('Hugo Dória')).toBeInTheDocument()
   })
 
   it('renders capitalized Owner with plain text value in Properties panel', () => {
-    renderPanel({ frontmatter: { Owner: 'Luca' } })
+    renderPanel({ frontmatter: { Owner: 'Hugo Dória' } })
     expect(screen.getByText('Owner')).toBeInTheDocument()
-    expect(screen.getByText('Luca')).toBeInTheDocument()
+    expect(screen.getByText('Hugo Dória')).toBeInTheDocument()
   })
 
   it('left-aligns mixed property value displays', () => {
     renderPanel({
       frontmatter: {
-        Owner: 'Luca',
+        Owner: 'Hugo Dória',
         History_confidence: 0.84,
         Date: '2026-04-11',
         color: '#3b82f6',
@@ -169,7 +169,7 @@ describe('DynamicPropertiesPanel', () => {
       },
     })
 
-    expect(screen.getByText('Luca').parentElement).toHaveClass('justify-start', 'text-left')
+    expect(screen.getByText('Hugo Dória').parentElement).toHaveClass('justify-start', 'text-left')
     expect(screen.getByText('0.84').parentElement).toHaveClass('justify-start', 'text-left')
     for (const dateDisplay of screen.getAllByTestId('date-display')) {
       expect(dateDisplay).toHaveClass('text-left')
@@ -190,7 +190,7 @@ describe('DynamicPropertiesPanel', () => {
   })
 
   it('hides Owner with wikilink value from Properties panel', () => {
-    renderPanel({ frontmatter: { Owner: '[[person/luca]]' } })
+    renderPanel({ frontmatter: { Owner: '[[person/hugo-doria]]' } })
     // Owner with wikilink goes to RelationshipsPanel, not Properties
     expect(screen.queryByText('Owner')).not.toBeInTheDocument()
   })
@@ -232,7 +232,7 @@ describe('DynamicPropertiesPanel', () => {
   })
 
   it('hides custom field with wikilink value from Properties', () => {
-    renderPanel({ frontmatter: { Mentor: '[[person/luca]]' } })
+    renderPanel({ frontmatter: { Mentor: '[[person/hugo-doria]]' } })
     // Mentor contains a wikilink → shown in Relationships, not Properties
     expect(screen.queryByText('Mentor')).not.toBeInTheDocument()
   })
@@ -511,7 +511,7 @@ describe('DynamicPropertiesPanel', () => {
   describe('editable vs read-only distinction', () => {
     it('editable properties have hover styling via data-testid', () => {
       renderPanel({
-        frontmatter: { cadence: 'Weekly', owner: 'Luca' },
+        frontmatter: { cadence: 'Weekly', owner: 'Hugo Dória' },
         onUpdateProperty,
         onDeleteProperty,
       })

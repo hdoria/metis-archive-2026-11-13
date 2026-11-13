@@ -133,8 +133,8 @@ describe('useVaultSwitcher', () => {
 
   it('loads persisted vaults on mount', async () => {
     mockVaultListStore = {
-      vaults: [{ label: 'My Vault', path: '/Users/luca/MetisLegacy' }],
-      active_vault: '/Users/luca/MetisLegacy',
+      vaults: [{ label: 'My Vault', path: '/Users/hugo/MetisLegacy' }],
+      active_vault: '/Users/hugo/MetisLegacy',
     }
 
     const { result } = renderHook(() => useVaultSwitcher({ onSwitch, onToast }))
@@ -145,9 +145,9 @@ describe('useVaultSwitcher', () => {
 
     expect(result.current.allVaults).toHaveLength(2) // default + persisted
     expect(result.current.allVaults[1].label).toBe('My Vault')
-    expect(result.current.allVaults[1].path).toBe('/Users/luca/MetisLegacy')
+    expect(result.current.allVaults[1].path).toBe('/Users/hugo/MetisLegacy')
     expect(result.current.allVaults[1].available).toBe(true)
-    expect(result.current.vaultPath).toBe('/Users/luca/MetisLegacy')
+    expect(result.current.vaultPath).toBe('/Users/hugo/MetisLegacy')
     expect(mockInvokeFn).toHaveBeenCalledWith('load_vault_list', {})
   })
 
@@ -420,7 +420,7 @@ describe('useVaultSwitcher', () => {
 
   it('opens local folder and persists', async () => {
     const { pickFolder } = await import('../utils/vault-dialog')
-    vi.mocked(pickFolder).mockResolvedValue('/Users/luca/MyVault')
+    vi.mocked(pickFolder).mockResolvedValue('/Users/hugo/MyVault')
 
     const { result } = renderHook(() => useVaultSwitcher({ onSwitch, onToast }))
     await waitFor(() => { expect(result.current.loaded).toBe(true) })
@@ -429,7 +429,7 @@ describe('useVaultSwitcher', () => {
       await result.current.handleOpenLocalFolder()
     })
 
-    expect(result.current.allVaults.some(v => v.path === '/Users/luca/MyVault')).toBe(true)
+    expect(result.current.allVaults.some(v => v.path === '/Users/hugo/MyVault')).toBe(true)
     expect(onToast).toHaveBeenCalledWith('Vault "MyVault" opened')
   })
 
@@ -450,7 +450,7 @@ describe('useVaultSwitcher', () => {
 
   it('creates an empty vault and switches to it', async () => {
     const { pickFolder } = await import('../utils/vault-dialog')
-    vi.mocked(pickFolder).mockResolvedValue('/Users/luca/New Vault')
+    vi.mocked(pickFolder).mockResolvedValue('/Users/hugo/New Vault')
     setMockInvokeBehavior({
       createEmptyVault: ({ targetPath }) => targetPath,
     })
@@ -461,15 +461,15 @@ describe('useVaultSwitcher', () => {
       await result.current.handleCreateEmptyVault()
     })
 
-    expect(mockInvokeFn).toHaveBeenCalledWith('create_empty_vault', { targetPath: '/Users/luca/New Vault' })
-    expect(result.current.vaultPath).toBe('/Users/luca/New Vault')
-    expect(result.current.allVaults.some(v => v.path === '/Users/luca/New Vault')).toBe(true)
+    expect(mockInvokeFn).toHaveBeenCalledWith('create_empty_vault', { targetPath: '/Users/hugo/New Vault' })
+    expect(result.current.vaultPath).toBe('/Users/hugo/New Vault')
+    expect(result.current.allVaults.some(v => v.path === '/Users/hugo/New Vault')).toBe(true)
     expect(onToast).toHaveBeenCalledWith('Vault "New Vault" created and opened')
   })
 
   it('shows a friendly toast when empty-vault creation targets a non-empty folder', async () => {
     const { pickFolder } = await import('../utils/vault-dialog')
-    vi.mocked(pickFolder).mockResolvedValue('/Users/luca/Busy Folder')
+    vi.mocked(pickFolder).mockResolvedValue('/Users/hugo/Busy Folder')
     setMockInvokeBehavior({
       createEmptyVault: () => Promise.reject('Choose an empty folder to create a new vault'),
     })
@@ -655,7 +655,7 @@ describe('useVaultSwitcher', () => {
     })
 
     it('keeps persisted active vault when one exists', async () => {
-      const persistedPath = '/Users/luca/MyVault'
+      const persistedPath = '/Users/hugo/MyVault'
       mockVaultListStore = {
         vaults: [{ label: 'My Vault', path: persistedPath }],
         active_vault: persistedPath,

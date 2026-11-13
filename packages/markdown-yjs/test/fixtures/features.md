@@ -15,7 +15,7 @@ _favorite: true
 
 A paragraph with **bold**, *italic*, ~~strike~~, `inline code`, ==a highlight== and a [link](https://example.com/a?b=1).
 
-Wikilinks: [[topic-writing]], an alias [[person-luca-rossi|Luca]] and a path [[type/note]].
+Wikilinks: [[topic-writing]], an alias [[person-hugo-doria|Hugo Dória]] and a path [[type/note]].
 
 Inline math $E = mc^2$ next to text, and a block:
 
@@ -51,7 +51,7 @@ $$
 | Name | Role | Notes |
 | --- | --- | --- |
 | Ada | Engineer | Writes `code` |
-| Luca | Founder | Links [[area-building]] |
+| Hugo Dória | Founder | Links [[area-building]] |
 
 ## Code
 

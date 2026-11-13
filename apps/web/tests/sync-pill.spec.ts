@@ -72,7 +72,7 @@ async function expectPill(
 	});
 }
 
-/** Luca's rule: the pill's icon is the one indicator; the note list and the editor stay still. */
+/** the upstream maintainer's rule: the pill's icon is the one indicator; the note list and the editor stay still. */
 async function expectOnlyThePillIsBusy(page: Page): Promise<void> {
 	await expect(
 		page.getByTestId("note-list-container").locator(BUSY_INDICATORS),

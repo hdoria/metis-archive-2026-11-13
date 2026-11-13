@@ -54,10 +54,10 @@ describe('mobile property display', () => {
       kind: 'status',
       text: 'High',
     })
-    expect(mobilePropertyDisplay('People', ['Luca', 'Brian'], undefined, { People: 'tags' })).toMatchObject({
+    expect(mobilePropertyDisplay('People', ['Hugo Dória', 'Brian'], undefined, { People: 'tags' })).toMatchObject({
       kind: 'list',
-      listItems: ['Luca', 'Brian'],
-      text: 'Luca, Brian',
+      listItems: ['Hugo Dória', 'Brian'],
+      text: 'Hugo Dória, Brian',
     })
   })
 })

@@ -55,10 +55,10 @@ function mockSearchContent(content: string, excludeFrontmatter?: boolean): strin
 
 function mockModifiedFiles(): ModifiedFile[] {
   return [
-    { path: '/Users/luca/MetisLegacy/26q1-metislegacy-app.md', relativePath: '26q1-metislegacy-app.md', status: 'modified' },
-    { path: '/Users/luca/MetisLegacy/facebook-ads-strategy.md', relativePath: 'facebook-ads-strategy.md', status: 'modified' },
-    { path: '/Users/luca/MetisLegacy/ai-agents-primer.md', relativePath: 'ai-agents-primer.md', status: 'added' },
-    { path: '/Users/luca/MetisLegacy/old-draft.md', relativePath: 'old-draft.md', status: 'deleted' },
+    { path: '/Users/hugo/MetisLegacy/26q1-metislegacy-app.md', relativePath: '26q1-metislegacy-app.md', status: 'modified' },
+    { path: '/Users/hugo/MetisLegacy/facebook-ads-strategy.md', relativePath: 'facebook-ads-strategy.md', status: 'modified' },
+    { path: '/Users/hugo/MetisLegacy/ai-agents-primer.md', relativePath: 'ai-agents-primer.md', status: 'added' },
+    { path: '/Users/hugo/MetisLegacy/old-draft.md', relativePath: 'old-draft.md', status: 'deleted' },
   ]
 }
 
@@ -611,16 +611,16 @@ export const mockHandlers = {
     return null
   },
   save_image: (args: { vault_path?: string; filename: string; data: string }) => {
-    const vault = args.vault_path ?? '/Users/luca/MetisLegacy'
+    const vault = args.vault_path ?? '/Users/hugo/MetisLegacy'
     return `${vault}/attachments/${Date.now()}-${args.filename}`
   },
   copy_image_to_vault: (args: { vault_path?: string; source_path: string }) => {
-    const vault = args.vault_path ?? '/Users/luca/MetisLegacy'
+    const vault = args.vault_path ?? '/Users/hugo/MetisLegacy'
     const filename = args.source_path.split('/').pop() ?? 'image.png'
     return `${vault}/attachments/${Date.now()}-${filename}`
   },
   download_remote_image_to_vault: (args: { vault_path?: string; url: string }) => {
-    const vault = args.vault_path ?? '/Users/luca/MetisLegacy'
+    const vault = args.vault_path ?? '/Users/hugo/MetisLegacy'
     const filename = new URL(args.url).pathname.split('/').pop() || 'remote-image.png'
     return `${vault}/attachments/${Date.now()}-${filename}`
   },

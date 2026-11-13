@@ -78,7 +78,7 @@ describe('resolveImageUrls', () => {
 
   it('rewrites legacy asset URLs from a different vault', () => {
     tauriMode = true
-    const legacyUrl = assetUrl('/Users/luca/Workspace/metis-getting-started/attachments/CleanShot.png')
+    const legacyUrl = assetUrl('/Users/hugo/Workspace/metis-getting-started/attachments/CleanShot.png')
     const markdown = `![CleanShot](${legacyUrl})`
 
     expect(resolveImageUrls(markdown, '/Users/john/Documents/Getting Started')).toBe(
@@ -272,7 +272,7 @@ describe('normalizeBareImageUrls', () => {
     const markdown = [
       '![local](./images/local.png)',
       '![parent](../shared/parent.png)',
-      '![absolute](/Users/luca/Pictures/photo.png)',
+      '![absolute](/Users/hugo/Pictures/photo.png)',
       '![remote](https://example.com/photo.png)',
       '![data](data:image/png;base64,abc123)',
       '![query](?image=photo.png)',
@@ -405,9 +405,9 @@ describe('portableImageUrls', () => {
   })
 
   it('unwraps external asset URLs to filesystem paths instead of saving asset scheme URLs', () => {
-    const markdown = `![external](${assetUrl('/Users/luca/Pictures/photo.png')})`
+    const markdown = `![external](${assetUrl('/Users/hugo/Pictures/photo.png')})`
 
-    expect(portableImageUrls(markdown, '/vault')).toBe('![external](/Users/luca/Pictures/photo.png)')
+    expect(portableImageUrls(markdown, '/vault')).toBe('![external](/Users/hugo/Pictures/photo.png)')
   })
 })
 

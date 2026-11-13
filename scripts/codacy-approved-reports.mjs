@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { relative } from 'node:path'
 
-// Luca's exact false-positive approval, call_355180105f3041c2888d7259418acb80.
+// The upstream maintainer's exact false-positive approval, call_355180105f3041c2888d7259418acb80.
 // Reports stay visible; changed bytes and expired approvals fail closed.
 const expiresAt = Date.parse('2026-10-30T23:59:00Z')
 const approvals = [

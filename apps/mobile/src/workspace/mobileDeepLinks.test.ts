@@ -17,7 +17,7 @@ describe('buildMobileDeepLinkForNote', () => {
         kind: 'localVault',
         label: 'Work Vault',
         totalNotes: 42,
-        vaultPath: '/Users/luca/Work Vault',
+        vaultPath: '/Users/hugo/Work Vault',
         visibleNotes: 20,
       },
     })).toEqual({
@@ -57,7 +57,7 @@ describe('buildMobileDeepLinkForNote', () => {
         kind: 'localVault',
         label: '',
         totalNotes: 1,
-        vaultPath: '/Users/luca/Work Vault',
+        vaultPath: '/Users/hugo/Work Vault',
         visibleNotes: 1,
       },
     })).toEqual({
@@ -156,7 +156,7 @@ function source() {
     kind: 'localVault' as const,
     label: 'MetisLegacy',
     totalNotes: 12,
-    vaultPath: '/Users/luca/MetisLegacy',
+    vaultPath: '/Users/hugo/MetisLegacy',
     visibleNotes: 8,
   }
 }

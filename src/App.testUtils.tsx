@@ -84,7 +84,7 @@ export const mockEntries = [
 		relatedTo: [],
 		status: "Active",
 		archived: false,
-		owner: "Luca",
+		owner: "Hugo Dória",
 		cadence: null,
 		modifiedAt: 1700000000,
 		createdAt: null,

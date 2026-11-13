@@ -17,7 +17,7 @@ Body ${index}.
       files,
       maxNotes: 2,
       vaultLabel: 'MetisLegacy',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
 
     expect(snapshot.notes.map((note) => note.title)).toEqual(['Note 4', 'Note 3'])
@@ -66,7 +66,7 @@ _archived: true
 `, 40),
       ],
       vaultLabel: 'MetisLegacy',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
 
     expect(snapshot.sidebarSections.find((section) => section.id === 'favorites')?.items?.map((item) => item.label)).toEqual([
@@ -99,7 +99,7 @@ type: Type
 `),
       ],
       vaultLabel: 'MetisLegacy',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
 
     expect(snapshot.notes).toEqual([])
@@ -143,7 +143,7 @@ _archived: true
 `, 4),
       ],
       vaultLabel: 'MetisLegacy',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
 
     expect(snapshot.source).toMatchObject({ totalNotes: 5, visibleNotes: 1 })
@@ -186,7 +186,7 @@ _organized: false
 `),
       ],
       vaultLabel: 'MetisLegacy',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
 
     expect(snapshot.typeDefinitions?.Recipe).toBeUndefined()
@@ -228,7 +228,7 @@ _organized: false
 `),
       ],
       vaultLabel: 'MetisLegacy',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
 
     expect(snapshot.views?.map((view) => view.definition.name)).toEqual(['Active Projects'])
@@ -260,7 +260,7 @@ _organized: false
 `),
       ],
       vaultLabel: 'MetisLegacy',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
 
     expect(snapshot.views?.map((view) => view.definition.name)).toEqual(['Legacy Focus'])
@@ -275,7 +275,7 @@ _organized: false
     const snapshot = buildLocalVaultWorkspaceSnapshot({
       files: typeMetadataVaultFiles(),
       vaultLabel: 'MetisLegacy',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
 
     expect(snapshot.typeDefinitions?.Project).toMatchObject({
@@ -327,7 +327,7 @@ Visible: false
 `),
       ],
       vaultLabel: 'MetisLegacy',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
 
     expect(snapshot.typeDefinitions?.Project).toMatchObject({
@@ -352,7 +352,7 @@ _icon: tag
 `),
       ],
       vaultLabel: 'MetisLegacy',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
 
     expect(snapshot.typeDefinitions?.Project?.icon).toBe('tag')
@@ -377,7 +377,7 @@ _archived: 1
 `),
       ],
       vaultLabel: 'MetisLegacy',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
 
     const favorite = snapshot.allNotes?.find((note) => note.id === 'Favorite Draft.md')
@@ -407,7 +407,7 @@ _organized: false
 `),
       ],
       vaultLabel: 'MetisLegacy',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
 
     expect(snapshot.notes[0]?.properties).toContainEqual({
@@ -441,7 +441,7 @@ _archived: true
 `),
       ],
       vaultLabel: 'MetisLegacy',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
 
     expect(snapshot.sidebarSections.find((section) => section.id === 'primary')?.items).toEqual([
@@ -471,7 +471,7 @@ _archived: true
       ],
       folderPaths: ['Writing', 'Writing/Empty'],
       vaultLabel: 'MetisLegacy',
-      vaultPath: '/Users/luca/MetisLegacy',
+      vaultPath: '/Users/hugo/MetisLegacy',
     })
 
     expect(snapshot.folderPaths).toEqual(['Writing', 'Writing/Empty'])

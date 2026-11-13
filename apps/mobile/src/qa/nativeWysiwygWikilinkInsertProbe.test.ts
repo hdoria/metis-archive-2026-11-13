@@ -28,13 +28,13 @@ describe('native WYSIWYG wikilink insert probe', () => {
       target: 'AI Ops Guide',
     })
     expect(nativeWysiwygPersonMentionInsertProbePayload()).toEqual({
-      label: 'Luca',
-      target: 'People/Luca',
+      label: 'Hugo Dória',
+      target: 'People/hugo-doria',
     })
     expect(nativeWysiwygEmojiInsertProbePayload()).toEqual({ text: rocketEmoji })
     expect(nativeWysiwygPersonMentionInsertProbeContent()).toMatchObject({
       content: [{
-        content: [{ text: 'Ask @Lu', type: 'text' }],
+        content: [{ text: 'Ask @Hu', type: 'text' }],
         type: 'paragraph',
       }, {
         content: [{ text: 'Ship :rock', type: 'text' }],
@@ -48,7 +48,7 @@ describe('native WYSIWYG wikilink insert probe', () => {
 
   it('builds a passing proof when inserted links save as desktop markdown', () => {
     expect(nativeWysiwygWikilinkInsertProof({
-      content: `# Note\n\nAsk [[People/Luca|Luca]] about [[AI Ops Guide]].\n\nShip ${rocketEmoji}`,
+      content: `# Note\n\nAsk [[People/hugo-doria|Hugo Dória]] about [[AI Ops Guide]].\n\nShip ${rocketEmoji}`,
       noteId: 'note.md',
     })).toMatchObject({
       insertedEmojiSaved: true,
@@ -85,7 +85,7 @@ describe('native WYSIWYG wikilink insert probe', () => {
 
   it('parses and asserts simulator log proofs', () => {
     const proof = nativeWysiwygWikilinkInsertProof({
-      content: `# Note\n\nAsk [[People/Luca|Luca]] [[AI Ops Guide]]\n\nShip ${rocketEmoji}`,
+      content: `# Note\n\nAsk [[People/hugo-doria|Hugo Dória]] [[AI Ops Guide]]\n\nShip ${rocketEmoji}`,
       noteId: 'note.md',
     })
 
@@ -111,7 +111,7 @@ describe('native WYSIWYG wikilink insert probe', () => {
     }])
     expect(assertNativeWysiwygWikilinkInsertProofs([
       nativeWysiwygWikilinkInsertProof({
-        content: '# Note\n\nAsk @Lu [[AI Ops Guide]]\n\nShip :rock',
+        content: '# Note\n\nAsk @Hu [[AI Ops Guide]]\n\nShip :rock',
         noteId: 'note.md',
       }),
     ])).toEqual([{

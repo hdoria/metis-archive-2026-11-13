@@ -4,7 +4,7 @@ import { clientColor, initials, MAX_NAME_LENGTH, PRESENCE_COLORS, presentUsers, 
 describe('presence', () => {
   it('lists who announced a user, the viewer first and the others by name', () => {
     const states = new Map<number, unknown>([
-      [3, { user: { name: 'Luca', color: '#111111' } }],
+      [3, { user: { name: 'Hugo Dória', color: '#111111' } }],
       [1, { user: { name: 'Ada', color: '#222222' } }],
       [2, { user: { name: 'Me', color: '#333333' } }],
       [4, { cursor: 'no user yet' }],
@@ -14,7 +14,7 @@ describe('presence', () => {
     expect(presentUsers(states, 2).map(({ name, self }) => [name, self])).toEqual([
       ['Me', true],
       ['Ada', false],
-      ['Luca', false],
+      ['Hugo Dória', false],
     ])
   })
 
@@ -49,7 +49,7 @@ describe('presence', () => {
 
   it('gives a name the same colour every time, from the palette', () => {
     expect(userColor('Ada Lovelace')).toBe(userColor('Ada Lovelace'))
-    expect(PRESENCE_COLORS).toContain(userColor('Luca'))
+    expect(PRESENCE_COLORS).toContain(userColor('Hugo Dória'))
   })
 
   it('gives each open document a palette colour, so two windows of one device differ', () => {
@@ -60,7 +60,7 @@ describe('presence', () => {
 
   it.each([
     ['Ada Lovelace', 'AL'],
-    ['luca', 'L'],
+    ['hugo', 'H'],
     ['  Jean   Luc  Picard ', 'JP'],
     ['', '?'],
     ['émile zola', 'ÉZ'],

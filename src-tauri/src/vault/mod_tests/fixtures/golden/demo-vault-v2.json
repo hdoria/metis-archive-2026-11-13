@@ -15,7 +15,7 @@
     "snippet": "The original spike that proved Metis could read a markdown vault, render note metadata, and support keyboard-first navigation. Set the initial four-panel layout...",
     "relationships": {
       "owner": [
-        "[[person-luca-rossi]]"
+        "[[person-hugo-doria]]"
       ],
       "belongs_to": [
         "[[24q4]]"
@@ -76,7 +76,7 @@
         "[[project]]"
       ],
       "owner": [
-        "[[person-luca-rossi]]"
+        "[[person-hugo-doria]]"
       ],
       "belongs_to": [
         "[[25q1]]"
@@ -140,7 +140,7 @@
         "[[25q2]]"
       ],
       "owner": [
-        "[[person-luca-rossi]]"
+        "[[person-hugo-doria]]"
       ]
     },
     "wordCount": 33,
@@ -214,7 +214,7 @@
       "[[25q1-metislegacy-v1]]"
     ],
     "relatedTo": [
-      "[[person-luca-rossi]]",
+      "[[person-hugo-doria]]",
       "[[person-matteo-cellini]]"
     ],
     "fileSize": 292,
@@ -227,7 +227,7 @@
         "[[25q1-metislegacy-v1]]"
       ],
       "related_to": [
-        "[[person-luca-rossi]]",
+        "[[person-hugo-doria]]",
         "[[person-matteo-cellini]]"
       ]
     },
@@ -359,14 +359,14 @@
     "fileKind": "markdown"
   },
   {
-    "path": "person-luca-rossi.md",
-    "filename": "person-luca-rossi.md",
-    "title": "Luca Rossi",
+    "path": "person-hugo-doria.md",
+    "filename": "person-hugo-doria.md",
+    "title": "Hugo Dória",
     "isA": "Person",
     "aliases": [
-      "[[Luca Rossi]]"
+      "[[Hugo Dória]]"
     ],
-    "fileSize": 173,
+    "fileSize": 175,
     "snippet": "Owns the MetisLegacy product work and remains the primary owner on the fixture's project notes.",
     "relationships": {
       "Type": [
@@ -457,7 +457,7 @@
         "[[responsibility-sponsorships]]"
       ],
       "owner": [
-        "[[person-luca-rossi]]"
+        "[[person-hugo-doria]]"
       ]
     },
     "wordCount": 25,

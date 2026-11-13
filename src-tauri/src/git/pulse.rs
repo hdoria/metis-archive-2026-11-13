@@ -380,14 +380,14 @@ mod tests {
         fn url(&self) -> &'static str {
             match self {
                 GitHubRemote::OwnerRepo => "https://github.com/owner/repo.git",
-                GitHubRemote::MetisLegacyVault => "https://github.com/lucaong/metislegacy-vault.git",
+                GitHubRemote::MetisLegacyVault => "https://github.com/hdoria/metislegacy-vault.git",
             }
         }
 
         fn commit_prefix(&self) -> &'static str {
             match self {
                 GitHubRemote::OwnerRepo => "https://github.com/owner/repo/commit/",
-                GitHubRemote::MetisLegacyVault => "https://github.com/lucaong/metislegacy-vault/commit/",
+                GitHubRemote::MetisLegacyVault => "https://github.com/hdoria/metislegacy-vault/commit/",
             }
         }
     }

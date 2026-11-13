@@ -145,16 +145,16 @@ describe('the collaboration channel over websockets', () => {
 
   it('makes two clients converge and see each other', async () => {
     const ada = await joinNote(NOTE)
-    const luca = await joinNote(NOTE)
+    const hugo = await joinNote(NOTE)
     ada.awareness.setLocalStateField('user', { name: 'Ada', color: '#d33' })
 
     heading(ada.doc).insert(0, 'A-')
-    heading(luca.doc).insert(heading(luca.doc).length, '-L')
-    await converged(ada, luca)
+    heading(hugo.doc).insert(heading(hugo.doc).length, '-L')
+    await converged(ada, hugo)
 
-    expect(codec.read(luca.doc)).toContain('# A-Alpha-L')
-    expect(codec.read(ada.doc)).toBe(codec.read(luca.doc))
-    expect(luca.awareness.getStates().get(ada.doc.clientID)).toEqual({ user: { name: 'Ada', color: '#d33' } })
+    expect(codec.read(hugo.doc)).toContain('# A-Alpha-L')
+    expect(codec.read(ada.doc)).toBe(codec.read(hugo.doc))
+    expect(hugo.awareness.getStates().get(ada.doc.clientID)).toEqual({ user: { name: 'Ada', color: '#d33' } })
   })
 
   it('commits the edit to the vault after the typing stops', async () => {

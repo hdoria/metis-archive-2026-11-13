@@ -14,7 +14,7 @@ const NOTE = 'notes/plan.md'
 const ANA: OutgoingShare = { id: 's_1', scope: NOTE, role: 'editor', grantee: { userId: 'u_ana', email: 'ana@example.com', github: 'ana' } }
 const VAULT_WIDE: OutgoingShare = { id: 's_2', scope: '*', role: 'viewer', grantee: { userId: 'u_bo', email: 'bo@example.com', github: null } }
 const ELSEWHERE: OutgoingShare = { id: 's_3', scope: 'other.md', role: 'viewer', grantee: { userId: 'u_cy', email: 'cy@example.com', github: null } }
-const INCOMING: IncomingShare = { id: 's_9', vaultId: 'v_9', scope: 'ideas/tea.md', role: 'viewer', owner: { userId: 'u_lu', email: null, github: 'luca' } }
+const INCOMING: IncomingShare = { id: 's_9', vaultId: 'v_9', scope: 'ideas/tea.md', role: 'viewer', owner: { userId: 'u_hd', email: null, github: 'hdoria' } }
 
 function available(state: Partial<SharingState> = {}): SharingState {
   return { status: 'available', vaultId: 'v_1', outgoing: [], incoming: [], ...state }
@@ -194,7 +194,7 @@ describe('the status bar sharing entry', () => {
     fireEvent.click(screen.getByTestId('status-shared-with-me'))
     const item = await screen.findByTestId('shared-with-me-item')
     expect(item).toHaveTextContent('tea')
-    expect(item).toHaveTextContent('from @luca')
+    expect(item).toHaveTextContent('from @hdoria')
     expect(item).toHaveTextContent('Can view')
     fireEvent.click(screen.getByTestId('shared-with-me-open'))
 

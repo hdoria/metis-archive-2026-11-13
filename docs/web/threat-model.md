@@ -25,7 +25,7 @@ The Metis web architecture consists of:
 
 2. **Web Client** (`apps/web`): Browser-based interface for real-time collaboration
 
-3. **Deployment**: Each vault runs in its own Container behind a Cloudflare Worker (from `metis-cloud`), fronted by Cloudflare Access at `metis.lucaron.in`
+3. **Deployment**: Each vault runs in its own Container behind a Cloudflare Worker (from `metis-cloud`), fronted by Cloudflare Access in the upstream hosted deployment
 
 ## Assets
 

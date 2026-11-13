@@ -8,7 +8,7 @@ date: 2026-10-25
 
 ## Context
 
-TOL-18 (B5-2) lets a Metis Web user share a note or a whole vault with another user as `editor` or `viewer`, and revoke it with immediate effect, open websockets included. The licensing boundary (`docs/web/licensing-boundary.md`, decided by Luca on 25 Oct 2026) puts enforcement in the open `apps/server` (AGPL), so self-hosted multiplayer has access control, and keeps share and account records and their API in the private `metis-cloud` front Worker, which must not import the open packages and talks to the server only over the protocol. Until now the server had one credential, the bearer token, with full access. The hosted front end and the server are deployed separately, in either order.
+TOL-18 (B5-2) lets a Metis Web user share a note or a whole vault with another user as `editor` or `viewer`, and revoke it with immediate effect, open websockets included. The licensing boundary (`docs/web/licensing-boundary.md`, decided by the upstream maintainer on 25 Oct 2026) puts enforcement in the open `apps/server` (AGPL), so self-hosted multiplayer has access control, and keeps share and account records and their API in the private `metis-cloud` front Worker, which must not import the open packages and talks to the server only over the protocol. Until now the server had one credential, the bearer token, with full access. The hosted front end and the server are deployed separately, in either order.
 
 ## Decision
 

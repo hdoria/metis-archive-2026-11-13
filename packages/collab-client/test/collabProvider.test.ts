@@ -49,28 +49,28 @@ describe('CollabProvider', () => {
   it('keeps edits made while offline and sends them when the connection is back', async () => {
     harness = await createHarness()
     const ada = await harness.client()
-    const luca = await harness.client()
+    const hugo = await harness.client()
 
     ada.sockets[0].close()
     ada.type('Alpha', ' written offline')
-    expect(luca.markdown()).not.toContain('written offline')
+    expect(hugo.markdown()).not.toContain('written offline')
     await ada.provider.whenSynced()
     await settle()
 
-    expect(luca.markdown()).toContain('# Alpha written offline')
+    expect(hugo.markdown()).toContain('# Alpha written offline')
   })
 
   it('stops showing the others while offline', async () => {
     harness = await createHarness()
     const ada = await harness.client()
-    const luca = await harness.client()
-    luca.provider.awareness.setLocalStateField('user', { name: 'Luca' })
+    const hugo = await harness.client()
+    hugo.provider.awareness.setLocalStateField('user', { name: 'Hugo Dória' })
     await settle()
 
     const before = ada.provider.awareness.getStates().size
     ada.sockets[0].close()
 
-    expect([before, ada.provider.awareness.getStates().has(luca.doc.clientID)]).toEqual([2, false])
+    expect([before, ada.provider.awareness.getStates().has(hugo.doc.clientID)]).toEqual([2, false])
   })
 
   it('retries with a growing delay while the server cannot be reached', async () => {

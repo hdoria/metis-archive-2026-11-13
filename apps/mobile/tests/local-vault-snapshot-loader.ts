@@ -25,7 +25,7 @@ type DirectoryName = string
 type RelativePath = string
 type VaultPath = string
 
-const defaultLocalVaultPath = '/Users/luca/MetisLegacy'
+const defaultLocalVaultPath = '/Users/hugo/MetisLegacy'
 export const localVaultPath = process.env.MOBILE_QA_VAULT_PATH ?? defaultLocalVaultPath
 
 let localVaultSnapshotPromise: Promise<LocalVaultSnapshotState | null> | null = null

@@ -21,7 +21,7 @@ const mockFolders: FolderNode[] = [
 ]
 
 const defaultSelection: SidebarSelection = { kind: 'filter', filter: 'all' }
-const vaultRootPath = '/Users/luca/MetisLegacy'
+const vaultRootPath = '/Users/hugo/MetisLegacy'
 
 function renderTree(props: Partial<ComponentProps<typeof FolderTree>> = {}) {
   const onSelect = props.onSelect ?? vi.fn()
@@ -101,14 +101,14 @@ describe('FolderTree', () => {
       {
         name: 'Personal',
         path: '',
-        rootPath: '/Users/luca/Personal',
-        children: [{ name: 'projects', path: 'projects', rootPath: '/Users/luca/Personal', children: [] }],
+        rootPath: '/Users/hugo/Personal',
+        children: [{ name: 'projects', path: 'projects', rootPath: '/Users/hugo/Personal', children: [] }],
       },
       {
         name: 'Team',
         path: '',
-        rootPath: '/Users/luca/Team',
-        children: [{ name: 'projects', path: 'projects', rootPath: '/Users/luca/Team', children: [] }],
+        rootPath: '/Users/hugo/Team',
+        children: [{ name: 'projects', path: 'projects', rootPath: '/Users/hugo/Team', children: [] }],
       },
     ]
 
@@ -117,7 +117,7 @@ describe('FolderTree', () => {
         folders={folders}
         selection={defaultSelection}
         onSelect={onSelect}
-        vaultRootPath="/Users/luca/Personal"
+        vaultRootPath="/Users/hugo/Personal"
       />,
     )
 
@@ -130,7 +130,7 @@ describe('FolderTree', () => {
     expect(onSelect).toHaveBeenCalledWith({
       kind: 'folder',
       path: 'projects',
-      rootPath: '/Users/luca/Team',
+      rootPath: '/Users/hugo/Team',
     })
   })
 
@@ -266,7 +266,7 @@ describe('FolderTree', () => {
 
   it('passes the target vault root when the vault root is selected', async () => {
     const onCreateFolder = vi.fn().mockResolvedValue(true)
-    const otherVault = '/Users/luca/Team'
+    const otherVault = '/Users/hugo/Team'
     const folders: FolderNode[] = [
       {
         name: 'Personal',
@@ -593,14 +593,14 @@ describe('FolderTree', () => {
       {
         name: 'Personal',
         path: '',
-        rootPath: '/Users/luca/Personal',
-        children: [{ name: 'projects', path: 'projects', rootPath: '/Users/luca/Personal', children: [] }],
+        rootPath: '/Users/hugo/Personal',
+        children: [{ name: 'projects', path: 'projects', rootPath: '/Users/hugo/Personal', children: [] }],
       },
       {
         name: 'Team',
         path: '',
-        rootPath: '/Users/luca/Team',
-        children: [{ name: 'projects', path: 'projects', rootPath: '/Users/luca/Team', children: [] }],
+        rootPath: '/Users/hugo/Team',
+        children: [{ name: 'projects', path: 'projects', rootPath: '/Users/hugo/Team', children: [] }],
       },
     ]
 
@@ -609,7 +609,7 @@ describe('FolderTree', () => {
         folders={folders}
         selection={defaultSelection}
         onSelect={vi.fn()}
-        vaultRootPath="/Users/luca/Team"
+        vaultRootPath="/Users/hugo/Team"
       />,
     )
 
@@ -620,7 +620,7 @@ describe('FolderTree', () => {
     expect(onCreateNoteInFolder).toHaveBeenCalledOnce()
     expect((onCreateNoteInFolder.mock.calls[0][0] as CustomEvent).detail).toEqual({
       folderPath: 'projects',
-      rootPath: '/Users/luca/Team',
+      rootPath: '/Users/hugo/Team',
     })
     window.removeEventListener(CREATE_NOTE_IN_FOLDER_EVENT, onCreateNoteInFolder)
   })

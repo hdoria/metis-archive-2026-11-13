@@ -29,7 +29,7 @@ const makeEntry = (overrides: Partial<VaultEntry> = {}): VaultEntry => ({
 
 const entries = [
   makeEntry({ path: '/vault/project/alpha.md', filename: 'alpha.md', title: 'Alpha Project', isA: 'Project' }),
-  makeEntry({ path: '/vault/person/luca.md', filename: 'luca.md', title: 'Luca', isA: 'Person' }),
+  makeEntry({ path: '/vault/person/hugo-doria.md', filename: 'hugo-doria.md', title: 'Hugo Dória', isA: 'Person' }),
   makeEntry({ path: '/vault/topic/ai.md', filename: 'ai.md', title: 'AI Research', isA: 'Topic' }),
   makeEntry({ path: '/vault/note/plain.md', filename: 'plain.md', title: 'Plain Note', isA: null }),
   makeEntry({ path: '/vault/person/alice.md', filename: 'alice.md', title: 'Alice Smith', isA: 'Person', aliases: ['Alice'] }),
@@ -77,10 +77,10 @@ describe('NoteAutocomplete', () => {
 
   it('shows note type badge for typed entries', () => {
     const { container } = render(
-      <NoteAutocomplete entries={entries} typeEntryMap={typeEntryMap} value="Luca" onChange={onChange} onSelect={onSelect} />,
+      <NoteAutocomplete entries={entries} typeEntryMap={typeEntryMap} value="Hugo Dória" onChange={onChange} onSelect={onSelect} />,
     )
     fireEvent.focus(container.querySelector('input')!)
-    expect(screen.getByText('Luca')).toBeInTheDocument()
+    expect(screen.getByText('Hugo Dória')).toBeInTheDocument()
     expect(screen.getByText('Person')).toBeInTheDocument()
   })
 
@@ -97,7 +97,7 @@ describe('NoteAutocomplete', () => {
 
   it('applies type color and light background from typeEntryMap', () => {
     const { container } = render(
-      <NoteAutocomplete entries={entries} typeEntryMap={typeEntryMap} value="Luca" onChange={onChange} onSelect={onSelect} />,
+      <NoteAutocomplete entries={entries} typeEntryMap={typeEntryMap} value="Hugo Dória" onChange={onChange} onSelect={onSelect} />,
     )
     fireEvent.focus(container.querySelector('input')!)
     const typeLabel = container.querySelector('.wikilink-menu__type')

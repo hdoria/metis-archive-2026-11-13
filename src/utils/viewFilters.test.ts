@@ -125,11 +125,11 @@ describe('evaluateView', () => {
 
   it('filters by property field', () => {
     const entries = [
-      makeEntry({ title: 'Match', properties: { Owner: 'Luca' } }),
+      makeEntry({ title: 'Match', properties: { Owner: 'Hugo Dória' } }),
       makeEntry({ title: 'Other', properties: { Owner: 'Brian' } }),
       makeEntry({ title: 'None', properties: {} }),
     ]
-    expectFilterTitles({ field: 'Owner', op: 'equals', value: 'Luca' }, entries, ['Match'], 'By Owner')
+    expectFilterTitles({ field: 'Owner', op: 'equals', value: 'Hugo Dória' }, entries, ['Match'], 'By Owner')
   })
 
   it('filters with any_of operator', () => {

@@ -46,7 +46,7 @@ const MOCK_ENTRIES: VaultEntry[] = [
     color: null,
     order: null,
     template: null, sort: null,
-    outgoingLinks: ['topic/ai', 'topic/api-design', 'person/luca'],
+    outgoingLinks: ['topic/ai', 'topic/api-design', 'person/hugo-doria'],
     properties: {},
   },
   {

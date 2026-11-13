@@ -27,9 +27,9 @@ export type NativeWysiwygWikilinkInsertAssertionFailure = {
 export const nativeWysiwygWikilinkInsertLogPrefix = 'METIS_MOBILE_WYSIWYG_WIKILINK_INSERT_PROBE'
 const probeTarget = 'AI Ops Guide'
 const expectedWikilink = `[[${probeTarget}]]`
-const personMentionProbeLabel = 'Luca'
-const personMentionProbeTarget = 'People/Luca'
-const personMentionProbeSource = 'Ask @Lu'
+const personMentionProbeLabel = 'Hugo Dória'
+const personMentionProbeTarget = 'People/hugo-doria'
+const personMentionProbeSource = 'Ask @Hu'
 const expectedPersonMentionWikilink = `[[${personMentionProbeTarget}|${personMentionProbeLabel}]]`
 const emojiProbeSource = 'Ship :rock'
 const emojiProbeShortcode = ':rock'
@@ -100,7 +100,7 @@ export function nativeWysiwygWikilinkInsertProof({
     insertedEmojiSaved: content.includes(expectedEmoji),
     insertedEmojiSourceRemoved: !content.includes(emojiProbeShortcode),
     insertedPersonMentionSaved: content.includes(expectedPersonMentionWikilink),
-    insertedPersonMentionSourceRemoved: !content.includes('@Lu'),
+    insertedPersonMentionSourceRemoved: !content.includes('@Hu'),
     insertedWikilinkSaved: content.includes(expectedWikilink),
     noteId,
   }

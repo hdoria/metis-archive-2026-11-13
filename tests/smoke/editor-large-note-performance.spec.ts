@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test'
 import { executeCommand, openCommandPalette } from './helpers'
 
-const LARGE_NOTE_PATH = '/Users/luca/MetisLegacy/perf-large-note.md'
+const LARGE_NOTE_PATH = '/Users/hugo/MetisLegacy/perf-large-note.md'
 const LARGE_NOTE_TITLE = 'Perf Large Note'
 
 function largeMarkdown(): string {

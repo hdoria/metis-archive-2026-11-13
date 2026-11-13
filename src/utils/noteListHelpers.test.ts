@@ -107,7 +107,7 @@ describe('filterEntries', () => {
       makeEntry({ path: '/vault/note/real-note.md', title: 'Real Note', isA: 'Note' }),
       makeEntry({ path: '/vault/attachments/reference.md', title: 'Attachment Markdown', isA: 'Note' }),
       makeEntry({ path: '/vault/attachments/nested/diagram.md', title: 'Nested Attachment Markdown', isA: 'Note' }),
-      makeEntry({ path: 'C:\\Users\\luca\\Vault\\attachments\\windows.md', title: 'Windows Attachment Markdown', isA: 'Note' }),
+      makeEntry({ path: 'C:\\Users\\hugo\\Vault\\attachments\\windows.md', title: 'Windows Attachment Markdown', isA: 'Note' }),
     ]
 
     const result = filterEntries(entries, allSelection, { subFilter: 'open' })
@@ -171,10 +171,10 @@ describe('filterEntries', () => {
 
   it('matches slash-based folder selections against Windows entry paths', () => {
     const entries = [
-      makeEntry({ path: 'C:\\Users\\luca\\Vault\\Client Work\\Alpha.md', title: 'Alpha' }),
-      makeEntry({ path: 'C:\\Users\\luca\\Vault\\Client Work\\Nested\\Beta.md', title: 'Beta' }),
-      makeEntry({ path: 'C:\\Users\\luca\\Vault\\Client Work Archive\\Old.md', title: 'Archive' }),
-      makeEntry({ path: 'C:\\Users\\luca\\Vault\\客户\\计划.md', title: 'Unicode' }),
+      makeEntry({ path: 'C:\\Users\\hugo\\Vault\\Client Work\\Alpha.md', title: 'Alpha' }),
+      makeEntry({ path: 'C:\\Users\\hugo\\Vault\\Client Work\\Nested\\Beta.md', title: 'Beta' }),
+      makeEntry({ path: 'C:\\Users\\hugo\\Vault\\Client Work Archive\\Old.md', title: 'Archive' }),
+      makeEntry({ path: 'C:\\Users\\hugo\\Vault\\客户\\计划.md', title: 'Unicode' }),
     ]
 
     expect(filterEntries(entries, { kind: 'folder', path: 'Client Work' }).map((entry) => entry.title)).toEqual(['Alpha', 'Beta'])
@@ -183,28 +183,28 @@ describe('filterEntries', () => {
 
   it('shows only direct root-level files when selecting the vault root folder', () => {
     const entries = [
-      makeEntry({ path: '/Users/luca/MetisLegacy/root-note.md', title: 'Root Note', fileKind: 'markdown' }),
-      makeEntry({ path: '/Users/luca/MetisLegacy/config.json', title: 'config.json', fileKind: 'text' }),
-      makeEntry({ path: '/Users/luca/MetisLegacy/projects/nested.md', title: 'Nested Note', fileKind: 'markdown' }),
-      makeEntry({ path: '/Users/luca/MetisLegacy/assets/logo.png', title: 'Logo', fileKind: 'binary' }),
+      makeEntry({ path: '/Users/hugo/MetisLegacy/root-note.md', title: 'Root Note', fileKind: 'markdown' }),
+      makeEntry({ path: '/Users/hugo/MetisLegacy/config.json', title: 'config.json', fileKind: 'text' }),
+      makeEntry({ path: '/Users/hugo/MetisLegacy/projects/nested.md', title: 'Nested Note', fileKind: 'markdown' }),
+      makeEntry({ path: '/Users/hugo/MetisLegacy/assets/logo.png', title: 'Logo', fileKind: 'binary' }),
     ]
 
-    const result = filterEntries(entries, { kind: 'folder', path: '', rootPath: '/Users/luca/MetisLegacy' })
+    const result = filterEntries(entries, { kind: 'folder', path: '', rootPath: '/Users/hugo/MetisLegacy' })
 
     expect(result.map((entry) => entry.title)).toEqual(['Root Note', 'config.json'])
   })
 
   it('keeps same-named folders isolated by selected workspace root', () => {
     const entries = [
-      makeEntry({ path: '/Users/luca/Personal/projects/personal.md', title: 'Personal Project' }),
-      makeEntry({ path: '/Users/luca/Team/projects/team.md', title: 'Team Project' }),
-      makeEntry({ path: '/Users/luca/Team/archive/team.md', title: 'Team Archive' }),
+      makeEntry({ path: '/Users/hugo/Personal/projects/personal.md', title: 'Personal Project' }),
+      makeEntry({ path: '/Users/hugo/Team/projects/team.md', title: 'Team Project' }),
+      makeEntry({ path: '/Users/hugo/Team/archive/team.md', title: 'Team Archive' }),
     ]
 
     const result = filterEntries(entries, {
       kind: 'folder',
       path: 'projects',
-      rootPath: '/Users/luca/Team',
+      rootPath: '/Users/hugo/Team',
     })
 
     expect(result.map((entry) => entry.title)).toEqual(['Team Project'])
@@ -320,14 +320,14 @@ describe('buildRelationshipGroups', () => {
   it('keeps stale entity views usable when a rapidly switched entry lacks filename metadata', () => {
     const staleEntity = {
       ...makeEntry({
-        path: 'C:\\Users\\luca\\MetisLegacy\\project\\alpha.md',
+        path: 'C:\\Users\\hugo\\MetisLegacy\\project\\alpha.md',
         title: 'Alpha project',
         isA: 'Project',
       }),
       filename: undefined,
     } as unknown as ReturnType<typeof makeEntry>
     const backlink = makeEntry({
-      path: '/Users/luca/MetisLegacy/note/backlink.md',
+      path: '/Users/hugo/MetisLegacy/note/backlink.md',
       filename: 'backlink.md',
       title: 'Backlink',
       outgoingLinks: ['project/alpha'],

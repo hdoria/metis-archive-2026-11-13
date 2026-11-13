@@ -154,10 +154,10 @@ mod tests {
         let with_owner = update_frontmatter_content(
             content,
             "Owner",
-            Some(FrontmatterValue::String("Luca".to_string())),
+            Some(FrontmatterValue::String("Hugo Dória".to_string())),
         )
         .unwrap();
-        assert!(with_owner.contains("Owner: Luca"));
+        assert!(with_owner.contains("Owner: Hugo Dória"));
         let without_owner = update_frontmatter_content(&with_owner, "Owner", None).unwrap();
         assert!(!without_owner.contains("Owner"));
         assert!(without_owner.contains("Status: Draft"));

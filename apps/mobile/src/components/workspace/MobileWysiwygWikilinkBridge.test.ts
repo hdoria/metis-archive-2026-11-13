@@ -208,9 +208,9 @@ describe('native WYSIWYG wikilink bridge', () => {
   })
 
   it('detects an active native person mention autocomplete query', () => {
-    expectAutocomplete('Ask @lu', 8, {
+    expectAutocomplete('Ask @hu', 8, {
       kind: 'personMention',
-      query: 'lu',
+      query: 'hu',
       range: { from: 5, to: 8 },
     })
   })
@@ -266,10 +266,10 @@ describe('native WYSIWYG wikilink bridge', () => {
     },
     {
       cursor: 8,
-      expectedMarkdown: 'Ask [[People/Luca|Luca]] about this',
+      expectedMarkdown: 'Ask [[People/hugo-doria|Hugo Dória]] about this',
       kind: 'person mention',
-      payload: { label: 'Luca', target: 'People/Luca' },
-      text: 'Ask @Lu about this',
+      payload: { label: 'Hugo Dória', target: 'People/hugo-doria' },
+      text: 'Ask @Hu about this',
     },
     {
       cursor: 9,

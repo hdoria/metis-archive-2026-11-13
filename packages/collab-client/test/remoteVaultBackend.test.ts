@@ -104,14 +104,14 @@ describe('the remote vault backend', () => {
 
   it('opens a note as a live document that two clients share', async () => {
     const ada = await open('welcome.md', { user: { name: 'Ada', color: '#d9480f' } })
-    const luca = await open('welcome.md')
+    const hugo = await open('welcome.md')
 
     ada.doc.getText('frontmatter').insert(0, '')
     const heading = ada.fragment.createTreeWalker((node) => node.constructor.name === 'YXmlText').next().value as { insert(index: number, text: string): void }
     heading.insert(0, 'Shared ')
 
-    await expect.poll(() => codec.read(luca.doc)).toContain('# Shared Welcome')
-    expect(luca.awareness.getStates().get(ada.doc.clientID)).toEqual({ user: { name: 'Ada', color: '#d9480f' } })
+    await expect.poll(() => codec.read(hugo.doc)).toContain('# Shared Welcome')
+    expect(hugo.awareness.getStates().get(ada.doc.clientID)).toEqual({ user: { name: 'Ada', color: '#d9480f' } })
   })
 
   it('opens a read-only document that cannot change the note', async () => {

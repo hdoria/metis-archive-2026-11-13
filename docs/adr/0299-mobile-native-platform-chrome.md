@@ -36,6 +36,6 @@ Metis Mobile's existing parity guidance treats desktop as the visual source of t
 
 ## Advice
 
-Luca approved the native-UI plan on 2026-10-30 (recorded in TOL-274):
+The upstream maintainer approved the native-UI plan on 2026-10-30 (recorded in TOL-274):
 
 > Okay, so I agree with everything, and you can go ahead with the whole plan and start working on these right now. the only thing I'm not sure I understood correctly is that you also proposed to move to SF symbols icons, and that's something maybe we can do for the fixed sections like inboxes or notes and so on, but we can't do that for the types sections because those icons need to stay the same both on mobile and desktop.

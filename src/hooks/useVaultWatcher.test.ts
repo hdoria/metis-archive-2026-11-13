@@ -85,7 +85,7 @@ async function expectBatchedVaultChanges(scenario: WatcherBatchScenario) {
 describe('watch path helpers', () => {
   it('normalizes slashes and private tmp aliases', () => {
     expect(normalizeWatchPath('/private/tmp/vault//')).toBe('/tmp/vault')
-    expect(normalizeWatchPath('C:\\Users\\Luca\\Vault')).toBe('C:/Users/Luca/Vault')
+    expect(normalizeWatchPath('C:\\Users\\hugo\\Vault')).toBe('C:/Users/hugo/Vault')
   })
 
   it('resolves relative watcher paths against the active vault', () => {
@@ -131,19 +131,19 @@ describe('useRecentVaultWrites', () => {
 
   it('filters recent app-owned writes for tilde-mounted vault roots', () => {
     const { result } = renderHook(() => useRecentVaultWrites({
-      vaultPath: '/Users/luca/Workspace/metislegacy',
-      vaultPaths: ['/Users/luca/Workspace/metislegacy', '~/Workspace/refactoring-vault'],
+      vaultPath: '/Users/hugo/Workspace/metislegacy',
+      vaultPaths: ['/Users/hugo/Workspace/metislegacy', '~/Workspace/refactoring-vault'],
       now: () => 1000,
     }))
 
     act(() => {
-      result.current.markInternalWrite('/Users/luca/Workspace/refactoring-vault/notes/self.md')
+      result.current.markInternalWrite('/Users/hugo/Workspace/refactoring-vault/notes/self.md')
     })
 
     expect(result.current.filterExternalPaths([
-      '/Users/luca/Workspace/metislegacy/notes/external.md',
-      '/Users/luca/Workspace/refactoring-vault/notes/self.md',
-    ])).toEqual(['/Users/luca/Workspace/metislegacy/notes/external.md'])
+      '/Users/hugo/Workspace/metislegacy/notes/external.md',
+      '/Users/hugo/Workspace/refactoring-vault/notes/self.md',
+    ])).toEqual(['/Users/hugo/Workspace/metislegacy/notes/external.md'])
   })
 
   it.each([

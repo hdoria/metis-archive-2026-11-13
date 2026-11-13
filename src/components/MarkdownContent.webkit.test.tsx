@@ -58,10 +58,10 @@ describe('MarkdownContent WebKit regex fallback', () => {
     const { MarkdownContent } = await import('./MarkdownContent')
 
     expect(() => {
-      render(<MarkdownContent content="Contact luca@example.com for details" />)
+      render(<MarkdownContent content="Contact hugo@example.com for details" />)
     }).not.toThrow()
-    expect(screen.getByText('Contact luca@example.com for details')).toBeInTheDocument()
-    expect(screen.queryByRole('link', { name: 'luca@example.com' })).not.toBeInTheDocument()
+    expect(screen.getByText('Contact hugo@example.com for details')).toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: 'hugo@example.com' })).not.toBeInTheDocument()
   }
 
   it('renders AI code fences without syntax highlighting when modern regex features are unavailable', async () => {

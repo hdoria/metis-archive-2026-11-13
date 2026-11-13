@@ -20,7 +20,7 @@ October 21, and does not apply to Stable-channel jobs. Changed source bytes,
 additional reports, unavailable files, scanner errors, and expired approvals
 remain blocking. No dependency advisory is covered by this registry.
 
-The original authorization is Luca's response to
+The original authorization is the upstream maintainer's response to
 `call_355180105f3041c2888d7259418acb80`; the detailed release record is TOL-96.
 
 ## Consequences

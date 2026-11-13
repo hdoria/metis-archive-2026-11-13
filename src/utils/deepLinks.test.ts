@@ -10,18 +10,18 @@ import {
 
 const workVault: DeepLinkVault = {
   label: 'Work Vault',
-  path: '/Users/luca/Work Vault',
+  path: '/Users/hugo/Work Vault',
 }
 
 const personalVault: DeepLinkVault = {
   label: 'Personal Vault',
-  path: '/Users/luca/Personal Vault',
+  path: '/Users/hugo/Personal Vault',
 }
 
 describe('Metis deep links', () => {
   it('builds readable links with extensions and encoded path segments', () => {
     const result = buildMetisDeepLinkForEntry({
-      entry: { path: '/Users/luca/Work Vault/sponsorships/Acme call #1.md' },
+      entry: { path: '/Users/hugo/Work Vault/sponsorships/Acme call #1.md' },
       vaultPath: workVault.path,
       vaults: [workVault],
     })
@@ -43,8 +43,8 @@ describe('Metis deep links', () => {
   })
 
   it('appends stable path hashes when vault slugs collide', () => {
-    const first = { label: 'Work', path: '/Users/luca/One' }
-    const second = { label: 'Work', path: '/Users/luca/Two' }
+    const first = { label: 'Work', path: '/Users/hugo/One' }
+    const second = { label: 'Work', path: '/Users/hugo/Two' }
 
     const firstSlug = vaultDeepLinkSlug(first, [first, second])
     const secondSlug = vaultDeepLinkSlug(second, [first, second])
@@ -55,21 +55,21 @@ describe('Metis deep links', () => {
   })
 
   it('resolves generated collision-safe slugs without opening the wrong vault', () => {
-    const first = { label: 'Work', path: '/Users/luca/One' }
-    const second = { label: 'Work', path: '/Users/luca/Two' }
+    const first = { label: 'Work', path: '/Users/hugo/One' }
+    const second = { label: 'Work', path: '/Users/hugo/Two' }
     const slug = vaultDeepLinkSlug(second, [first, second])
 
     expect(resolveMetisDeepLink({ rawUrl: `metis://${slug}/note.md`, vaults: [first, second] })).toEqual({
       ok: true,
-      absolutePath: '/Users/luca/Two/note.md',
+      absolutePath: '/Users/hugo/Two/note.md',
       relativePath: 'note.md',
       vault: second,
     })
   })
 
   it('rejects ambiguous handwritten base slugs', () => {
-    const first = { label: 'Work', path: '/Users/luca/One' }
-    const second = { label: 'Work', path: '/Users/luca/Two' }
+    const first = { label: 'Work', path: '/Users/hugo/One' }
+    const second = { label: 'Work', path: '/Users/hugo/Two' }
 
     expect(resolveMetisDeepLink({ rawUrl: 'metis://work/note.md', vaults: [first, second] })).toEqual({
       ok: false,
@@ -104,15 +104,15 @@ describe('Metis deep links', () => {
 
   it('requires target files to stay inside a known vault root', () => {
     expect(relativePathForVaultItem({
-      itemPath: '/Users/luca/Work Vault/docs/adr/0129.md',
+      itemPath: '/Users/hugo/Work Vault/docs/adr/0129.md',
       vaultPath: workVault.path,
     })).toBe('docs/adr/0129.md')
     expect(relativePathForVaultItem({
-      itemPath: '/Users/luca/Work Vaults/docs/adr/0129.md',
+      itemPath: '/Users/hugo/Work Vaults/docs/adr/0129.md',
       vaultPath: workVault.path,
     })).toBeNull()
     expect(buildMetisDeepLinkForEntry({
-      entry: { path: '/Users/luca/Personal Vault/note.md' },
+      entry: { path: '/Users/hugo/Personal Vault/note.md' },
       vaultPath: workVault.path,
       vaults: [workVault, personalVault],
     })).toEqual({

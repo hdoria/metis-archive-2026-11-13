@@ -237,8 +237,8 @@ describe('mobile document content', () => {
             },
             { text: ' and ', type: 'text' },
             {
-              marks: [{ attrs: { href: 'mailto:luca@example.com' }, type: 'link' }],
-              text: 'luca@example.com',
+              marks: [{ attrs: { href: 'mailto:hugo@example.com' }, type: 'link' }],
+              text: 'hugo@example.com',
               type: 'text',
             },
           ],
@@ -247,7 +247,7 @@ describe('mobile document content', () => {
     }
 
     expect(tiptapJsonToMobileMarkdown(document)).toBe(
-      'Location: <https://example.com/room?id=42> and <luca@example.com>',
+      'Location: <https://example.com/room?id=42> and <hugo@example.com>',
     )
   })
 

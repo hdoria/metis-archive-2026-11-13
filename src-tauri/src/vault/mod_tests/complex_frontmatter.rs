@@ -14,7 +14,7 @@ aliases: ["My Complex Note"]
 Topics: ["[[topic-writing]]", "[[topic-productivity|Productivity]]"]
 "Created at": "2021-12-31T14:19:00.000Z"
 Status: Published
-Owner: "[[person-luca|Luca]]"
+Owner: "[[person-hugo-doria|Hugo Dória]]"
 ---
 # My Complex Note
 

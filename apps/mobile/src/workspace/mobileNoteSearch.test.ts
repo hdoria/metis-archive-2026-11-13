@@ -81,18 +81,18 @@ describe('mobile note search', () => {
         kind: 'custom',
         key: 'Owner',
         label: 'Owner',
-        values: [{ id: 'person-luca', title: 'Luca', type: 'Person', typeTone: 'blue' }],
+        values: [{ id: 'person-hugo-doria', title: 'Hugo Dória', type: 'Person', typeTone: 'blue' }],
       }],
     })
 
     expect(mobileNoteDisplayLabels(candidate, ['Priority', 'belongs_to', 'Owner'])).toEqual([
       'High',
       'LLM Workflow',
-      'Luca',
+      'Hugo Dória',
     ])
     expect(mobileNoteListMatchesQuery(candidate, 'llm workflow', { displayPropertyKeys: ['belongs_to'] })).toBe(true)
     expect(mobileNoteListMatchesQuery(candidate, 'high', { displayPropertyKeys: ['Priority'] })).toBe(true)
-    expect(mobileNoteListMatchesQuery(candidate, 'luca', { displayPropertyKeys: ['Owner'] })).toBe(true)
+    expect(mobileNoteListMatchesQuery(candidate, 'hugo', { displayPropertyKeys: ['Owner'] })).toBe(true)
     expect(mobileNoteListMatchesQuery(candidate, 'llm workflow', { displayPropertyKeys: ['Priority'] })).toBe(false)
   })
 

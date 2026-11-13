@@ -45,7 +45,7 @@ export const makeEntry = (overrides: Partial<VaultEntry> = {}): VaultEntry => ({
 
 export const mockEntries: VaultEntry[] = [
   makeEntry({
-    path: '/Users/luca/MetisLegacy/project/26q1-metislegacy-app.md',
+    path: '/Users/hugo/MetisLegacy/project/26q1-metislegacy-app.md',
     filename: '26q1-metislegacy-app.md',
     title: 'Build MetisLegacy App',
     isA: 'Project',
@@ -60,7 +60,7 @@ export const mockEntries: VaultEntry[] = [
     },
   }),
   makeEntry({
-    path: '/Users/luca/MetisLegacy/note/facebook-ads-strategy.md',
+    path: '/Users/hugo/MetisLegacy/note/facebook-ads-strategy.md',
     filename: 'facebook-ads-strategy.md',
     title: 'Facebook Ads Strategy',
     isA: 'Note',
@@ -76,7 +76,7 @@ export const mockEntries: VaultEntry[] = [
     },
   }),
   makeEntry({
-    path: '/Users/luca/MetisLegacy/person/matteo-cellini.md',
+    path: '/Users/hugo/MetisLegacy/person/matteo-cellini.md',
     filename: 'matteo-cellini.md',
     title: 'Matteo Cellini',
     isA: 'Person',
@@ -86,7 +86,7 @@ export const mockEntries: VaultEntry[] = [
     snippet: 'Sponsorship manager.',
   }),
   makeEntry({
-    path: '/Users/luca/MetisLegacy/event/2026-02-14-kickoff.md',
+    path: '/Users/hugo/MetisLegacy/event/2026-02-14-kickoff.md',
     filename: '2026-02-14-kickoff.md',
     title: 'Kickoff Meeting',
     isA: 'Event',
@@ -96,7 +96,7 @@ export const mockEntries: VaultEntry[] = [
     snippet: 'Project kickoff meeting notes.',
   }),
   makeEntry({
-    path: '/Users/luca/MetisLegacy/topic/software-development.md',
+    path: '/Users/hugo/MetisLegacy/topic/software-development.md',
     filename: 'software-development.md',
     title: 'Software Development',
     isA: 'Topic',

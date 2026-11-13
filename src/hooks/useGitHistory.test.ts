@@ -4,7 +4,7 @@ import type { GitCommit } from '../types'
 import { useGitHistory } from './useGitHistory'
 
 const mockHistory: GitCommit[] = [
-  { hash: 'abc', shortHash: 'abc', author: 'luca', date: 1_700_000_000, message: 'Initial commit' },
+  { hash: 'abc', shortHash: 'abc', author: 'Hugo Dória', date: 1_700_000_000, message: 'Initial commit' },
 ]
 
 describe('useGitHistory', () => {

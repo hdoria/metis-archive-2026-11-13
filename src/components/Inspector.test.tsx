@@ -18,7 +18,7 @@ const mockEntry: VaultEntry = {
   belongsTo: ['[[responsibility/grow-newsletter]]'],
   relatedTo: ['[[topic/software-development]]'],
   status: 'Active',
-  owner: 'Luca Rossi',
+  owner: 'Hugo Dória',
   cadence: null,
   archived: false,
   modifiedAt: 1707900000,
@@ -38,7 +38,7 @@ const mockContent = `---
 title: Test Project
 is_a: Project
 Status: Active
-Owner: Luca Rossi
+Owner: Hugo Dória
 Cadence: Weekly
 tags: [React, TypeScript, Tauri]
 Belongs to:
@@ -79,9 +79,9 @@ const referrerEntry: VaultEntry = {
 
 const now = Math.floor(Date.now() / 1000)
 const mockGitHistory: GitCommit[] = [
-  { hash: 'a1b2c3d4e5f6a7b8', shortHash: 'a1b2c3d', message: 'Update test with latest changes', author: 'Luca Rossi', date: now - 86400 * 2 },
-  { hash: 'e4f5g6h7i8j9k0l1', shortHash: 'e4f5g6h', message: 'Add new section to test', author: 'Luca Rossi', date: now - 86400 * 5 },
-  { hash: 'i7j8k9l0m1n2o3p4', shortHash: 'i7j8k9l', message: 'Create test', author: 'Luca Rossi', date: now - 86400 * 12 },
+  { hash: 'a1b2c3d4e5f6a7b8', shortHash: 'a1b2c3d', message: 'Update test with latest changes', author: 'Hugo Dória', date: now - 86400 * 2 },
+  { hash: 'e4f5g6h7i8j9k0l1', shortHash: 'e4f5g6h', message: 'Add new section to test', author: 'Hugo Dória', date: now - 86400 * 5 },
+  { hash: 'i7j8k9l0m1n2o3p4', shortHash: 'i7j8k9l', message: 'Create test', author: 'Hugo Dória', date: now - 86400 * 12 },
 ]
 
 const defaultProps = {
@@ -124,7 +124,7 @@ function makeWorkspace(path: string, label: string, alias = label.toLowerCase())
 }
 
 const referencedByTargetEntry: VaultEntry = {
-  path: '/Users/luca/MetisLegacy/responsibility/grow-newsletter.md',
+  path: '/Users/hugo/MetisLegacy/responsibility/grow-newsletter.md',
   filename: 'grow-newsletter.md',
   title: 'Grow Newsletter',
   isA: 'Responsibility',
@@ -149,7 +149,7 @@ const referencedByTargetEntry: VaultEntry = {
 }
 
 const referencedByEssayEntry: VaultEntry = {
-  path: '/Users/luca/MetisLegacy/essay/on-writing.md',
+  path: '/Users/hugo/MetisLegacy/essay/on-writing.md',
   filename: 'on-writing.md',
   title: 'On Writing Well',
   isA: 'Essay',
@@ -174,7 +174,7 @@ const referencedByEssayEntry: VaultEntry = {
 }
 
 const referencedByProcedureEntry: VaultEntry = {
-  path: '/Users/luca/MetisLegacy/procedure/write-essays.md',
+  path: '/Users/hugo/MetisLegacy/procedure/write-essays.md',
   filename: 'write-essays.md',
   title: 'Write Weekly Essays',
   isA: 'Procedure',
@@ -199,7 +199,7 @@ const referencedByProcedureEntry: VaultEntry = {
 }
 
 const referencedByExperimentEntry: VaultEntry = {
-  path: '/Users/luca/MetisLegacy/experiment/seo.md',
+  path: '/Users/hugo/MetisLegacy/experiment/seo.md',
   filename: 'seo.md',
   title: 'SEO Experiment',
   isA: 'Experiment',
@@ -323,11 +323,11 @@ Status: Evergreened
   })
 
   it('infers the current workspace for untagged default-vault notes before moving them', () => {
-    const metislegacyWorkspace = makeWorkspace('/Users/luca/MetisLegacy', 'MetisLegacy')
-    const refactoringWorkspace = makeWorkspace('/Users/luca/Refactoring', 'Refactoring')
+    const metislegacyWorkspace = makeWorkspace('/Users/hugo/MetisLegacy', 'MetisLegacy')
+    const refactoringWorkspace = makeWorkspace('/Users/hugo/Refactoring', 'Refactoring')
     const entry = {
       ...mockEntry,
-      path: '/Users/luca/MetisLegacy/project/test.md',
+      path: '/Users/hugo/MetisLegacy/project/test.md',
       workspace: undefined,
     }
     const onChangeWorkspace = vi.fn()
@@ -585,7 +585,7 @@ This is a test note with some words to count.
     it('skips Type relationships in referenced-by computation', () => {
       const typeEntry: VaultEntry = {
         ...referencedByTargetEntry,
-        path: '/Users/luca/MetisLegacy/responsibility.md',
+        path: '/Users/hugo/MetisLegacy/responsibility.md',
         filename: 'responsibility.md',
         title: 'Responsibility',
         isA: 'Type',
@@ -631,7 +631,7 @@ This is a test note with some words to count.
 
     it('excludes entries from backlinks when already shown in referenced-by', async () => {
       const noteA: VaultEntry = {
-        path: '/Users/luca/MetisLegacy/essay/on-writing.md',
+        path: '/Users/hugo/MetisLegacy/essay/on-writing.md',
         filename: 'on-writing.md',
         title: 'On Writing Well',
         isA: 'Essay',

@@ -3,7 +3,7 @@ type: Procedure
 aliases:
   - "[[Sponsor Onboarding]]"
 belongs_to: "[[responsibility-sponsorships]]"
-owner: "[[person-luca-rossi]]"
+owner: "[[person-hugo-doria]]"
 cadence: "As needed"
 ---
 

@@ -4,7 +4,7 @@ import { MOCK_NOW as now } from './mockNow'
 /** Part of the demo vault entries (see mock-entries.ts), split to keep each file small. */
 export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
   {
-    path: '/Users/luca/MetisLegacy/2026-02-14-metislegacy-app-kickoff.md',
+    path: '/Users/hugo/MetisLegacy/2026-02-14-metislegacy-app-kickoff.md',
     filename: '2026-02-14-metislegacy-app-kickoff.md',
     title: 'MetisLegacy App Design Session',
     isA: 'Event',
@@ -32,7 +32,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/software-development.md',
+    path: '/Users/hugo/MetisLegacy/software-development.md',
     filename: 'software-development.md',
     title: 'Software Development',
     isA: 'Topic',
@@ -60,7 +60,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/trading.md',
+    path: '/Users/hugo/MetisLegacy/trading.md',
     filename: 'trading.md',
     title: 'Trading',
     isA: 'Topic',
@@ -88,7 +88,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/on-writing-well.md',
+    path: '/Users/hugo/MetisLegacy/on-writing-well.md',
     filename: 'on-writing-well.md',
     title: 'On Writing Well',
     isA: 'Essay',
@@ -116,7 +116,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/engineering-leadership-101.md',
+    path: '/Users/hugo/MetisLegacy/engineering-leadership-101.md',
     filename: 'engineering-leadership-101.md',
     title: 'Engineering Leadership 101',
     isA: 'Essay',
@@ -145,7 +145,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/ai-agents-primer.md',
+    path: '/Users/hugo/MetisLegacy/ai-agents-primer.md',
     filename: 'ai-agents-primer.md',
     title: 'AI Agents Primer',
     isA: 'Essay',
@@ -174,7 +174,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
   },
   // --- Type documents ---
   {
-    path: '/Users/luca/MetisLegacy/project.md',
+    path: '/Users/hugo/MetisLegacy/project.md',
     filename: 'project.md',
     title: 'Project',
     isA: 'Type',
@@ -199,7 +199,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/responsibility.md',
+    path: '/Users/hugo/MetisLegacy/responsibility.md',
     filename: 'responsibility.md',
     title: 'Responsibility',
     isA: 'Type',
@@ -224,7 +224,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/procedure.md',
+    path: '/Users/hugo/MetisLegacy/procedure.md',
     filename: 'procedure.md',
     title: 'Procedure',
     isA: 'Type',
@@ -249,7 +249,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/experiment.md',
+    path: '/Users/hugo/MetisLegacy/experiment.md',
     filename: 'experiment.md',
     title: 'Experiment',
     isA: 'Type',
@@ -274,7 +274,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/person.md',
+    path: '/Users/hugo/MetisLegacy/person.md',
     filename: 'person.md',
     title: 'Person',
     isA: 'Type',
@@ -299,7 +299,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/event.md',
+    path: '/Users/hugo/MetisLegacy/event.md',
     filename: 'event.md',
     title: 'Event',
     isA: 'Type',
@@ -324,7 +324,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/topic.md',
+    path: '/Users/hugo/MetisLegacy/topic.md',
     filename: 'topic.md',
     title: 'Topic',
     isA: 'Type',
@@ -349,7 +349,7 @@ export const MOCK_ENTRIES_PART_2: VaultEntry[] = [
     organized: false, favorite: false, favoriteIndex: null, listPropertiesDisplay: [], hasH1: false,
   },
   {
-    path: '/Users/luca/MetisLegacy/essay.md',
+    path: '/Users/hugo/MetisLegacy/essay.md',
     filename: 'essay.md',
     title: 'Essay',
     isA: 'Type',

@@ -139,7 +139,7 @@ mod tests {
         let launch = parse_launch_args([
             "metis",
             VAULT_INSTANCE_FLAG,
-            "/Users/luca/Work Vault",
+            "/Users/hugo/Work Vault",
             VAULT_COLOR_FLAG,
             "Red",
         ]);
@@ -147,7 +147,7 @@ mod tests {
         assert_eq!(
             launch,
             Some(VaultInstanceLaunch {
-                vault_path: PathBuf::from("/Users/luca/Work Vault"),
+                vault_path: PathBuf::from("/Users/hugo/Work Vault"),
                 vault_color: Some("red".to_string()),
             })
         );
@@ -177,7 +177,7 @@ mod tests {
     fn packaged_macos_launches_through_launch_services_as_a_new_instance() {
         let plan = launch_plan(
             Path::new("/Applications/Metis.app/Contents/MacOS/Metis"),
-            Path::new("/Users/luca/Work Vault"),
+            Path::new("/Users/hugo/Work Vault"),
             Some("green"),
             "macos",
         );
@@ -190,7 +190,7 @@ mod tests {
                 "/Applications/Metis.app",
                 "--args",
                 VAULT_INSTANCE_FLAG,
-                "/Users/luca/Work Vault",
+                "/Users/hugo/Work Vault",
                 VAULT_COLOR_FLAG,
                 "green",
             ]

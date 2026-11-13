@@ -16,7 +16,7 @@ const gettingStartedNotes = [
 	`---\ntype: Note\nrelated_to: "[[metis]]"\n---\n# Note List\n\nYou can also create a new note anywhere with \`Cmd+N\` (\`Ctrl+N\` on Windows and Linux) or from the [[command-palette]]`,
 	`---\ntype: Note\nrelated_to: "[[metis]]"\n---\n# Editor\n\nOpen [[editor-playground]] for examples you can manipulate directly.\n\n- List **item** 1\n  - Nested *italic item*\n\n1. **Numbered item** in bold\n2. Numbered second item\n\n- [ ] Task 1\n\nUse the export button, or run Export from the [[command-palette]], to turn the current note into a PDF.`,
 	`---\ntype: Project\nstatus: In progress\nrelated_to:\n  - "[[metis]]"\n_organized: true\n---\n# Get familiar with Metis\n\n- [ ] **Read the** [[metis-principles|Metis Principles]] — understand the core philosophy\n- [ ] **Explore the** [[metis-sidebar]] — learn Inbox, All Notes, Archive, Favorites, Types, Folders\n- [ ] **Try the** [[metis-editor|Editor]] and [[editor-playground]] — rich vs raw mode\n- [ ] **Open the** [[the-properties-panel|Properties Panel]] — add a property, create a relationship`,
-	`---\ntype: Note\nrelated_to: "[[metis]]"\n---\n# Principles\n\nMetis is free and [open source](https://github.com/hdoria/metis). I built this for myself ([[luca-rossi]]) and for sharing it with others.\n\nA lot of how we designed [[metis-editor]] and [[command-palette]] is based on this.`,
+	`---\ntype: Note\nrelated_to: "[[metis]]"\n---\n# Principles\n\nMetis is free and [open source](https://github.com/hdoria/metis). I built this for myself ([[hugo-doria]]) and for sharing it with others.\n\nA lot of how we designed [[metis-editor]] and [[command-palette]] is based on this.`,
 ];
 
 function wikilinks(content: string) {

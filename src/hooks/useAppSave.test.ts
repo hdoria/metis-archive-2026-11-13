@@ -142,7 +142,7 @@ describe('useAppSave', () => {
     }
   }
 
-  function renderMissingVaultDraft(path = 'C:\\Users\\Luca\\Notes\\draft.md') {
+  function renderMissingVaultDraft(path = 'C:\\Users\\hugo\\Notes\\draft.md') {
     vi.mocked(isTauri).mockReturnValue(true)
     const entry = makeEntry(path, 'Draft', 'draft.md')
 

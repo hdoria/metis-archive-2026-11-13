@@ -68,7 +68,7 @@ describe('tablet workspace navigation', () => {
   it('derives canonical Type names from legacy plural sidebar labels', () => {
     const snapshot: MobileWorkspaceSnapshot = {
       ...workspaceSnapshot([
-        note({ id: 'responsibility', properties: [{ key: 'Owner', label: 'Owner', value: 'Luca' }], title: 'Roadmap', type: 'Responsibility' }),
+        note({ id: 'responsibility', properties: [{ key: 'Owner', label: 'Owner', value: 'Hugo Dória' }], title: 'Roadmap', type: 'Responsibility' }),
         note({ id: 'person', title: 'Ada', type: 'Person' }),
         note({ id: 'wrong', title: 'Essay', type: 'Responsibilities' }),
       ]),

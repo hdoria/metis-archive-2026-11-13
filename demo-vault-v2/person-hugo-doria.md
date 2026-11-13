@@ -1,11 +1,11 @@
 ---
 type: Person
 aliases:
-  - "[[Luca Rossi]]"
+  - "[[Hugo Dória]]"
 tier: 1st
 ---
 
-# Luca Rossi
+# Hugo Dória
 
 Owns the MetisLegacy product work and remains the primary owner on the fixture's project notes.
 

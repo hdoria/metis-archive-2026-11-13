@@ -133,11 +133,11 @@ Updated body.
 
   it('hydrates markdown autolinks as editable TenTap links', () => {
     const html = mobileMarkdownBodyToTentapHtml(
-      'Location: <https://example.com/room?id=42> and <luca@example.com>\n',
+      'Location: <https://example.com/room?id=42> and <hugo@example.com>\n',
     )
 
     expect(html).toBe(
-      '<p>Location: <a href="https://example.com/room?id=42">https://example.com/room?id=42</a> and <a href="mailto:luca@example.com">luca@example.com</a></p>',
+      '<p>Location: <a href="https://example.com/room?id=42">https://example.com/room?id=42</a> and <a href="mailto:hugo@example.com">hugo@example.com</a></p>',
     )
   })
 

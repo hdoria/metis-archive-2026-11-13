@@ -109,7 +109,7 @@ filters:
   it('parses desktop YAML escaped scalars and null shorthands', () => {
     const view = parseMobileSavedViewFile({
       relativePath: 'views/escaped-scalars.yml',
-      content: String.raw`name: "Luca \"Focus\" \u2605"
+      content: String.raw`name: "Hugo Dória \"Focus\" \u2605"
 icon: "~"
 color: ~
 listPropertiesDisplay: ["Quote \"A\"", 'Owner''s Status']
@@ -131,7 +131,7 @@ filters:
       color: null,
       icon: '~',
       listPropertiesDisplay: ['Quote "A"', "Owner's Status"],
-      name: 'Luca "Focus" \u2605',
+      name: 'Hugo Dória "Focus" \u2605',
     })
     expect(view?.definition.filters).toMatchObject({
       all: [

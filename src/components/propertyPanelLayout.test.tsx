@@ -154,11 +154,11 @@ describe('property panel shared grid layout', () => {
   it('renders plain text values flush with the shared value column', () => {
     renderPropertiesPanel({
       entry,
-      frontmatter: { Owner: 'Luca' },
+      frontmatter: { Owner: 'Hugo Dória' },
       onUpdateProperty: vi.fn(),
     })
 
-    expect(screen.getByText('Luca').parentElement).toHaveClass('px-0')
+    expect(screen.getByText('Hugo Dória').parentElement).toHaveClass('px-0')
   })
 
   it('renders relationship groups as single-column stacks', () => {

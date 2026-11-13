@@ -39,7 +39,7 @@ const ROADMAP = 'roadmap.md'
 const AGENDA = '# Team Sync\n\nAgenda for the week.\n'
 const LISTS = `${AGENDA}\n- Budget\n- Hiring\n  - Backend\n  - Design\n\n1. Review\n2. Decide\n`
 const TASKS = `${LISTS}\n- [ ] Send minutes\n- [x] Book the room\n`
-const TABLE = `${TASKS}\n| Owner | Topic |\n| --- | --- |\n| Ada | Engine |\n| Luca | Notes |\n`
+const TABLE = `${TASKS}\n| Owner | Topic |\n| --- | --- |\n| Ada | Engine |\n| Hugo Dória | Notes |\n`
 const CODE = `${TABLE}\n\`\`\`ts\nconst total = items.reduce((sum, item) => sum + item.cost, 0)\n\`\`\`\n`
 const LINKS = `${CODE}\nOwner: [[ada-lovelace]], see [[ada-lovelace|Ada]] and [[roadmap|the roadmap]].\n`
 const INLINE = `${LINKS}\nSome **bold**, _italic_, \`code\` and a [link](https://example.com).\n`

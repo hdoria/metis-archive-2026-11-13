@@ -34,45 +34,45 @@ describe('a room', () => {
 
   it('makes two clients converge on concurrent edits', async () => {
     const ada = await harness.client()
-    const luca = await harness.client()
+    const hugo = await harness.client()
 
     ada.type('Alpha', ' by Ada')
-    luca.type('Heron', ' Luca was here.')
-    luca.type('Alpha', ' and Luca')
+    hugo.type('Heron', ' Hugo Dória was here.')
+    hugo.type('Alpha', ' and Hugo Dória')
     await settle()
 
-    expect(ada.markdown()).toBe(luca.markdown())
-    expect(ada.markdown()).toContain('Luca was here.')
-    expect(ada.markdown()).toMatch(/# Alpha( by Ada| and Luca){2}/)
+    expect(ada.markdown()).toBe(hugo.markdown())
+    expect(ada.markdown()).toContain('Hugo Dória was here.')
+    expect(ada.markdown()).toMatch(/# Alpha( by Ada| and Hugo Dória){2}/)
   })
 
   it('shows each client the presence and cursor of the other', async () => {
     const ada = await harness.client()
-    const luca = await harness.client()
+    const hugo = await harness.client()
 
     ada.provider.awareness.setLocalStateField('user', { name: 'Ada', color: '#d33' })
-    luca.provider.awareness.setLocalStateField('user', { name: 'Luca', color: '#36c' })
+    hugo.provider.awareness.setLocalStateField('user', { name: 'Hugo Dória', color: '#36c' })
     await settle()
 
-    expect(luca.provider.awareness.getStates().get(ada.doc.clientID)).toEqual({ user: { name: 'Ada', color: '#d33' } })
-    expect(ada.provider.awareness.getStates().get(luca.doc.clientID)).toEqual({ user: { name: 'Luca', color: '#36c' } })
+    expect(hugo.provider.awareness.getStates().get(ada.doc.clientID)).toEqual({ user: { name: 'Ada', color: '#d33' } })
+    expect(ada.provider.awareness.getStates().get(hugo.doc.clientID)).toEqual({ user: { name: 'Hugo Dória', color: '#36c' } })
   })
 
   it('withdraws the presence of a client that leaves', async () => {
     const ada = await harness.client()
-    const luca = await harness.client()
+    const hugo = await harness.client()
     ada.provider.awareness.setLocalStateField('user', { name: 'Ada', color: '#d33' })
     await settle()
 
     ada.provider.destroy()
     await settle()
 
-    expect([...luca.provider.awareness.getStates().keys()]).toEqual([luca.doc.clientID])
+    expect([...hugo.provider.awareness.getStates().keys()]).toEqual([hugo.doc.clientID])
   })
 
   it('does not let a client publish or withdraw the presence of another', async () => {
     const ada = await harness.client()
-    const luca = await harness.client()
+    const hugo = await harness.client()
     const mallory = await harness.client()
     ada.provider.awareness.setLocalStateField('user', { name: 'Ada', color: '#d33' })
     await settle()
@@ -86,7 +86,7 @@ describe('a room', () => {
     mallory.sockets[0].send(awarenessMessage(forged, [ada.doc.clientID]))
     await settle()
 
-    expect(luca.provider.awareness.getStates().get(ada.doc.clientID)).toEqual({ user: { name: 'Ada', color: '#d33' } })
+    expect(hugo.provider.awareness.getStates().get(ada.doc.clientID)).toEqual({ user: { name: 'Ada', color: '#d33' } })
     expect(mallory.sockets[0].closeCode).toBeNull()
   })
 
@@ -95,9 +95,9 @@ describe('a room', () => {
     ada.provider.awareness.setLocalStateField('user', { name: 'Ada', color: '#d33' })
     await settle()
 
-    const luca = await harness.client()
+    const hugo = await harness.client()
 
-    expect(luca.provider.awareness.getStates().get(ada.doc.clientID)).toEqual({ user: { name: 'Ada', color: '#d33' } })
+    expect(hugo.provider.awareness.getStates().get(ada.doc.clientID)).toEqual({ user: { name: 'Ada', color: '#d33' } })
   })
 
   it('ignores the edits of a read-only client and still shows it the document', async () => {
@@ -114,15 +114,15 @@ describe('a room', () => {
 
   it('puts back the meta map when a client writes to it', async () => {
     const ada = await harness.client()
-    const luca = await harness.client()
+    const hugo = await harness.client()
     const revision = (await harness.vault.read(NOTE as VaultPath)).etag
 
     ada.doc.getMap<string>('meta').set('baseRevision', 'forged')
     ada.doc.getMap<string>('meta').set('conflictCopy', 'somewhere-else.md')
     await settle()
 
-    expect(luca.doc.getMap('meta').toJSON()).toEqual({ format: 'metis.blocknote/1', baseRevision: revision })
-    expect(ada.doc.getMap('meta').toJSON()).toEqual(luca.doc.getMap('meta').toJSON())
+    expect(hugo.doc.getMap('meta').toJSON()).toEqual({ format: 'metis.blocknote/1', baseRevision: revision })
+    expect(ada.doc.getMap('meta').toJSON()).toEqual(hugo.doc.getMap('meta').toJSON())
   })
 
   it.each([
@@ -575,10 +575,10 @@ describe('a restart', () => {
     ada.type('Alpha', ' offline')
     await ada.provider.whenSynced()
     await settle()
-    const luca = await harness.client()
+    const hugo = await harness.client()
 
-    expect(luca.markdown()).toBe(ada.markdown())
-    expect(luca.markdown().match(/# Alpha before offline/g)).toHaveLength(1)
+    expect(hugo.markdown()).toBe(ada.markdown())
+    expect(hugo.markdown().match(/# Alpha before offline/g)).toHaveLength(1)
   })
 
   it('reconciles a snapshot with a file that changed while the server was down', async () => {
@@ -589,10 +589,10 @@ describe('a restart', () => {
     await harness.vault.write(NOTE as VaultPath, text(`${SEED}\nAdded while down.\n`.replace('# Alpha', '# Alpha kept')), { kind: 'any' })
 
     await harness.restart()
-    const luca = await harness.client()
+    const hugo = await harness.client()
 
-    expect(luca.markdown()).toContain('Added while down.')
-    expect(luca.markdown()).toContain('# Alpha kept')
+    expect(hugo.markdown()).toContain('Added while down.')
+    expect(hugo.markdown()).toContain('# Alpha kept')
   })
 
   it('rebuilds a document from the file when its snapshot cannot be read', async () => {

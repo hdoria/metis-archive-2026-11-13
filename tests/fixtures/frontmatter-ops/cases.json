@@ -14,8 +14,8 @@
       "content": "---\ntitle: Note\nStatus: Draft\n---\n# Note\n\nBody text.\n",
       "key": "Owner",
       "op": "update",
-      "value": "Luca",
-      "expected": "---\ntitle: Note\nStatus: Draft\nOwner: Luca\n---\n# Note\n\nBody text.\n"
+      "value": "Hugo Dória",
+      "expected": "---\ntitle: Note\nStatus: Draft\nOwner: Hugo Dória\n---\n# Note\n\nBody text.\n"
     },
     {
       "name": "deletes a key",

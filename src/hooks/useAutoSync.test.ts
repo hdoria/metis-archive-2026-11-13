@@ -49,7 +49,7 @@ describe('useAutoSync', () => {
     return renderHook(() =>
       useAutoSync({
         enabled,
-        vaultPath: '/Users/luca/MetisLegacy',
+        vaultPath: '/Users/hugo/MetisLegacy',
         vaultPaths,
         intervalMinutes,
         onVaultUpdated,
@@ -62,16 +62,16 @@ describe('useAutoSync', () => {
   it('pulls on mount (app launch)', async () => {
     renderSync()
     await waitFor(() => {
-      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/luca/MetisLegacy' })
+      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/hugo/MetisLegacy' })
     })
   })
 
   it('pulls all active vaults on mount', async () => {
-    renderSync(5, true, ['/Users/luca/MetisLegacy', '/Users/luca/Work'])
+    renderSync(5, true, ['/Users/hugo/MetisLegacy', '/Users/hugo/Work'])
 
     await waitFor(() => {
-      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/luca/MetisLegacy' })
-      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/luca/Work' })
+      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/hugo/MetisLegacy' })
+      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/hugo/Work' })
     })
   })
 
@@ -110,7 +110,7 @@ describe('useAutoSync', () => {
     now.mockImplementation(() => clock)
 
     try {
-      renderSync(0.001, true, ['/Users/luca/MetisLegacy', '/Users/luca/Work'])
+      renderSync(0.001, true, ['/Users/hugo/MetisLegacy', '/Users/hugo/Work'])
 
       await waitFor(() => {
         expect(commandCalls('git_pull')).toHaveLength(2)
@@ -145,8 +145,8 @@ describe('useAutoSync', () => {
       expect(result.current.syncStatus).toBe('idle')
     })
 
-    expect(mockInvokeFn).not.toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/luca/MetisLegacy' })
-    expect(mockInvokeFn).not.toHaveBeenCalledWith('git_remote_status', { vaultPath: '/Users/luca/MetisLegacy' })
+    expect(mockInvokeFn).not.toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/hugo/MetisLegacy' })
+    expect(mockInvokeFn).not.toHaveBeenCalledWith('git_remote_status', { vaultPath: '/Users/hugo/MetisLegacy' })
 
     act(() => {
       result.current.triggerSync()
@@ -154,8 +154,8 @@ describe('useAutoSync', () => {
       window.dispatchEvent(new Event('focus'))
     })
 
-    expect(mockInvokeFn).not.toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/luca/MetisLegacy' })
-    expect(mockInvokeFn).not.toHaveBeenCalledWith('git_push', { vaultPath: '/Users/luca/MetisLegacy' })
+    expect(mockInvokeFn).not.toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/hugo/MetisLegacy' })
+    expect(mockInvokeFn).not.toHaveBeenCalledWith('git_push', { vaultPath: '/Users/hugo/MetisLegacy' })
   })
 
   it('sets syncStatus to idle after up_to_date pull', async () => {
@@ -174,7 +174,7 @@ describe('useAutoSync', () => {
     const { result } = renderSync()
 
     await waitFor(() => {
-      expect(onVaultUpdated).toHaveBeenCalledWith(['note.md', 'project/plan.md'], '/Users/luca/MetisLegacy')
+      expect(onVaultUpdated).toHaveBeenCalledWith(['note.md', 'project/plan.md'], '/Users/hugo/MetisLegacy')
       expect(onToast).toHaveBeenCalledWith('Pulled 2 update(s) from remote')
       expect(result.current.syncStatus).toBe('idle')
     })
@@ -193,7 +193,7 @@ describe('useAutoSync', () => {
 
     renderHook(() =>
       useAutoSync({
-        vaultPath: '/Users/luca/MetisLegacy',
+        vaultPath: '/Users/hugo/MetisLegacy',
         intervalMinutes: 5,
         onVaultUpdated: asyncVaultRefresh,
         onConflict,
@@ -202,7 +202,7 @@ describe('useAutoSync', () => {
     )
 
     await waitFor(() => {
-      expect(asyncVaultRefresh).toHaveBeenCalledWith(['note.md'], '/Users/luca/MetisLegacy')
+      expect(asyncVaultRefresh).toHaveBeenCalledWith(['note.md'], '/Users/hugo/MetisLegacy')
     })
     expect(onToast).not.toHaveBeenCalledWith('Pulled 1 update(s) from remote')
 
@@ -248,7 +248,7 @@ describe('useAutoSync', () => {
 
     renderSync()
     await waitFor(() => {
-      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/luca/MetisLegacy' })
+      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/hugo/MetisLegacy' })
     })
 
     // Focus within cooldown — should NOT trigger pull
@@ -263,7 +263,7 @@ describe('useAutoSync', () => {
     await act(async () => { window.dispatchEvent(new Event('focus')) })
 
     await waitFor(() => {
-      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/luca/MetisLegacy' })
+      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/hugo/MetisLegacy' })
     })
 
     now.mockRestore()
@@ -286,7 +286,7 @@ describe('useAutoSync', () => {
     })
 
     await waitFor(() => {
-      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/luca/MetisLegacy' })
+      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/hugo/MetisLegacy' })
       expect(onToast).toHaveBeenCalledWith('Pulled 1 update(s) from remote')
     })
   })
@@ -409,7 +409,7 @@ describe('useAutoSync', () => {
     })
     renderHook(() =>
       useAutoSync({
-        vaultPath: '/Users/luca/MetisLegacy',
+        vaultPath: '/Users/hugo/MetisLegacy',
         intervalMinutes: 5,
         onVaultUpdated,
         onSyncUpdated,
@@ -427,7 +427,7 @@ describe('useAutoSync', () => {
     const onSyncUpdated = vi.fn()
     renderHook(() =>
       useAutoSync({
-        vaultPath: '/Users/luca/MetisLegacy',
+        vaultPath: '/Users/hugo/MetisLegacy',
         intervalMinutes: 5,
         onVaultUpdated,
         onSyncUpdated,
@@ -446,7 +446,7 @@ describe('useAutoSync', () => {
     const onSyncUpdated = vi.fn()
     const { result } = renderHook(() =>
       useAutoSync({
-        vaultPath: '/Users/luca/MetisLegacy',
+        vaultPath: '/Users/hugo/MetisLegacy',
         intervalMinutes: 5,
         onVaultUpdated,
         onSyncUpdated,
@@ -465,12 +465,12 @@ describe('useAutoSync', () => {
     onVaultUpdated.mockClear()
 
     await act(async () => {
-      result.current.triggerSync('/Users/luca/MetisLegacy')
+      result.current.triggerSync('/Users/hugo/MetisLegacy')
     })
 
     await waitFor(() => {
-      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/luca/MetisLegacy' })
-      expect(onVaultUpdated).toHaveBeenCalledWith([], '/Users/luca/MetisLegacy')
+      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/hugo/MetisLegacy' })
+      expect(onVaultUpdated).toHaveBeenCalledWith([], '/Users/hugo/MetisLegacy')
       expect(onSyncUpdated).toHaveBeenCalledOnce()
     })
   })
@@ -510,7 +510,7 @@ describe('useAutoSync', () => {
 
     const { result } = renderHook(() =>
       useAutoSync({
-        vaultPath: '/Users/luca/MetisLegacy',
+        vaultPath: '/Users/hugo/MetisLegacy',
         intervalMinutes: 5,
         onVaultUpdated,
         onSyncUpdated,
@@ -528,7 +528,7 @@ describe('useAutoSync', () => {
     })
 
     await waitFor(() => {
-      expect(onVaultUpdated).toHaveBeenCalledWith(['note.md'], '/Users/luca/MetisLegacy')
+      expect(onVaultUpdated).toHaveBeenCalledWith(['note.md'], '/Users/hugo/MetisLegacy')
       expect(onSyncUpdated).toHaveBeenCalled()
       expect(onToast).toHaveBeenCalledWith('Pulled and pushed successfully')
       expect(result.current.syncStatus).toBe('idle')
@@ -584,17 +584,17 @@ describe('useAutoSync', () => {
     })
 
     await act(async () => {
-      result.current.triggerSync('/Users/luca/Work')
+      result.current.triggerSync('/Users/hugo/Work')
     })
 
     await waitFor(() => {
-      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/luca/Work' })
-      expect(onVaultUpdated).toHaveBeenCalledWith(['work.md'], '/Users/luca/Work')
+      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/hugo/Work' })
+      expect(onVaultUpdated).toHaveBeenCalledWith(['work.md'], '/Users/hugo/Work')
     })
   })
 
   it('manual triggerSync syncs every active vault by default', async () => {
-    const { result } = renderSync(5, true, ['/Users/luca/MetisLegacy', '/Users/luca/Work'])
+    const { result } = renderSync(5, true, ['/Users/hugo/MetisLegacy', '/Users/hugo/Work'])
     await waitFor(() => {
       expect(result.current.syncStatus).toBe('idle')
     })
@@ -612,16 +612,16 @@ describe('useAutoSync', () => {
     })
 
     await waitFor(() => {
-      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/luca/MetisLegacy' })
-      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/luca/Work' })
-      expect(onVaultUpdated).toHaveBeenCalledWith(['home.md'], '/Users/luca/MetisLegacy')
-      expect(onVaultUpdated).toHaveBeenCalledWith(['work.md'], '/Users/luca/Work')
+      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/hugo/MetisLegacy' })
+      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/hugo/Work' })
+      expect(onVaultUpdated).toHaveBeenCalledWith(['home.md'], '/Users/hugo/MetisLegacy')
+      expect(onVaultUpdated).toHaveBeenCalledWith(['work.md'], '/Users/hugo/Work')
       expect(onToast).toHaveBeenCalledWith('Pulled 2 update(s) from remote')
     })
   })
 
   it('pullAndPush pulls and pushes every active vault by default', async () => {
-    const { result } = renderSync(5, true, ['/Users/luca/MetisLegacy', '/Users/luca/Work'])
+    const { result } = renderSync(5, true, ['/Users/hugo/MetisLegacy', '/Users/hugo/Work'])
     await waitFor(() => {
       expect(result.current.syncStatus).toBe('idle')
     })
@@ -641,10 +641,10 @@ describe('useAutoSync', () => {
     })
 
     await waitFor(() => {
-      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/luca/MetisLegacy' })
-      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/luca/Work' })
-      expect(mockInvokeFn).toHaveBeenCalledWith('git_push', { vaultPath: '/Users/luca/MetisLegacy' })
-      expect(mockInvokeFn).toHaveBeenCalledWith('git_push', { vaultPath: '/Users/luca/Work' })
+      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/hugo/MetisLegacy' })
+      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/hugo/Work' })
+      expect(mockInvokeFn).toHaveBeenCalledWith('git_push', { vaultPath: '/Users/hugo/MetisLegacy' })
+      expect(mockInvokeFn).toHaveBeenCalledWith('git_push', { vaultPath: '/Users/hugo/Work' })
       expect(onToast).toHaveBeenCalledWith('Pulled and pushed successfully')
     })
   })
@@ -677,8 +677,8 @@ describe('useAutoSync', () => {
     })
 
     await waitFor(() => {
-      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/luca/MetisLegacy' })
-      expect(mockInvokeFn).not.toHaveBeenCalledWith('git_push', { vaultPath: '/Users/luca/MetisLegacy' })
+      expect(mockInvokeFn).toHaveBeenCalledWith('git_pull', { vaultPath: '/Users/hugo/MetisLegacy' })
+      expect(mockInvokeFn).not.toHaveBeenCalledWith('git_push', { vaultPath: '/Users/hugo/MetisLegacy' })
       expect(result.current.syncStatus).toBe('idle')
     })
   })

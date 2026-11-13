@@ -1,6 +1,6 @@
 # Metis Web: deliberate UI departures
 
-Standing rule (Luca, 10 Oct 2026): Metis Web reuses the desktop shell, BlockNote editor, components, tokens, typography, icons and dark mode. Where the web demands something different, the change is made deliberately and recorded here: what, why, where. Karn copies this list into the vault note `metis-vault-remote-v1`.
+Standing rule (the upstream maintainer, 10 Oct 2026): Metis Web reuses the desktop shell, BlockNote editor, components, tokens, typography, icons and dark mode. Where the web demands something different, the change is made deliberately and recorded here: what, why, where. Karn copies this list into the vault note `metis-vault-remote-v1`.
 
 ## Departures made
 

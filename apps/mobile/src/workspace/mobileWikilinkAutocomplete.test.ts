@@ -139,11 +139,11 @@ describe('mobile wikilink autocomplete', () => {
 
   it('ranks @ mention exact person titles before alias matches', () => {
     const suggestions = mobilePersonMentionAutocompleteSuggestions([
-      note({ aliases: ['Luca'], path: 'people/lucas.md', title: 'Lucas Smith', type: 'Person' }),
-      note({ path: 'people/luca.md', title: 'Luca', type: 'Person' }),
-    ], 'luca')
+      note({ aliases: ['Hugo Dória'], path: 'people/lucas.md', title: 'Lucas Smith', type: 'Person' }),
+      note({ path: 'people/hugo-doria.md', title: 'Hugo Dória', type: 'Person' }),
+    ], 'hugo dória')
 
-    expect(suggestions.map((suggestion) => suggestion.title)).toEqual(['Luca', 'Lucas Smith'])
+    expect(suggestions.map((suggestion) => suggestion.title)).toEqual(['Hugo Dória', 'Lucas Smith'])
   })
 
   it('replaces @ mention queries with canonical wikilinks and a trailing space', () => {

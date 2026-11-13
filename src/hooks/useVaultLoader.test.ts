@@ -25,7 +25,7 @@ const mockModifiedFiles: ModifiedFile[] = [
 ]
 
 const mockGitHistory: GitCommit[] = [
-  { hash: 'abc1234567', shortHash: 'abc1234', message: 'initial commit', author: 'luca', date: 1700000000 },
+  { hash: 'abc1234567', shortHash: 'abc1234', message: 'initial commit', author: 'Hugo Dória', date: 1700000000 },
 ]
 
 type MockCommandHandler = (args?: Record<string, unknown>) => unknown

@@ -8,7 +8,7 @@ date: 2026-10-25
 
 ## Context
 
-TOL-232 sends errors from the web build (metis.lucaron.in) to Sentry, next to the desktop intake defined by ADR 0016. The web bundle is built from the same `src/` as the desktop, so it already contains `@sentry/react`, the consent flow and the scrubbing `beforeSend`. What differs: the web bundle is minified JavaScript served to browsers, so a stack is unreadable without source maps; serving those maps would publish the whole client source map of each deploy; a desktop DSN set in a build environment must not end up in the web bundle; and in a browser the SDK records page and request URLs, which on Metis Web carry note paths and collaboration tickets.
+TOL-232 sends errors from the web build (the upstream hosted deployment) to Sentry, next to the desktop intake defined by ADR 0016. The web bundle is built from the same `src/` as the desktop, so it already contains `@sentry/react`, the consent flow and the scrubbing `beforeSend`. What differs: the web bundle is minified JavaScript served to browsers, so a stack is unreadable without source maps; serving those maps would publish the whole client source map of each deploy; a desktop DSN set in a build environment must not end up in the web bundle; and in a browser the SDK records page and request URLs, which on Metis Web carry note paths and collaboration tickets.
 
 ## Decision
 
