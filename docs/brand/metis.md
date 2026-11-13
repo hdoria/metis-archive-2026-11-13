@@ -4,7 +4,7 @@ Aplicativo gratuito de conhecimento pessoal. Notas em Markdown, arquivos locais 
 
 ## Identidade
 
-Nome público: Métis. Identificadores técnicos: metis. Namespace: io.github.hdoria.metis. Repositório: https://github.com/hdoria/metis.
+Nome público: Métis. Identificadores técnicos: metis. Namespace: io.github.hdoria.metis. Repositório: https://github.com/hdoria/metis. Domínio oficial: https://metisapp.com.br.
 
 Verde pinho #17463F, verde claro #79B9A5, marfim #F6F5ED, texto #18332E, borda #CCD9D2. O editor mantém a tipografia de leitura existente. O símbolo é o elemento principal da identidade; interface e documentação ficam discretas.
 

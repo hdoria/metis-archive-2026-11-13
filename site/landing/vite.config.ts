@@ -8,7 +8,7 @@ import { defineConfig, type PluginOption } from "vite"
 // - "metis.md": the public site. `vite build --mode metis-md` (npm run build:metis-md), and the default whenever
 //   ../preview is absent (e.g. after this folder is copied into the Métis repo). Output: ./dist (copy it over the
 //   VitePress output; see IMPORT.md at the metis-landing repo root). No service worker, no search-engine opt-out, canonical
-//   and share image on https://hdoria.github.io/metis, docs links relative (/docs, /start/install, ...).
+//   and share image on https://metisapp.com.br, docs links relative (/docs, /start/install, ...).
 // - "preview": the private preview build. Adds what lives in ../preview (search-engine opt-out, private assets, service worker) and
 //   writes ../public for the Worker.
 const previewDir = resolve(import.meta.dirname, "../preview")
