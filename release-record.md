@@ -79,3 +79,15 @@ Current-owner examples, demo notes, fixtures, mock data, design files and packag
 The targeted scan found no remaining former-maintainer full name, personal slugs or account handles in tracked current source. Unrelated people and dependency authors are unchanged. Test results: 1,396 desktop tests, 233 mobile tests plus 37 after mention-prefix adjustments, 276 server/package tests, 3 web/index parity tests, 1,194 Rust library tests (2 ignored), 4 Rust parity tests and 3 landing tests passed. Mobile typecheck and landing build passed. UTF-8 fixture sizes, word counts and snippets were regenerated with the normal test harness.
 
 Independent source review found no blocking issue, checked all 35 demo golden entries against physical files and 38 parity byte sizes, and found no behavioral changes beyond example and QA data. Native artifacts and live-site publication are recorded separately after verification.
+
+## Local macOS release package and site update (2026-11-12)
+
+Source commit `c80411d365072e4e1e0749fe1f428b1e5a91aa70` was pushed to main after ESLint and pre-push build, locale and mobile-isolation gates passed. The final native release build included the completed identity changes and regenerated MCP and agent documentation resources. Apple Silicon artifacts are in `src-tauri/target/release/bundle`: `macos/Métis.app` (42,254,738 bytes) and `dmg/Métis_0.1.0_aarch64.dmg` (23,116,257 bytes).
+
+The DMG SHA-256 is `03d02f228b148c17cb7dd795f871f637b8c1d967a9e3d0de17ad6d849abeab07`. `codesign --verify --deep --strict` passed for the original app and the mounted copy. `hdiutil verify` passed; all 69 app files in the mounted DMG matched the source hashes. Credits, LICENSE and icon matched the repository. The binary is arm64 with minimum macOS 11.0; Info.plist retains the framework's default minimum of 10.13. No personal vaults were opened and no native runtime smoke test is claimed.
+
+The signature is ad-hoc. No valid Apple signing identity is installed, notarization was not attempted, and `spctl` rejected the package as expected for this distribution state. The DMG is a local test artifact, not a public release. `docs/macos-local-build.md` records the installation workflow and Apple credentials needed for the next step.
+
+Independent artifact review repeated signature, checksum, read-only mounting and all 69 file comparisons without discrepancies. It confirmed the packaged identity, license, credits and icon, and detached the volume afterward.
+
+Vercel deployment `dpl_8XAnnF5HtAWH9GRg5bnYf7S13wrc` reached READY at https://metisapp.com.br. Its updated credits returned HTTPS 200 with certificate validation enabled and matched the current source byte for byte, including Hugo Dória as maintainer. The former personal identity is absent from that page. The public site does not distribute the local application package.
