@@ -14,6 +14,8 @@ Use Métis in display text and metis in machine identifiers. Keep configuration 
 
 Origin is https://github.com/hdoria/metis. Use Conventional Commits and push verified work to main. GitHub CI validates the fork. Signing, update servers, mobile OTA and analytics require Métis-owned configuration; leave them disabled by default. External maintainers' Linear queues, paid analysis services and deployment credentials are not part of this fork's workflow.
 
+Deploy the landing to Vercel project popcode/metis-landing using root vercel.json and docs/hosting/vercel.md. The official domain is metisapp.com.br. The archived Sites preview is historical; do not publish future changes there. GitHub autodeployment is not connected, so use the documented CLI workflow.
+
 ## UI
 
 Reuse existing components and locale catalogs. Apply docs/brand/metis.md. Keep locale placeholders intact. Add behavioral tests when changing logic; branding-only replacements rely on build, localization and visual checks.

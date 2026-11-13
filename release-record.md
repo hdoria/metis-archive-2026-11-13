@@ -57,3 +57,11 @@ Independent review found no remaining issue after the dedicated landing test com
 Hosted private preview: https://metis-segundo-cerebro.blackonyx2.chatgpt.site. The Sites deployment returned succeeded. Public application distribution is still pending the whiteboard license.
 
 The earlier CI run exposed stale fixture expectations after an EOF blank line was removed. The source note is 455 bytes. The index golden now records that size, and the Markdown/Yjs snapshot no longer lists the removed blank-line difference. Two failures were reproduced before correction; 205 package tests and the focused Rust golden test passed afterward. No production logic changed for this correction.
+
+## Vercel landing migration (2026-11-12)
+
+Hugo selected the Popcode team. Production deployment `dpl_2cwVAWc8pfhRF85yGbaWsidr2biF` reached READY at https://metis-landing-roan.vercel.app. It publishes the landing built from main commit `e804c65102fa90fd75a5337fffcc767172e5627f`. The Vercel production build passed; unauthenticated HTTP requests returned 200 for the landing, credits, license, JavaScript, CSS, icon and font. Published HTML, credits and license matched their local artifacts byte for byte. No remote browser inspection is claimed.
+
+Both metisapp.com.br and www.metisapp.com.br are attached to popcode/metis-landing, with ownership verified. DNS is still pending; the authoritative .br delegation now names Cloudflare. Exact CNAME recommendations are recorded in docs/hosting/vercel.md. Custom-domain HTTPS and the live www redirect remain unverified until those DNS records are applied.
+
+The former Sites domain binding was removed, and listing its custom domains returned an empty array. Its owner-private preview remains available as historical fallback. The Sites manifest was archived. GitHub integration rejected the repository connection; deployments currently use the documented CLI workflow.
