@@ -13,6 +13,18 @@ The DMG is 23,115,501 bytes, with SHA-256 `32b7db71611c91154a15651915d197a8f8f98
 
 Public download distribution still awaits the whiteboard vendor license. Signing and notarization are complete; that separate prerequisite remains recorded in `release-record.md`.
 
+## Licensed evaluation package — 2026-11-13
+
+A separate, freshly compiled Apple Silicon package now includes a tldraw evaluation license. The SDK verified its signature and returned `licensed`; its encoded expiry is **2026-11-27**. This is not the hobby license required for continued public distribution after the trial. The key is stored outside Git in `~/.config/metis/licensing/tldraw.env` with mode 0600 and was passed to the build as `VITE_TLDRAW_LICENSE_KEY`. Future builds must load that value explicitly; the previously signed package and installed application were not replaced.
+
+- Installer: `src-tauri/target/release/bundle/evaluation/dmg/Métis_0.1.0_aarch64_avaliacao.dmg`
+- App: `src-tauri/target/release/bundle/evaluation/macos/Métis.app`
+- DMG: 23,117,380 bytes; SHA-256 `bf1aebc92a021cfa2eafe5a687fcd9afe6e426fc2dfc15dba6f3dbc80a02fa83`.
+
+The new app and DMG are signed by Popcode, notarized by Apple with `Accepted` and no issues, stapled and accepted by Gatekeeper. Independent review repeated signature/ticket checks, queried Apple's results, mounted the image read-only, compared its contents, and verified the exact licensed frontend blobs inside the native executable. The old signed DMG checksum remains unchanged. The new evaluation package has not been installed or published.
+
+Validation also passed 18 whiteboard tests and 59 telemetry tests. A disposable Chromium session rendered the real whiteboard, observed its actual licensed state, created a rectangle and saved a snapshot without a license gate or external requests. That smoke test is a browser test, not a launch of the new native package. Sanitized build/package evidence is retained in `src-tauri/target/metis-local-package/tldraw-evaluation-2026-11-13/`; [the integration audit](integrations-audit.md) records telemetry behavior and remaining account decisions.
+
 ## Build and verify an ad-hoc test package
 
 Run from the repository root with Rust's cargo binary available in PATH. Keep Apple notarization credentials out of the local ad-hoc build environment. The tested workflow builds sources first and then packages the resulting executable:
