@@ -11,7 +11,7 @@
       "[[24q4]]"
     ],
     "status": "Done",
-    "fileSize": 456,
+    "fileSize": 455,
     "snippet": "The original spike that proved Metis could read a markdown vault, render note metadata, and support keyboard-first navigation. Set the initial four-panel layout...",
     "relationships": {
       "owner": [
